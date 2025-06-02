@@ -1,0 +1,13 @@
+Utilisateur —> Créer un compte  
+Utilisateur —> Se connecter  
+Utilisateur —> Rechercher un produit  
+Utilisateur —> Consulter un produit(écouter et voir le produit sélectionné)
+Utilisateur —> Ajouter au panier  
+Utilisateur —> Supprimer du panier  
+Utilisateur —> Passer une commande  
+Utilisateur —> Voir historique commandes  
+Utilisateur —> Laisser un avis  
+
+
+Administrateur —> Gérer les produits  
+Administrateur —> Gérer les utilisateurs 
