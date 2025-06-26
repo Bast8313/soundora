@@ -1,0 +1,36 @@
+mini-shop-back/
+├── server.js                  # Point d'entrée : démarre ton app Express
+├── config/
+│   └── db.js                  # Connexion MySQL (ex : mysql2.createPool)
+├── routes/
+│   ├── auth.js                # Routes pour /auth (login, register)
+│   └── products.js            # Routes pour /products (CRUD produit)
+│   └── categories.js          # (quand tu ajouteras CRUD des catégories)
+├── controllers/
+│   ├── authController.js      # Logique de login/register
+│   └── productController.js   # Logique CRUD des produits
+│   └── categoryController.js  # (pour tes catégories plus tard)
+├── middleware/
+│   └── checkJwt.js            # Vérification du token JWT
+└── models/
+    ├── userModel.js           # (optionnel si tu veux séparer les requêtes SQL)
+    ├── productModel.js        # (pareil pour produits)
+    └── categoryModel.js       # (pareil pour catégories)
+
+
+
+
+
+
+
+
+mini-shop-back/
+├── server.js
+├── config/
+│   └── db.js
+├── routes/
+│   └── products.js
+├── controllers/
+│   └── productController.js
+├── middleware/
+│   └── checkJwt.js
