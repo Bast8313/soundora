@@ -1,5 +1,9 @@
+require("dotenv").config(); // On importe dotenv pour charger les variables d'environnement depuis un fichier .env
+
 const mysql = require("mysql2"); // On importe le module mysql2 qui permet de communiquer avec une base MySQL depuis Node.js.
 // Ce module est plus performant que le module mysql classique et supporte les promesses.
+
+const secret = process.env.JWT_SECRET;
 
 // Configuration de la connexion à la base de données
 const db = mysql.createPool({

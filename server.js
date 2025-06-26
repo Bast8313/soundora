@@ -1,3 +1,5 @@
+require("dotenv").config(); // On importe dotenv pour charger les variables d'environnement depuis un fichier .env
+
 const express = require("express"); // On importe le module Express (framework pour simplifier la création de serveur Node.js)
 
 const app = express(); // On crée une instance d'Express
