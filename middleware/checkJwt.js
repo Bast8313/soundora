@@ -3,7 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const secret = "votre_clé_secrète";
 // La clé secrète utilisée pour signer et vérifier les tokens JWT.
-// ⚠ À remplacer par une variable d'environnement (.env) en production.
+// À remplacer par une variable d'environnement (.env) en production.
 
 module.exports = (req, res, next) => {
   // On exporte une fonction middleware qui intercepte les requêtes protégées.
