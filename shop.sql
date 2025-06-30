@@ -16,7 +16,7 @@ CREATE TABLE products (
     image_url VARCHAR(255),
 );
 
-CREATe TABLE category (
+CREATe TABLE categories(
     id int AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL UNIQUE,
     description TEXT

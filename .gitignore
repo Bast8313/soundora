@@ -1,3 +1,25 @@
+
+# Node modules (dossier des dépendances installées)
 node_modules/
+
+# Fichiers d’environnement sensibles
 .env
 
+# Fichiers de log
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Système
+.DS_Store
+Thumbs.db
+
+# Fichiers temporaires d’éditeurs
+.vscode/
+.idea/
+
+# Sauvegardes ou fichiers inutiles
+*.swp
+*.swo
+*.bak

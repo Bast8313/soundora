@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 // On importe la librairie jsonwebtoken pour manipuler les tokens JWT.
 
-const secret = "votre_clé_secrète";
+const secret = process.env.JWT_SECRET;
 // La clé secrète utilisée pour signer et vérifier les tokens JWT.
 // À remplacer par une variable d'environnement (.env) en production.
 

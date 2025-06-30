@@ -1,25 +1,35 @@
-const express = require("express");
-const router = express.Router(); // mini-routeur pour regrouper les routes liées aux produits
+// importation des fonctions de validation
+const { body } = require("express-validator");
 
-const productController = require("../controllers/productController"); // contrôleur qui contiendra la logique métier (productController)
+// === IMPORT DES MODULES ET MIDDLEWARES ===
+const express = require("express"); // Importe Express
+const router = express.Router(); // Crée un mini-routeur Express
 
-const authController = require("../controllers/authController"); // contrôleur pour l'authentification (si besoin)
+// === IMPORT DES CONTRÔLEURS ===
+const authController = require("../controllers/authController"); // Gère l'authentification (login/register)
+const productController = require("../controllers/productController"); // Gère la logique produits
+const categoryController = require("../controllers/categoryController"); // Gère la logique des catégories
 
-const checkJwt = require("../middleware/checkJwt"); // middleware JWT qui protège certaines routes
+// === IMPORT DU MIDDLEWARE JWT POUR PROTÉGER CERTAINES ROUTES ===
+const checkJwt = require("../middleware/checkJwt"); // Vérifie la validité du token JWT
 
-// === ROUTES AUTHENTIFICATION ===
+// === ROUTES D'AUTHENTIFICATION ===
+router.post("/auth/register", authController.register); // Inscription d’un utilisateur
+router.post("/auth/login", authController.login); // Connexion et obtention du token JWT
 
-router.post("/", authController.login); // route pour se connecter (login) et obtenir un token JWT
-router.post("/", authController.register); // route pour s'inscrire (register) et créer un compte utilisateur
+// === ROUTES POUR LES PRODUITS ===
+router.get("/products", productController.getAllProducts); // Liste tous les produits
+router.get("/products/:id", productController.getProductById); // Récupère un produit spécifique par ID
+router.post("/products", checkJwt, productController.createProduct); // Création d’un produit (protégé)
+router.put("/products/:id", checkJwt, productController.updateProduct); // Modification d’un produit (protégé)
+router.delete("/products/:id", checkJwt, productController.deleteProduct); // Suppression d’un produit (protégé)
 
-// === ROUTES PRODUITS ===
+// === ROUTES POUR LES CATÉGORIES ===
+router.get("/categories", categoryController.getAllCategories); // Liste toutes les catégories
+router.get("/categories/:id", categoryController.getCategoryById); // Récupère une catégorie spécifique
+router.post("/categories", checkJwt, categoryController.createCategory); // Création d’une catégorie (protégé)
+router.put("/categories/:id", checkJwt, categoryController.updateCategory); // Mise à jour (protégé)
+router.delete("/categories/:id", checkJwt, categoryController.deleteCategory); // Suppression (protégé)
 
-router.get("/", productController.getAllProducts); // retourne tout les produits
-router.get("/:id", productController.getProductById); // retourne un produit par son ID
-// Routes protégées (token JWT obligatoire)
-router.post("/", checkJwt, productController.createProduct); // crée un nouveau produit (necessite un token)
-router.put("/:id", checkJwt, productController.updateProduct); // modifie un produit existant
-router.delete("/:id", checkJwt, productController.deleteProduct); // supprime un produit existant
-// Le middleware checkJwt vérifie le token avant de laisser passer.
-
-module.exports = router; // exporte le routeur pour l'utiliser dans le serveur principal
+// === EXPORT DU ROUTEUR POUR L’UTILISER DANS server.js ===
+module.exports = router;

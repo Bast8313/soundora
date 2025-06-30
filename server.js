@@ -1,27 +1,30 @@
-require("dotenv").config(); // On importe dotenv pour charger les variables d'environnement depuis un fichier .env
+// Importe le module Express pour créer une application serveur web
+const express = require("express");
 
-const express = require("express"); // On importe le module Express (framework pour simplifier la création de serveur Node.js)
+// Initialise une application Express
+const app = express();
 
-const app = express(); // On crée une instance d'Express
-// C'est cette instance (app) qui va servir à définir les routes et configurer le serveur.
+// Importe dotenv pour charger les variables d'environnement depuis un fichier .env
+const dotenv = require("dotenv");
+dotenv.config(); // Charge les variables d’environnement (.env) dans process.env
 
-const apiRoutes = require("./routes/api"); /* On importe le fichier de routes des produits (./routes/products.js)
-Ce fichier contient les routes dédiées aux opérations sur les produits.
-*/
+// Middleware Express pour parser automatiquement les requêtes JSON entrantes
+app.use(express.json());
 
-app.use(
-  express.json()
-); /* On ajoute un middleware fourni par Express qui permet de transformer automatiquement 
-le corps des requêtes HTTP contenant du JSON en objet JS accessible via req.body.
-Sans ça, req.body serait undefined pour les requêtes POST/PUT avec un body JSON.  */
+// === ROUTES ===
 
-app.use(
-  "/products" /* On dit à l'application Express d'utiliser les routes définies dans productRoutes */,
-  app.use(
-    "/api",
-    apiRoutes
-  ) /* pour toutes les requêtes qui commencent par /products. */
-);
+// Importe le fichier de routes unifiées (authentification, produits, catégories, etc.)
+const apiRoutes = require("./routes/api.js");
 
-// On peut ajouter d'autres routes ici si besoin, par exemple pour les utilisateurs, les commandes, etc.
-app.listen(3000, () => console.log("Serveur démarré sur le port 3000")); // On démarre le serveur sur le port 3000 et on affiche un message dans la console
+// Utilise ces routes avec un préfixe "/api" → toutes les routes seront accessibles via /api/*
+app.use("/api", apiRoutes);
+
+// === LANCEMENT DU SERVEUR ===
+
+// Détermine le port : d'abord celui défini dans .env, sinon 3000 par défaut
+const PORT = process.env.PORT || 3000;
+
+// Démarre le serveur sur le port défini
+app.listen(PORT, () => {
+  console.log(`Serveur démarré sur le port ${PORT}`); // Affiche un message dans la console pour indiquer que le serveur est en marche
+});
