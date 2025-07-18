@@ -13,6 +13,10 @@ app.use(express.json());
 
 // === ROUTES ===
 
+app.get("/test", (req, res) => {
+  res.send("Bienvenue sur l'API de Mini Shop !");
+});
+
 // Importe le fichier de routes unifiées (authentification, produits, catégories, etc.)
 const apiRoutes = require("./routes/api.js");
 
@@ -22,9 +26,9 @@ app.use("/api", apiRoutes);
 // === LANCEMENT DU SERVEUR ===
 
 // Détermine le port : d'abord celui défini dans .env, sinon 3000 par défaut
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3010;
 
 // Démarre le serveur sur le port défini
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`); // Affiche un message dans la console pour indiquer que le serveur est en marche
+app.listen(PORT, "localhost", () => {
+  console.log(`Serveur démarré sur le port ` + PORT); // Affiche un message dans la console pour indiquer que le serveur est en marche
 });

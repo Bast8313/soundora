@@ -9,10 +9,10 @@ const db = mysql.createPool({
   // Un pool permet de gérer plusieurs connexions ouvertes en même temps, 
   // ce qui est plus performant qu'ouvrir/fermer une connexion à chaque requête. */
 
-  host: "localhost", // Adresse du serveur DB (ex: localhost)
-  user: "root", // Utilisateur DB
-  password: "Foie1312Flea2512", // Mot de passe DB
-  database: "mini_shop", // Nom de la base de données
+  host: process.env.DB_HOST || "localhost", // Adresse du serveur DB (ex: localhost)
+  user: process.env.DB_USER || "admin-user", // Utilisateur DB
+  password: process.env.DB_PASSWORD || "Foie1312Flea2512", // Mot de passe DB
+  database: process.env.DB_NAME || "mini_shop", // Nom de la base de données
 });
 module.exports =
   db; /*  On exporte ce pool pour pouvoir l'utiliser dans les autres fichiers 
