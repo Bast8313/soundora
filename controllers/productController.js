@@ -1,25 +1,21 @@
-const db = require("../config/db");
+import db from "../config/db.js"; // Import du pool MySQL
 
-// ------------------------
-// Récupère tous les produits avec leur catégorie associée (si existante)
-exports.getAllProducts = (req, res) => {
-  const sql = `
-    SELECT products.*, categories.name AS category_name
-    FROM products
-    LEFT JOIN categories ON products.category_id = categories.id
-  `;
-  db.query(sql, (err, results) => {
+// ========================
+// Récupérer tous les produits
+export const getAllProducts = (req, res) => {
+  db.query("SELECT * FROM products", (err, results) => {
     if (err) return res.status(500).json({ error: err });
     res.json(results);
   });
 };
 
-// ------------------------
-// Récupère un produit par ID
-exports.getProductById = (req, res) => {
+// ========================
+// Récupérer un produit par son id
+export const getProductById = (req, res) => {
+  const productId = req.params.id;
   db.query(
     "SELECT * FROM products WHERE id = ?",
-    [req.params.id],
+    [productId],
     (err, results) => {
       if (err) return res.status(500).json({ error: err });
       if (results.length === 0)
@@ -29,52 +25,56 @@ exports.getProductById = (req, res) => {
   );
 };
 
-// ------------------------
-// Crée un nouveau produit
-exports.createProduct = (req, res) => {
-  const { name, description, price, image_url, category_id } = req.body;
+// ========================
+// Ajouter un produit
+export const addProduct = (req, res) => {
+  const { name, price, stock, description, image_url, category_id } = req.body;
 
-  if (!name || !price) {
-    return res.status(400).json({ message: "Nom et prix obligatoires" });
+  if (!name || !price || !stock) {
+    return res.status(400).json({ message: "Nom, prix et stock requis" });
   }
 
   db.query(
-    "INSERT INTO products (name, description, price, image_url, category_id) VALUES (?, ?, ?, ?, ?)",
-    [name, description || null, price, image_url || null, category_id || null],
+    "INSERT INTO products (name, price, stock, description, image_url, category_id) VALUES (?, ?, ?, ?, ?, ?)",
+    [name, price, stock, description, image_url, category_id],
     (err, result) => {
       if (err) return res.status(500).json({ error: err });
-
-      res.status(201).json({
-        id: result.insertId,
-        name,
-        description,
-        price,
-        image_url,
-        category_id,
-      });
+      res
+        .status(201)
+        .json({
+          id: result.insertId,
+          name,
+          price,
+          stock,
+          description,
+          image_url,
+          category_id,
+        });
     }
   );
 };
 
-// ------------------------
-// Met à jour un produit existant
-exports.updateProduct = (req, res) => {
-  const { name, description, price, image_url, category_id } = req.body;
+// ========================
+// Mettre à jour un produit
+export const updateProduct = (req, res) => {
+  const productId = req.params.id;
+  const { name, price, stock, description, image_url, category_id } = req.body;
 
   db.query(
-    "UPDATE products SET name = ?, description = ?, price = ?, image_url = ?, category_id = ? WHERE id = ?",
-    [name, description, price, image_url, category_id, req.params.id],
-    (err) => {
+    "UPDATE products SET name = ?, price = ?, stock = ?, description = ?, image_url = ?, category_id = ? WHERE id = ?",
+    [name, price, stock, description, image_url, category_id, productId],
+    (err, result) => {
       if (err) return res.status(500).json({ error: err });
       res.json({ message: "Produit mis à jour" });
     }
   );
 };
 
-// ------------------------
-// Supprime un produit par ID
-exports.deleteProduct = (req, res) => {
-  db.query("DELETE FROM products WHERE id = ?", [req.params.id], (err) => {
+// ========================
+// Supprimer un produit
+export const deleteProduct = (req, res) => {
+  const productId = req.params.id;
+  db.query("DELETE FROM products WHERE id = ?", [productId], (err, result) => {
     if (err) return res.status(500).json({ error: err });
     res.json({ message: "Produit supprimé" });
   });

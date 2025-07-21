@@ -1,9 +1,11 @@
-require("dotenv").config(); // On importe dotenv pour charger les variables d'environnement depuis un fichier .env
+import dotenv from "dotenv"; // On importe dotenv pour charger les variables d'environnement depuis un fichier .env
 
-const mysql = require("mysql2"); // On importe le module mysql2 qui permet de communiquer avec une base MySQL depuis Node.js.
+import mysql from "mysql2"; // On importe le module mysql2 qui permet de communiquer avec une base MySQL depuis Node.js.
 // Ce module est plus performant que le module mysql classique et supporte les promesses.
 
 // Configuration de la connexion à la base de données
+dotenv.config(); // charge les variables d'environnement depuis le fichier .env
+
 const db = mysql.createPool({
   /* On crée un "pool" de connexions. 
   // Un pool permet de gérer plusieurs connexions ouvertes en même temps, 
@@ -14,7 +16,6 @@ const db = mysql.createPool({
   password: process.env.DB_PASSWORD || "Foie1312Flea2512", // Mot de passe DB
   database: process.env.DB_NAME || "mini_shop", // Nom de la base de données
 });
-module.exports =
-  db; /*  On exporte ce pool pour pouvoir l'utiliser dans les autres fichiers 
+export default db; /*  On exporte ce pool pour pouvoir l'utiliser dans les autres fichiers 
 (par ex : dans les contrôleurs pour exécuter des requêtes SQL)
 */

@@ -1,16 +1,13 @@
-// === IMPORT DES MODULES ET MIDDLEWARES ===
-const express = require("express"); // Importe Express
-const router = express.Router(); // Crée un mini-routeur Express
+import express from "express"; // Importe Express pour créer le routeur
+import * as authController from "../controllers/authController.js"; // Contrôleur d'authentification
+import * as productController from "../controllers/productController.js"; // Contrôleur produits
+import * as categoryController from "../controllers/categoryController.js"; // Contrôleur catégories
+import * as cartController from "../controllers/cartController.js"; // Contrôleur panier
+import * as orderController from "../controllers/orderController.js"; // Contrôleur commandes
+import checkJwt from "../middleware/checkJwt.js"; // Middleware JWT pour protéger les routes
+import jwt from "jsonwebtoken"; // Import de jsonwebtoken pour la gestion des tokens JWT
 
-// === IMPORT DES CONTRÔLEURS ===
-const authController = require("../controllers/authController"); // Gère l'authentification (login/register)
-const productController = require("../controllers/productController"); // Gère la logique produits
-const categoryController = require("../controllers/categoryController"); // Gère la logique des catégories
-const cartController = require("../controllers/cartController"); // Gère la logique du panier
-const orderController = require("../controllers/orderController"); // Gère la logique des commandes
-
-// === IMPORT DU MIDDLEWARE JWT POUR PROTÉGER CERTAINES ROUTES ===
-const checkJwt = require("../middleware/checkJwt"); // Vérifie la validité du token JWT
+const router = express.Router(); // Crée un routeur Express
 
 // === ROUTES D'AUTHENTIFICATION ===
 router.post("/auth/register", authController.register); // Inscription d’un utilisateur
@@ -19,7 +16,7 @@ router.post("/auth/login", authController.login); // Connexion et obtention du t
 // === ROUTES POUR LES PRODUITS ===
 router.get("/products", productController.getAllProducts); // Liste tous les produits
 router.get("/products/:id", productController.getProductById); // Récupère un produit spécifique par ID
-router.post("/products", checkJwt, productController.createProduct); // Création d’un produit (protégé)
+router.post("/products", checkJwt, productController.addProduct); // Création d’un produit (protégé)
 router.put("/products/:id", checkJwt, productController.updateProduct); // Modification d’un produit (protégé)
 router.delete("/products/:id", checkJwt, productController.deleteProduct); // Suppression d’un produit (protégé)
 
@@ -38,9 +35,23 @@ router.delete("/cart/items/:id", checkJwt, cartController.removeFromCart); // Su
 router.get("/cart/count", checkJwt, cartController.getCartCount); // Récupère le nombre d'articles dans le panier (protégé)
 
 // === ROUTES POUR LES COMMANDES ===
-router.post("/orders", checkJwt, orderController.createOrder);
+router.post("/orders", checkJwt, orderController.createOrder); // Création d'une commande (protégé)
 router.get("/orders", checkJwt, orderController.getUserOrders); // Récupère les commandes de l'utilisateur (protégé)
 router.get("/orders/:order_id", checkJwt, orderController.getOrderDetails); // Récupère une commande spécifique (protégé)
 
+// route de connexion (login) pour les utilisateurs
+router.post("/login", (req, res) => {
+  const { username, password } = req.body;
+  // à remplacer par la logique réelle pplus tard
+  if (username === "admin" && password === "admin") {
+    // Génération d'un token JWT
+    const token = jwt.sign({ username }, "votre_clé_secrète_jwt", {
+      expiresIn: "1h",
+    });
+    res.json({ token }); // Envoie le token au client
+  } else {
+    res.status(401).json({ message: "Identifiants invalides" }); // En cas d'échec
+  }
+});
 // === EXPORT DU ROUTEUR POUR L’UTILISER DANS server.js ===
-module.exports = router;
+export default router;

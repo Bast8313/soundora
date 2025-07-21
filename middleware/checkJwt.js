@@ -1,40 +1,33 @@
-const jwt = require("jsonwebtoken");
-// On importe la librairie jsonwebtoken pour manipuler les tokens JWT.
+import jwt from "jsonwebtoken"; // Importe la librairie jsonwebtoken pour manipuler les tokens JWT
 
-const secret = process.env.JWT_SECRET;
-// La clé secrète utilisée pour signer et vérifier les tokens JWT.
-// À remplacer par une variable d'environnement (.env) en production.
+const secret = process.env.JWT_SECRET; // Clé secrète pour signer et vérifier les tokens JWT
 
-module.exports = (req, res, next) => {
-  // On exporte une fonction middleware qui intercepte les requêtes protégées.
-
-  const authHeader = req.headers.authorization;
-  // On récupère l'en-tête Authorization où le token doit se trouver.
+/**
+ * Middleware Express pour vérifier le token JWT dans l'en-tête Authorization.
+ * Si le token est valide, ajoute le payload décodé dans req.user et passe au middleware suivant.
+ * Sinon, renvoie une erreur 401 Unauthorized.
+ */
+const checkJwt = (req, res, next) => {
+  const authHeader = req.headers.authorization; // Récupère l'en-tête Authorization
 
   if (!authHeader) {
-    // Si aucun header Authorization n'est présent,
+    // Si aucun header Authorization n'est présent, bloque la requête
     return res.status(401).json({ message: "Token manquant" });
-    // On bloque la requête avec un code 401 Unauthorized.
   }
 
+  // Récupère le token au format "Bearer <token>"
   const token = authHeader.split(" ")[1];
-  // On récupère le token dans l'en-tête au format : "Bearer <token>"
-  // On split sur l'espace pour extraire le token pur.
 
+  // Vérifie la validité du token (signature + expiration)
   jwt.verify(token, secret, (err, decoded) => {
-    // On vérifie que le token est bien valide (signature correcte + pas expiré).
-
     if (err) {
-      // Si la vérification échoue (ex : token expiré ou falsifié),
+      // Si la vérification échoue (ex : token expiré ou falsifié), bloque la requête
       return res.status(401).json({ message: "Token invalide" });
-      // On bloque la requête avec un 401 Unauthorized.
     }
 
-    req.user = decoded;
-    // Si le token est valide, on ajoute les données décodées (payload) dans req.user.
-    // Les routes suivantes pourront y accéder.
-
-    next();
-    // On passe au middleware ou contrôleur suivant.
+    req.user = decoded; // Ajoute le payload décodé dans req.user pour les routes suivantes
+    next(); // Passe au middleware ou contrôleur suivant
   });
 };
+
+export default checkJwt; // Export du middleware pour utilisation dans les routes

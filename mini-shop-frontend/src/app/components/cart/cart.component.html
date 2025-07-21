@@ -1,0 +1,14 @@
+<div class="cart-list">
+  <h2>Mon panier</h2>
+  <div *ngFor="let item of items" class="cart-item">
+    <span>{{ item.name }} ({{ item.quantity }})</span>
+    <span>{{ item.price * item.quantity }} €</span>
+    <button (click)="removeFromCart(item)">Supprimer</button>
+  </div>
+  <div *ngIf="items.length === 0">
+    <p>Votre panier est vide.</p>
+  </div>
+  <div *ngIf="items.length > 0" class="cart-total">
+    <strong>Total : {{ getTotal() }} €</strong>
+  </div>
+</div>

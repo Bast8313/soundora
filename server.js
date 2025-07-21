@@ -1,24 +1,26 @@
 // Importe le module Express pour créer une application serveur web
-const express = require("express");
+import express from "express";
 
 // Initialise une application Express
-const app = express();
+import dotenv from "dotenv"; // Importe dotenv pour charger les variables d'environnement depuis un fichier .env
+
+import cors from "cors"; // Importe CORS pour gérer les requêtes cross-origin
 
 // Importe dotenv pour charger les variables d'environnement depuis un fichier .env
-const dotenv = require("dotenv");
+import apiRoutes from "./routes/api.js"; // Importe les routes API
 dotenv.config(); // Charge les variables d’environnement (.env) dans process.env
+
+const app = express(); // Crée l initialisation d'express
 
 // Middleware Express pour parser automatiquement les requêtes JSON entrantes
 app.use(express.json());
+app.use(cors()); // Utilise CORS pour permettre les requêtes cross-origin
 
 // === ROUTES ===
 
 app.get("/test", (req, res) => {
   res.send("Bienvenue sur l'API de Mini Shop !");
 });
-
-// Importe le fichier de routes unifiées (authentification, produits, catégories, etc.)
-const apiRoutes = require("./routes/api.js");
 
 // Utilise ces routes avec un préfixe "/api" → toutes les routes seront accessibles via /api/*
 app.use("/api", apiRoutes);

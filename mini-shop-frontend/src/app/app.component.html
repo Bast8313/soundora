@@ -1,54 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mini Shop</title>
-  <link rel="stylesheet" href="app.component.css" />
-</head>
-<body>
-  <header>
-    <h1>SOUNDORA</h1>
-    <nav>
-      <a href="#">Accueil</a>
-      <a href="#">Produits</a>
-      <a href="#">F.A.Q<a></a>
-      <a href="#">Panier</a>
-    </nav>
-  </header>
+<nav class="navbar">
+  <div class="burger" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 
-  <main>
-    <section class="products">
-      <div class="product-card">
-        <img src="https://via.placeholder.com/150" alt="Produit 1" />
-        <h2>Produit 1</h2>
-        <p>Prix : 19.99 €</p>
-        <button>Ajouter au panier</button>
-      </div>
+  <div class="nav-links" [class.open]="menuOpen">
+    
+  <a routerLink="/" routerLinkActive="active" (click)="closeMenu()">Accueil</a>
+  <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">Panier</a>
+  <a routerLink="/order" routerLinkActive="active" (click)="closeMenu()">Commande</a>
+  <a routerLink="/login" routerLinkActive="active" (click)="closeMenu()">Connexion</a>
+  <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">Voir le panier</a> 
+  <a routerLink="/" routerLinkActive="active" (click)="closeMenu()">Catalogue</a> 
+  </div> 
+</nav>
 
-      <div class="product-card">
-        <img src="https://via.placeholder.com/150" alt="Produit 2" />
-        <h2>Produit 2</h2>
-        <p>Prix : 29.99 €</p>
-        <button>Ajouter au panier</button>
-      </div>
-
-      <div class="product-card">
-        <img src="https://via.placeholder.com/150" alt="Produit 2" />
-        <h2>Produit 2</h2>
-        <p>Prix : 39.99 €</p>
-        <button>Ajouter au panier</button>
-      </div>
-
-      <!-- Tu peux dupliquer ce bloc pour plus de produits -->
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 Mini Shop. Tous droits réservés.</p>
-  </footer>
-</body>
-</html>
-
-<router-outlet />
-
+<router-outlet></router-outlet>

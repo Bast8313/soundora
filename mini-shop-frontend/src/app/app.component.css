@@ -1,81 +1,54 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background: linear-gradient(rgba(156, 37, 37, 0.6), rgba(255,255,255,0.6)),
-              url('/assets/nick-bolton-Qj5jh36niYE-unsplash.png');
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-header {
-  background-color: #333;
-  color: rgb(79, 155, 70);
-  padding: 1rem 2rem;
+/*mini-shop-back/mini-shop-frontend/src/app/app.component.css */
+.navbar {
+  background: #1976d2;
+  padding: 16px;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
-nav a {
-  color: rgb(255, 255, 255);
-  margin-left: 1rem;
-  text-decoration: none;
-}
-
-nav a:hover {
-  text-decoration: underline;
-}
-
-main {
-  padding: 2rem;
-  justify-content: center;
-  text-align: center;
-}
-
-.products {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2rem;
-}
-
-.product-card {
-  background-color: white;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  padding: 1rem;
-  text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.05);
-}
-
-.product-card img {
-  max-width: 100%;
-  border-radius: 4px;
-}
-
-.product-card h2 {
-  font-size: 1.2rem;
-  margin: 0.5rem 0;
-}
-
-.product-card button {
-  background-color: #007bff;
-  color: white;
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 4px;
+.burger {
+  display: none;
+  flex-direction: column;
   cursor: pointer;
+  margin-right: 16px;
 }
 
-.product-card button:hover {
-  background-color: #0056b3;
+.burger span {
+  width: 28px;
+  height: 4px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 2px;
+  display: block;
 }
 
-footer {
-  text-align: center;
-  padding: 1rem;
-  background-color: #eee;
-  margin-top: 2rem;
+.nav-links {
+  display: flex;
+  gap: 24px;
+  flex: 1;
 }
 
+@media (max-width: 700px) {
+  .burger {
+    display: flex;
+  }
+  .nav-links {
+    position: absolute;
+    top: 56px;
+    left: 0;
+    right: 0;
+    background: #1976d2;
+    flex-direction: column;
+    gap: 0;
+    display: none;
+    z-index: 10;
+  }
+  .nav-links.open {
+    display: flex;
+  }
+  .nav-links a {
+    padding: 16px;
+    border-bottom: 1px solid #1565c0;
+  }
+}

@@ -1,0 +1,31 @@
+.product-detail {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  padding: 24px;
+  max-width: 400px;
+  margin: 32px auto;
+}
+
+.product-detail h2 {
+  margin-top: 0;
+}
+
+.product-detail p {
+  margin: 8px 0;
+}
+
+button {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 16px;
+  font-size: 1em;
+}
+
+button:hover {
+  background: #1565c0;
+}

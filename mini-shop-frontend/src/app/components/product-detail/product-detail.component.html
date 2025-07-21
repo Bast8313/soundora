@@ -1,0 +1,14 @@
+
+<!-- filepath: /home/bastien/Bureau/PROJET FIN D'ANNÉE/mini-shop-back/mini-shop-frontend/src/app/components/product-detail/product-detail.component.html -->
+<div class="product-detail" *ngIf="product">
+  <h2>{{ product.name }}</h2>
+  <p>{{ product.description }}</p>
+  <p>Prix : {{ product.price }} €</p>
+  <p>Stock : {{ product.stock }}</p>
+
+  <!-- bouton "Ajouter au panier" -->
+    <button (click)="addToCart(product)">Ajouter au panier</button>
+</div>
+<div *ngIf="!product">
+  <p>Chargement...</p>
+</div>
