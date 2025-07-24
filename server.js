@@ -19,7 +19,7 @@ app.use(cors()); // Utilise CORS pour permettre les requêtes cross-origin
 // === ROUTES ===
 
 app.get("/test", (req, res) => {
-  res.send("Bienvenue sur l'API de Mini Shop !");
+  res.send("Bienvenue sur l'API de Soundora !");
 });
 
 // Utilise ces routes avec un préfixe "/api" → toutes les routes seront accessibles via /api/*

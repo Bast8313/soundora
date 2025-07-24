@@ -1,28 +1,48 @@
-import db from "../config/db.js"; // Import du pool MySQL
+import supabase from "../config/supabase.js"; // Import du client Supabase
 
 // ========================
 // Récupérer tous les produits
-export const getAllProducts = (req, res) => {
-  db.query("SELECT * FROM products", (err, results) => {
-    if (err) return res.status(500).json({ error: err });
-    res.json(results);
-  });
+export const getAllProducts = async (req, res) => {
+  try {
+    // Test simple de connexion d'abord
+    const { data: products, error } = await supabase
+      .from('products')
+      .select('*');
+    
+    if (error) {
+      return res.status(500).json({ error: error.message });
+    }
+    
+    res.json(products || []);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 // ========================
 // Récupérer un produit par son id
-export const getProductById = (req, res) => {
-  const productId = req.params.id;
-  db.query(
-    "SELECT * FROM products WHERE id = ?",
-    [productId],
-    (err, results) => {
-      if (err) return res.status(500).json({ error: err });
-      if (results.length === 0)
+export const getProductById = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    
+    const { data: product, error } = await supabase
+      .from('products')
+      .select('*')
+      .eq('id', productId)
+      .eq('is_active', true)
+      .single();
+    
+    if (error) {
+      if (error.code === 'PGRST116') {
         return res.status(404).json({ message: "Produit non trouvé" });
-      res.json(results[0]);
+      }
+      return res.status(500).json({ error: error.message });
     }
-  );
+    
+    res.json(product);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };
 
 // ========================

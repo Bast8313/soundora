@@ -2,11 +2,11 @@ services :
 
   db:
     image: mariadb:latest
-    container_name: mini-shop-db
+    container_name: soundora-db
     restart: always
     environment:
       MARIADB_ROOT_PASSWORD: example
-      MARIADB_DATABASE: mini_shop
+      MARIADB_DATABASE: soundora
       MARIADB_USER: admin-user
       MARIADB_PASSWORD: Foie1312Flea2512
     ports:

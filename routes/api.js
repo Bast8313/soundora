@@ -4,10 +4,15 @@ import * as productController from "../controllers/productController.js"; // Con
 import * as categoryController from "../controllers/categoryController.js"; // Contrôleur catégories
 import * as cartController from "../controllers/cartController.js"; // Contrôleur panier
 import * as orderController from "../controllers/orderController.js"; // Contrôleur commandes
+import * as testController from "../controllers/testController.js"; // Contrôleur de test
 import checkJwt from "../middleware/checkJwt.js"; // Middleware JWT pour protéger les routes
 import jwt from "jsonwebtoken"; // Import de jsonwebtoken pour la gestion des tokens JWT
 
 const router = express.Router(); // Crée un routeur Express
+
+// === ROUTES DE TEST ===
+router.get("/test/connection", testController.testConnection); // Test connexion Supabase
+router.get("/test/tables", testController.listTables); // Liste des tables disponibles
 
 // === ROUTES D'AUTHENTIFICATION ===
 router.post("/auth/register", authController.register); // Inscription d’un utilisateur

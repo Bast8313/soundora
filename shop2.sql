@@ -1,6 +1,6 @@
 -- Création de la base
-CREATE DATABASE IF NOT EXISTS mini_shop CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE mini_shop;
+CREATE DATABASE IF NOT EXISTS soundora CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE soundora;
 
 -- Table utilisateurs
 CREATE TABLE users (

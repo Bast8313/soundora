@@ -1,7 +1,7 @@
 import dotenv from "dotenv"; // Pour charger les variables d'environnement
 import bcrypt from "bcrypt"; // Pour hasher les mots de passe
 import jwt from "jsonwebtoken"; // Pour créer et vérifier les tokens JWT
-import db from "../config/db.js"; // Import du pool MySQL
+import supabase from "../config/supabase.js"; // Import du client Supabase
 
 dotenv.config(); // Charge les variables d'environnement depuis .env
 

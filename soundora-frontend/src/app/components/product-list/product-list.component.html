@@ -1,0 +1,23 @@
+<div class="container">
+  <h2>🎸 Nos Instruments</h2>
+  <ul>
+    <li *ngFor="let product of products">
+      <div class="product-brand">{{ product.brand_id ? 'Marque' : 'Soundora' }}</div>
+      <a [routerLink]="['/product', product.id]">
+        {{ product.name }}
+      </a>
+      <div class="product-info">
+        <div class="product-price">{{ product.price }} €</div>
+        <div class="product-stock">
+          Stock: {{ product.stock }} disponible{{ product.stock > 1 ? 's' : '' }}
+        </div>
+        <div class="product-model" *ngIf="product.model">
+          Modèle: {{ product.model }}
+        </div>
+        <div class="product-color" *ngIf="product.color">
+          Couleur: {{ product.color }}
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

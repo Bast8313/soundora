@@ -1,4 +1,4 @@
-mini-shop-back/
+soundora/
 ├── server.js                  # Point d'entrée : démarre ton app Express
 ├── config/
 │   └── db.js                  # Connexion MySQL (ex : mysql2.createPool)
@@ -24,7 +24,7 @@ mini-shop-back/
 
 
 
-mini-shop-back/
+soundora/
 ├── server.js
 ├── config/
 │   └── db.js

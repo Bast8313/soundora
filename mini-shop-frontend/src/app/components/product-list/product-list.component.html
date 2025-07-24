@@ -1,9 +1,0 @@
-<h2>Catalogue</h2>
-<ul>
-  <li *ngFor="let product of products"> <!-- boucle Angular pour afficher chaque produit.
--->
-    <a [routerLink]="['/product', product.id]"> <!--crée un lien dynamique vers la page de détail du produit.-->
-      {{ product.name }} - {{ product.price }} € <!--interpolation pour afficher les propriétés du produit.-->
-      </a>
-  </li>
-</ul>

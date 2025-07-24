@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mini-shop-frontend": {
+    "soundora-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/mini-shop-frontend",
+            "outputPath": "dist/soundora-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mini-shop-frontend:build:production"
+              "buildTarget": "soundora-frontend:build:production"
             },
             "development": {
-              "buildTarget": "mini-shop-frontend:build:development"
+              "buildTarget": "soundora-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

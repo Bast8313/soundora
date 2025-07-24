@@ -1,4 +1,4 @@
-import db from "../config/db.js"; // Import du pool MySQL
+import supabase from "../config/supabase.js"; // Import du client Supabase
 
 // ------------------------
 // Récupère toutes les catégories

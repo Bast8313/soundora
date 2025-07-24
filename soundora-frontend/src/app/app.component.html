@@ -1,0 +1,28 @@
+<nav class="navbar">
+  <div class="nav-brand">
+    <h1><a routerLink="/">� Soundora</a></h1>
+  </div>
+  
+  <div class="burger" (click)="toggleMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="nav-links" [class.open]="menuOpen">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" (click)="closeMenu()">Accueil</a>
+    <a routerLink="/cart" routerLinkActive="active" (click)="closeMenu()">Panier</a>
+    <a routerLink="/order" routerLinkActive="active" (click)="closeMenu()">Commandes</a>
+    <a routerLink="/login" routerLinkActive="active" (click)="closeMenu()">Connexion</a>
+  </div> 
+</nav>
+
+<!-- Section Hero avec image de groupe de rock -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>Bienvenue chez Soundora</h1>
+    <p>Votre boutique d'instruments de musique de référence</p>
+  </div>
+</section>
+
+<router-outlet></router-outlet>
