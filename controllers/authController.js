@@ -1,82 +1,222 @@
 import dotenv from "dotenv"; // Pour charger les variables d'environnement
-import bcrypt from "bcrypt"; // Pour hasher les mots de passe
-import jwt from "jsonwebtoken"; // Pour créer et vérifier les tokens JWT
 import supabase from "../config/supabase.js"; // Import du client Supabase
 
 dotenv.config(); // Charge les variables d'environnement depuis .env
 
-const secret = process.env.JWT_SECRET || "votre_clé_secrète";
+// =========================================
+// FONCTION D'ENREGISTREMENT AVEC SUPABASE
+// =========================================
+export const register = async (req, res) => {
+  try {
+    const { email, password, first_name, last_name } = req.body;
 
-// Fonction d'enregistrement d'un nouvel utilisateur
-export const register = (req, res) => {
-  const { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email et mot de passe requis" });
-  }
-
-  // Vérification si l'email existe déjà
-  db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
-    if (err) return res.status(500).json({ error: err });
-
-    if (results.length > 0) {
-      return res.status(400).json({ message: "Email déjà existant" });
+    // Validation des données d'entrée
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email et mot de passe requis",
+      });
     }
 
-    // Hachage du mot de passe
-    bcrypt.hash(password, 10, (err, hashedPassword) => {
-      if (err) return res.status(500).json({ error: err });
+    if (password.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: "Le mot de passe doit contenir au moins 6 caractères",
+      });
+    }
 
-      // Insertion dans la table users
-      db.query(
-        "INSERT INTO users (email, password) VALUES (?, ?)",
-        [email, hashedPassword],
-        (err, result) => {
-          if (err) return res.status(500).json({ error: err });
-          res.status(201).json({ message: "Utilisateur créé avec succès" });
-        }
-      );
+    // SUPABASE AUTH : Création du compte utilisateur
+    // Supabase gère automatiquement :
+    // - Vérification email unique
+    // - Hashage du mot de passe
+    // - Création dans auth.users
+    // - Génération du token JWT
+    const { data: authData, error: authError } = await supabase.auth.signUp({
+      email: email,
+      password: password,
+      options: {
+        data: {
+          first_name: first_name || "",
+          last_name: last_name || "",
+        },
+      },
     });
-  });
-};
 
-// Fonction de connexion d'un utilisateur
-export const login = (req, res) => {
-  const { email, password } = req.body;
+    if (authError) {
+      console.error("Erreur Supabase Auth:", authError);
 
-  if (!email || !password) {
-    return res.status(400).json({ message: "Email et mot de passe requis" });
-  }
-
-  // Recherche de l'utilisateur dans la base
-  db.query("SELECT * FROM users WHERE email = ?", [email], (err, results) => {
-    if (err) return res.status(500).json({ error: err });
-
-    if (results.length === 0) {
-      return res
-        .status(401)
-        .json({ message: "Email ou mot de passe incorrect" });
-    }
-
-    const user = results[0];
-
-    // Comparaison du mot de passe fourni avec le hash stocké
-    bcrypt.compare(password, user.password, (err, isMatch) => {
-      if (err) return res.status(500).json({ error: err });
-
-      if (!isMatch) {
-        return res
-          .status(401)
-          .json({ message: "Email ou mot de passe incorrect" });
+      // Gestion des erreurs spécifiques Supabase
+      if (authError.message.includes("already registered")) {
+        return res.status(400).json({
+          success: false,
+          message: "Cet email est déjà utilisé",
+        });
       }
 
-      // Génération du token JWT
-      const token = jwt.sign({ id: user.id, email: user.email }, secret, {
-        expiresIn: "1h",
+      return res.status(400).json({
+        success: false,
+        message: authError.message,
+      });
+    }
+
+    // SUCCÈS : Utilisateur créé dans auth.users
+    // authData.user contient les infos de l'utilisateur
+    // authData.session contient le token d'accès
+
+    res.status(201).json({
+      success: true,
+      message: "Compte créé avec succès",
+      user: {
+        id: authData.user.id,
+        email: authData.user.email,
+        first_name: authData.user.user_metadata?.first_name || "",
+        last_name: authData.user.user_metadata?.last_name || "",
+      },
+      // Le token est automatiquement géré par Supabase côté client
+      session: authData.session,
+    });
+  } catch (error) {
+    console.error("Erreur serveur register:", error);
+    res.status(500).json({
+      success: false,
+      message: "Erreur interne du serveur",
+    });
+  }
+};
+
+// =========================================
+// FONCTION DE CONNEXION AVEC SUPABASE
+// =========================================
+export const login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validation des données d'entrée
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email et mot de passe requis",
+      });
+    }
+
+    // SUPABASE AUTH : Connexion utilisateur
+    // Supabase gère automatiquement :
+    // - Vérification email/password
+    // - Génération du token JWT
+    // - Gestion de la session
+    const { data: authData, error: authError } =
+      await supabase.auth.signInWithPassword({
+        email: email,
+        password: password,
       });
 
-      // Envoi du token au client
-      res.json({ token });
+    if (authError) {
+      console.error("Erreur Supabase Login:", authError);
+
+      return res.status(401).json({
+        success: false,
+        message: "Email ou mot de passe incorrect",
+      });
+    }
+
+    // SUCCÈS : Utilisateur connecté
+    // authData.user contient les infos utilisateur
+    // authData.session contient les tokens (access_token, refresh_token)
+
+    res.json({
+      success: true,
+      message: "Connexion réussie",
+      user: {
+        id: authData.user.id,
+        email: authData.user.email,
+        first_name: authData.user.user_metadata?.first_name || "",
+        last_name: authData.user.user_metadata?.last_name || "",
+      },
+      session: authData.session,
+      // Token d'accès pour les requêtes API
+      access_token: authData.session.access_token,
     });
-  });
+  } catch (error) {
+    console.error("Erreur serveur login:", error);
+    res.status(500).json({
+      success: false,
+      message: "Erreur interne du serveur",
+    });
+  }
+};
+
+// =========================================
+// FONCTION DE DÉCONNEXION
+// =========================================
+export const logout = async (req, res) => {
+  try {
+    // SUPABASE AUTH : Déconnexion
+    // Invalide le token et ferme la session
+    const { error } = await supabase.auth.signOut();
+
+    if (error) {
+      console.error("Erreur logout:", error);
+      return res.status(500).json({
+        success: false,
+        message: "Erreur lors de la déconnexion",
+      });
+    }
+
+    res.json({
+      success: true,
+      message: "Déconnexion réussie",
+    });
+  } catch (error) {
+    console.error("Erreur serveur logout:", error);
+    res.status(500).json({
+      success: false,
+      message: "Erreur interne du serveur",
+    });
+  }
+};
+
+// =========================================
+// FONCTION POUR RÉCUPÉRER L'UTILISATEUR ACTUEL
+// =========================================
+export const getCurrentUser = async (req, res) => {
+  try {
+    // Le token est passé dans l'en-tête Authorization
+    const token = req.headers.authorization?.replace("Bearer ", "");
+
+    if (!token) {
+      return res.status(401).json({
+        success: false,
+        message: "Token d'accès requis",
+      });
+    }
+
+    // SUPABASE AUTH : Vérification du token
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.getUser(token);
+
+    if (error || !user) {
+      return res.status(401).json({
+        success: false,
+        message: "Token invalide ou expiré",
+      });
+    }
+
+    res.json({
+      success: true,
+      user: {
+        id: user.id,
+        email: user.email,
+        first_name: user.user_metadata?.first_name || "",
+        last_name: user.user_metadata?.last_name || "",
+      },
+    });
+  } catch (error) {
+    console.error("Erreur getCurrentUser:", error);
+    res.status(500).json({
+      success: false,
+      message: "Erreur interne du serveur",
+    });
+  }
 };
