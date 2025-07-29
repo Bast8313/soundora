@@ -11,7 +11,7 @@ export const routes: Routes = [
   { path: 'category/:slug', component: ProductListComponent }, // Filtrage par catégorie
   { path: 'brand/:slug', component: ProductListComponent }, // Filtrage par marque
   { 
-    path: 'product/:id', 
+    path: 'product/:slug', // Utilise le slug au lieu de l'ID pour des URLs SEO-friendly
     component: ProductDetailComponent,
     data: { prerender: false } // Désactiver le prerendering pour les routes avec paramètres
   }, 

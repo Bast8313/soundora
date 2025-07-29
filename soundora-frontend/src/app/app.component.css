@@ -1,8 +1,11 @@
-/* Layout principal Soundora */
+/* Layout principal Soundora - OPTIMISÉ SANS ESPACES */
 .main-content {
-  min-height: calc(100vh - 140px);
+  /* Suppression de la hauteur minimale qui créait des espaces */
   padding: 0;
+  margin: 0;
   background: #fff;
+  /* La navbar fait 70px de haut, on s'assure qu'il n'y a pas d'espace */
+  min-height: calc(100vh - 70px - 60px); /* navbar + footer approximatif */
 }
 
 .footer {

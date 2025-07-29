@@ -4,6 +4,7 @@ import { RouterModule, ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { ProductService, Product, ProductFilters, ApiResponse } from '../../services/product.service';
 import { CategoryService, Category, Brand } from '../../services/category.service';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -37,7 +38,8 @@ export class ProductListComponent implements OnInit {
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private cartService: CartService // Ajout du CartService pour gérer l'ajout au panier
   ) {}
 
   ngOnInit() {
@@ -225,5 +227,28 @@ export class ProductListComponent implements OnInit {
     return product.images && product.images.length > 0 
       ? product.images[0] 
       : '/assets/images/no-image.jpg';
+  }
+
+  /**
+   * Ajoute un produit au panier et empêche la propagation du clic
+   * pour éviter la navigation vers la page de détails
+   */
+  addToCart(product: Product, event: Event): void {
+    // Empêche la propagation du clic pour éviter de naviguer vers la page de détails
+    event.stopPropagation();
+    event.preventDefault();
+    
+    // Vérification du stock
+    if (product.stock === 0) {
+      console.warn('Tentative d\'ajout d\'un produit en rupture de stock:', product.name);
+      return;
+    }
+    
+    // Ajout au panier
+    this.cartService.addToCart(product);
+    console.log(`Produit "${product.name}" ajouté au panier depuis la liste des produits`);
+    
+    // TODO: Afficher une notification visuelle (toast, snackbar, etc.)
+    // Par exemple : this.toastService.show(`${product.name} ajouté au panier`);
   }
 }

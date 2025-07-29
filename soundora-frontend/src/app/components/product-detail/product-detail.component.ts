@@ -24,18 +24,30 @@ export class ProductDetailComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
-      this.productService.getProductById(id).subscribe({
-        next: (data) => {
-          this.product = data;
-          console.log('Produit chargé:', this.product);
+    // Récupération du slug depuis l'URL (ex: /product/gibson-les-paul-standard)
+    const slug = this.route.snapshot.paramMap.get('slug');
+    if (slug) {
+      console.log('Chargement du produit avec slug:', slug);
+      
+      // Utilise getProductBySlug au lieu de getProductById pour correspondre à l'API backend
+      this.productService.getProductBySlug(slug).subscribe({
+        next: (response) => {
+          // L'API retourne { success: true, data: product }
+          if (response.success && response.data) {
+            this.product = response.data;
+            console.log('Produit chargé:', this.product);
+          } else {
+            console.error('Réponse API invalide:', response);
+            this.error = 'Produit introuvable';
+          }
         },
         error: (error) => {
           console.error('Erreur lors du chargement du produit:', error);
           this.error = 'Produit introuvable';
         }
       });
+    } else {
+      this.error = 'Aucun slug fourni dans l\'URL';
     }
   }
 

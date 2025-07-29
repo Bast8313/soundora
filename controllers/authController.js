@@ -1,16 +1,32 @@
-import dotenv from "dotenv"; // Pour charger les variables d'environnement
-import supabase from "../config/supabase.js"; // Import du client Supabase
+// === IMPORTS NÉCESSAIRES ===
+import dotenv from "dotenv"; // Pour charger les variables d'environnement depuis .env
+import supabase from "../config/supabase.js"; // Import du client Supabase configuré
 
-dotenv.config(); // Charge les variables d'environnement depuis .env
+// Charge les variables d'environnement depuis le fichier .env
+dotenv.config(); 
 
 // =========================================
-// FONCTION D'ENREGISTREMENT AVEC SUPABASE
+// === FONCTION D'INSCRIPTION UTILISATEUR ===
 // =========================================
+/**
+ * Fonction d'enregistrement d'un nouvel utilisateur avec Supabase Auth
+ * 
+ * FONCTIONNEMENT :
+ * 1. Validation des données d'entrée (email, password, longueur)
+ * 2. Appel à l'API Supabase Auth pour créer le compte
+ * 3. Supabase gère automatiquement le hashage du mot de passe et la génération du token
+ * 4. Retour des informations utilisateur et du token d'accès
+ * 
+ * @param {Request} req - Requête contenant { email, password, first_name, last_name }
+ * @param {Response} res - Réponse à renvoyer au client
+ */
 export const register = async (req, res) => {
   try {
+    // === EXTRACTION DES DONNÉES DE LA REQUÊTE ===
     const { email, password, first_name, last_name } = req.body;
 
-    // Validation des données d'entrée
+    // === VALIDATIONS CÔTÉ SERVEUR ===
+    // Validation des champs obligatoires
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -18,6 +34,7 @@ export const register = async (req, res) => {
       });
     }
 
+    // Validation de la longueur du mot de passe (sécurité)
     if (password.length < 6) {
       return res.status(400).json({
         success: false,
@@ -25,27 +42,30 @@ export const register = async (req, res) => {
       });
     }
 
-    // SUPABASE AUTH : Création du compte utilisateur
+    // === SUPABASE AUTH : CRÉATION DU COMPTE UTILISATEUR ===
     // Supabase gère automatiquement :
-    // - Vérification email unique
-    // - Hashage du mot de passe
-    // - Création dans auth.users
-    // - Génération du token JWT
+    // - Vérification de l'unicité de l'email
+    // - Hashage sécurisé du mot de passe
+    // - Création dans la table auth.users
+    // - Génération du token JWT d'authentification
+    
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
+        // user_metadata : données supplémentaires stockées avec l'utilisateur
         data: {
-          first_name: first_name || "",
-          last_name: last_name || "",
+          first_name: first_name || "",  // Prénom (optionnel)
+          last_name: last_name || "",    // Nom (optionnel)
         },
       },
     });
 
+    // === GESTION DES ERREURS SUPABASE ===
     if (authError) {
       console.error("Erreur Supabase Auth:", authError);
 
-      // Gestion des erreurs spécifiques Supabase
+      // Gestion des erreurs spécifiques selon le message d'erreur
       if (authError.message.includes("already registered")) {
         return res.status(400).json({
           success: false,
@@ -53,6 +73,7 @@ export const register = async (req, res) => {
         });
       }
 
+      // Erreur générique de Supabase
       return res.status(400).json({
         success: false,
         message: authError.message,

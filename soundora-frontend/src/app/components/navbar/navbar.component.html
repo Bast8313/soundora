@@ -1,64 +1,211 @@
+<!-- Élément principal de navigation avec classe CSS pour le style -->
 <nav class="navbar">
+  <!-- Conteneur principal qui centre et limite la largeur du contenu -->
   <div class="nav-container">
-    <!-- Logo -->
+    
+    <!-- Section du logo/titre du site -->
     <div class="nav-logo">
+      <!-- Lien vers l'accueil avec routerLink (navigation Angular) -->
       <a routerLink="/" class="logo-link">
         <h1>Soundora</h1>
       </a>
     </div>
 
-    <!-- Navigation Links -->
+    <!-- Section contenant tous les liens de navigation -->
     <div class="nav-links">
+      
+      <!-- Lien vers la page d'accueil -->
+      <!-- routerLinkActive="active" : Ajoute la classe 'active' quand la route est active -->
+      <!-- [routerLinkActiveOptions]="{exact: true}" : Correspondance exacte requise -->
       <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
         Accueil
       </a>
       
-      <!-- Dropdown Catégories -->
-      <div class="dropdown" (mouseleave)="closeDropdowns()">
+      <!-- === DROPDOWN MENU DES CATÉGORIES === -->
+      <!-- 
+        MODIFICATION : Suppression du comportement de survol automatique
+        - AVANT : (mouseleave)="closeDropdowns()" → Fermait au survol
+        - APRÈS : Aucun événement de survol → Gestion par clic uniquement
+        
+        OBJECTIF : Les dropdowns restent fermés au chargement et ne s'ouvrent QUE sur clic
+        AVANTAGE : Interface plus propre, contrôle total de l'utilisateur
+      -->
+      <div class="dropdown">
+        
+        <!-- Bouton déclencheur du dropdown -->
+        <!-- 
+          MODIFICATION : Suppression de (mouseenter)="openDropdown()"
+          - AVANT : Ouverture au survol ET au clic
+          - APRÈS : (click)="toggleDropdown()" UNIQUEMENT
+          
+          LOGIQUE : toggleDropdown() bascule entre ouvert/fermé (true/false)
+          COMPORTEMENT : 1er clic = ouvre, 2ème clic = ferme
+        -->
         <button 
           class="dropdown-toggle nav-link" 
-          (click)="toggleDropdown()"
-          (mouseenter)="openDropdown()">
+          (click)="toggleDropdown()">
           Catégories
+          <!-- Icône flèche qui tourne selon l'état ouvert/fermé -->
+          <!-- [class.open] : Ajoute la classe CSS 'open' si isDropdownOpen est true -->
           <i class="dropdown-arrow" [class.open]="isDropdownOpen">▼</i>
         </button>
+        
+        <!-- Menu déroulant des catégories -->
+        <!-- 
+          FONCTIONNEMENT INCHANGÉ : [class.show] contrôle l'affichage CSS
+          - show = true → dropdown visible avec animation
+          - show = false → dropdown masqué
+          
+          LIAISON : isDropdownOpen (booléen TypeScript) → class CSS "show"
+        -->
         <div class="dropdown-menu" [class.show]="isDropdownOpen">
+          <!-- Boucle sur toutes les catégories avec *ngFor -->
+          <!-- 
+            COMPORTEMENT INCHANGÉ : Clic sur une catégorie
+            1. onCategorySelect(category.slug) → Navigation vers /category/guitares
+            2. closeDropdowns() → Ferme automatiquement le dropdown après sélection
+          -->
           <a 
             *ngFor="let category of categories" 
             class="dropdown-item"
             (click)="onCategorySelect(category.slug)"
             [title]="category.description">
+            <!-- Affiche le nom de la catégorie -->
             {{ category.name }}
           </a>
         </div>
       </div>
 
-      <!-- Dropdown Marques -->
-      <div class="dropdown" (mouseleave)="closeDropdowns()">
+      <!-- === DROPDOWN MENU DES MARQUES === -->
+      <!-- 
+        MODIFICATION IDENTIQUE AU DROPDOWN CATÉGORIES
+        - SUPPRESSION : (mouseleave)="closeDropdowns()" 
+        - SUPPRESSION : (mouseenter)="openBrandDropdown()"
+        - CONSERVATION : (click)="toggleBrandDropdown()" uniquement
+        
+        COHÉRENCE : Même comportement pour tous les dropdowns de la navbar
+      -->
+      <div class="dropdown">
+        
+        <!-- Bouton déclencheur pour les marques -->
+        <!-- 
+          MODIFICATION : Gestion par clic uniquement
+          - toggleBrandDropdown() : Bascule isBrandDropdownOpen (true ↔ false)
+          - Ferme automatiquement les autres dropdowns pour éviter les conflits
+        -->
         <button 
           class="dropdown-toggle nav-link" 
-          (click)="toggleBrandDropdown()"
-          (mouseenter)="openBrandDropdown()">
+          (click)="toggleBrandDropdown()">
           Marques
+          <!-- Icône flèche liée à l'état du dropdown des marques -->
+          <!-- [class.open] : Animation CSS basée sur isBrandDropdownOpen -->
           <i class="dropdown-arrow" [class.open]="isBrandDropdownOpen">▼</i>
         </button>
+        
+        <!-- Menu déroulant des marques -->
+        <!-- 
+          STRUCTURE IDENTIQUE AUX CATÉGORIES
+          - [class.show]="isBrandDropdownOpen" : Contrôle CSS de l'affichage
+          - *ngFor : Boucle sur le tableau brands[] récupéré de l'API
+        -->
         <div class="dropdown-menu" [class.show]="isBrandDropdownOpen">
+          <!-- Boucle sur toutes les marques -->
+          <!-- 
+            NAVIGATION : onBrandSelect(brand.slug) 
+            - Exemple : clic sur "Fender" → navigation vers /brand/fender
+            - Fermeture automatique du dropdown après sélection
+          -->
           <a 
             *ngFor="let brand of brands" 
             class="dropdown-item"
             (click)="onBrandSelect(brand.slug)"
             [title]="brand.description">
+            <!-- Affiche le nom de la marque -->
             {{ brand.name }}
           </a>
         </div>
       </div>
 
+      <!-- === LIENS DE NAVIGATION CONDITIONNELS === -->
+      
+      <!-- Lien vers la page du panier (toujours visible) -->
       <a routerLink="/cart" class="nav-link" routerLinkActive="active">
-        Panier
+        🛒 Panier
       </a>
-      <a routerLink="/login" class="nav-link" routerLinkActive="active">
-        Connexion
-      </a>
+      
+      <!-- === SECTION AUTHENTIFICATION === -->
+      <!-- Affichage conditionnel selon l'état de connexion -->
+      
+      <!-- Si l'utilisateur N'EST PAS connecté -->
+      <div *ngIf="!isLoggedIn" class="auth-links">
+        <a routerLink="/login" class="nav-link" routerLinkActive="active">
+          Connexion
+        </a>
+      </div>
+      
+      <!-- Si l'utilisateur EST connecté -->
+      <div *ngIf="isLoggedIn" class="user-menu">
+        
+        <!-- Dropdown utilisateur -->
+        <!-- 
+          MODIFICATION COHÉRENCE : Suppression de (mouseleave)="closeDropdowns()"
+          - AVANT : Fermeture au survol automatique
+          - APRÈS : Fermeture par clic uniquement ou clic extérieur
+          
+          LOGIQUE : Même comportement que les autres dropdowns pour l'UX
+        -->
+        <div class="dropdown user-dropdown">
+          
+          <!-- Bouton utilisateur avec avatar -->
+          <button 
+            class="user-button" 
+            (click)="toggleUserDropdown()"
+            [class.active]="isUserDropdownOpen">
+            
+            <!-- Avatar avec initiale -->
+            <div class="user-avatar">
+              {{ getUserInitial() }}
+            </div>
+            
+            <!-- Nom d'utilisateur -->
+            <span class="user-name">{{ getUserDisplayName() }}</span>
+            
+            <!-- Flèche -->
+            <i class="dropdown-arrow" [class.open]="isUserDropdownOpen">▼</i>
+          </button>
+          
+          <!-- Menu déroulant utilisateur -->
+          <div class="dropdown-menu user-menu-items" [class.show]="isUserDropdownOpen">
+            
+            <!-- Profil utilisateur -->
+            <div class="user-info">
+              <div class="user-email">{{ currentUser?.email }}</div>
+              <div class="user-full-name" *ngIf="currentUser?.first_name || currentUser?.last_name">
+                {{ currentUser?.first_name }} {{ currentUser?.last_name }}
+              </div>
+            </div>
+            
+            <!-- Séparateur -->
+            <div class="dropdown-divider"></div>
+            
+            <!-- Liens du menu utilisateur -->
+            <a routerLink="/orders" class="dropdown-item">
+              📦 Mes commandes
+            </a>
+            <a routerLink="/profile" class="dropdown-item">
+              👤 Mon profil
+            </a>
+            
+            <!-- Séparateur -->
+            <div class="dropdown-divider"></div>
+            
+            <!-- Bouton de déconnexion -->
+            <button class="dropdown-item logout-button" (click)="logout()">
+              🚪 Se déconnecter
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </nav>

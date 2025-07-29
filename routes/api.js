@@ -7,6 +7,7 @@ import * as cartController from "../controllers/cartController.js"; // Contrôle
 import * as orderController from "../controllers/orderController.js"; // Contrôleur commandes
 import * as testController from "../controllers/testController.js"; // Contrôleur de test
 import checkJwt from "../middleware/checkJwt.js"; // Middleware JWT pour protéger les routes
+import checkSupabaseAuth from "../middleware/checkSupabaseAuth.js"; // Middleware Supabase Auth
 
 const router = express.Router(); // Crée un routeur Express
 
@@ -24,7 +25,7 @@ router.get("/test/tables", testController.listTables); // Liste des tables dispo
 router.post("/auth/register", authController.register); // Inscription d'un utilisateur
 router.post("/auth/login", authController.login); // Connexion et obtention du token JWT
 router.post("/auth/logout", authController.logout); // Déconnexion utilisateur
-router.get("/auth/me", authController.getCurrentUser); // Récupération de l'utilisateur actuel
+router.get("/auth/me", checkSupabaseAuth, authController.getCurrentUser); // Récupération de l'utilisateur actuel (protégé)
 
 // ===================================
 // ROUTES POUR LES PRODUITS - Version Supabase Avancée

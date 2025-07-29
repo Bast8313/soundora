@@ -1,34 +1,215 @@
-.login-container {
-  background: #fff;
-  border-radius: 8px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
-  padding: 32px;
-  max-width: 350px;
-  margin: 40px auto;
+/* === STYLES DE LA PAGE D'AUTHENTIFICATION === */
+/* Fichier CSS pour le composant de connexion/inscription */
+
+/* === CONTENEUR PRINCIPAL === */
+.auth-container {
+  background: #fff;                    /* Fond blanc propre */
+  border-radius: 12px;                 /* Coins arrondis modernes */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Ombre douce pour le relief */
+  padding: 40px;                       /* Espacement interne généreux */
+  max-width: 450px;                    /* Largeur maximale pour la lisibilité */
+  margin: 40px auto;                   /* Centrage horizontal avec marge verticale */
+  display: flex;
+  flex-direction: column;              /* Disposition verticale des éléments */
+  align-items: center;                 /* Centrage horizontal du contenu */
+  min-height: 500px;                   /* Hauteur minimale pour la cohérence */
+}
+
+/* === EN-TÊTE DE LA PAGE === */
+.auth-header {
+  text-align: center;                  /* Centrage du texte */
+  margin-bottom: 30px;                 /* Espacement avec le formulaire */
+  width: 100%;                         /* Pleine largeur */
+}
+
+.auth-header h2 {
+  color: #2c3e50;                      /* Couleur principale foncée */
+  font-size: 28px;                     /* Taille de police importante */
+  font-weight: 700;                    /* Poids de police gras */
+  margin: 0 0 8px 0;                   /* Marges optimisées */
+}
+
+.auth-header p {
+  color: #7f8c8d;                      /* Couleur grise pour le sous-titre */
+  font-size: 16px;                     /* Taille lisible */
+  margin: 0;                           /* Suppression des marges par défaut */
+}
+
+/* === FORMULAIRE === */
+.auth-form {
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 20px;
 }
-.login-container input {
+
+/* === GROUPES DE CHAMPS === */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  color: #34495e;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* === CHAMPS DE SAISIE === */
+.form-group input {
   width: 100%;
-  margin: 8px 0;
-  padding: 10px;
-  border-radius: 4px;
-  border: 1px solid #ccc;
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 2px solid #e0e6ed;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  background: #fff;
+  box-sizing: border-box;
 }
-.login-container button {
-  background: #1976d2;
+
+.form-group input:focus {
+  outline: none;
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+}
+
+.form-group input:disabled {
+  background: #f8f9fa;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.form-group input::placeholder {
+  color: #a0a7b4;
+}
+
+/* === BOUTON DE SOUMISSION === */
+.auth-button {
+  background: linear-gradient(135deg, #3498db, #2980b9);
   color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 4px;
+  padding: 14px 24px;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 12px;
-}
-.login-container button:hover {
-  background: #1565c0;
-}
-.error {
-  color: #e53935;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.3s ease;
   margin-top: 10px;
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-button:hover:not(:disabled) {
+  background: linear-gradient(135deg, #2980b9, #1f639a);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+}
+
+.auth-button:disabled {
+  background: #bdc3c7;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.auth-button.loading {
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.7; }
+  100% { opacity: 1; }
+}
+
+.loading-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.loading-text::after {
+  content: '';
+  width: 16px;
+  height: 16px;
+  border: 2px solid transparent;
+  border-top: 2px solid #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* === MESSAGES D'ERREUR === */
+.error-message {
+  background: #ffeaea;
+  border: 1px solid #e74c3c;
+  border-radius: 8px;
+  padding: 12px 16px;
+  color: #c0392b;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.error-icon {
+  font-size: 16px;
+}
+
+/* === BASCULER ENTRE MODES === */
+.toggle-mode {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid #ecf0f1;
+}
+
+.toggle-mode p {
+  color: #7f8c8d;
+  font-size: 14px;
+  margin: 0;
+}
+
+.toggle-link {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.toggle-link:hover {
+  color: #2980b9;
+  text-decoration: underline;
+}
+
+/* === RESPONSIVE === */
+@media (max-width: 768px) {
+  .auth-container {
+    margin: 20px;
+    padding: 30px 20px;
+    max-width: none;
+  }
+  
+  .auth-header h2 {
+    font-size: 24px;
+  }
+  
+  .form-group input {
+    font-size: 16px; /* Évite le zoom sur iOS */
+  }
+}
+
+/* === ÉTATS DE VALIDATION === */
+.form-group input.ng-touched.ng-invalid {
+  border-color: #e74c3c;
+}
+
+.form-group input.ng-touched.ng-valid {
+  border-color: #27ae60;
 }

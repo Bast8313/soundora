@@ -1,5 +1,5 @@
-<!-- Section Hero avec image de groupe de rock -->
-<section class="hero-section">
+<!-- Section Hero optimisée - RÉDUITE -->
+<section class="hero-section-mini">
   <div class="hero-content">
     <h1>Bienvenue chez Soundora</h1>
     <p>Votre boutique d'instruments de musique de référence</p>
@@ -108,7 +108,8 @@
 
       <!-- Grille de produits -->
       <div class="products-grid" *ngIf="!loading">
-        <div class="product-card" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+        <!-- Utilise le slug au lieu de l'ID pour des URLs SEO-friendly -->
+        <div class="product-card" *ngFor="let product of products" [routerLink]="['/product', product.slug]">
           <!-- Image produit -->
           <div class="product-image">
             <img [src]="getMainImage(product)" [alt]="product.name" 
@@ -147,7 +148,12 @@
 
           <!-- Actions -->
           <div class="product-actions">
-            <button class="btn btn-primary btn-sm">🛒 Ajouter au panier</button>
+            <!-- Bouton d'ajout au panier avec gestion du clic -->
+            <button class="btn btn-primary btn-sm" 
+                    (click)="addToCart(product, $event)"
+                    [disabled]="product.stock === 0">
+              🛒 {{ product.stock === 0 ? 'Rupture' : 'Ajouter au panier' }}
+            </button>
             <a [routerLink]="['/product', product.slug]" class="btn btn-outline-secondary btn-sm">
              Voir détails
             </a>

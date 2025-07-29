@@ -1,5 +1,5 @@
 import express from "express"; // Importe Express pour créer le routeur// ===================================
-// 📂 ROUTES POUR LES CATÉGORIES
+//  ROUTES POUR LES CATÉGORIES
 // ===================================
 router.get("/categories", categoryController.getAllCategories); // Liste toutes les catégories
 router.get("/categories/:id", categoryController.getCategoryById); // Récupère une catégorie spécifique
@@ -8,7 +8,7 @@ router.put("/categories/:id", checkJwt, categoryController.updateCategory); // M
 router.delete("/categories/:id", checkJwt, categoryController.deleteCategory); // Suppression (protégé)
 
 // ===================================
-// 🛒 ROUTES POUR LE PANIER
+//  ROUTES POUR LE PANIER
 // ===================================
 router.get("/cart", checkJwt, cartController.getCart); // Récupère le panier de l'utilisateur (protégé)
 router.post("/cart/items", checkJwt, cartController.addToCart); // Ajoute un article au panier (protégé)
@@ -25,7 +25,7 @@ router.get("/orders/:order_id", checkJwt, orderController.getOrderDetails); // R
 
 // === EXPORT DU ROUTEUR POUR L'UTILISER DANS server.js ===
 export default router;t * as authController from "../controllers/authController.js"; // Contrôleur d'authentification
-import * as productSupabaseController from "../controllers/productSupabaseController.js"; // 🚀 NOUVEAU : Contrôleur produits Supabase (remplace productController)
+import * as productSupabaseController from "../controllers/productSupabaseController.js"; // !! NOUVEAU : Contrôleur produits Supabase (remplace productController)
 import * as categoryController from "../controllers/categoryController.js"; // Contrôleur catégories
 import * as cartController from "../controllers/cartController.js"; // Contrôleur panier
 import * as orderController from "../controllers/orderController.js"; // Contrôleur commandes
