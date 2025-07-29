@@ -2,6 +2,7 @@ import express from "express"; // Importe Express pour créer le routeur
 import * as authController from "../controllers/authController.js"; // Contrôleur d'authentification
 import * as productSupabaseController from "../controllers/productSupabaseController.js"; //  NOUVEAU : Contrôleur produits Supabase (remplace productController)
 import * as categoryController from "../controllers/categoryController.js"; // Contrôleur catégories
+import * as brandController from "../controllers/brandController.js"; // Contrôleur marques
 import * as cartController from "../controllers/cartController.js"; // Contrôleur panier
 import * as orderController from "../controllers/orderController.js"; // Contrôleur commandes
 import * as testController from "../controllers/testController.js"; // Contrôleur de test
@@ -65,6 +66,14 @@ router.get("/categories/:id", categoryController.getCategoryById); // Récupère
 router.post("/categories", checkJwt, categoryController.createCategory); // Création d'une catégorie (protégé)
 router.put("/categories/:id", checkJwt, categoryController.updateCategory); // Mise à jour (protégé)
 router.delete("/categories/:id", checkJwt, categoryController.deleteCategory); // Suppression (protégé)
+
+// ===================================
+// ROUTES POUR LES MARQUES
+// Gestion des marques de produits (Fender, Gibson, etc.)
+// ===================================
+router.get("/brands", brandController.getAllBrands); // Liste toutes les marques
+router.get("/brands/:id", brandController.getBrandById); // Récupère une marque par ID
+router.get("/brands/slug/:slug", brandController.getBrandBySlug); // Récupère une marque par slug
 
 // ===================================
 // ROUTES POUR LE PANIER

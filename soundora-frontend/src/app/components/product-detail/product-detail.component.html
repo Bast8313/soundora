@@ -1,14 +1,166 @@
 
 <!-- filepath: /home/bastien/Bureau/PROJET FIN D'ANNÉE/soundora-back/soundora-frontend/src/app/components/product-detail/product-detail.component.html -->
-<div class="product-detail" *ngIf="product">
-  <h2>{{ product.name }}</h2>
-  <p>{{ product.description }}</p>
-  <p>Prix : {{ product.price }} €</p>
-  <p>Stock : {{ product.stock }}</p>
+<!-- Product Detail Page -->
+<div class="container mt-4" *ngIf="product">
+  <div class="row">
+    <!-- Navigation de retour -->
+    <div class="col-12 mb-3">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item">
+            <a routerLink="/" class="text-decoration-none">Accueil</a>
+          </li>
+          <li class="breadcrumb-item">
+            <a [routerLink]="['/category', product.categories?.slug]" class="text-decoration-none">
+              {{ product.categories?.name }}
+            </a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+        </ol>
+      </nav>
+    </div>
 
-  <!-- bouton "Ajouter au panier" -->
-    <button (click)="addToCart(product)">Ajouter au panier</button>
+    <!-- Image du produit -->
+    <div class="col-md-6">
+      <div class="product-image-container">
+        <img 
+          [src]="product.images && product.images.length > 0 ? product.images[0] : '/assets/no-image.jpg'" 
+          [alt]="product.name"
+          class="product-main-image"
+          (error)="onImageError($event)">
+        
+        <!-- Badges -->
+        <div class="product-badges">
+          <span *ngIf="product.is_featured" class="badge badge-featured">Coup de cœur</span>
+          <span *ngIf="product.stock < 5 && product.stock > 0" class="badge badge-low-stock">Stock limité</span>
+          <span *ngIf="product.stock === 0" class="badge badge-out-stock">Rupture</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Informations du produit -->
+    <div class="col-md-6">
+      <div class="product-info">
+        <!-- Marque et nom -->
+        <div class="product-brand mb-2">
+          <a [routerLink]="['/brand', product.brands?.slug]" class="brand-link">
+            {{ product.brands?.name }}
+          </a>
+        </div>
+        
+        <h1 class="product-title">{{ product.name }}</h1>
+        
+        <!-- Prix -->
+        <div class="product-price mb-3">
+          <span class="current-price">{{ product.price }} €</span>
+          <span *ngIf="product.compare_price" class="original-price">{{ product.compare_price }} €</span>
+        </div>
+
+        <!-- Description courte -->
+        <div class="product-short-desc mb-3">
+          <p>{{ product.short_description || product.description }}</p>
+        </div>
+
+        <!-- Stock et référence -->
+        <div class="product-meta mb-4">
+          <div class="meta-item">
+            <strong>Disponibilité :</strong>
+            <span [class]="'stock-' + getStockStatus()">{{ getStockText() }}</span>
+          </div>
+          <div class="meta-item" *ngIf="product.sku">
+            <strong>Référence :</strong> {{ product.sku }}
+          </div>
+          <div class="meta-item" *ngIf="product.model">
+            <strong>Modèle :</strong> {{ product.model }}
+          </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="product-actions">
+          <div class="quantity-selector mb-3">
+            <label for="quantity">Quantité :</label>
+            <div class="input-group quantity-input">
+              <button class="btn btn-outline-secondary" type="button" (click)="decreaseQuantity()">-</button>
+              <input 
+                type="number" 
+                class="form-control text-center" 
+                id="quantity"
+                [(ngModel)]="selectedQuantity" 
+                min="1" 
+                [max]="product.stock">
+              <button class="btn btn-outline-secondary" type="button" (click)="increaseQuantity()">+</button>
+            </div>
+          </div>
+          
+          <button 
+            class="btn btn-primary btn-lg w-100 mb-2" 
+            [disabled]="product.stock === 0"
+            (click)="addToCart(product, selectedQuantity)">
+            <i class="fas fa-shopping-cart me-2"></i>
+            {{ product.stock === 0 ? 'Rupture de stock' : 'Ajouter au panier' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Spécifications et description détaillée -->
+  <div class="row mt-5">
+    <div class="col-12">
+      <ul class="nav nav-tabs" id="productTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+          <button class="nav-link active" id="description-tab" data-bs-toggle="tab" data-bs-target="#description" type="button" role="tab">
+            Description
+          </button>
+        </li>
+        <li class="nav-item" role="presentation" *ngIf="product.specifications && Object.keys(product.specifications).length > 0">
+          <button class="nav-link" id="specs-tab" data-bs-toggle="tab" data-bs-target="#specs" type="button" role="tab">
+            Spécifications
+          </button>
+        </li>
+      </ul>
+      
+      <div class="tab-content" id="productTabsContent">
+        <!-- Description -->
+        <div class="tab-pane fade show active" id="description" role="tabpanel">
+          <div class="tab-content-wrapper">
+            <h3>Description complète</h3>
+            <p>{{ product.description }}</p>
+          </div>
+        </div>
+        
+        <!-- Spécifications -->
+        <div class="tab-pane fade" id="specs" role="tabpanel" *ngIf="product.specifications">
+          <div class="tab-content-wrapper">
+            <h3>Spécifications techniques</h3>
+            <div class="specifications-table">
+              <div class="spec-row" *ngFor="let spec of getSpecifications()">
+                <div class="spec-label">{{ spec.key }}:</div>
+                <div class="spec-value">{{ spec.value }}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<div *ngIf="!product">
-  <p>Chargement...</p>
+
+<!-- Loading state -->
+<div class="container mt-4" *ngIf="!product && !error">
+  <div class="text-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Chargement...</span>
+    </div>
+    <p class="mt-2">Chargement du produit...</p>
+  </div>
+</div>
+
+<!-- Error state -->
+<div class="container mt-4" *ngIf="error">
+  <div class="alert alert-danger text-center">
+    <h4>Produit introuvable</h4>
+    <p>{{ error }}</p>
+    <a routerLink="/" class="btn btn-primary">Retour à l'accueil</a>
+  </div>
 </div>

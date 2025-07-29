@@ -1,0 +1,64 @@
+<nav class="navbar">
+  <div class="nav-container">
+    <!-- Logo -->
+    <div class="nav-logo">
+      <a routerLink="/" class="logo-link">
+        <h1>Soundora</h1>
+      </a>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="nav-links">
+      <a routerLink="/" class="nav-link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Accueil
+      </a>
+      
+      <!-- Dropdown Catégories -->
+      <div class="dropdown" (mouseleave)="closeDropdowns()">
+        <button 
+          class="dropdown-toggle nav-link" 
+          (click)="toggleDropdown()"
+          (mouseenter)="openDropdown()">
+          Catégories
+          <i class="dropdown-arrow" [class.open]="isDropdownOpen">▼</i>
+        </button>
+        <div class="dropdown-menu" [class.show]="isDropdownOpen">
+          <a 
+            *ngFor="let category of categories" 
+            class="dropdown-item"
+            (click)="onCategorySelect(category.slug)"
+            [title]="category.description">
+            {{ category.name }}
+          </a>
+        </div>
+      </div>
+
+      <!-- Dropdown Marques -->
+      <div class="dropdown" (mouseleave)="closeDropdowns()">
+        <button 
+          class="dropdown-toggle nav-link" 
+          (click)="toggleBrandDropdown()"
+          (mouseenter)="openBrandDropdown()">
+          Marques
+          <i class="dropdown-arrow" [class.open]="isBrandDropdownOpen">▼</i>
+        </button>
+        <div class="dropdown-menu" [class.show]="isBrandDropdownOpen">
+          <a 
+            *ngFor="let brand of brands" 
+            class="dropdown-item"
+            (click)="onBrandSelect(brand.slug)"
+            [title]="brand.description">
+            {{ brand.name }}
+          </a>
+        </div>
+      </div>
+
+      <a routerLink="/cart" class="nav-link" routerLinkActive="active">
+        Panier
+      </a>
+      <a routerLink="/login" class="nav-link" routerLinkActive="active">
+        Connexion
+      </a>
+    </div>
+  </div>
+</nav>

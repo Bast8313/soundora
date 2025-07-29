@@ -1,23 +1,190 @@
+<!-- Section Hero avec image de groupe de rock -->
+<section class="hero-section">
+  <div class="hero-content">
+    <h1>Bienvenue chez Soundora</h1>
+    <p>Votre boutique d'instruments de musique de référence</p>
+  </div>
+</section>
+
 <div class="container">
-  <h2>🎸 Nos Instruments</h2>
-  <ul>
-    <li *ngFor="let product of products">
-      <div class="product-brand">{{ product.brand_id ? 'Marque' : 'Soundora' }}</div>
-      <a [routerLink]="['/product', product.id]">
-        {{ product.name }}
-      </a>
-      <div class="product-info">
-        <div class="product-price">{{ product.price }} €</div>
-        <div class="product-stock">
-          Stock: {{ product.stock }} disponible{{ product.stock > 1 ? 's' : '' }}
+  <div class="row">
+    <!-- Titre de la section -->
+    <div class="col-12 mb-4">
+      <h2 class="section-title">{{ pageTitle }}</h2>
+      <div class="title-divider"></div>
+    </div>
+    
+    <!-- Filtres latéraux -->
+    <div class="col-md-3">
+      <div class="filters-panel">
+        <h4>Filtres</h4>
+        
+        <!-- Recherche -->
+        <div class="filter-group">
+          <label for="search">Recherche</label>
+          <input 
+            type="text" 
+            id="search"
+            class="form-control"
+            [(ngModel)]="searchQuery" 
+            (keyup.enter)="onSearch()"
+            placeholder="Chercher un produit...">
+          <button class="btn btn-primary btn-sm mt-1" (click)="onSearch()">🔍</button>
         </div>
-        <div class="product-model" *ngIf="product.model">
-          Modèle: {{ product.model }}
+
+        <!-- Catégories -->
+        <div class="filter-group">
+          <label for="category">Catégorie</label>
+          <select 
+            id="category"
+            class="form-control" 
+            [(ngModel)]="selectedCategory" 
+            (change)="onCategoryChange()">
+            <option value="">Toutes les catégories</option>
+            <option *ngFor="let category of categories" [value]="category.slug">
+              {{ category.name }}
+            </option>
+          </select>
         </div>
-        <div class="product-color" *ngIf="product.color">
-          Couleur: {{ product.color }}
+
+        <!-- Marques -->
+        <div class="filter-group">
+          <label for="brand">Marque</label>
+          <select 
+            id="brand"
+            class="form-control" 
+            [(ngModel)]="selectedBrand" 
+            (change)="onBrandChange()">
+            <option value="">Toutes les marques</option>
+            <option *ngFor="let brand of brands" [value]="brand.slug">
+              {{ brand.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- Prix -->
+        <div class="filter-group">
+          <label>Prix</label>
+          <div class="price-range">
+            <input 
+              type="number" 
+              class="form-control form-control-sm"
+              [(ngModel)]="priceMin" 
+              placeholder="Min €"
+              (change)="onPriceFilter()">
+            <span>-</span>
+            <input 
+              type="number" 
+              class="form-control form-control-sm"
+              [(ngModel)]="priceMax" 
+              placeholder="Max €"
+              (change)="onPriceFilter()">
+          </div>
+        </div>
+
+        <!-- Bouton reset -->
+        <button class="btn btn-secondary btn-sm" (click)="clearFilters()">
+         Effacer les filtres
+        </button>
+      </div>
+    </div>
+
+    <!-- Liste des produits -->
+    <div class="col-md-9">
+      <!-- En-tête avec résultats -->
+      <div class="products-header">
+        <h2>🎸 Nos Instruments</h2>
+        <div class="results-info" *ngIf="!loading">
+          {{ totalItems }} produit{{ totalItems > 1 ? 's' : '' }} trouvé{{ totalItems > 1 ? 's' : '' }}
         </div>
       </div>
-    </li>
-  </ul>
+
+      <!-- Loader -->
+      <div *ngIf="loading" class="text-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+
+      <!-- Grille de produits -->
+      <div class="products-grid" *ngIf="!loading">
+        <div class="product-card" *ngFor="let product of products" [routerLink]="['/product', product.id]">
+          <!-- Image produit -->
+          <div class="product-image">
+            <img [src]="getMainImage(product)" [alt]="product.name" 
+                 onerror="this.src='/assets/images/no-image.jpg'">
+            <div class="product-featured" *ngIf="product.is_featured">⭐</div>
+          </div>
+
+          <!-- Informations produit -->
+          <div class="product-info">
+            <div class="product-brand" *ngIf="product.brands?.name">{{ product.brands.name }}</div>
+            <h5 class="product-name">{{ product.name }}</h5>
+            <p class="product-description">{{ product.short_description }}</p>
+            
+            <!-- Prix -->
+            <div class="product-pricing">
+              <span class="current-price">{{ formatPrice(product.price) }}</span>
+              <span class="original-price" *ngIf="product.compare_price">
+                {{ formatPrice(product.compare_price) }}
+              </span>
+            </div>
+
+            <!-- Stock et catégorie -->
+            <div class="product-meta">
+              <span class="stock" [class.low-stock]="product.stock <= 2">
+               {{ product.stock }} en stock
+              </span>
+              <span class="category" *ngIf="product.categories?.name">{{ product.categories.name }}</span>
+            </div>
+
+            <!-- Couleur et modèle -->
+            <div class="product-details" *ngIf="product.color || product.model">
+              <span *ngIf="product.color" class="color">{{ product.color }}</span>
+              <span *ngIf="product.model" class="model">{{ product.model }}</span>
+            </div>
+          </div>
+
+          <!-- Actions -->
+          <div class="product-actions">
+            <button class="btn btn-primary btn-sm">🛒 Ajouter au panier</button>
+            <a [routerLink]="['/product', product.slug]" class="btn btn-outline-secondary btn-sm">
+             Voir détails
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Message si aucun produit -->
+      <div *ngIf="!loading && products.length === 0" class="no-products">
+        <h4> Aucun produit trouvé</h4>
+        <p>Essayez de modifier vos filtres de recherche.</p>
+      </div>
+
+      <!-- Pagination -->
+      <nav *ngIf="!loading && totalPages > 1" class="pagination-wrapper">
+        <ul class="pagination justify-content-center">
+          <li class="page-item" [class.disabled]="currentPage === 1">
+            <button class="page-link" (click)="previousPage()" [disabled]="currentPage === 1">
+              Précédent
+            </button>
+          </li>
+          
+          <li class="page-item" 
+              *ngFor="let page of getPagesArray()" 
+              [class.active]="currentPage === page">
+            <button class="page-link" (click)="goToPage(page)">
+              {{ page }}
+            </button>
+          </li>
+          
+          <li class="page-item" [class.disabled]="currentPage === totalPages">
+            <button class="page-link" (click)="nextPage()" [disabled]="currentPage === totalPages">
+              Suivant
+            </button>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
 </div>

@@ -1,17 +1,9 @@
 -- Script d'enrichissement complet pour Soundora
--- Catégories hiérarchiques + Large gamme de produits musicaux
+-- ATTENTION: À exécuter APRÈS test_data.sql pour enrichir le catalogue
 
 -- =================================
--- 1. NETTOYAGE PRÉALABLE (optionnel)
+-- 1. NOUVELLES MARQUES SPÉCIALISÉES
 -- =================================
--- Décommentez si vous voulez repartir à zéro
--- DELETE FROM cart_items;
--- DELETE FROM order_items;
--- DELETE FROM orders;
--- DELETE FROM products;
--- DELETE FROM categories WHERE parent_id IS NOT NULL;
--- DELETE FROM categories WHERE parent_id IS NULL;
--- DELETE FROM brands;
 
 -- =================================
 -- 2. MARQUES COMPLÈTES

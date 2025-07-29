@@ -1,16 +1,24 @@
-/*soundora-back/soundora-frontend/src/app/app.component.css */
-.navbar {
-  background: rgba(20, 20, 20, 0.95);
-  backdrop-filter: blur(10px);
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 2px solid #ff6b6b;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+/* Layout principal Soundora */
+.main-content {
+  min-height: calc(100vh - 140px);
+  padding: 0;
+  background: #fff;
+}
+
+.footer {
+  background: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  padding: 20px 0;
+  margin-top: auto;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+  color: #6c757d;
+  font-size: 14px;
+  padding: 0 20px;
 }
 
 .nav-brand h1 {

@@ -84,10 +84,9 @@ products (
   description,
   price,
   stock,
-  brand, -- marque importante pour les instruments
+  brand_id, -- référence vers table brands
   model,
-  category_id,
-  subcategory_id,
+  category_id, -- référence vers categories (peut être parent ou enfant)
   images, -- JSON array pour plusieurs images
   specifications, -- JSON pour specs techniques
   created_at,

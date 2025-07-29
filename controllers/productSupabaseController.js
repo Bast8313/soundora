@@ -199,16 +199,18 @@ export const getFeaturedProducts = async (req, res) => {
       .from("products")
       .select(
         `
-        id,                                          // ID unique du produit
-        name,                                        // Nom du produit
-        slug,                                        // URL SEO-friendly
-        description,                                 // Description
-        price,                                       // Prix
-        original_price,                              // Prix barré (si promotion)
-        image_url,                                   // Image principale
-        discount_percentage,                         // % de réduction
-        categories!inner(id, name, slug),            // Infos catégorie (obligatoire)
-        brands(id, name, slug)                       // Infos marque (optionnel)
+        id,
+        name,
+        slug,
+        description,
+        short_description,
+        price,
+        compare_price,
+        images,
+        stock,
+        is_featured,
+        categories!inner(id, name, slug),
+        brands(id, name, slug)
       `
       )
       .eq("is_active", true) // WHERE is_active = true

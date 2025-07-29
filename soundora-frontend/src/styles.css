@@ -7,12 +7,19 @@
 
 body {
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 50%, #f1f3f4 100%);
   background-attachment: fixed;
   margin: 0;
   padding: 0;
-  color: #ffffff;
+  color: #2c3e50;
   min-height: 100vh;
+}
+
+/* Élimination des espaces par défaut */
+app-root {
+  display: block;
+  margin: 0;
+  padding: 0;
 }
 
 /* Hero Section avec image de groupe de rock */
@@ -26,7 +33,7 @@ body {
   align-items: center;
   justify-content: center;
   text-align: center;
-  margin-bottom: 2rem;
+  margin-bottom: 0; /* Suppression de la marge */
 }
 
 .hero-content h1 {

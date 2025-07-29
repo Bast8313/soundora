@@ -2,15 +2,30 @@ import supabase from "../config/supabase.js"; // Import du client Supabase
 
 // ------------------------
 // Récupère toutes les catégories
-export const getAllCategories = (req, res) => {
-  db.query("SELECT * FROM categories", (err, results) => {
-    if (err) {
-      // Erreur SQL
-      return res.status(500).json({ error: err });
+export const getAllCategories = async (req, res) => {
+  try {
+    const { data, error } = await supabase
+      .from('categories')
+      .select('*')
+      .order('name');
+
+    if (error) {
+      return res.status(500).json({ 
+        success: false, 
+        error: error.message 
+      });
     }
-    // Renvoie toutes les catégories
-    res.json(results);
-  });
+
+    res.json({
+      success: true,
+      data: data
+    });
+  } catch (err) {
+    res.status(500).json({ 
+      success: false, 
+      error: 'Erreur serveur lors de la récupération des catégories' 
+    });
+  }
 };
 
 // ------------------------

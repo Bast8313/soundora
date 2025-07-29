@@ -2,7 +2,7 @@
 -- À exécuter dans l'interface Supabase SQL Editor
 
 -- =================================
--- 🧹 NETTOYAGE : Suppression des tables existantes (si elles existent)
+-- NETTOYAGE : Suppression des tables existantes (si elles existent)
 -- =================================
 -- ATTENTION : Ceci va supprimer toutes les données existantes !
 -- Ordre important : supprimer les tables avec foreign keys en premier
