@@ -1,4 +1,43 @@
-<!-- Section Hero optimisée - RÉDUITE -->
+<!-- 
+  =====================================
+  TEMPLATE DE LISTE DE PRODUITS -         <!-- FILTRE : Sélection de marque -->
+        <div class="filter-group">
+          <label for="brand">Marque</label>
+          <!-- 
+            LOGIQUE IDENTIQUE AU FILTRE CATÉGORIE :
+            - [(ngModel)]="selectedBrand" : Stockage de la marque sélectionnée
+            - (change)="onBrandChange()" : Filtrage immédiat à la sélection
+            - Option vide pour "Toutes les marques"
+          -->
+          <select 
+            id="brand"
+            class="form-control" 
+            [(ngModel)]="selectedBrand" 
+            (change)="onBrandChange()">
+            <option value="">Toutes les marques</option>
+            <option *ngFor="let brand of brands" [value]="brand.slug">
+              {{ brand.name }}
+            </option>
+          </select>
+        </div>
+
+        <!-- FILTRE : Fourchette de prix -->
+        <div class="filter-group">
+          <label>Prix</label>
+          <!-- 
+            SYSTÈME DE FOURCHETTE PRIX :
+            - Deux inputs : prix minimum et maximum
+            - (blur) : Déclenche le filtrage quand l'utilisateur quitte le champ
+            - Validation côté TypeScript pour s'assurer que min < max
+          -->
+          <div class="price-range">
+            <!--  Prix minimum -->============================
+  Affichage des produits avec filtres, pagination et système de panier
+  Includes: Hero section, filtres latéraux, grille de produits, notifications
+-->
+
+<!-- Section Hero optimisée - VERSION MINI pour les listes de produits -->
+<!-- Utilise une classe CSS spécifique pour réduire la hauteur -->
 <section class="hero-section-mini">
   <div class="hero-content">
     <h1>Bienvenue chez Soundora</h1>
@@ -6,22 +45,37 @@
   </div>
 </section>
 
+<!-- Conteneur principal avec système de grille Bootstrap -->
 <div class="container">
   <div class="row">
-    <!-- Titre de la section -->
+    
+    <!-- =====================================
+         EN-TÊTE DE SECTION
+         ===================================== -->
+    <!-- Titre dynamique basé sur les filtres actifs -->
     <div class="col-12 mb-4">
+      <!-- pageTitle : Déterminé dans le TypeScript selon le contexte -->
+      <!-- Exemples : "Tous les produits", "Guitares", "Produits Fender" -->
       <h2 class="section-title">{{ pageTitle }}</h2>
       <div class="title-divider"></div>
     </div>
     
-    <!-- Filtres latéraux -->
+    <!-- =====================================
+         PANNEAU DE FILTRES LATÉRAL
+         ===================================== -->
     <div class="col-md-3">
       <div class="filters-panel">
         <h4>Filtres</h4>
         
-        <!-- Recherche -->
+        <!-- FILTRE : Barre de recherche textuelle -->
         <div class="filter-group">
           <label for="search">Recherche</label>
+          <!-- 
+            FONCTIONNALITÉS :
+            - [(ngModel)]="searchQuery" : Liaison bidirectionnelle avec la propriété TypeScript
+            - (keyup.enter) : Recherche instantanée quand l'utilisateur appuie sur Entrée
+            - (click) sur bouton : Recherche au clic
+          -->
           <input 
             type="text" 
             id="search"
@@ -32,9 +86,16 @@
           <button class="btn btn-primary btn-sm mt-1" (click)="onSearch()">🔍</button>
         </div>
 
-        <!-- Catégories -->
+        <!-- FILTRE : Sélection de catégorie -->
         <div class="filter-group">
           <label for="category">Catégorie</label>
+          <!-- 
+            FONCTIONNEMENT :
+            - [(ngModel)]="selectedCategory" : Valeur sélectionnée stockée dans la propriété
+            - (change)="onCategoryChange()" : Déclenche le filtrage immédiat
+            - *ngFor : Boucle sur les catégories récupérées de l'API
+            - [value]="category.slug" : Utilise le slug comme identifiant unique
+          -->
           <select 
             id="category"
             class="form-control" 
@@ -47,7 +108,7 @@
           </select>
         </div>
 
-        <!-- Marques -->
+        <!-- FILTRE : Sélection de marque -->
         <div class="filter-group">
           <label for="brand">Marque</label>
           <select 
@@ -66,6 +127,7 @@
         <div class="filter-group">
           <label>Prix</label>
           <div class="price-range">
+            <!--  Prix minimum -->
             <input 
               type="number" 
               class="form-control form-control-sm"
@@ -73,6 +135,7 @@
               placeholder="Min €"
               (change)="onPriceFilter()">
             <span>-</span>
+            <!-- Prix maximum -->
             <input 
               type="number" 
               class="form-control form-control-sm"
@@ -82,78 +145,135 @@
           </div>
         </div>
 
-        <!-- Bouton reset -->
+        <!-- BOUTON : Réinitialisation des filtres -->
+        <!-- 
+          FONCTION : clearFilters() remet tous les filtres à leurs valeurs par défaut
+          UTILITÉ : Permet à l'utilisateur de retrouver rapidement l'affichage complet
+        -->
         <button class="btn btn-secondary btn-sm" (click)="clearFilters()">
          Effacer les filtres
         </button>
       </div>
     </div>
 
-    <!-- Liste des produits -->
+    <!-- =====================================
+         ZONE D'AFFICHAGE DES PRODUITS
+         ===================================== -->
     <div class="col-md-9">
-      <!-- En-tête avec résultats -->
+      
+      <!-- EN-TÊTE avec compteur de résultats -->
       <div class="products-header">
         <h2>🎸 Nos Instruments</h2>
+        <!-- 
+          COMPTEUR DYNAMIQUE :
+          - Affiche le nombre total de produits trouvés
+          - Gère le pluriel automatiquement (produit/produits, trouvé/trouvés)
+          - Masqué pendant le chargement (*ngIf="!loading")
+        -->
         <div class="results-info" *ngIf="!loading">
           {{ totalItems }} produit{{ totalItems > 1 ? 's' : '' }} trouvé{{ totalItems > 1 ? 's' : '' }}
         </div>
       </div>
 
-      <!-- Loader -->
+      <!-- INDICATEUR DE CHARGEMENT -->
+      <!-- Spinner Bootstrap affiché uniquement pendant les requêtes API -->
       <div *ngIf="loading" class="text-center">
         <div class="spinner-border" role="status">
           <span class="visually-hidden">Chargement...</span>
         </div>
       </div>
 
-      <!-- Grille de produits -->
+      <!-- =====================================
+           GRILLE DE PRODUITS PRINCIPALE
+           ===================================== -->
+      <!-- Masquée pendant le chargement pour éviter le scintillement -->
       <div class="products-grid" *ngIf="!loading">
-        <!-- Utilise le slug au lieu de l'ID pour des URLs SEO-friendly -->
-        <div class="product-card" *ngFor="let product of products" [routerLink]="['/product', product.slug]">
-          <!-- Image produit -->
+        <!-- 
+          OPTIMISATION CRITIQUE : trackBy: trackByProductId
+          PROBLÈME RÉSOLU : Évite le "saut" des noms de produits
+          FONCTIONNEMENT : Angular utilise product.id pour identifier chaque élément
+          AVANTAGE : Pas de re-rendu inutile, performance améliorée
+        -->
+        <div class="product-card" *ngFor="let product of products; trackBy: trackByProductId" [routerLink]="['/product', product.slug]">
+          
+          <!-- SECTION : Image du produit -->
           <div class="product-image">
+            <!-- 
+              IMAGE AVEC FALLBACK :
+              - [src]="getMainImage(product)" : Récupère l'image principale via méthode
+              - onerror : Si l'image n'existe pas, affiche une image par défaut
+              - [alt] : Texte alternatif pour l'accessibilité
+            -->
             <img [src]="getMainImage(product)" [alt]="product.name" 
                  onerror="this.src='/assets/images/no-image.jpg'">
+            <!-- Badge "Produit vedette" si is_featured est true -->
             <div class="product-featured" *ngIf="product.is_featured">⭐</div>
           </div>
 
-          <!-- Informations produit -->
+          <!-- SECTION : Informations du produit -->
           <div class="product-info">
+            <!-- Marque (si disponible via relation brands) -->
             <div class="product-brand" *ngIf="product.brands?.name">{{ product.brands.name }}</div>
+            <!-- Nom du produit (titre principal) -->
             <h5 class="product-name">{{ product.name }}</h5>
+            <!-- Description courte -->
             <p class="product-description">{{ product.short_description }}</p>
             
-            <!-- Prix -->
+            <!-- SECTION : Affichage des prix -->
             <div class="product-pricing">
+              <!-- Prix actuel (toujours affiché) -->
               <span class="current-price">{{ formatPrice(product.price) }}</span>
+              <!-- Prix de comparaison (ancien prix si en promotion) -->
               <span class="original-price" *ngIf="product.compare_price">
                 {{ formatPrice(product.compare_price) }}
               </span>
             </div>
 
-            <!-- Stock et catégorie -->
+            <!-- SECTION : Métadonnées du produit -->
             <div class="product-meta">
+              <!-- 
+                INDICATEUR DE STOCK :
+                - [class.low-stock] : Applique une classe CSS spéciale si stock <= 2
+                - Affichage conditionnel pour alerter sur le stock faible
+              -->
               <span class="stock" [class.low-stock]="product.stock <= 2">
                {{ product.stock }} en stock
               </span>
+              <!-- Catégorie du produit (si disponible via relation) -->
               <span class="category" *ngIf="product.categories?.name">{{ product.categories.name }}</span>
             </div>
 
-            <!-- Couleur et modèle -->
+            <!-- SECTION : Détails techniques (couleur, modèle) -->
             <div class="product-details" *ngIf="product.color || product.model">
+              <!-- Couleur du produit (optionnel) -->
               <span *ngIf="product.color" class="color">{{ product.color }}</span>
+              <!-- Modèle du produit (optionnel) -->
               <span *ngIf="product.model" class="model">{{ product.model }}</span>
             </div>
           </div>
 
-          <!-- Actions -->
+          <!-- =====================================
+               ACTIONS UTILISATEUR SUR LE PRODUIT
+               ===================================== -->
           <div class="product-actions">
-            <!-- Bouton d'ajout au panier avec gestion du clic -->
+            <!-- 
+              BOUTON AJOUT AU PANIER :
+              - (click)="addToCart(product, $event)" : Méthode d'ajout avec gestion d'événement
+              - $event : Nécessaire pour éviter la navigation vers la page détail
+              - [disabled] : Désactive le bouton si rupture de stock
+              - Texte dynamique selon le stock
+            -->
             <button class="btn btn-primary btn-sm" 
                     (click)="addToCart(product, $event)"
                     [disabled]="product.stock === 0">
               🛒 {{ product.stock === 0 ? 'Rupture' : 'Ajouter au panier' }}
             </button>
+            
+            <!-- 
+              BOUTON VOIR DÉTAILS :
+              - [routerLink] : Navigation vers la page détail du produit
+              - Utilise le slug pour des URLs SEO-friendly
+            -->
             <a [routerLink]="['/product', product.slug]" class="btn btn-outline-secondary btn-sm">
              Voir détails
             </a>
@@ -161,21 +281,43 @@
         </div>
       </div>
 
-      <!-- Message si aucun produit -->
+      <!-- =====================================
+           MESSAGE AUCUN RÉSULTAT
+           ===================================== -->
+      <!-- Affiché uniquement si pas de chargement ET aucun produit trouvé -->
       <div *ngIf="!loading && products.length === 0" class="no-products">
-        <h4> Aucun produit trouvé</h4>
+        <h4>🔍 Aucun produit trouvé</h4>
         <p>Essayez de modifier vos filtres de recherche.</p>
       </div>
 
-      <!-- Pagination -->
+      <!-- =====================================
+           SYSTÈME DE PAGINATION
+           ===================================== -->
+      <!-- 
+        AFFICHAGE CONDITIONNEL :
+        - !loading : Masqué pendant le chargement
+        - totalPages > 1 : Affiché seulement si plusieurs pages disponibles
+      -->
       <nav *ngIf="!loading && totalPages > 1" class="pagination-wrapper">
         <ul class="pagination justify-content-center">
+          <!-- 
+            BOUTON PAGE PRÉCÉDENTE :
+            - [class.disabled] : Applique classe CSS si on est sur la première page
+            - [disabled] : Désactive le bouton fonctionnellement
+            - (click)="previousPage()" : Méthode de navigation
+          -->
           <li class="page-item" [class.disabled]="currentPage === 1">
             <button class="page-link" (click)="previousPage()" [disabled]="currentPage === 1">
               Précédent
             </button>
           </li>
           
+          <!-- 
+            NUMÉROS DE PAGES :
+            - *ngFor="let page of getPagesArray()" : Boucle sur les numéros de pages
+            - [class.active] : Surligne la page actuelle
+            - (click)="goToPage(page)" : Navigation directe vers une page
+          -->
           <li class="page-item" 
               *ngFor="let page of getPagesArray()" 
               [class.active]="currentPage === page">
@@ -184,6 +326,11 @@
             </button>
           </li>
           
+          <!-- 
+            BOUTON PAGE SUIVANTE :
+            - Logique inverse du bouton précédent
+            - Désactivé si on est sur la dernière page
+          -->
           <li class="page-item" [class.disabled]="currentPage === totalPages">
             <button class="page-link" (click)="nextPage()" [disabled]="currentPage === totalPages">
               Suivant
@@ -194,3 +341,22 @@
     </div>
   </div>
 </div>
+
+<!-- 
+  =====================================
+  FIN DU TEMPLATE PRODUCT-LIST
+  =====================================
+  Structure complète :
+  1. Hero section mini
+  2. Conteneur avec filtres latéraux (col-md-3)
+  3. Zone principale des produits (col-md-9)
+  4. Grille responsive avec cartes produits
+  5. Système de pagination intégré
+  
+  Fonctionnalités clés :
+  - Filtrage en temps réel (catégorie, marque, prix, recherche)
+  - Optimisation performance avec trackBy
+  - Gestion d'état (loading, aucun résultat)
+  - Navigation SEO-friendly avec slugs
+  - Integration système de panier avec notifications
+-->

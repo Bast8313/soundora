@@ -137,13 +137,15 @@ export const getProductBySlug = async (req, res) => {
     const { slug } = req.params;
 
     // REQUÊTE SUPABASE AVEC JOINTURES DÉTAILLÉES
+    // CORRECTION : Suppression des commentaires SQL qui causent l'erreur PGRST100
+    // Les commentaires ne sont pas supportés dans les requêtes Supabase .select()
     const { data: product, error } = await supabase
       .from("products")
       .select(
         `
-        *,                                           // Tous les champs du produit
-        categories!inner(id, name, slug, parent_id), // Infos catégorie (obligatoire avec !inner)
-        brands(id, name, slug, description, logo_url) // Infos marque (optionnel)
+        *,
+        categories!inner(id, name, slug, parent_id),
+        brands(id, name, slug, description, logo_url)
       `
       )
       .eq("slug", slug) // WHERE slug = 'gibson-les-paul-standard'

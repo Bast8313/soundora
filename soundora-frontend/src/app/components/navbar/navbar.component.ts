@@ -1,5 +1,7 @@
-// Importation des modules Angular nécessaires
-// MODIFICATION : Ajout de HostListener pour gérer les clics extérieurs
+// =====================================
+// IMPORTS NÉCESSAIRES POUR LA NAVBAR
+// =====================================
+// Modules Angular pour le composant de navigation principal
 import { Component, OnInit, OnDestroy, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
@@ -7,52 +9,86 @@ import { CategoryService, Category, Brand } from '../../services/category.servic
 import { AuthService } from '../../services/auth.service';
 import { Subscription } from 'rxjs';
 
-// Décorateur Component qui définit les métadonnées du composant
+/**
+ * COMPOSANT DE NAVIGATION PRINCIPAL
+ * Barre de navigation responsive avec dropdowns pour catégories, marques et utilisateur
+ * Gère l'affichage selon l'état d'authentification
+ * Includes menu mobile et desktop avec fermeture automatique
+ */
 @Component({
-  selector: 'app-navbar',           // Nom du sélecteur HTML pour utiliser ce composant
+  selector: 'app-navbar',           // Sélecteur HTML : <app-navbar></app-navbar>
   standalone: true,                // Composant autonome (Angular 14+)
-  imports: [CommonModule, RouterModule], // Modules importés pour ce composant
-  templateUrl: './navbar.component.html', // Chemin vers le template HTML
-  styleUrl: './navbar.component.css'      // Chemin vers le fichier CSS
+  imports: [CommonModule, RouterModule], // Modules requis pour directives et routing
+  templateUrl: './navbar.component.html', // Template HTML associé
+  styleUrl: './navbar.component.css'      // Styles CSS associés
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  // Propriétés pour stocker les données récupérées de l'API
-  categories: Category[] = [];     // Liste des catégories de produits
-  brands: Brand[] = [];           // Liste des marques de produits
   
-  // Variables pour gérer l'état d'ouverture/fermeture des dropdowns
+  // =====================================
+  // PROPRIÉTÉS DE DONNÉES
+  // =====================================
+  categories: Category[] = [];     // Liste des catégories récupérées de l'API
+  brands: Brand[] = [];           // Liste des marques récupérées de l'API
+  
+  // =====================================
+  // GESTION DES ÉTATS D'INTERFACE
+  // =====================================
   isDropdownOpen = false;         // État du dropdown des catégories
   isBrandDropdownOpen = false;    // État du dropdown des marques
-
-  // Variables pour l'authentification
-  isLoggedIn = false;             // État de connexion de l'utilisateur
-  currentUser: any = null;        // Données de l'utilisateur connecté
   isUserDropdownOpen = false;     // État du dropdown utilisateur
 
-  // Gestion des abonnements RxJS
-  private subscriptions: Subscription[] = [];
+  // =====================================
+  // GESTION DE L'AUTHENTIFICATION
+  // =====================================
+  isLoggedIn = false;             // Statut de connexion utilisateur
+  currentUser: any = null;        // Données de l'utilisateur connecté
 
-  // Injection de dépendances dans le constructeur
+  // =====================================
+  // GESTION DES ABONNEMENTS RXJS
+  // =====================================
+  private subscriptions: Subscription[] = []; // Stockage des abonnements pour éviter les fuites mémoire
+
+  /**
+   * CONSTRUCTEUR - INJECTION DES DÉPENDANCES
+   * Injecte les services nécessaires au fonctionnement de la navbar
+   * 
+   * @param categoryService - Service pour récupérer catégories et marques
+   * @param authService - Service pour la gestion de l'authentification
+   * @param router - Service de navigation Angular
+   */
   constructor(
-    private categoryService: CategoryService, // Service pour récupérer catégories et marques
-    private authService: AuthService,         // Service d'authentification
-    private router: Router                    // Service de navigation d'Angular
+    private categoryService: CategoryService,
+    private authService: AuthService,
+    private router: Router
   ) {}
 
-  // Méthode appelée automatiquement après l'initialisation du composant
+  /**
+   * INITIALISATION DU COMPOSANT
+   * Charge les données initiales et configure les abonnements
+   */
   ngOnInit() {
     this.loadCategories(); // Charge les catégories au démarrage
     this.loadBrands();     // Charge les marques au démarrage
     this.initAuthState();  // Initialise l'état d'authentification
   }
 
-  // Méthode appelée lors de la destruction du composant
+  /**
+   * NETTOYAGE À LA DESTRUCTION
+   * Libère les abonnements pour éviter les fuites mémoire
+   */
   ngOnDestroy() {
-    // Désabonne tous les observables pour éviter les fuites mémoire
+    // Désabonnement de tous les observables pour éviter les fuites mémoire
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-  // Initialise l'état d'authentification en s'abonnant aux observables
+  // =====================================
+  // GESTION DE L'AUTHENTIFICATION
+  // =====================================
+
+  /**
+   * INITIALISE L'ÉTAT D'AUTHENTIFICATION
+   * S'abonne aux observables de l'AuthService pour suivre les changements
+   */
   initAuthState() {
     // S'abonner à l'état de connexion
     const authSub = this.authService.isLoggedIn$.subscribe({

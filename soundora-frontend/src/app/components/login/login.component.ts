@@ -1,52 +1,72 @@
-// === IMPORTS NÉCESSAIRES ===
+// =====================================
+// IMPORTS POUR LE COMPOSANT LOGIN
+// =====================================
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
+import { CommonModule } from '@angular/common'; // Directives Angular de base (ngIf, ngFor, etc.)
+import { FormsModule } from '@angular/forms'; // Module pour liaison de formulaires [(ngModel)]
+import { Router } from '@angular/router'; // Service de navigation Angular
+import { AuthService } from '../../services/auth.service'; // Service d'authentification
 
-// === DÉCORATEUR COMPONENT ===
-// Définit les métadonnées du composant Angular
+/**
+ * COMPOSANT DE CONNEXION/INSCRIPTION
+ * Gère l'authentification des utilisateurs avec double fonctionnalité :
+ * - Mode login : Connexion utilisateur existant
+ * - Mode register : Inscription nouvel utilisateur
+ * Includes validation, gestion d'erreurs et redirection automatique
+ */
 @Component({
-  selector: 'app-login',              // Sélecteur HTML pour utiliser ce composant
+  selector: 'app-login',              // Sélecteur HTML : <app-login></app-login>
   standalone: true,                  // Composant autonome (Angular 14+)
-  imports: [CommonModule, FormsModule], // Modules importés pour les directives et le binding
-  templateUrl: './login.component.html', // Template HTML externe
-  styleUrls: ['./login.component.css']   // Styles CSS externes
+  imports: [CommonModule, FormsModule], // Modules requis pour directives et formulaires
+  templateUrl: './login.component.html', // Template HTML associé
+  styleUrls: ['./login.component.css']   // Styles CSS associés
 })
 export class LoginComponent {
   
-  // === PROPRIÉTÉS DU FORMULAIRE ===
-  // Données du formulaire de connexion (liées par [(ngModel)])
-  email = '';           // Email de l'utilisateur
-  password = '';        // Mot de passe
+  // =====================================
+  // PROPRIÉTÉS DU FORMULAIRE
+  // =====================================
+  email = '';           // Email utilisateur (requis pour connexion/inscription)
+  password = '';        // Mot de passe (requis)
   
-  // === GESTION DES ÉTATS DU COMPOSANT ===
-  error = '';           // Message d'erreur à afficher
-  isLoading = false;    // Indicateur de chargement (désactive le formulaire)
+  // =====================================
+  // GESTION DES ÉTATS INTERFACE
+  // =====================================
+  error = '';           // Message d'erreur à afficher à l'utilisateur
+  isLoading = false;    // État de chargement (désactive formulaire pendant requête)
   
-  // === MODE D'AFFICHAGE ===
-  // Permet de basculer entre connexion et inscription dans le même composant
-  mode: 'login' | 'register' = 'login';
+  // =====================================
+  // MODE D'AFFICHAGE DU COMPOSANT
+  // =====================================
+  mode: 'login' | 'register' = 'login'; // Bascule entre connexion et inscription
   
-  // === CHAMPS SUPPLÉMENTAIRES POUR L'INSCRIPTION ===
-  firstName = '';       // Prénom (optionnel)
-  lastName = '';        // Nom (optionnel)
-  confirmPassword = ''; // Confirmation du mot de passe
-
-  // === INJECTION DE DÉPENDANCES ===
-  constructor(
-    private authService: AuthService, // Service d'authentification
-    private router: Router           // Service de navigation Angular
-  ) {}
+  // =====================================
+  // CHAMPS SUPPLÉMENTAIRES INSCRIPTION
+  // =====================================
+  firstName = '';       // Prénom utilisateur (optionnel pour inscription)
+  lastName = '';        // Nom utilisateur (optionnel pour inscription)
+  confirmPassword = ''; // Confirmation mot de passe (validation inscription)
 
   /**
-   * === MÉTHODE DE CONNEXION ===
-   * Gère la connexion d'un utilisateur existant
+   * CONSTRUCTEUR - INJECTION DES DÉPENDANCES
+   * @param authService - Service pour gestion authentification
+   * @param router - Service pour navigation après connexion
+   */
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
+  // =====================================
+  // MÉTHODES D'AUTHENTIFICATION
+  // =====================================
+
+  /**
+   * CONNEXION UTILISATEUR EXISTANT
+   * Authentifie un utilisateur avec email/mot de passe
    */
   login(): void {
-    // === VALIDATION CÔTÉ CLIENT ===
-    // Vérification des champs requis
+    // VALIDATION CÔTÉ CLIENT
     if (!this.email || !this.password) {
       this.error = 'Email et mot de passe requis';
       return;

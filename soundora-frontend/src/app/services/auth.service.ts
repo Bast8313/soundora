@@ -40,7 +40,7 @@ export class AuthService {
   // URL de base de l'API backend
   private apiUrl = 'http://localhost:3010/api';
   
-  // === GESTION D'ÉTAT AVEC BEHAVIORSUBJECT ===
+    // === GESTION D'ÉTAT AVEC BEHAVIORSUBJECT ===
   // BehaviorSubject : Observable qui garde la dernière valeur émise
   // Permet aux composants de s'abonner aux changements d'état
   
@@ -48,21 +48,29 @@ export class AuthService {
   private currentUserSubject = new BehaviorSubject<User | null>(null);
   public currentUser$ = this.currentUserSubject.asObservable();
   
-  // Gestion de l'état de connexion (true/false)
+  // Gestion de l'état de connexion (connecté/déconnecté)
   private isLoggedInSubject = new BehaviorSubject<boolean>(false);
   public isLoggedIn$ = this.isLoggedInSubject.asObservable();
 
-  // === INJECTION DE DÉPENDANCES ===
+  /**
+   * CONSTRUCTEUR DU SERVICE D'AUTHENTIFICATION
+   * Injection des dépendances nécessaires au fonctionnement
+   * Initialise l'état d'authentification au démarrage
+   * 
+   * @param http - Client HTTP pour les appels API
+   * @param router - Service de navigation pour les redirections
+   */
   constructor(
-    private http: HttpClient, // Pour les requêtes HTTP vers l'API
-    private router: Router    // Pour la navigation entre les pages
+    private http: HttpClient,
+    private router: Router
   ) {
-    // Vérifier si l'utilisateur est déjà connecté au démarrage
+    // INITIALISATION : Vérifier si l'utilisateur est déjà connecté
+    // Appel au démarrage pour restaurer l'état d'authentification
     this.checkAuthState();
   }
 
   /**
-   * === MÉTHODE DE VÉRIFICATION D'ÉTAT AU DÉMARRAGE ===
+   * MÉTHODE DE VÉRIFICATION D'ÉTAT AU DÉMARRAGE
    * Vérifie l'état d'authentification au démarrage de l'application
    * en cherchant un token dans le localStorage
    */
@@ -76,6 +84,8 @@ export class AuthService {
             // Token valide : mettre à jour l'état
             this.currentUserSubject.next(response.user);
             this.isLoggedInSubject.next(true);
+            console.log('État de connexion mis à jour:', true);
+            console.log('Utilisateur actuel mis à jour:', response.user);
           } else {
             // Token invalide, nettoyer le localStorage
             this.clearAuthData();
@@ -90,7 +100,7 @@ export class AuthService {
   }
 
   /**
-   * === MÉTHODE D'INSCRIPTION ===
+   * MÉTHODE D'INSCRIPTION
    * Inscription d'un nouvel utilisateur avec Supabase
    * @param email - Email de l'utilisateur
    * @param password - Mot de passe
@@ -126,7 +136,7 @@ export class AuthService {
   }
 
   /**
-   * === MÉTHODE DE CONNEXION ===
+   * MÉTHODE DE CONNEXION
    * Connexion d'un utilisateur existant avec email/mot de passe
    * @param email - Email de l'utilisateur
    * @param password - Mot de passe
@@ -151,7 +161,7 @@ export class AuthService {
   }
 
   /**
-   * === MÉTHODE DE DÉCONNEXION ===
+   * MÉTHODE DE DÉCONNEXION
    * Déconnexion de l'utilisateur (côté serveur + nettoyage local)
    * @returns Observable pour la requête de déconnexion
    */
@@ -169,7 +179,7 @@ export class AuthService {
   }
 
   /**
-   * === MÉTHODE DE RÉCUPÉRATION UTILISATEUR ===
+   * MÉTHODE DE RÉCUPÉRATION UTILISATEUR
    * Récupère les informations de l'utilisateur actuel depuis le serveur
    * Utilisée pour vérifier la validité du token au démarrage
    * @returns Observable contenant les données utilisateur
@@ -183,9 +193,12 @@ export class AuthService {
     });
   }
 
-  // === MÉTHODES UTILITAIRES POUR LE TOKEN ===
+  // =====================================
+  // MÉTHODES UTILITAIRES POUR LE TOKEN
+  // =====================================
 
   /**
+   * RÉCUPÈRE LE TOKEN JWT STOCKÉ
    * Récupère le token JWT stocké dans le localStorage
    * Vérification de l'environnement pour éviter les erreurs SSR
    * @returns Token JWT ou null si absent
@@ -198,6 +211,7 @@ export class AuthService {
   }
 
   /**
+   * STOCKE LE TOKEN JWT
    * Stocke le token JWT dans le localStorage de manière sécurisée
    * @param token - Token JWT à stocker
    */
@@ -208,6 +222,7 @@ export class AuthService {
   }
 
   /**
+   * NETTOIE LES DONNÉES D'AUTHENTIFICATION
    * Nettoie toutes les données d'authentification
    * - Supprime le token du localStorage
    * - Remet à zéro l'état utilisateur
@@ -221,9 +236,12 @@ export class AuthService {
     this.isLoggedInSubject.next(false);
   }
 
-  // === MÉTHODES D'AIDE POUR LES COMPOSANTS ===
+  // =====================================
+  // MÉTHODES D'AIDE POUR LES COMPOSANTS
+  // =====================================
 
   /**
+   * VÉRIFIE SI L'UTILISATEUR EST CONNECTÉ
    * Vérifie si l'utilisateur est actuellement connecté
    * Retourne la valeur actuelle du BehaviorSubject
    * @returns true si connecté, false sinon
@@ -233,6 +251,7 @@ export class AuthService {
   }
 
   /**
+   * RÉCUPÈRE LES DONNÉES UTILISATEUR ACTUELLES
    * Récupère les données de l'utilisateur actuel
    * Retourne la valeur actuelle du BehaviorSubject utilisateur
    * @returns Données utilisateur ou null si déconnecté

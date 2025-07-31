@@ -1,27 +1,63 @@
-import { Component,OnInit} from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importation du module commun pour les directives Angular de base
-import { CartService } from '../../services/cart.service'; // Importation du service de panier
+// =====================================
+// IMPORTS POUR LE COMPOSANT PANIER
+// =====================================
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common'; // Directives Angular de base (ngFor, ngIf, etc.)
+import { CartService } from '../../services/cart.service'; // Service de gestion du panier
 
+/**
+ * COMPOSANT PANIER D'ACHAT
+ * Affiche les articles dans le panier, permet la modification des quantités
+ * et calcule le total des achats
+ */
 @Component({
   selector: 'app-cart',
-  standalone: true, // Indique que ce composant est autonome
-  imports: [CommonModule], // Importation des modules nécessaires pour le composant
+  standalone: true, // Composant autonome (Angular 14+)
+  imports: [CommonModule], // Modules nécessaires pour les directives
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-  items: any[] = []; // Tableau pour stocker les articles du panier
+  
+  // =====================================
+  // PROPRIÉTÉS DU COMPOSANT
+  // =====================================
+  items: any[] = []; // Tableau des articles dans le panier
 
-  constructor(private cartService: CartService) { } // Injection du service de panier
+  /**
+   * CONSTRUCTEUR - INJECTION DU SERVICE PANIER
+   * @param cartService - Service pour gérer les opérations du panier
+   */
+  constructor(private cartService: CartService) { }
 
-  ngOnInit(){
-    this.items = this.cartService.getItems(); // Récupération des articles du panier lors de l'initialisation du composant
+  /**
+   * INITIALISATION DU COMPOSANT
+   * Charge les articles du panier au démarrage
+   */
+  ngOnInit() {
+    this.items = this.cartService.getItems(); // Récupération des articles du panier
   }
+
+  // =====================================
+  // MÉTHODES DE GESTION DU PANIER
+  // =====================================
+
+  /**
+   * SUPPRIME UN ARTICLE DU PANIER
+   * Retire l'article et met à jour l'affichage
+   * @param item - Article à supprimer
+   */
   removeFromCart(item: any) {
-    this.cartService.removeFromCart(item); // Suppression d'un article du panier
-    this.items = this.cartService.getItems(); // Mise à jour de la liste des articles après suppression
+    this.cartService.removeFromCart(item); // Suppression via le service
+    this.items = this.cartService.getItems(); // Rechargement de la liste mise à jour
   }
+
+  /**
+   * CALCULE LE PRIX TOTAL DU PANIER
+   * Additionne prix × quantité pour chaque article
+   * @returns Prix total en euros
+   */
   getTotal(): number {
-    return this.items.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0); // Calcul du total du panier
-}
+    return this.items.reduce((sum, item) => sum + (item.price * (item.quantity || 1)), 0);
+  }
 }

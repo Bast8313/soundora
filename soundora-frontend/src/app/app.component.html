@@ -1,12 +1,31 @@
-<!-- Navbar Component -->
+<!-- 
+====================================
+TEMPLATE PRINCIPAL DE L'APPLICATION
+====================================
+Structure de base avec navbar, contenu principal, notifications et footer
+-->
+
+<!-- BARRE DE NAVIGATION -->
+<!-- Composant navbar visible sur toutes les pages -->
 <app-navbar></app-navbar>
 
-<!-- Main Content -->
+<!-- CONTENU PRINCIPAL -->
+<!-- Zone où s'affichent les différentes pages via le routing Angular -->
 <main class="main-content">
+  <!-- router-outlet : Point d'insertion pour les composants de page -->
   <router-outlet></router-outlet>
 </main>
 
-<!-- Footer -->
+<!-- 
+SYSTÈME DE NOTIFICATIONS
+Position fixe en haut à droite de l'écran
+Affiche toutes les notifications actives (confirmations d'ajout panier, erreurs, etc.)
+Se positionne automatiquement au-dessus de tout le contenu avec z-index élevé
+-->
+<app-notification></app-notification>
+
+<!-- PIED DE PAGE -->
+<!-- Footer visible sur toutes les pages -->
 <footer class="footer">
   <div class="footer-content">
     <p>&copy; 2025 Soundora - Votre magasin de musique en ligne</p>

@@ -5,6 +5,7 @@ import * as categoryController from "../controllers/categoryController.js"; // C
 import * as brandController from "../controllers/brandController.js"; // Contrôleur marques
 import * as cartController from "../controllers/cartController.js"; // Contrôleur panier
 import * as orderController from "../controllers/orderController.js"; // Contrôleur commandes
+import * as stripeController from "../controllers/stripeController.js"; // NOUVEAU : Contrôleur Stripe pour paiements
 import * as testController from "../controllers/testController.js"; // Contrôleur de test
 import checkJwt from "../middleware/checkJwt.js"; // Middleware JWT pour protéger les routes
 import checkSupabaseAuth from "../middleware/checkSupabaseAuth.js"; // Middleware Supabase Auth
@@ -93,6 +94,21 @@ router.get("/cart/count", checkJwt, cartController.getCartCount); // Récupère 
 router.post("/orders", checkJwt, orderController.createOrder); // Création d'une commande (protégé)
 router.get("/orders", checkJwt, orderController.getUserOrders); // Récupère les commandes de l'utilisateur (protégé)
 router.get("/orders/:order_id", checkJwt, orderController.getOrderDetails); // Récupère une commande spécifique (protégé)
+
+// ===================================
+// ROUTES STRIPE PAIEMENT
+// Gestion des paiements via Stripe Checkout
+// ===================================
+router.post("/stripe/create-checkout-session", checkSupabaseAuth, stripeController.createCheckoutSession); // Créer session Stripe (protégé)
+router.get("/stripe/session-status/:sessionId", stripeController.getSessionStatus); // Vérifier statut session
+
+// ===================================
+// WEBHOOK STRIPE (SANS AUTHENTIFICATION)
+// Stripe appelle cette route pour confirmer les paiements
+// IMPORTANT: Cette route ne doit PAS avoir de middleware d'auth
+// Le middleware raw est déjà appliqué dans server.js
+// ===================================
+router.post("/stripe/webhook", stripeController.stripeWebhook);
 
 // === EXPORT DU ROUTEUR POUR L'UTILISER DANS server.js ===
 export default router;

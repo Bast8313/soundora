@@ -1,36 +1,50 @@
+// ===================================
+// SERVEUR SOUNDORA - BACKEND API
+// ===================================
+// Serveur Express avec intégration Stripe pour les paiements
+
 // Importe le module Express pour créer une application serveur web
 import express from "express";
+import dotenv from "dotenv"; // Variables d'environnement
+import cors from "cors"; // CORS pour les requêtes cross-origin
+import apiRoutes from "./routes/api.js"; // Routes API
 
-// Initialise une application Express
-import dotenv from "dotenv"; // Importe dotenv pour charger les variables d'environnement depuis un fichier .env
+// Charge les variables d'environnement (.env)
+dotenv.config();
 
-import cors from "cors"; // Importe CORS pour gérer les requêtes cross-origin
+// Initialise l'application Express
+const app = express();
 
-// Importe dotenv pour charger les variables d'environnement depuis un fichier .env
-import apiRoutes from "./routes/api.js"; // Importe les routes API
-dotenv.config(); // Charge les variables d’environnement (.env) dans process.env
+// ===================================
+// MIDDLEWARE SPÉCIAL STRIPE WEBHOOK
+// IMPORTANT : Le webhook Stripe DOIT recevoir le raw body
+// On traite cette route AVANT les autres middlewares JSON
+// ===================================
+app.use("/api/stripe/webhook", express.raw({ type: "application/json" }));
 
-const app = express(); // Crée l initialisation d'express
+// ===================================
+// MIDDLEWARES GÉNÉRAUX
+// ===================================
+app.use(express.json()); // Parser JSON pour les requêtes normales
+app.use(cors()); // Autorise les requêtes cross-origin
 
-// Middleware Express pour parser automatiquement les requêtes JSON entrantes
-app.use(express.json());
-app.use(cors()); // Utilise CORS pour permettre les requêtes cross-origin
-
-// === ROUTES ===
-
+// ===================================
+// ROUTES
+// ===================================
 app.get("/test", (req, res) => {
-  res.send("Bienvenue sur l'API de Soundora !");
+  res.send(" Bienvenue sur l'API de Soundora ! ");
 });
 
-// Utilise ces routes avec un préfixe "/api" → toutes les routes seront accessibles via /api/*
+// Utilise les routes API avec le préfixe "/api"
 app.use("/api", apiRoutes);
 
-// === LANCEMENT DU SERVEUR ===
-
-// Détermine le port : d'abord celui défini dans .env, sinon 3000 par défaut
+// ===================================
+// LANCEMENT DU SERVEUR
+// ===================================
 const PORT = process.env.PORT || 3010;
 
-// Démarre le serveur sur le port défini
 app.listen(PORT, "localhost", () => {
-  console.log(`Serveur démarré sur le port ` + PORT); // Affiche un message dans la console pour indiquer que le serveur est en marche
+  console.log(` Serveur Soundora démarré sur le port ${PORT}`);
+  console.log(` URL: http://localhost:${PORT}`);
+  console.log(` Environment: ${process.env.NODE_ENV || "development"}`);
 });
