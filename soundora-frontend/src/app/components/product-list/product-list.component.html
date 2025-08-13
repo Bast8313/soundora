@@ -31,7 +31,7 @@
             - Validation côté TypeScript pour s'assurer que min < max
           -->
           <div class="price-range">
-            <!--  Prix minimum -->============================
+            <!--  Prix minimum ============================
   Affichage des produits avec filtres, pagination et système de panier
   Includes: Hero section, filtres latéraux, grille de produits, notifications
 -->
@@ -65,7 +65,15 @@
          ===================================== -->
     <div class="col-md-3">
       <div class="filters-panel">
-        <h4>Filtres</h4>
+        <!-- HEADER ROCK POUR LES FILTRES -->
+        <div class="filters-header">
+          <h4 class="filters-title">
+            <i class="filter-icon">🎛️</i>
+            Filtres de recherche
+            <i class="music-note">♫</i>
+          </h4>
+          <div class="filters-subtitle">Affinez votre sélection</div>
+        </div>
         
         <!-- FILTRE : Barre de recherche textuelle -->
         <div class="filter-group">
@@ -76,14 +84,18 @@
             - (keyup.enter) : Recherche instantanée quand l'utilisateur appuie sur Entrée
             - (click) sur bouton : Recherche au clic
           -->
-          <input 
-            type="text" 
-            id="search"
-            class="form-control"
-            [(ngModel)]="searchQuery" 
-            (keyup.enter)="onSearch()"
-            placeholder="Chercher un produit...">
-          <button class="btn btn-primary btn-sm mt-1" (click)="onSearch()">🔍</button>
+          <div class="search-group">
+            <input 
+              type="text" 
+              id="search"
+              class="form-control search-input"
+              [(ngModel)]="searchQuery" 
+              (keyup.enter)="onSearch()"
+              placeholder="Chercher un produit...">
+            <button class="btn btn-primary btn-sm search-btn" (click)="onSearch()">
+              🔍 Rechercher
+            </button>
+          </div>
         </div>
 
         <!-- FILTRE : Sélection de catégorie -->
@@ -125,23 +137,29 @@
 
         <!-- Prix -->
         <div class="filter-group">
-          <label>Prix</label>
+          <label>Prix (€)</label>
           <div class="price-range">
-            <!--  Prix minimum -->
-            <input 
-              type="number" 
-              class="form-control form-control-sm"
-              [(ngModel)]="priceMin" 
-              placeholder="Min €"
-              (change)="onPriceFilter()">
-            <span>-</span>
-            <!-- Prix maximum -->
-            <input 
-              type="number" 
-              class="form-control form-control-sm"
-              [(ngModel)]="priceMax" 
-              placeholder="Max €"
-              (change)="onPriceFilter()">
+            <!-- Prix minimum avec icône -->
+            <div class="price-input-group">
+              <span class="price-icon">💰</span>
+              <input 
+                type="number" 
+                class="form-control form-control-sm price-input"
+                [(ngModel)]="priceMin" 
+                placeholder="Min"
+                (change)="onPriceFilter()">
+            </div>
+            <span class="price-separator">→</span>
+            <!-- Prix maximum avec icône -->
+            <div class="price-input-group">
+              <span class="price-icon">💎</span>
+              <input 
+                type="number" 
+                class="form-control form-control-sm price-input"
+                [(ngModel)]="priceMax" 
+                placeholder="Max"
+                (change)="onPriceFilter()">
+            </div>
           </div>
         </div>
 
@@ -150,9 +168,11 @@
           FONCTION : clearFilters() remet tous les filtres à leurs valeurs par défaut
           UTILITÉ : Permet à l'utilisateur de retrouver rapidement l'affichage complet
         -->
-        <button class="btn btn-secondary btn-sm" (click)="clearFilters()">
-         Effacer les filtres
-        </button>
+        <div class="clear-filters-section">
+          <button class="btn btn-secondary btn-clear" (click)="clearFilters()">
+            🗑️ Effacer les filtres
+          </button>
+        </div>
       </div>
     </div>
 
