@@ -1,40 +1,9 @@
 <!-- 
   =====================================
-  TEMPLATE DE LISTE DE PRODUITS -         <!-- FILTRE : Sélection de marque -->
-        <div class="filter-group">
-          <label for="brand">Marque</label>
-          <!-- 
-            LOGIQUE IDENTIQUE AU FILTRE CATÉGORIE :
-            - [(ngModel)]="selectedBrand" : Stockage de la marque sélectionnée
-            - (change)="onBrandChange()" : Filtrage immédiat à la sélection
-            - Option vide pour "Toutes les marques"
-          -->
-          <select 
-            id="brand"
-            class="form-control" 
-            [(ngModel)]="selectedBrand" 
-            (change)="onBrandChange()">
-            <option value="">Toutes les marques</option>
-            <option *ngFor="let brand of brands" [value]="brand.slug">
-              {{ brand.name }}
-            </option>
-          </select>
-        </div>
-
-        <!-- FILTRE : Fourchette de prix -->
-        <div class="filter-group">
-          <label>Prix</label>
-          <!-- 
-            SYSTÈME DE FOURCHETTE PRIX :
-            - Deux inputs : prix minimum et maximum
-            - (blur) : Déclenche le filtrage quand l'utilisateur quitte le champ
-            - Validation côté TypeScript pour s'assurer que min < max
-          -->
-          <div class="price-range">
-            <!--  Prix minimum ============================
+  TEMPLATE DE LISTE DE PRODUITS - Page d'accueil avec catalogue complet
   Affichage des produits avec filtres, pagination et système de panier
   Includes: Hero section, filtres latéraux, grille de produits, notifications
--->
+===================================== -->
 
 <!-- Section Hero optimisée - VERSION MINI pour les listes de produits -->
 <!-- Utilise une classe CSS spécifique pour réduire la hauteur -->
@@ -120,49 +89,6 @@
           </select>
         </div>
 
-        <!-- FILTRE : Sélection de marque -->
-        <div class="filter-group">
-          <label for="brand">Marque</label>
-          <select 
-            id="brand"
-            class="form-control" 
-            [(ngModel)]="selectedBrand" 
-            (change)="onBrandChange()">
-            <option value="">Toutes les marques</option>
-            <option *ngFor="let brand of brands" [value]="brand.slug">
-              {{ brand.name }}
-            </option>
-          </select>
-        </div>
-
-        <!-- Prix -->
-        <div class="filter-group">
-          <label>Prix (€)</label>
-          <div class="price-range">
-            <!-- Prix minimum avec icône -->
-            <div class="price-input-group">
-              <span class="price-icon">💰</span>
-              <input 
-                type="number" 
-                class="form-control form-control-sm price-input"
-                [(ngModel)]="priceMin" 
-                placeholder="Min"
-                (change)="onPriceFilter()">
-            </div>
-            <span class="price-separator">→</span>
-            <!-- Prix maximum avec icône -->
-            <div class="price-input-group">
-              <span class="price-icon">💎</span>
-              <input 
-                type="number" 
-                class="form-control form-control-sm price-input"
-                [(ngModel)]="priceMax" 
-                placeholder="Max"
-                (change)="onPriceFilter()">
-            </div>
-          </div>
-        </div>
-
         <!-- BOUTON : Réinitialisation des filtres -->
         <!-- 
           FONCTION : clearFilters() remet tous les filtres à leurs valeurs par défaut
@@ -170,7 +96,7 @@
         -->
         <div class="clear-filters-section">
           <button class="btn btn-secondary btn-clear" (click)="clearFilters()">
-            🗑️ Effacer les filtres
+           Effacer les filtres
           </button>
         </div>
       </div>

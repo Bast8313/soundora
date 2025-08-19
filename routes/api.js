@@ -103,6 +103,13 @@ router.post("/stripe/create-checkout-session", checkSupabaseAuth, stripeControll
 router.get("/stripe/session-status/:sessionId", stripeController.getSessionStatus); // Vérifier statut session
 
 // ===================================
+// ROUTES STRIPE TEST (POUR DÉVELOPPEMENT) - ACTIVÉES POUR TESTS
+// Routes simples pour tester Stripe sans authentification
+// ===================================
+router.post("/stripe/test-simple", stripeController.createTestSessionSimple); // Test session 10€ (non protégé)
+router.post("/stripe/test-complete", stripeController.createTestSessionComplete); // Test session 99€ (non protégé)
+
+// ===================================
 // WEBHOOK STRIPE (SANS AUTHENTIFICATION)
 // Stripe appelle cette route pour confirmer les paiements
 // IMPORTANT: Cette route ne doit PAS avoir de middleware d'auth

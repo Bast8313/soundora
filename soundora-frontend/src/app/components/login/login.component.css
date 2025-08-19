@@ -1,11 +1,22 @@
-/* === STYLES DE LA PAGE D'AUTHENTIFICATION === */
+/* === STYLES DE LA PAGE D'AUTHENTIFICATION - THÈME STUDIO SOMBRE === */
 /* Fichier CSS pour le composant de connexion/inscription */
 
-/* === CONTENEUR PRINCIPAL === */
+/* === CONTENEUR PRINCIPAL THÈME SOMBRE === */
 .auth-container {
-  background: #fff;                    /* Fond blanc propre */
-  border-radius: 12px;                 /* Coins arrondis modernes */
-  box-shadow: 0 4px 20px rgba(0,0,0,0.1); /* Ombre douce pour le relief */
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 26, 0.95) 0%, 
+    rgba(45, 45, 45, 0.95) 100%
+  );
+  background-image: 
+    radial-gradient(circle at 30% 30%, rgba(255, 71, 87, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 70% 70%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+  backdrop-filter: blur(15px);                 /* Effet de flou moderne */
+  border-radius: 15px;                 /* Coins arrondis modernes */
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.4),
+    0 0 40px rgba(255, 71, 87, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1); /* Ombre douce pour le relief */
+  border: 1px solid rgba(255, 71, 87, 0.2);
   padding: 40px;                       /* Espacement interne généreux */
   max-width: 450px;                    /* Largeur maximale pour la lisibilité */
   margin: 40px auto;                   /* Centrage horizontal avec marge verticale */
@@ -13,9 +24,10 @@
   flex-direction: column;              /* Disposition verticale des éléments */
   align-items: center;                 /* Centrage horizontal du contenu */
   min-height: 500px;                   /* Hauteur minimale pour la cohérence */
+  color: #e0e0e0;
 }
 
-/* === EN-TÊTE DE LA PAGE === */
+/* === EN-TÊTE DE LA PAGE THÈME SOMBRE === */
 .auth-header {
   text-align: center;                  /* Centrage du texte */
   margin-bottom: 30px;                 /* Espacement avec le formulaire */
@@ -23,16 +35,18 @@
 }
 
 .auth-header h2 {
-  color: #2c3e50;                      /* Couleur principale foncée */
+  color: #ff4757;                      /* Couleur studio rouge */
   font-size: 28px;                     /* Taille de police importante */
   font-weight: 700;                    /* Poids de police gras */
   margin: 0 0 8px 0;                   /* Marges optimisées */
+  text-shadow: 0 0 15px rgba(255, 71, 87, 0.6);
 }
 
 .auth-header p {
-  color: #7f8c8d;                      /* Couleur grise pour le sous-titre */
+  color: #b0b0b0;                      /* Couleur grise pour le sous-titre */
   font-size: 16px;                     /* Taille lisible */
   margin: 0;                           /* Suppression des marges par défaut */
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 /* === FORMULAIRE === */
@@ -51,42 +65,45 @@
 }
 
 .form-group label {
-  color: #34495e;
+  color: #e0e0e0;
   font-weight: 600;
   font-size: 14px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
-/* === CHAMPS DE SAISIE === */
+/* === CHAMPS DE SAISIE THÈME SOMBRE === */
 .form-group input {
   width: 100%;
   padding: 12px 16px;
   border-radius: 8px;
-  border: 2px solid #e0e6ed;
+  border: 2px solid rgba(255, 71, 87, 0.3);
   font-size: 16px;
   transition: all 0.3s ease;
-  background: #fff;
+  background: rgba(26, 26, 26, 0.8);
+  backdrop-filter: blur(10px);
+  color: #e0e0e0;
   box-sizing: border-box;
 }
 
 .form-group input:focus {
   outline: none;
-  border-color: #3498db;
-  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+  border-color: #ff4757;
+  box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.2);
 }
 
 .form-group input:disabled {
-  background: #f8f9fa;
+  background: rgba(45, 45, 45, 0.5);
   cursor: not-allowed;
   opacity: 0.7;
 }
 
 .form-group input::placeholder {
-  color: #a0a7b4;
+  color: #888;
 }
 
-/* === BOUTON DE SOUMISSION === */
+/* === BOUTON DE SOUMISSION THÈME SOMBRE === */
 .auth-button {
-  background: linear-gradient(135deg, #3498db, #2980b9);
+  background: linear-gradient(135deg, #ff4757, #ff6b35);
   color: #fff;
   border: none;
   padding: 14px 24px;
@@ -98,16 +115,18 @@
   margin-top: 10px;
   position: relative;
   overflow: hidden;
+  box-shadow: 0 0 20px rgba(255, 71, 87, 0.4);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .auth-button:hover:not(:disabled) {
-  background: linear-gradient(135deg, #2980b9, #1f639a);
+  background: linear-gradient(135deg, #ff6b35, #ff8c42);
   transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+  box-shadow: 0 6px 20px rgba(255, 107, 53, 0.5);
 }
 
 .auth-button:disabled {
-  background: #bdc3c7;
+  background: #555;
   cursor: not-allowed;
   transform: none;
   box-shadow: none;
@@ -144,48 +163,53 @@
   100% { transform: rotate(360deg); }
 }
 
-/* === MESSAGES D'ERREUR === */
+/* === MESSAGES D'ERREUR THÈME SOMBRE === */
 .error-message {
-  background: #ffeaea;
-  border: 1px solid #e74c3c;
+  background: rgba(255, 107, 107, 0.2);
+  border: 1px solid #ff6b6b;
   border-radius: 8px;
   padding: 12px 16px;
-  color: #c0392b;
+  color: #ff8a80;
   font-size: 14px;
   display: flex;
   align-items: center;
   gap: 8px;
   margin-top: 10px;
+  backdrop-filter: blur(10px);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .error-icon {
   font-size: 16px;
 }
 
-/* === BASCULER ENTRE MODES === */
+/* === BASCULER ENTRE MODES THÈME SOMBRE === */
 .toggle-mode {
   text-align: center;
   margin-top: 20px;
   padding-top: 20px;
-  border-top: 1px solid #ecf0f1;
+  border-top: 1px solid rgba(255, 71, 87, 0.3);
 }
 
 .toggle-mode p {
-  color: #7f8c8d;
+  color: #b0b0b0;
   font-size: 14px;
   margin: 0;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
 }
 
 .toggle-link {
-  color: #3498db;
+  color: #ff4757;
   text-decoration: none;
   font-weight: 600;
   transition: color 0.3s ease;
+  text-shadow: 0 0 8px rgba(255, 71, 87, 0.5);
 }
 
 .toggle-link:hover {
-  color: #2980b9;
+  color: #ff6b35;
   text-decoration: underline;
+  text-shadow: 0 0 12px rgba(255, 107, 53, 0.8);
 }
 
 /* === RESPONSIVE === */
@@ -205,11 +229,13 @@
   }
 }
 
-/* === ÉTATS DE VALIDATION === */
+/* === ÉTATS DE VALIDATION THÈME SOMBRE === */
 .form-group input.ng-touched.ng-invalid {
-  border-color: #e74c3c;
+  border-color: #ff6b6b;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.3);
 }
 
 .form-group input.ng-touched.ng-valid {
-  border-color: #27ae60;
+  border-color: #4caf50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.3);
 }

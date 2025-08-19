@@ -77,50 +77,20 @@
       </div>
 
       <!-- === DROPDOWN MENU DES MARQUES === -->
-      <!-- 
-        MODIFICATION IDENTIQUE AU DROPDOWN CATÉGORIES
-        - SUPPRESSION : (mouseleave)="closeDropdowns()" 
-        - SUPPRESSION : (mouseenter)="openBrandDropdown()"
-        - CONSERVATION : (click)="toggleBrandDropdown()" uniquement
-        
-        COHÉRENCE : Même comportement pour tous les dropdowns de la navbar
-      -->
       <div class="dropdown">
-        
-        <!-- Bouton déclencheur pour les marques -->
-        <!-- 
-          MODIFICATION : Gestion par clic uniquement
-          - toggleBrandDropdown() : Bascule isBrandDropdownOpen (true ↔ false)
-          - Ferme automatiquement les autres dropdowns pour éviter les conflits
-        -->
         <button 
           class="dropdown-toggle nav-link" 
           (click)="toggleBrandDropdown()">
           Marques
-          <!-- Icône flèche liée à l'état du dropdown des marques -->
-          <!-- [class.open] : Animation CSS basée sur isBrandDropdownOpen -->
           <i class="dropdown-arrow" [class.open]="isBrandDropdownOpen">▼</i>
         </button>
         
-        <!-- Menu déroulant des marques -->
-        <!-- 
-          STRUCTURE IDENTIQUE AUX CATÉGORIES
-          - [class.show]="isBrandDropdownOpen" : Contrôle CSS de l'affichage
-          - *ngFor : Boucle sur le tableau brands[] récupéré de l'API
-        -->
         <div class="dropdown-menu" [class.show]="isBrandDropdownOpen">
-          <!-- Boucle sur toutes les marques -->
-          <!-- 
-            NAVIGATION : onBrandSelect(brand.slug) 
-            - Exemple : clic sur "Fender" → navigation vers /brand/fender
-            - Fermeture automatique du dropdown après sélection
-          -->
           <a 
             *ngFor="let brand of brands" 
             class="dropdown-item"
             (click)="onBrandSelect(brand.slug)"
             [title]="brand.description">
-            <!-- Affiche le nom de la marque -->
             {{ brand.name }}
           </a>
         </div>
@@ -130,7 +100,7 @@
       
       <!-- Lien vers la page du panier (toujours visible) -->
       <a routerLink="/cart" class="nav-link" routerLinkActive="active">
-        🛒 Panier
+       Panier
       </a>
       
       <!-- === SECTION AUTHENTIFICATION === -->
