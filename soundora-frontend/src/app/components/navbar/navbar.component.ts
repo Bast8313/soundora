@@ -38,17 +38,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
    * Détecte si l'écran est en mode mobile (largeur <= 768px)
    */
   checkMobile() {
-    this.isMobile = window.innerWidth <= 768;
+    if (window !== undefined) {
+      this.isMobile = window.innerWidth <= 768;
+    }
     // Si on repasse en desktop, on ferme le menu burger
     if (!this.isMobile) {
       this.isBurgerMenuOpen = false;
     }
   }
 
-  @HostListener('window:resize')
-  onResize() {
-    this.checkMobile();
-  }
+  // @HostListener('window:resize')
+  // onResize() {
+  //   this.checkMobile();
+  // }
   
   // =====================================
   // PROPRIÉTÉS DE DONNÉES
@@ -73,11 +75,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // GESTION DES ABONNEMENTS RXJS
   // =====================================
   private subscriptions: Subscription[] = []; // Stockage des abonnements pour éviter les fuites mémoire
-
   /**
    * CONSTRUCTEUR - INJECTION DES DÉPENDANCES
    * Injecte les services nécessaires au fonctionnement de la navbar
-   * 
+   
    * @param categoryService - Service pour récupérer catégories et marques
    * @param authService - Service pour la gestion de l'authentification
    * @param router - Service de navigation Angular
@@ -96,7 +97,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   this.loadCategories(); // Charge les catégories au démarrage
   this.loadBrands();     // Charge les marques au démarrage
   this.initAuthState();  // Initialise l'état d'authentification
-  this.checkMobile();    // Détecte le mode mobile au chargement
+  //this.checkMobile();    // Détecte le mode mobile au chargement
   }
 
   /**
