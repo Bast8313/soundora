@@ -1,3 +1,64 @@
+/* ========================= */
+/* MENU BURGER RESPONSIVE    */
+/* ========================= */
+
+/* Bouton burger caché sur desktop, visible sur mobile */
+.burger-menu {
+  display: none;
+  background: none;
+  border: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.burger-bar {
+  width: 28px;
+  height: 4px;
+  background: #fff;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* Affichage du bouton burger sur mobile */
+@media (max-width: 768px) {
+  .burger-menu {
+    display: flex;
+    position: absolute;
+    top: 18px;
+    right: 18px;
+  }
+  /* Masquer les liens par défaut sur mobile */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    background: #222;
+    width: 100vw;
+    max-width: 320px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    flex-direction: column;
+    padding: 24px 0 12px 0;
+    border-radius: 0 0 12px 12px;
+    z-index: 1000;
+  }
+  /* Afficher les liens si menu ouvert */
+  .nav-links.open {
+    display: flex;
+  }
+  /* Liens verticaux sur mobile */
+  .nav-link, .dropdown, .auth-links, .user-menu {
+    width: 100%;
+    text-align: left;
+    padding: 12px 24px;
+    box-sizing: border-box;
+  }
+}
 /* Navbar Soundora - Style studio sombre plus foncé */
 .navbar {
   background: linear-gradient(135deg, 

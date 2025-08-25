@@ -2,6 +2,13 @@
 <nav class="navbar">
   <!-- Conteneur principal qui centre et limite la largeur du contenu -->
   <div class="nav-container">
+    <!-- BOUTON BURGER (visible uniquement sur mobile) -->
+    <button class="burger-menu" (click)="toggleBurgerMenu()" aria-label="Ouvrir le menu" *ngIf="true">
+      <!-- Icône burger simple -->
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+      <span class="burger-bar"></span>
+    </button>
     
     <!-- Section du logo/titre du site -->
     <div class="nav-logo">
@@ -11,8 +18,9 @@
       </a>
     </div>
 
-    <!-- Section contenant tous les liens de navigation -->
-    <div class="nav-links">
+  <!-- Section contenant tous les liens de navigation -->
+  <!-- Liens de navigation principaux -->
+  <div class="nav-links" [class.open]="isBurgerMenuOpen" *ngIf="!isMobile || isBurgerMenuOpen">
       
       <!-- Lien vers la page d'accueil -->
       <!-- routerLinkActive="active" : Ajoute la classe 'active' quand la route est active -->
@@ -160,10 +168,10 @@
             
             <!-- Liens du menu utilisateur -->
             <a routerLink="/orders" class="dropdown-item">
-              📦 Mes commandes
+              Mes commandes
             </a>
             <a routerLink="/profile" class="dropdown-item">
-              👤 Mon profil
+              Mon profil
             </a>
             
             <!-- Séparateur -->
@@ -171,7 +179,7 @@
             
             <!-- Bouton de déconnexion -->
             <button class="dropdown-item logout-button" (click)="logout()">
-              🚪 Se déconnecter
+              Se déconnecter
             </button>
           </div>
         </div>
