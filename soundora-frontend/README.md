@@ -1,59 +1,67 @@
-# MiniShopFrontend
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.0.
+# SoundoraFrontend
 
-## Development server
+Front-end Angular du projet **Soundora**, une boutique en ligne spécialisée dans la vente d’instruments de musique et d’accessoires. Ce projet s’inscrit dans le cadre d’un projet de fin d’année et met en œuvre une architecture moderne : Angular 19, API Node.js/Express, base de données Supabase (PostgreSQL), intégration Stripe, et authentification sécurisée.
 
-To start a local development server, run:
+## Présentation
 
-```bash
-ng serve
-```
+SoundoraFrontend propose une interface utilisateur responsive, moderne et accessible :
+- Navigation par catégories et marques
+- Recherche et filtrage de produits
+- Gestion du panier et du tunnel de commande
+- Authentification sécurisée (JWT, Supabase)
+- Paiement en ligne via Stripe
+- Espace utilisateur (commandes, profil)
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## Prérequis
 
-## Code scaffolding
+- Node.js >= 18.x
+- npm >= 9.x
+- Accès à l’API back-end Soundora (voir README du back)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
+## Installation
 
 ```bash
-ng build
+git clone https://github.com/Bast8313/soundora.git
+cd soundora/soundora-frontend
+npm install
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## Lancement en développement
 
 ```bash
-ng test
+npm start
 ```
+Ouvre ensuite [http://localhost:4200](http://localhost:4200) dans ton navigateur.
 
-## Running end-to-end tests
+## Scripts utiles
 
-For end-to-end (e2e) testing, run:
+- `npm start` : lance le serveur de développement
+- `ng build` : build de production dans `dist/`
+- `ng test` : lance les tests unitaires
 
-```bash
-ng e2e
-```
+## Dépendances principales
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+- Angular 19
+- RxJS
+- Stripe (paiement sécurisé)
+- Supabase (authentification, base de données)
+- Bootstrap (UI responsive)
 
-## Additional Resources
+## Structure du projet
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+- `src/app/components/` : composants Angular (navbar, produits, panier, etc.)
+- `src/app/services/` : services (API, auth, panier…)
+- `src/environments/` : variables d’environnement
+
+## Documentation
+
+- [Cahier des charges](../docs/cahier-des-charges.md)
+- [README back-end](../README.md)
+
+## Auteur
+
+Bastien (Bast8313)
+
+---
+*Projet réalisé dans le cadre du projet de fin d’année 2025 – IUT* 
