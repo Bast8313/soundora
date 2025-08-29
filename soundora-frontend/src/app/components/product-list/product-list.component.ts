@@ -70,23 +70,28 @@ export class ProductListComponent implements OnInit {
    */
   ngOnInit() {
     // CHARGEMENT DES DONNÉES DE BASE
-    // Charger d'abord les catégories et marques pour les filtres
     this.loadCategories();
     this.loadBrands();
-    
+
     // ÉCOUTE DES CHANGEMENTS DE ROUTE
-    // Réagit aux changements d'URL pour appliquer les filtres appropriés
-    // Écouter les changements de route après avoir chargé les données
     this.route.params.subscribe(params => {
-      // ATTENDRE QUE LES DONNÉES SOIENT CHARGÉES AVANT DE TRAITER LES PARAMÈTRES
-      // Vérifie si les catégories et marques sont chargées avant de procéder
-      if (this.categories.length > 0 && this.brands.length > 0) {
-        this.handleRouteParams(params);
+      // Si aucun filtre n'est appliqué (pas de slug dans params), charger tous les produits
+      const hasNoFilter = !params['slug'];
+      if (hasNoFilter) {
+        this.selectedCategory = '';
+        this.selectedBrand = '';
+        this.pageTitle = 'Tous nos produits';
+        this.currentPage = 1;
+        this.loadProducts();
       } else {
-        // Si pas encore chargées, attendre un court délai
-        setTimeout(() => {
+        // ATTENDRE QUE LES DONNÉES SOIENT CHARGÉES AVANT DE TRAITER LES PARAMÈTRES
+        if (this.categories.length > 0 && this.brands.length > 0) {
           this.handleRouteParams(params);
-        }, 200);
+        } else {
+          setTimeout(() => {
+            this.handleRouteParams(params);
+          }, 200);
+        }
       }
     });
   }

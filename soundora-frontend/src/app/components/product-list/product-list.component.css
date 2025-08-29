@@ -1,3 +1,12 @@
+/* Garantit que la liste déroulante des catégories ne masque pas le champ de recherche */
+.filter-group {
+  margin-bottom: 18px;
+}
+
+.form-control {
+  position: relative;
+  z-index: 10;
+}
 /* Product List Component - Thème Studio de Musique Sombre */
 
 /* =====================================
@@ -342,6 +351,7 @@
   border: 2px solid #ddd !important;
   border-radius: 8px !important;
   transition: all 0.3s ease;
+  color: #111 !important; /* Texte noir pour une meilleure visibilité */
 }
 
 .search-input:focus {

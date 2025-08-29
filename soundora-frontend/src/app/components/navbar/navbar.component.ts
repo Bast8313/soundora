@@ -36,21 +36,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   /**
    * Détecte si l'écran est en mode mobile (largeur <= 768px)
+   * Ferme le menu burger si on change de mode
    */
   checkMobile() {
-    if (window !== undefined) {
-      this.isMobile = window.innerWidth <= 768;
-    }
-    // Si on repasse en desktop, on ferme le menu burger
+    this.isMobile = window.innerWidth <= 768;
     if (!this.isMobile) {
       this.isBurgerMenuOpen = false;
     }
   }
 
-  // @HostListener('window:resize')
-  // onResize() {
-  //   this.checkMobile();
-  // }
+  @HostListener('window:resize')
+  onResize() {
+    this.checkMobile();
+  }
   
   // =====================================
   // PROPRIÉTÉS DE DONNÉES
@@ -97,7 +95,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   this.loadCategories(); // Charge les catégories au démarrage
   this.loadBrands();     // Charge les marques au démarrage
   this.initAuthState();  // Initialise l'état d'authentification
-  //this.checkMobile();    // Détecte le mode mobile au chargement
+  this.checkMobile();    // Détecte le mode mobile au chargement
+  this.isBurgerMenuOpen = false; // Toujours fermé au chargement
   }
 
   /**
