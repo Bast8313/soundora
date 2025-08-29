@@ -1,6 +1,6 @@
 Soundora
 
-Soundora est une application e-commerce dédiée à la vente d’instruments de musique, développée dans le cadre d’un projet de fin d’année. Elle propose une expérience utilisateur moderne, un design responsive, et intègre un système de paiement sécurisé avec Stripe.
+Soundora est une plateforme e-commerce innovante dédiée à la vente d’instruments de musique et d’accessoires. Le projet vise à offrir une expérience utilisateur moderne, intuitive et sécurisée, aussi bien sur ordinateur que sur mobile. Grâce à une interface responsive, un système d’authentification robuste, une gestion complète du panier et des commandes, ainsi qu’un paiement en ligne sécurisé via Stripe, Soundora ambitionne de faciliter l’achat d’instruments pour tous les passionnés de musique. Le projet intègre également un backoffice simplifié pour la gestion des produits et des commandes, tout en garantissant la sécurité des données et la fiabilité des transactions.
 
 Fonctionnalités principales :
 
