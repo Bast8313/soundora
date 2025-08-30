@@ -1,0 +1,80 @@
+
+# Soundora
+
+Soundora est une plateforme e-commerce innovante dédiée à la vente d’instruments de musique et d’accessoires. Le projet vise à offrir une expérience utilisateur moderne, intuitive et sécurisée, aussi bien sur ordinateur que sur mobile. Grâce à une interface responsive, un système d’authentification robuste, une gestion complète du panier et des commandes, ainsi qu’un paiement en ligne sécurisé via Stripe, Soundora ambitionne de faciliter l’achat d’instruments pour tous les passionnés de musique. Le projet intègre également un backoffice simplifié pour la gestion des produits et des commandes, tout en garantissant la sécurité des données et la fiabilité des transactions.
+
+Fonctionnalités principales :
+
+- Catalogue de produits (guitares, accessoires, etc.)
+- Recherche, filtres par catégories et marques
+- Panier d’achat et gestion des commandes
+- Authentification (inscription, connexion, JWT)
+- Paiement en ligne sécurisé via Stripe
+- Interface responsive (mobile & desktop)
+- Menu burger mobile, dark mode
+
+
+Stack technique :
+
+- Frontend : Angular 19 (TypeScript, HTML, CSS)
+- Backend : Node.js (Express)
+- Base de données : Supabase (PostgreSQL)
+- Paiement : Stripe API
+- Authentification : Supabase Auth + JWT
+- Déploiement : Docker, Docker Compose
+
+soundora-back/
+  server.js
+  controllers/
+  routes/
+  config/
+  ...
+  soundora-frontend/
+    src/
+      app/
+      assets/
+      environments/
+    ...
+docker-compose.yml
+
+## Documentation spécifique
+
+- [Frontend Angular (SoundoraFrontend)](./soundora-frontend/README.md)
+- [Cahier des charges](./docs/cahier-des-charges.md)
+
+
+Installation & lancement
+
+1. Cloner le dépôt :
+git clone https://github.com/Bast8313/soundora.git
+cd soundora
+
+2. Installer les dépendances :
+cd soundora-back
+npm install
+cd soundora-frontend
+npm install
+
+3. Lancer les serveurs (backend & frontend) :
+# Backend
+cd soundora-back
+node server.js
+# Frontend
+cd soundora-frontend
+ng serve --port 4200
+
+4. Accéder à l’application :
+
+- Frontend : http://localhost:4200
+- Backend : http://localhost:3010
+  
+
+Paiement Stripe (en cours de mise en prod.) :
+
+- Utilise l’API Stripe pour les paiements réels et en test.
+- Webhooks configurés pour la gestion des commandes.
+
+  
+Auteur :
+- Bastien BRUNET (Bast8313)
+- Projet de fin d’année 2025
