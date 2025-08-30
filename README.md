@@ -1,4 +1,3 @@
-
 # Soundora
 
 Soundora est une plateforme e-commerce innovante dédiée à la vente d’instruments de musique et d’accessoires. Le projet vise à offrir une expérience utilisateur moderne, intuitive et sécurisée, aussi bien sur ordinateur que sur mobile. Grâce à une interface responsive, un système d’authentification robuste, une gestion complète du panier et des commandes, ainsi qu’un paiement en ligne sécurisé via Stripe, Soundora ambitionne de faciliter l’achat d’instruments pour tous les passionnés de musique. Le projet intègre également un backoffice simplifié pour la gestion des produits et des commandes, tout en garantissant la sécurité des données et la fiabilité des transactions.
@@ -41,6 +40,10 @@ docker-compose.yml
 
 - [Frontend Angular (SoundoraFrontend)](./soundora-frontend/README.md)
 - [Cahier des charges](./docs/cahier-des-charges.md)
+
+## Documentation API
+
+- [Documentation de l’API (routes, endpoints, sécurité)](./docs/documentation_api.md)
 
 
 Installation & lancement
