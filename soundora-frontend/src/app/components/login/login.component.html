@@ -5,6 +5,10 @@
   <div class="auth-header">
     <h2>{{ mode === 'login' ? 'Connexion' : 'Inscription' }}</h2>
     <p>{{ mode === 'login' ? 'Connectez-vous à votre compte' : 'Créez votre compte Soundora' }}</p>
+    <!-- Message de confirmation d'inscription -->
+    <div class="success-message" *ngIf="success">
+      {{ success }}
+    </div>
   </div>
 
   <!-- Formulaire d'authentification -->

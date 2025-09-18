@@ -33,6 +33,7 @@ export class LoginComponent {
   // GESTION DES ÉTATS INTERFACE
   // =====================================
   error = '';           // Message d'erreur à afficher à l'utilisateur
+  success = '';         // Message de confirmation à afficher à l'utilisateur
   isLoading = false;    // État de chargement (désactive formulaire pendant requête)
   
   // =====================================
@@ -157,8 +158,13 @@ export class LoginComponent {
         this.isLoading = false;
         if (response.success) {
           console.log('Inscription réussie:', response.user);
-          // Redirection vers la page d'accueil après inscription réussie
-          this.router.navigate(['/']);
+          // Affiche un message de confirmation à l'utilisateur (sans icône)
+          // Le message reste affiché au moins 2 secondes avant la redirection
+          this.success = "Votre compte a bien été créé !";
+          setTimeout(() => {
+            this.router.navigate(['/']);
+            this.success = '';
+          }, 2000);
         } else {
           // Erreur retournée par l'API
           this.error = response.message || 'Erreur lors de l\'inscription';
