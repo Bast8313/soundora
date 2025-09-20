@@ -55,7 +55,8 @@ export class ProductDetailComponent implements OnInit {
     const slug = this.route.snapshot.paramMap.get('slug');
     
     if (slug) {
-      console.log('Chargement du produit avec slug:', slug);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif du slug produit
+  // console.log('Chargement du produit avec slug:', slug);
       
       // APPEL API POUR CHARGER LE PRODUIT
       // Utilise getProductBySlug au lieu de getProductById pour correspondre à l'API backend
@@ -65,15 +66,18 @@ export class ProductDetailComponent implements OnInit {
           // L'API retourne { success: true, data: product }
           if (response.success && response.data) {
             this.product = response.data;
-            console.log('Produit chargé:', this.product);
+            // [SOUNDORA] Log désactivé pour éviter l'affichage massif du produit
+            // console.log('Produit chargé:', this.product);
           } else {
-            console.error('Réponse API invalide:', response);
+            // [SOUNDORA] Log d'erreur conservé pour debug, peut être réactivé si besoin
+            // console.error('Réponse API invalide:', response);
             this.error = 'Produit introuvable';
           }
         },
         error: (error) => {
           // GESTION DES ERREURS DE CHARGEMENT
-          console.error('Erreur lors du chargement du produit:', error);
+          // [SOUNDORA] Log d'erreur conservé pour debug, peut être réactivé si besoin
+          // console.error('Erreur lors du chargement du produit:', error);
           this.error = 'Produit introuvable';
         }
       });
@@ -194,7 +198,8 @@ export class ProductDetailComponent implements OnInit {
     );
     
     // LOG POUR DEBUG avec informations détaillées
-    console.log(`🛒 ${quantity} x "${product.name}" ajouté(s) au panier depuis la page détail`);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif de l'ajout au panier
+  // console.log(`🛒 ${quantity} x "${product.name}" ajouté(s) au panier depuis la page détail`);
     
     // OPTIONNEL : Réinitialiser la quantité sélectionnée à 1 après ajout
     // this.selectedQuantity = 1;

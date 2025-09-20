@@ -1,0 +1,14 @@
+/* Styles pour la notification de commande réussie */
+.order-success-notification {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #4caf50;
+  color: #fff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 1.2rem;
+  z-index: 1000;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}

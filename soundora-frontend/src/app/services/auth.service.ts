@@ -84,8 +84,10 @@ export class AuthService {
             // Token valide : mettre à jour l'état
             this.currentUserSubject.next(response.user);
             this.isLoggedInSubject.next(true);
-            console.log('État de connexion mis à jour:', true);
-            console.log('Utilisateur actuel mis à jour:', response.user);
+            // [SOUNDORA] Log désactivé pour éviter l'affichage massif de l'état de connexion
+            // console.log('État de connexion mis à jour:', true);
+            // [SOUNDORA] Log désactivé pour éviter l'affichage massif de l'utilisateur
+            // console.log('Utilisateur actuel mis à jour:', response.user);
           } else {
             // Token invalide, nettoyer le localStorage
             this.clearAuthData();

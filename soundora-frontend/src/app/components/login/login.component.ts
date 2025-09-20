@@ -157,7 +157,8 @@ export class LoginComponent {
       next: (response) => {
         this.isLoading = false;
         if (response.success) {
-          console.log('Inscription réussie:', response.user);
+            // [SOUNDORA] Log désactivé pour éviter l'affichage massif de l'inscription
+            // console.log('Inscription réussie:', response.user);
           // Affiche un message de confirmation à l'utilisateur (sans icône)
           // Le message reste affiché au moins 2 secondes avant la redirection
           this.success = "Votre compte a bien été créé !";
@@ -173,7 +174,8 @@ export class LoginComponent {
       // Cas d'erreur HTTP
       error: (err) => {
         this.isLoading = false;
-        console.error('Erreur d\'inscription:', err);
+          // [SOUNDORA] Log d'erreur conservé pour debug, peut être réactivé si besoin
+          // console.error('Erreur d\'inscription:', err);
         
         // === GESTION DES ERREURS SPÉCIFIQUES À L'INSCRIPTION ===
         if (err.status === 400) {

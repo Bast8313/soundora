@@ -97,8 +97,10 @@ export class ProductListComponent implements OnInit {
   }
 
   handleRouteParams(params: any) {
-    console.log('Paramètres de route reçus:', params);
-    console.log('URL actuelle:', this.route.snapshot.url);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif des paramètres de route
+  // console.log('Paramètres de route reçus:', params);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif de l'URL
+  // console.log('URL actuelle:', this.route.snapshot.url);
     
     // STOCKAGE DES VALEURS PRÉCÉDENTES pour éviter les rechargements inutiles
     const previousCategory = this.selectedCategory;
@@ -112,7 +114,8 @@ export class ProductListComponent implements OnInit {
     // Vérifier si on filtre par catégorie
     if (params['slug'] && this.route.snapshot.url[0]?.path === 'category') {
       this.selectedCategory = params['slug'];
-      console.log('Filtre par catégorie:', this.selectedCategory);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif du filtre catégorie
+  // console.log('Filtre par catégorie:', this.selectedCategory);
       // Trouver le nom de la catégorie pour le titre
       const category = this.categories.find(c => c.slug === params['slug']);
       this.pageTitle = category ? `Catégorie: ${category.name}` : 'Catégorie';
@@ -121,13 +124,15 @@ export class ProductListComponent implements OnInit {
     // Vérifier si on filtre par marque
     if (params['slug'] && this.route.snapshot.url[0]?.path === 'brand') {
       this.selectedBrand = params['slug'];
-      console.log('Filtre par marque:', this.selectedBrand);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif du filtre marque
+  // console.log('Filtre par marque:', this.selectedBrand);
       // Trouver le nom de la marque pour le titre
       const brand = this.brands.find(b => b.slug === params['slug']);
       this.pageTitle = brand ? `Marque: ${brand.name}` : 'Marque';
     }
     
-    console.log('Titre de page:', this.pageTitle);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif du titre de page
+  // console.log('Titre de page:', this.pageTitle);
     
     // OPTIMISATION: Ne recharger que si les filtres ont vraiment changé
     if (previousCategory !== this.selectedCategory || previousBrand !== this.selectedBrand) {
@@ -145,10 +150,12 @@ export class ProductListComponent implements OnInit {
       next: (response: any) => {
         // Gestion de différents formats de réponse API
         this.categories = response.data || response || [];
-        console.log('Catégories chargées:', this.categories);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif des catégories
+  // console.log('Catégories chargées:', this.categories);
       },
       error: (error) => {
-        console.error('Erreur lors du chargement des catégories:', error);
+  // [SOUNDORA] Log d'erreur conservé pour debug, peut être réactivé si besoin
+  // console.error('Erreur lors du chargement des catégories:', error);
         this.categories = [];
       }
     });
@@ -163,10 +170,12 @@ export class ProductListComponent implements OnInit {
       next: (response: any) => {
         // Gestion de différents formats de réponse API
         this.brands = response.data || response || [];
-        console.log('Marques chargées:', this.brands);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif des marques
+  // console.log('Marques chargées:', this.brands);
       },
       error: (error) => {
-        console.error('Erreur lors du chargement des marques:', error);
+  // [SOUNDORA] Log d'erreur conservé pour debug, peut être réactivé si besoin
+  // console.error('Erreur lors du chargement des marques:', error);
         this.brands = [];
       }
     });
@@ -180,7 +189,8 @@ export class ProductListComponent implements OnInit {
   loadProducts() {
     // ÉVITER LES RECHARGEMENTS MULTIPLES
     if (this.loading) {
-      console.log('Chargement déjà en cours, annulation...');
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif
+  // console.log('Chargement déjà en cours, annulation...');
       return;
     }
     
@@ -201,7 +211,8 @@ export class ProductListComponent implements OnInit {
     // APPEL API POUR RÉCUPÉRER LES PRODUITS
     this.productService.getProducts(this.filters).subscribe({
       next: (response: any) => {
-        console.log('Réponse API produits:', response);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif des produits
+  // console.log('Réponse API produits:', response);
         
         // TRAITEMENT DE LA RÉPONSE API
         if (response && typeof response === 'object') {

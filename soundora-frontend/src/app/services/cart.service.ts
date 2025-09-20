@@ -62,7 +62,8 @@ export class CartService {
     
     // Sauvegarder le panier mis à jour
     this.saveCartToCookies(cart);
-    console.log('Produit ajouté au panier :', product.name);
+  // [SOUNDORA] Log désactivé pour éviter l'affichage massif de l'ajout au panier
+  // console.log('Produit ajouté au panier :', product.name);
   }
 
   /**
