@@ -1,0 +1,110 @@
+# Tutoriel Stripe pour Soundora
+
+## 1. Prérequis
+- Serveur backend Node.js (Express) opérationnel
+- Frontend Angular opérationnel
+- Compte Stripe (https://dashboard.stripe.com/)
+- Clés API Stripe (test ou live)
+- Compte Supabase (pour l'authentification et la base de données)
+
+---
+
+## 2. Configuration des clés Stripe
+
+### a) Clés API Stripe
+- Récupère tes clés dans le dashboard Stripe :
+  - **Clé secrète** (test) : `sk_test_...`
+  - **Clé publique** (test) : `pk_test_...`
+- Place la clé secrète dans le backend (ex : fichier `.env` ou directement dans le code `server.js` ou `stripeController.js`)
+- Place la clé publique dans le frontend (ex : fichier d'environnement Angular)
+
+### b) Webhook Stripe
+- Dans le dashboard Stripe, va dans "Développeurs > Webhooks"
+- Ajoute un endpoint :
+  - URL : `https://<ton-domaine-ou-localhost>/api/stripe/webhook`
+  - Événements à écouter :
+    - `checkout.session.completed`
+    - `payment_intent.succeeded`
+    - (optionnel) `checkout.session.async_payment_succeeded`, etc.
+- Stripe va générer une **clé secrète de webhook** (commence par `whsec_...`)
+- Place cette clé dans le backend (ex : `.env` ou dans le code du contrôleur Stripe)
+
+---
+
+## 3. Configuration Supabase
+- Crée un projet Supabase
+- Récupère les clés API (URL et clé publique)
+- Configure l’authentification (email/password, etc.)
+- Place les clés dans le backend et le frontend
+
+---
+
+## 4. Lancement des serveurs
+
+### Backend :
+```bash
+cd /home/bastien/Bureau/PROJET FIN D'ANNÉE/SOUNDORA
+npm install
+node server.js
+```
+
+### Frontend :
+```bash
+cd /home/bastien/Bureau/PROJET FIN D'ANNÉE/SOUNDORA/soundora-frontend
+npm install
+ng serve --port 4200
+```
+
+---
+
+## 5. Test du paiement Stripe
+
+### a) Via l’interface utilisateur
+1. Connecte-toi ou inscris-toi sur le site (auth Supabase)
+2. Ajoute des produits au panier
+3. Va sur la page de paiement
+4. Utilise une carte de test Stripe :
+   - Numéro : `4242 4242 4242 4242`
+   - Date d’expiration : n’importe quelle date future
+   - CVC : n’importe quel code
+   - Email, nom, adresse : valeurs fictives
+5. Valide le paiement
+6. Stripe redirige vers la page de succès ou affiche une confirmation
+
+### b) Via l’API (pour tests rapides)
+- Route test simple :
+  ```bash
+  POST /api/stripe/test-simple
+  ```
+- Route test complète :
+  ```bash
+  POST /api/stripe/test-complete
+  ```
+
+---
+
+## 6. Vérification du webhook
+- Stripe appelle `/api/stripe/webhook` après paiement
+- Le backend doit traiter l’événement et créer la commande
+- Vérifie les logs backend et la base Supabase pour la création de la commande
+
+---
+
+## 7. Points de vigilance
+- Les clés Stripe et webhook doivent rester secrètes (jamais dans le frontend)
+- Le frontend utilise la clé publique Stripe
+- Le backend utilise la clé secrète Stripe et la clé webhook
+- Il faut être connecté (auth Supabase) pour passer commande réelle
+- Les routes test Stripe ne nécessitent pas d’authentification
+
+---
+
+## 8. Ressources utiles
+- [Stripe Docs](https://stripe.com/docs)
+- [Supabase Docs](https://supabase.com/docs)
+- [Cartes de test Stripe](https://stripe.com/docs/testing)
+
+---
+
+Auteur : Bastien BRUNET (Bast8313)
+Projet Soundora - 2025

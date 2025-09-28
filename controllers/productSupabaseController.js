@@ -29,18 +29,24 @@ export const getAllProducts = async (req, res) => {
       order = "desc", // Ordre de tri (desc = plus récent d'abord)
     } = req.query;
 
+    // Log des paramètres reçus pour debug
+    // Utile pour vérifier ce que le frontend envoie
+    console.log("[getAllProducts] Paramètres reçus:", req.query);
+
     // CONSTRUCTION DE LA REQUÊTE SUPABASE
     // Crée la requête de base avec jointures (relations entre tables)
     let query = supabase
       .from("products") // Table principale
-      .select(
-        `
+      .select(`
         *,                                 
         categories!inner(id, name, slug),  
         brands(id, name, slug)             
-      `
-      )
+      `)
       .eq("is_active", true); // Seulement les produits actifs
+
+    // Log de la requête Supabase (pour debug, n'affiche pas les données mais la structure)
+    // Utile pour vérifier la construction de la requête
+    console.log("[getAllProducts] Requête Supabase construite:", query);
 
     // APPLICATION DES FILTRES
     // Chaque filtre s'ajoute à la requête seulement s'il est fourni
