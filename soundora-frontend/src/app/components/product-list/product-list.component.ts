@@ -1,4 +1,4 @@
-// IMPORTS NÉCESSAIRES POUR LE COMPOSANT DE LISTE DE PRODUITS
+// ...imports nécessaires...
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, ActivatedRoute, Router } from '@angular/router';
@@ -7,54 +7,48 @@ import { ProductService, Product, ProductFilters, ApiResponse } from '../../serv
 import { CategoryService, Category, Brand } from '../../services/category.service';
 import { CartService } from '../../services/cart.service';
 import { NotificationService } from '../../services/notification.service';
+// CONSTRUCTEUR - INJECTION DES DÉPENDANCES
+// Injecte tous les services nécessaires pour le fonctionnement du composant
 
-/**
- * COMPOSANT LISTE DES PRODUITS
- * Gère l'affichage de tous les produits avec filtres, pagination et recherche
- * Supporte le filtrage par catégorie, marque, prix et recherche textuelle
- * Inclut la gestion du panier avec notifications
- */
 @Component({
   selector: 'app-product-list',
-  standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './product-list.component.html',
-  styleUrls: ['./product-list.component.css']
+  styleUrls: ['./product-list.component.css'],
+  imports: [CommonModule, FormsModule, RouterModule]
 })
 export class ProductListComponent implements OnInit {
   // DONNÉES PRINCIPALES
-  products: Product[] = [];       // Liste des produits récupérés depuis l'API
-  categories: Category[] = [];    // Liste des catégories pour les filtres
-  brands: Brand[] = [];          // Liste des marques pour les filtres
-  loading = false;               // État de chargement pour l'UI
-  
+  products: Product[] = [];
+  categories: Category[] = [];
+  brands: Brand[] = [];
+  loading = false;
   // FILTRES ET PAGINATION
-  filters: ProductFilters = {};   // Objet contenant tous les filtres appliqués
-  currentPage = 1;               // Page courante pour la pagination
-  totalPages = 0;                // Nombre total de pages
-  totalItems = 0;                // Nombre total d'éléments
-  
+  filters: ProductFilters = {};
+  currentPage = 1;
+  totalPages = 0;
+  totalItems = 0;
+  // FILTRES UI - propriétés nécessaires pour le fonctionnement du composant
+  selectedCategory: string = '';
+  selectedBrand: string = '';
+  pageTitle: string = '';
+  searchQuery: string = '';
+  priceMin: number | null = null;
+  priceMax: number | null = null;
   // FILTRES UI - VALEURS LIÉES AUX CONTRÔLES DU FORMULAIRE
-  selectedCategory = '';         // Catégorie sélectionnée dans le dropdown
-  selectedBrand = '';           // Marque sélectionnée dans le dropdown
-  searchQuery = '';             // Texte de recherche saisi par l'utilisateur
-  priceMin: number | null = null; // Prix minimum pour le filtre de prix
-  priceMax: number | null = null; // Prix maximum pour le filtre de prix
-  
-  // TITRE DYNAMIQUE DE LA PAGE SELON LE FILTRE ACTIF
-  pageTitle = 'Tous nos produits';
+  // ...autres propriétés et méthodes...
 
   /**
-   * CONSTRUCTEUR - INJECTION DES DÉPENDANCES
-   * Injecte tous les services nécessaires pour le fonctionnement du composant
-   * 
-   * @param productService - Service pour les opérations liées aux produits
-   * @param categoryService - Service pour récupérer catégories et marques
-   * @param route - Service pour accéder aux paramètres de l'URL courante
-   * @param router - Service pour la navigation programmatique
-   * @param cartService - Service pour gérer l'ajout au panier
-   * @param notificationService - Service pour afficher les notifications
+   * Gestion d'erreur d'image :
+   * Si l'image du produit ne se charge pas, on affiche une image de secours sans boucle infinie.
    */
+  onImgError(event: Event) {
+    const img = event.target as HTMLImageElement;
+    img.src = 'assets/images/no-image.jpg';
+    img.onerror = null; // Empêche la boucle infinie si l'image de secours est absente
+  }
+
+
+  // ...autres méthodes et logique du composant...
   constructor(
     private productService: ProductService,
     private categoryService: CategoryService,
@@ -74,15 +68,27 @@ export class ProductListComponent implements OnInit {
     this.loadBrands();
 
     // ÉCOUTE DES CHANGEMENTS DE ROUTE
+    let lastParams: any = {};
     this.route.params.subscribe(params => {
+      // Log pour debug
+      console.log('[ProductList] Params reçus:', params);
+      // Empêche la boucle : ne recharge que si les params changent vraiment
+      if (JSON.stringify(params) === JSON.stringify(lastParams)) {
+        console.log('[ProductList] Params identiques, pas de reload.');
+        return;
+      }
+      lastParams = { ...params };
+
       // Si aucun filtre n'est appliqué (pas de slug dans params), charger tous les produits
       const hasNoFilter = !params['slug'];
       if (hasNoFilter) {
-        this.selectedCategory = '';
-        this.selectedBrand = '';
-        this.pageTitle = 'Tous nos produits';
-        this.currentPage = 1;
-        this.loadProducts();
+        if (this.selectedCategory !== '' || this.selectedBrand !== '' || this.pageTitle !== 'Tous nos produits' || this.currentPage !== 1) {
+          this.selectedCategory = '';
+          this.selectedBrand = '';
+          this.pageTitle = 'Tous nos produits';
+          this.currentPage = 1;
+          this.loadProducts();
+        }
       } else {
         // ATTENDRE QUE LES DONNÉES SOIENT CHARGÉES AVANT DE TRAITER LES PARAMÈTRES
         if (this.categories.length > 0 && this.brands.length > 0) {

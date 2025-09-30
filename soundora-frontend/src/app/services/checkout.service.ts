@@ -28,8 +28,8 @@ export interface CheckoutItem {
  * Contient tous les éléments nécessaires au paiement
  */
 export interface CheckoutRequest {
-  items: CheckoutItem[];  // Liste complète des articles du panier
-  customerEmail: string;  // Email obligatoire pour la facturation Stripe
+  cartItems: CheckoutItem[];  // Liste complète des articles du panier (nom attendu par le backend)
+  userEmail: string;  // Email obligatoire pour la facturation Stripe (nom attendu par le backend)
 }
 
 /**
@@ -91,7 +91,17 @@ export class CheckoutService {
    * @returns Token JWT string ou null si non connecté
    */
   private getAuthToken(): string | null {
-    return localStorage.getItem('access_token');
+    // Récupère le token JWT depuis la clé 'auth_token' (string ou JSON)
+    const raw = localStorage.getItem('auth_token');
+    if (!raw) return null;
+    try {
+      const parsed = JSON.parse(raw);
+      // Pour Supabase v2, le token est souvent dans parsed.access_token ou parsed.currentSession.access_token
+      return parsed.access_token || parsed.currentSession?.access_token || raw;
+    } catch {
+      // Si ce n'est pas du JSON, retourne la valeur brute
+      return raw;
+    }
   }
 
   /**
@@ -176,8 +186,8 @@ export class CheckoutService {
   createCheckoutSession(items: CheckoutItem[], customerEmail: string): Observable<CheckoutResponse> {
     // ÉTAPE 1 : Préparation des données pour l'API
     const checkoutData: CheckoutRequest = {
-      items,          // Articles du panier
-      customerEmail   // Email obligatoire pour Stripe
+      cartItems: items,      // Articles du panier (nom attendu par le backend)
+      userEmail: customerEmail // Email obligatoire pour Stripe (nom attendu par le backend)
     };
 
     // ÉTAPE 2 : Préparation de l'authentification

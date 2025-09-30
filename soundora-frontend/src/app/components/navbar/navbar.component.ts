@@ -39,9 +39,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
    * Ferme le menu burger si on change de mode
    */
   checkMobile() {
-    this.isMobile = window.innerWidth <= 768;
-    if (!this.isMobile) {
-      this.isBurgerMenuOpen = false;
+    if (typeof window !== 'undefined') {
+      this.isMobile = window.innerWidth <= 768;
+      if (!this.isMobile) {
+        this.isBurgerMenuOpen = false;
+      }
     }
   }
 

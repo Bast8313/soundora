@@ -150,8 +150,8 @@
               - onerror : Si l'image n'existe pas, affiche une image par défaut
               - [alt] : Texte alternatif pour l'accessibilité
             -->
-            <img [src]="getMainImage(product)" [alt]="product.name" 
-                 onerror="this.src='/assets/images/no-image.jpg'">
+            <!-- Affichage image produit avec fallback automatique et gestion d'erreur pour éviter la boucle infinie -->
+            <img [src]="getMainImage(product) || 'assets/images/no-image.jpg'" [alt]="product.name" (error)="onImgError($event)">
             <!-- Badge "Produit vedette" si is_featured est true -->
             <div class="product-featured" *ngIf="product.is_featured">⭐</div>
           </div>

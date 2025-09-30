@@ -17,6 +17,15 @@ import supabase from "../config/supabase.js"; // Import du client Supabase confi
  */
 const checkSupabaseAuth = async (req, res, next) => {
   try {
+    // LOGS DEBUG : Affiche l'URL et la clé utilisées par le client Supabase
+    console.log('[Supabase Auth] URL:', process.env.SUPABASE_URL);
+    console.log('[Supabase Auth] ANON_KEY:', process.env.SUPABASE_ANON_KEY);
+    // Test DNS direct
+    import('dns').then(dns => {
+      dns.lookup('lohumrjasdauvpqgjvhd.supabase.co', (err, address) => {
+        console.log('[DNS] lookup lohumrjasdauvpqgjvhd.supabase.co:', err, address);
+      });
+    });
     // === RÉCUPÉRATION DU TOKEN ===
     const authHeader = req.headers.authorization; // Récupère l'en-tête Authorization
 

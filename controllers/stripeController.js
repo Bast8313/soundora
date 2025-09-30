@@ -75,6 +75,8 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
  */
 export const createCheckoutSession = async (req, res) => {
   try {
+    // LOG DEBUG : Affiche le corps brut reçu du frontend
+    console.log('[Stripe] Corps de la requête:', req.body);
     // ==========================================
     // ÉTAPE 1 : EXTRACTION DES DONNÉES DE LA REQUÊTE
     // ==========================================
@@ -182,7 +184,7 @@ export const createCheckoutSession = async (req, res) => {
             // Stripe accepte un tableau d'URLs d'images pour l'affichage
             // [0] = première image du produit Soundora (image principale)
             // Fallback sur image par défaut si aucune image disponible
-            images: [item.images?.[0] || "/assets/images/no-image.jpg"],
+        images: [item.images?.[0] || "https://via.placeholder.com/300x300?text=No+Image"],
 
             // MÉTADONNÉES SOUNDORA → STRIPE
             // Ces données permettent la réconciliation entre Stripe et Supabase
