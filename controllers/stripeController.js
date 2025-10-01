@@ -76,7 +76,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 export const createCheckoutSession = async (req, res) => {
   try {
     // LOG DEBUG : Affiche le corps brut reçu du frontend
-    console.log('[Stripe] Corps de la requête:', req.body);
+    console.log("[Stripe] Corps de la requête:", req.body);
     // ==========================================
     // ÉTAPE 1 : EXTRACTION DES DONNÉES DE LA REQUÊTE
     // ==========================================
@@ -184,7 +184,10 @@ export const createCheckoutSession = async (req, res) => {
             // Stripe accepte un tableau d'URLs d'images pour l'affichage
             // [0] = première image du produit Soundora (image principale)
             // Fallback sur image par défaut si aucune image disponible
-        images: [item.images?.[0] || "https://via.placeholder.com/300x300?text=No+Image"],
+            images: [
+              item.images?.[0] ||
+                "https://via.placeholder.com/300x300?text=No+Image",
+            ],
 
             // MÉTADONNÉES SOUNDORA → STRIPE
             // Ces données permettent la réconciliation entre Stripe et Supabase
@@ -417,6 +420,9 @@ export const createCheckoutSession = async (req, res) => {
  * @param {Object} res - Réponse Express (obligatoire 200 pour Stripe)
  */
 export const stripeWebhook = async (req, res) => {
+  // LOG DEBUG : Vérifie la réception du webhook Stripe
+  console.log("[STRIPE WEBHOOK] Reçu ! Headers:", req.headers);
+  console.log("[STRIPE WEBHOOK] Body brut:", req.body);
   // ==========================================
   // RÉCUPÉRATION DE LA SIGNATURE STRIPE
   // ==========================================
@@ -988,5 +994,23 @@ export const createTestSessionComplete = async (req, res) => {
       error: error.message,
       type: error.type || "unknown",
     });
+    // Génère un numéro de commande unique pour chaque commande
+    function generateOrderNumber() {
+      // Récupère la date actuelle
+      const now = new Date();
+      // Formate la date au format AAAAMMJJ (ex: 20251001)
+      const datePart = now.toISOString().slice(0, 10).replace(/-/g, "");
+      // Prend les 6 derniers chiffres du timestamp pour garantir l'unicité
+      const timePart = now.getTime().toString().slice(-6);
+      // Assemble le numéro de commande final (ex: ORD-20251001-123456)
+      return `ORD-${datePart}-${timePart}`;
+    }
+
+    // Appelle la fonction pour générer le numéro de commande
+    const orderNumber = generateOrderNumber();
   }
 };
+
+// Ajoute le numéro de commande généré
+order_number: orderNumber;
+// ...autres champs existants à compléter selon ta logique...
