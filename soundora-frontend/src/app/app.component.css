@@ -1,0 +1,51 @@
+/*
+  =====================================
+  STYLES - AppComponent
+  =====================================
+  
+  Fichier CSS pour les styles du composant racine.
+  Ces styles s'appliquent uniquement à ce composant.
+  
+  Remarque : Les styles ici ne s'appliquent pas aux composants enfants
+  (sauf s'ils héritent de propriétés comme font-family)
+*/
+
+/* Variables CSS personnalisées (couleurs, espaces, etc.) */
+:host {
+  --couleur-primaire: #333;
+  --couleur-accent: #007bff;
+  --couleur-succes: #28a745;
+  --couleur-danger: #dc3545;
+}
+
+/* Styles pour le header */
+header {
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+header p {
+  margin: 10px 0 0 0;
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Styles pour le main (contenu principal) */
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Styles pour le footer */
+footer {
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 5px 0;
+}

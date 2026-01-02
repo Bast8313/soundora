@@ -1,0 +1,40 @@
+<!--
+  =====================================
+  TEMPLATE HTML - AppComponent
+  =====================================
+  
+  C'est la structure HTML du composant racine.
+  Elle affiche :
+  1. Un header (optionnel)
+  2. Le contenu dynamique via <router-outlet>
+  3. Un footer (optionnel)
+-->
+
+<!-- En-tête simple de la page -->
+<header style="background-color: #333; color: white; padding: 20px; text-align: center;">
+  <h1>🎸 {{ title }}</h1>
+  <p>Plateforme e-commerce d'instruments de musique</p>
+</header>
+
+<!-- Contenu principal -->
+<main style="min-height: 80vh; padding: 20px;">
+  <!--
+    <router-outlet>
+    Élément spécial Angular qui affiche le composant
+    correspondant à la route active.
+    
+    Exemple :
+    - Route /products → Affiche ProductListComponent
+    - Route /cart → Affiche CartComponent
+    - Route /login → Affiche LoginComponent
+    
+    Son contenu change automatiquement lors de la navigation.
+  -->
+  <router-outlet></router-outlet>
+</main>
+
+<!-- Pied de page simple -->
+<footer style="background-color: #f0f0f0; text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #ddd;">
+  <p>&copy; 2025 Soundora. Tous droits réservés.</p>
+  <p>Plateforme de vente d'instruments de musique</p>
+</footer>
