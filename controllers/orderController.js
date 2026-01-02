@@ -1,9 +1,13 @@
 import supabase from "../config/supabase.js"; // Import du client Supabase
+import transporter from "../config/email.js"; // Transporteur nodemailer pour l'envoi d'emails
 
 // ========================
 // Créer une commande à partir du panier
+// Création d'une commande et envoi d'un email de confirmation
 export const createOrder = (req, res) => {
+
   const userId = req.user.id;
+  const userEmail = req.user.email; // Email de l'utilisateur connecté (à adapter selon ton middleware d'auth)
   const { shipping_address } = req.body;
 
   if (!shipping_address) {
@@ -47,14 +51,15 @@ export const createOrder = (req, res) => {
     );
 
     // Créer la commande
+    // Création de la commande avec le statut "en attente"
     const createOrderSql = `
       INSERT INTO orders (user_id, total_amount, shipping_address, status, order_date)
-      VALUES (?, ?, ?, 'confirmed', NOW())
+      VALUES (?, ?, ?, 'en attente', NOW())
     `;
     db.query(
       createOrderSql,
       [userId, totalAmount, shipping_address],
-      (err, orderResult) => {
+      async (err, orderResult) => {
         if (err) return res.status(500).json({ error: err });
 
         const orderId = orderResult.insertId;
@@ -91,11 +96,30 @@ export const createOrder = (req, res) => {
                     db.query(clearCartSql, [cartItems[0].cart_id], (err) => {
                       if (err) return res.status(500).json({ error: err });
 
-                      res.status(201).json({
-                        message: "Commande créée avec succès",
-                        order_id: orderId,
-                        total_amount: totalAmount,
-                      });
+                      // Envoi d'un email de confirmation de commande (version promesse)
+                      transporter.sendMail({
+                        from: process.env.SMTP_USER,
+                        to: userEmail,
+                        subject: 'Confirmation de votre commande Soundora',
+                        text: `Merci pour votre commande ! Votre numéro de commande est : ${orderId}`
+                      })
+                        .then(() => {
+                          // Réponse au client après envoi de l'email
+                          res.status(201).json({
+                            message: "Commande créée avec succès",
+                            order_id: orderId,
+                            total_amount: totalAmount,
+                          });
+                        })
+                        .catch((mailErr) => {
+                          console.error("Erreur lors de l'envoi de l'email de confirmation:", mailErr);
+                          // Réponse au client même si l'email échoue
+                          res.status(201).json({
+                            message: "Commande créée avec succès (email non envoyé)",
+                            order_id: orderId,
+                            total_amount: totalAmount,
+                          });
+                        });
                     });
                   }
                 }
@@ -109,7 +133,7 @@ export const createOrder = (req, res) => {
 };
 
 // ========================
-// Récupérer les commandes de l'utilisateur
+// Récupérer l'historique des commandes de l'utilisateur connecté
 export const getUserOrders = (req, res) => {
   const userId = req.user.id;
 
@@ -117,7 +141,7 @@ export const getUserOrders = (req, res) => {
     SELECT 
       o.id as order_id,
       o.total_amount,
-      o.status,
+      o.status, -- Statut de la commande (en attente, envoyée, etc.)
       o.shipping_address,
       o.order_date,
       o.created_at,
@@ -131,7 +155,7 @@ export const getUserOrders = (req, res) => {
 
   db.query(sql, [userId], (err, results) => {
     if (err) return res.status(500).json({ error: err });
-    res.json(results);
+    res.json({ success: true, orders: results });
   });
 };
 

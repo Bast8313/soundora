@@ -3,20 +3,20 @@ import dotenv from "dotenv"; // Pour charger les variables d'environnement depui
 import supabase from "../config/supabase.js"; // Import du client Supabase configuré
 
 // Charge les variables d'environnement depuis le fichier .env
-dotenv.config(); 
+dotenv.config();
 
 // =========================================
 // === FONCTION D'INSCRIPTION UTILISATEUR ===
 // =========================================
 /**
  * Fonction d'enregistrement d'un nouvel utilisateur avec Supabase Auth
- * 
+ *
  * FONCTIONNEMENT :
  * 1. Validation des données d'entrée (email, password, longueur)
  * 2. Appel à l'API Supabase Auth pour créer le compte
  * 3. Supabase gère automatiquement le hashage du mot de passe et la génération du token
  * 4. Retour des informations utilisateur et du token d'accès
- * 
+ *
  * @param {Request} req - Requête contenant { email, password, first_name, last_name }
  * @param {Response} res - Réponse à renvoyer au client
  */
@@ -48,15 +48,15 @@ export const register = async (req, res) => {
     // - Hashage sécurisé du mot de passe
     // - Création dans la table auth.users
     // - Génération du token JWT d'authentification
-    
+
     const { data: authData, error: authError } = await supabase.auth.signUp({
       email: email,
       password: password,
       options: {
         // user_metadata : données supplémentaires stockées avec l'utilisateur
         data: {
-          first_name: first_name || "",  // Prénom (optionnel)
-          last_name: last_name || "",    // Nom (optionnel)
+          first_name: first_name || "", // Prénom (optionnel)
+          last_name: last_name || "", // Nom (optionnel)
         },
       },
     });
@@ -142,7 +142,7 @@ export const login = async (req, res) => {
 
     // SUCCÈS : Utilisateur connecté
     // authData.user contient les infos utilisateur
-    // authData.session contient les tokens (access_token, refresh_token)
+    // authData.session contie nt les tokens (access_token, refresh_token)
 
     res.json({
       success: true,

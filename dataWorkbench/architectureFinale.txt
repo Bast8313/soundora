@@ -1,7 +1,0 @@
-auth.users (Supabase)     profiles (notre table)
-├── id (UUID)            ├── id → auth.users(id) 
-├── email                ├── first_name
-├── encrypted_password   ├── last_name
-└── email_confirmed      ├── phone
-                         ├── address_*
-                         └── preferences

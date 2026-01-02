@@ -1,0 +1,32 @@
+
+Oui, tu peux cliquer sur "Set up custom SMTP server" dans Supabase pour configurer ton propre serveur d’envoi d’emails.
+Cela te permettra de lever les limites d’envoi et d’assurer la délivrabilité des emails (inscription, reset password, etc.).
+
+Voici comment faire :
+
+Clique sur "Set up custom SMTP server" dans Supabase (Auth > Settings > Email).
+
+Renseigne les informations de ton fournisseur SMTP (Gmail, Outlook, Mailgun, Sendgrid, etc.) :
+
+SMTP sender email : l’adresse qui enverra les mails (ex : tonadresse@gmail.com)
+SMTP server : l’adresse du serveur SMTP (ex : smtp.gmail.com)
+SMTP port : souvent 465 (SSL) ou 587 (TLS)
+SMTP username : ton adresse email ou identifiant
+SMTP password : le mot de passe de l’application (pour Gmail, il faut générer un mot de passe d’application)
+Secure : coche si tu utilises SSL/TLS
+Sauvegarde la configuration.
+
+Attention :
+
+Si tu utilises Gmail, il faut activer la validation en deux étapes et générer un mot de passe d’application (pas ton mot de passe habituel).
+Pour d’autres services (Mailgun, Sendgrid…), utilise les identifiants fournis par le service.
+Une fois configuré, refais un test d’inscription.
+Si tu veux, donne-moi le fournisseur que tu veux utiliser (Gmail, autre…) et je te guide pas à pas pour remplir chaque champ !
+
+ok; je pense que le problème vient de là; peux tu enregistrer notre conversation pour résoudre cela plus tard car j'ai quelques soucis plus urgent encore à regler rapidement ?
+
+Je ne peux pas enregistrer la conversation de façon persistante, mais tu peux :
+
+Copier-coller notre échange dans un fichier texte (ex : docs/suivi_problemes_supabase.txt) pour garder une trace.
+Revenir ici à tout moment, je pourrai reprendre le diagnostic à partir de ce que tu as sauvegardé ou me redonner le contexte.
+N’hésite pas à me solliciter dès que tu veux reprendre la résolution du problème SMTP/Supabase ou pour toute autre urgence sur ton projet ! Je reste disponible pour t’aider rapidement.
