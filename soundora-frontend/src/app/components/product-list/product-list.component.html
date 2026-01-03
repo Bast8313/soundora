@@ -1,0 +1,87 @@
+<div class="product-list-container">
+  <!-- En-tête -->
+  <header class="page-header">
+    <h1>Nos Produits</h1>
+    <p>Découvrez notre sélection d'instruments de musique</p>
+  </header>
+
+  <!-- Message d'erreur -->
+  <div class="error-message" *ngIf="error">
+    {{ error }}
+  </div>
+
+  <!-- Loader pendant le chargement -->
+  <div class="loading" *ngIf="isLoading">
+    <div class="spinner"></div>
+    <p>Chargement des produits...</p>
+  </div>
+
+  <!-- Grille de produits -->
+  <div class="products-grid" *ngIf="!isLoading && products.length > 0">
+    <div class="product-card" *ngFor="let product of products">
+      <!-- Image du produit -->
+      <div class="product-image">
+        <img [src]="product.image_url || 'assets/no-image.png'" 
+             [alt]="product.name">
+        <span class="badge featured" *ngIf="product.featured">⭐ Vedette</span>
+      </div>
+
+      <!-- Informations du produit -->
+      <div class="product-info">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <p class="product-description">{{ product.description || 'Aucune description disponible' }}</p>
+        
+        <!-- Prix et stock -->
+        <div class="product-footer">
+          <span class="product-price">{{ product.price | currency:'EUR' }}</span>
+          <span class="product-stock" [class.out-of-stock]="product.stock === 0">
+            {{ product.stock > 0 ? 'En stock' : 'Rupture' }}
+          </span>
+        </div>
+
+        <!-- Bouton voir détails -->
+        <a [routerLink]="['/product', product.slug]" class="btn-details">
+          Voir les détails
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Message si aucun produit -->
+  <div class="no-products" *ngIf="!isLoading && products.length === 0">
+    <p>Aucun produit disponible pour le moment.</p>
+  </div>
+
+  <!-- Pagination -->
+  <div class="pagination" *ngIf="!isLoading && totalPages > 1">
+    <!-- Bouton précédent -->
+    <button class="btn-page" 
+            (click)="previousPage()" 
+            [disabled]="currentPage === 1">
+      ← Précédent
+    </button>
+
+    <!-- Numéros de page -->
+    <div class="page-numbers">
+      <button *ngFor="let pageNum of getPageNumbers()"
+              class="btn-page-number"
+              [class.active]="pageNum === currentPage"
+              (click)="goToPage(pageNum)">
+        {{ pageNum }}
+      </button>
+    </div>
+
+    <!-- Bouton suivant -->
+    <button class="btn-page" 
+            (click)="nextPage()" 
+            [disabled]="currentPage === totalPages">
+      Suivant →
+    </button>
+  </div>
+
+  <!-- Info pagination -->
+  <div class="pagination-info" *ngIf="!isLoading && products.length > 0">
+    Affichage de {{ (currentPage - 1) * limit + 1 }} à 
+    {{ currentPage * limit > total ? total : currentPage * limit }} sur {{ total }} produits
+  </div>
+</div>

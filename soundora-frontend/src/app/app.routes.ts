@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { ProductListComponent } from './components/product-list/product-list.component';
 
 /**
  * =====================================
@@ -37,12 +38,11 @@ export const routes: Routes = [
   // ========================================
   // ROUTE PRODUITS (LISTE)
   // ========================================
-  // Exemple à implémenter plus tard :
-  // {
-  //   path: 'products',
-  //   component: ProductListComponent,
-  //   data: { title: 'Catalogue des produits' }
-  // },
+  {
+    path: 'products',
+    component: ProductListComponent,
+    data: { title: 'Catalogue des produits' }
+  },
 
   // ========================================
   // ROUTE DÉTAIL D'UN PRODUIT
