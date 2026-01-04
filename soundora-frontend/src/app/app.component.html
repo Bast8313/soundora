@@ -5,19 +5,16 @@
   
   C'est la structure HTML du composant racine.
   Elle affiche :
-  1. Un header (optionnel)
+  1. La navbar (navigation)
   2. Le contenu dynamique via <router-outlet>
-  3. Un footer (optionnel)
+  3. Un footer
 -->
 
-<!-- En-tête simple de la page -->
-<header style="background-color: #333; color: white; padding: 20px; text-align: center;">
-  <h1>🎸 {{ title }}</h1>
-  <p>Plateforme e-commerce d'instruments de musique</p>
-</header>
+<!-- Navbar avec navigation, recherche, panier, auth -->
+<app-navbar></app-navbar>
 
 <!-- Contenu principal -->
-<main style="min-height: 80vh; padding: 20px;">
+<main style="min-height: calc(100vh - 200px);">
   <!--
     <router-outlet>
     Élément spécial Angular qui affiche le composant
@@ -34,7 +31,7 @@
 </main>
 
 <!-- Pied de page simple -->
-<footer style="background-color: #f0f0f0; text-align: center; padding: 20px; margin-top: 40px; border-top: 1px solid #ddd;">
-  <p>&copy; 2025 Soundora. Tous droits réservés.</p>
-  <p>Plateforme de vente d'instruments de musique</p>
+<footer style="background-color: #2c3e50; color: white; text-align: center; padding: 2rem; margin-top: 4rem;">
+  <p>&copy; 2026 Soundora. Tous droits réservés.</p>
+  <p style="margin-top: 0.5rem; font-size: 0.9rem;">🎸 Votre plateforme de vente d'instruments de musique</p>
 </footer>

@@ -1,19 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 /**
  * Composant racine de l'application
  * 
  * Structure :
- * - Header (en-tête)
+ * - Navbar (navigation)
  * - Main avec <router-outlet> (contenu dynamique)
  * - Footer (pied de page)
  */
 @Component({
   selector: 'app-root',           // Balise HTML : <app-root>
   standalone: true,               // Composant standalone (moderne)
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, NavbarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
 })

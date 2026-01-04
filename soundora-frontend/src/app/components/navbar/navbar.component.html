@@ -1,0 +1,78 @@
+<!-- Navbar principale -->
+<nav class="navbar">
+  <div class="navbar-container">
+    
+    <!-- Logo -->
+    <a routerLink="/" class="navbar-logo">
+      <span class="logo-icon">🎸</span>
+      <span class="logo-text">Soundora</span>
+    </a>
+
+    <!-- Menu de navigation (desktop et mobile) -->
+    <ul class="navbar-menu" [class.active]="isMenuOpen">
+      <!-- Lien Accueil -->
+      <li class="navbar-item">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-link" (click)="closeMenu()">
+          Accueil
+        </a>
+      </li>
+
+      <!-- Lien Produits -->
+      <li class="navbar-item">
+        <a routerLink="/products" routerLinkActive="active" class="navbar-link" (click)="closeMenu()">
+          Produits
+        </a>
+      </li>
+
+      <!-- Lien Catégories (à implémenter) -->
+      <li class="navbar-item">
+        <a routerLink="/categories" routerLinkActive="active" class="navbar-link" (click)="closeMenu()">
+          Catégories
+        </a>
+      </li>
+
+      <!-- Lien À propos -->
+      <li class="navbar-item">
+        <a routerLink="/about" routerLinkActive="active" class="navbar-link" (click)="closeMenu()">
+          À propos
+        </a>
+      </li>
+    </ul>
+
+    <!-- Barre de recherche -->
+    <div class="navbar-search">
+      <input 
+        type="text" 
+        class="search-input" 
+        placeholder="Rechercher un produit..."
+        [(ngModel)]="searchQuery"
+        (keyup.enter)="onSearch()">
+      <button class="search-button" (click)="onSearch()">
+        🔍
+      </button>
+    </div>
+
+    <!-- Actions utilisateur (panier, connexion) -->
+    <div class="navbar-actions">
+      <!-- Panier avec badge compteur -->
+      <a routerLink="/cart" class="navbar-icon-link" title="Panier">
+        <span class="icon">🛒</span>
+        <span class="badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+      </a>
+
+      <!-- Boutons Connexion/Inscription -->
+      <div class="navbar-auth">
+        <a routerLink="/login" class="btn-login">Connexion</a>
+        <a routerLink="/register" class="btn-register">Inscription</a>
+      </div>
+    </div>
+
+    <!-- Bouton burger pour mobile -->
+    <button class="burger-menu" (click)="toggleMenu()" [class.active]="isMenuOpen">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+
+  </div>
+</nav>
