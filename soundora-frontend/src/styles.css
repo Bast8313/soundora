@@ -1,13 +1,91 @@
-/* Styles globaux pour toute l'application */
+/* =====================================
+   STYLES GLOBAUX - Application Soundora
+   =====================================
+   Ces styles s'appliquent à TOUTE l'application
+   (tous les composants Angular héritent de ces règles)
+*/
 
+/* ===================================
+   RESET CSS - Suppression des styles par défaut
+   ===================================
+   Le navigateur applique des marges/paddings par défaut.
+   On les remet à zéro pour avoir un contrôle total.
+*/
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+  margin: 0;          /* Supprime toutes les marges extérieures */
+  padding: 0;         /* Supprime tous les espacements intérieurs */
+  box-sizing: border-box;  /* Inclut padding et border dans la taille totale des éléments */
 }
 
+/* ===================================
+   BODY - Corps de la page
+   ===================================
+*/
 body {
-  font-family: Arial, sans-serif;
+  /* POLICE : Utilise Segoe UI (police moderne de Microsoft)
+     Si non disponible, utilise Tahoma, puis Geneva, etc.
+     Plus agréable que la Arial par défaut */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  
+  /* HAUTEUR DE LIGNE : Espace entre les lignes de texte (1.6 = 160% de la taille du texte) */
   line-height: 1.6;
+  
+  /* COULEUR DU TEXTE : Gris foncé (#333) au lieu de noir pur (meilleur pour les yeux) */
   color: #333;
+  
+  /* ARRIÈRE-PLAN DÉGRADÉ :
+     - linear-gradient() : Crée un dégradé de couleur
+     - 135deg : Angle du dégradé (diagonal de haut-gauche vers bas-droite)
+     - #f5f7fa 0% : Couleur de départ (gris-bleu très clair)
+     - #f0f2f5 100% : Couleur de fin (gris légèrement plus foncé)
+     Résultat : Fond élégant et doux au lieu d'un blanc plat */
+  background: linear-gradient(135deg, #f5f7fa 0%, #f0f2f5 100%);
+  
+  /* Hauteur minimale = 100% de la hauteur de la fenêtre (évite un fond blanc en bas) */
+  min-height: 100vh;
+}
+
+/* ===================================
+   ANIMATION FADE-IN (Apparition en fondu)
+   ===================================
+   Animation réutilisable pour faire apparaître des éléments en douceur
+   Utilisation : animation: fadeIn 0.5s ease-out;
+*/
+@keyframes fadeIn {
+  from {
+    opacity: 0;                /* Début : invisible (0 = transparent) */
+    transform: translateY(10px); /* Début : décalé de 10px vers le bas */
+  }
+  to {
+    opacity: 1;                /* Fin : visible (1 = opaque) */
+    transform: translateY(0);   /* Fin : position normale */
+  }
+}
+
+/* ===================================
+   SCROLLBAR PERSONNALISÉE (barre de défilement)
+   ===================================
+   Style uniquement compatible avec Chrome, Edge, Safari
+   Firefox utilise des propriétés différentes
+*/
+
+/* LARGEUR de la barre de défilement */
+::-webkit-scrollbar {
+  width: 10px;  /* Largeur de 10 pixels */
+}
+
+/* FOND de la barre (la piste sur laquelle glisse le curseur) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;  /* Gris très clair */
+}
+
+/* CURSEUR de défilement (la partie qu'on fait glisser) */
+::-webkit-scrollbar-thumb {
+  background: #888;      /* Gris moyen */
+  border-radius: 5px;    /* Coins arrondis de 5px */
+}
+
+/* CURSEUR au survol de la souris */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;  /* Gris plus foncé au survol (feedback visuel) */
 }

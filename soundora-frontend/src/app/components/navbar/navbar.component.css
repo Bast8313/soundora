@@ -2,13 +2,66 @@
    NAVBAR - Styles
    =================================== */
 
-/* Container principal */
+/* ===================================
+   CONTAINER PRINCIPAL - Navbar
+   ===================================
+*/
 .navbar {
-  background-color: #2c3e50;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  /* DÉGRADÉ DE FOND :
+     - linear-gradient(135deg, ...) : Dégradé en diagonal
+     - #2c3e50 : Bleu marine foncé (couleur de départ)
+     - #34495e : Bleu marine légèrement plus clair (couleur de fin)
+     Résultat : Effet de profondeur moderne au lieu d'une couleur unie */
+  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  
+  /* OMBRE PORTÉE :
+     - 0 : décalage horizontal (0 = centré)
+     - 4px : décalage vertical (vers le bas)
+     - 12px : flou de l'ombre
+     - rgba(0, 0, 0, 0.15) : noir avec 15% d'opacité
+     Résultat : La navbar semble "flotter" au-dessus du contenu */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* POSITION STICKY :
+     La navbar reste en haut de l'écran quand on scroll
+     (comme si elle était "collée" en haut) */
   position: sticky;
-  top: 0;
+  top: 0;  /* Distance depuis le haut (0 = tout en haut) */
+  
+  /* Z-INDEX : Ordre d'empilement (1000 = au-dessus de tout) */
   z-index: 1000;
+  
+  /* BACKDROP-FILTER : Flou de l'arrière-plan (effet moderne)
+     Crée un effet de verre dépoli si on scroll sous la navbar */
+  backdrop-filter: blur(10px);
+  
+  /* ANIMATION au chargement de la page :
+     - slideDown : nom de l'animation (définie en-dessous)
+     - 0.5s : durée de 0.5 secondes
+     - ease-out : décélération progressive (plus naturel) */
+  animation: slideDown 0.5s ease-out;
+}
+
+/* ===================================
+   ANIMATION SLIDE-DOWN (glissement vers le bas)
+   ===================================
+   La navbar "descend" depuis le haut au chargement de la page
+*/
+@keyframes slideDown {
+  from {
+    /* DÉBUT :
+       - translateY(-100%) : Déplace la navbar vers le haut (hors de l'écran)
+       - opacity: 0 : Invisible */
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    /* FIN :
+       - translateY(0) : Position normale
+       - opacity: 1 : Visible */
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .navbar-container {
@@ -36,12 +89,48 @@
   transition: transform 0.3s;
 }
 
+/* EFFET AU SURVOL DU LOGO */
 .navbar-logo:hover {
+  /* AGRANDISSEMENT :
+     scale(1.05) = 105% de la taille originale (légère augmentation) */
   transform: scale(1.05);
+  
+  /* EFFET GLOW (lueur) :
+     - drop-shadow() : Ombre portée sur l'élément lui-même (pas sa boîte)
+     - 0 0 : Position de l'ombre (0,0 = centrée)
+     - 8px : Intensité du flou (lueur)
+     - rgba(52, 152, 219, 0.6) : Bleu avec 60% d'opacité
+     Résultat : Le logo "brille" en bleu au survol */
+  filter: drop-shadow(0 0 8px rgba(52, 152, 219, 0.6));
 }
 
+/* ICÔNE DU LOGO (emoji ou SVG) */
 .logo-icon {
-  font-size: 2rem;
+  font-size: 2rem;  /* Taille de l'icône = 2 fois la taille du texte de base */
+  
+  /* ANIMATION PULSE (pulsation) :
+     - pulse : Nom de l'animation
+     - 2s : Durée = 2 secondes par cycle
+     - ease-in-out : Accélération puis décélération (mouvement fluide)
+     - infinite : Répétition infinie
+     Résultat : L'icône "bat" doucement comme un cœur */
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ===================================
+   ANIMATION PULSE (pulsation)
+   ===================================
+   L'icône grandit et rétrécit légèrement en boucle
+*/
+@keyframes pulse {
+  /* DÉBUT et FIN (0% et 100%) : Taille normale */
+  0%, 100% {
+    transform: scale(1);   /* 100% de la taille */
+  }
+  /* MILIEU (50%) : Légèrement agrandi */
+  50% {
+    transform: scale(1.1); /* 110% de la taille */
+  }
 }
 
 .logo-text {
