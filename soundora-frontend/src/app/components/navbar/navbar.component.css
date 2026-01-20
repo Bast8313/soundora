@@ -67,12 +67,13 @@
 .navbar-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: 0 1.5rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 70px;
-  gap: 2rem;
+  gap: 1rem;
+  flex-wrap: nowrap;  /* Empêche le passage à la ligne */
 }
 
 /* ===================================
@@ -87,6 +88,8 @@
   font-size: 1.5rem;
   font-weight: bold;
   transition: transform 0.3s;
+  flex-shrink: 0;  /* Le logo ne rétrécit jamais */
+  min-width: 150px;  /* Largeur minimale du logo */
 }
 
 /* EFFET AU SURVOL DU LOGO */
@@ -143,9 +146,18 @@
 .navbar-menu {
   display: flex;
   list-style: none;
-  gap: 2rem;
+  gap: 0.5rem;
   margin: 0;
   padding: 0;
+  flex-wrap: nowrap;  /* Empêche le passage à la ligne */
+  overflow-x: auto;   /* Scroll horizontal si trop de catégories */
+  scrollbar-width: none;  /* Masque la scrollbar sur Firefox */
+  flex-shrink: 1;  /* Le menu peut rétrécir si nécessaire */
+}
+
+/* Masque la scrollbar sur Chrome/Safari */
+.navbar-menu::-webkit-scrollbar {
+  display: none;
 }
 
 .navbar-item {
@@ -179,8 +191,9 @@
 .navbar-search {
   display: flex;
   align-items: center;
-  flex: 1;
-  max-width: 400px;
+  flex-shrink: 0;  /* Ne rétrécit pas */
+  min-width: 200px;  /* Largeur minimale */
+  max-width: 350px;  /* Largeur maximale réduite */
 }
 
 .search-input {
@@ -190,6 +203,7 @@
   border-radius: 25px 0 0 25px;
   font-size: 0.95rem;
   outline: none;
+  min-width: 120px;  /* Largeur minimale de l'input */
 }
 
 .search-button {
@@ -212,16 +226,19 @@
 .navbar-actions {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  gap: 1rem;
+  flex-shrink: 0;  /* Ne rétrécit jamais */
+  white-space: nowrap;  /* Empêche le retour à la ligne */
 }
 
 /* Icône panier */
 .navbar-icon-link {
   position: relative;
   color: white;
-  font-size: 1.8rem;
+  font-size: 1.6rem;  /* Réduit légèrement la taille */
   text-decoration: none;
   transition: transform 0.3s;
+  flex-shrink: 0;
 }
 
 .navbar-icon-link:hover {
@@ -246,7 +263,19 @@
 /* Boutons authentification */
 .navbar-auth {
   display: flex;
-  gap: 0.8rem;
+  gap: 0.6rem;
+  flex-shrink: 0;  /* Ne rétrécit jamais */
+}
+
+.btn-login,
+.btn-register {
+  padding: 0.5rem 1rem;  /* Réduit le padding */
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 0.9rem;  /* Réduit légèrement la taille */
+  transition: all 0.3s;
+  white-space: nowrap;  /* Empêche le retour à la ligne */
 }
 
 /* ===================================
@@ -337,16 +366,6 @@
 .dropdown-subcategory:hover {
   padding-left: 2.5rem;
   background-color: #e3f2fd;
-}
-
-.btn-login,
-.btn-register {
-  padding: 0.6rem 1.2rem;
-  text-decoration: none;
-  border-radius: 6px;
-  font-weight: 500;
-  font-size: 0.95rem;
-  transition: all 0.3s;
 }
 
 .btn-login {

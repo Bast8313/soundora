@@ -1,76 +1,58 @@
-<!-- Navbar principale -->
+<!-- 
+  =====================================
+  NAVBAR PRINCIPALE (style Thomann)
+  =====================================
+  
+  STRUCTURE :
+  [Logo] [Guitares] [Basses] [Effets] ... [Recherche] [Panier] [Compte]
+  
+  DIFFÉRENCE AVEC L'ANCIENNE VERSION :
+  - Avant : Menu déroulant pour les catégories
+  - Maintenant : Catégories affichées directement comme liens
+-->
+
 <nav class="navbar">
   <div class="navbar-container">
     
-    <!-- Logo -->
+    <!-- 
+      ===================
+      LOGO SOUNDORA
+      ===================
+      Cliquable, ramène à l'accueil
+    -->
     <a routerLink="/" class="navbar-logo">
       <span class="logo-icon">🎸</span>
       <span class="logo-text">Soundora</span>
     </a>
 
-    <!-- Menu de navigation (desktop et mobile) -->
+    <!-- 
+      ===================
+      MENU DE CATÉGORIES
+      ===================
+      Affiche directement les catégories principales
+      Style horizontal sur desktop, vertical sur mobile
+    -->
     <ul class="navbar-menu" [class.active]="isMenuOpen">
-      <!-- Lien Accueil -->
-      <li class="navbar-item">
-        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="navbar-link" (click)="closeMenu()">
-          Accueil
+      
+      <!-- 
+        CATÉGORIES PRINCIPALES
+        *ngFor : Boucle sur toutes les catégories
+        Affiche directement les catégories sans "Accueil" ni "Toutes les catégories"
+      -->
+      <li class="navbar-item" *ngFor="let category of categories">
+        <!-- 
+          [routerLink]="['/products']" : Va à la page produits
+          [queryParams]="{category: category.slug}" : Ajoute ?category=guitares dans l'URL
+          Résultat : /products?category=guitares
+        -->
+        <a [routerLink]="['/products']" 
+           [queryParams]="{category: category.slug}" 
+           class="navbar-link category-link" 
+           (click)="closeMenu()">
+          {{ category.name }}
         </a>
       </li>
 
-      <!-- Lien Produits -->
-      <li class="navbar-item">
-        <a routerLink="/products" routerLinkActive="active" class="navbar-link" (click)="closeMenu()">
-          Produits
-        </a>
-      </li>
-
-      <!-- Dropdown Catégories -->
-      <li class="navbar-item navbar-dropdown" 
-          (mouseenter)="openCategoriesDropdown()"
-          (mouseleave)="closeCategoriesDropdown()">
-        <a class="navbar-link navbar-link-dropdown" 
-           (click)="toggleCategoriesDropdown()">
-          Catégories
-          <span class="dropdown-arrow">▼</span>
-        </a>
-        
-        <!-- Menu déroulant des catégories -->
-        <div class="dropdown-menu" [class.active]="isCategoriesDropdownOpen">
-          <!-- Lien vers toutes les catégories -->
-          <a routerLink="/categories" class="dropdown-item" (click)="closeMenu()">
-            <strong>Toutes les catégories</strong>
-          </a>
-          <div class="dropdown-divider"></div>
-          
-          <!-- Liste des catégories principales -->
-          <ng-container *ngFor="let category of categories">
-            <a [routerLink]="['/products']" 
-               [queryParams]="{category: category.slug}" 
-               class="dropdown-item dropdown-category" 
-               (click)="closeMenu()">
-              {{ category.name }}
-            </a>
-            
-            <!-- Sous-catégories -->
-            <ng-container *ngIf="category.subcategories && category.subcategories.length > 0">
-              <a *ngFor="let subcategory of category.subcategories"
-                 [routerLink]="['/products']" 
-                 [queryParams]="{category: subcategory.slug}" 
-                 class="dropdown-item dropdown-subcategory" 
-                 (click)="closeMenu()">
-                {{ subcategory.name }}
-              </a>
-            </ng-container>
-          </ng-container>
-        </div>
-      </li>
-
-      <!-- Lien À propos -->
-      <li class="navbar-item">
-        <a routerLink="/about" routerLinkActive="active" class="navbar-link" (click)="closeMenu()">
-          À propos
-        </a>
-      </li>
     </ul>
 
     <!-- Barre de recherche -->

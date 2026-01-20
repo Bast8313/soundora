@@ -1,0 +1,38 @@
+<!-- 
+  =====================================
+  TOP NAVBAR - HTML
+  =====================================
+  
+  Structure simple avec 3 sections :
+  1. Liens à gauche (Service)
+  2. Liens au centre (vide pour l'instant)
+  3. Liens à droite (Contact, À propos, FAQ)
+-->
+
+<div class="top-navbar">
+  <div class="top-navbar-container">
+    
+    <!-- SECTION GAUCHE -->
+    <div class="top-navbar-left">
+      <a routerLink="/service" class="top-link">Service</a>
+    </div>
+
+    <!-- SECTION CENTRE (vide pour l'instant) -->
+    <div class="top-navbar-center">
+      <!-- On peut ajouter des infos ici plus tard -->
+      <!-- Exemple : "Livraison gratuite dès 50€" -->
+    </div>
+
+    <!-- SECTION DROITE -->
+    <div class="top-navbar-right">
+      <!-- 
+        routerLink : Navigation Angular sans rechargement de page
+        class="top-link" : Style CSS pour ces liens
+      -->
+      <a routerLink="/contact" class="top-link">Nous contacter</a>
+      <a routerLink="/about" class="top-link">À propos</a>
+      <a routerLink="/faq" class="top-link">FAQ</a>
+    </div>
+
+  </div>
+</div>

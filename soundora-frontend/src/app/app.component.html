@@ -5,12 +5,23 @@
   
   C'est la structure HTML du composant racine.
   Elle affiche :
-  1. La navbar (navigation)
-  2. Le contenu dynamique via <router-outlet>
-  3. Un footer
+  1. La TOP navbar (petite barre en haut)
+  2. La navbar principale (catégories, recherche, etc.)
+  3. Le contenu dynamique via <router-outlet>
+  4. Un footer
 -->
 
-<!-- Navbar avec navigation, recherche, panier, auth -->
+<!-- 
+  TOP NAVBAR (nouvelle !)
+  Petite barre en haut avec liens utiles
+  [Service] [Nous contacter] [À propos] [FAQ]
+-->
+<app-top-navbar></app-top-navbar>
+
+<!-- 
+  NAVBAR PRINCIPALE
+  Logo, catégories, recherche, panier, connexion
+-->
 <app-navbar></app-navbar>
 
 <!-- Contenu principal -->

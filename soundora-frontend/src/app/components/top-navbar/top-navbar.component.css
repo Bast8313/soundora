@@ -1,0 +1,133 @@
+/* =====================================
+   TOP NAVBAR - Styles
+   ===================================== */
+
+/**
+ * CONTENEUR PRINCIPAL
+ * Barre horizontale en haut de la page
+ */
+.top-navbar {
+  /* Couleur de fond gris clair (comme Thomann) */
+  background-color: #f5f5f5;
+  
+  /* Bordure en bas pour séparer de la navbar principale */
+  border-bottom: 1px solid #e0e0e0;
+  
+  /* Padding vertical petit pour une barre compacte */
+  padding: 0.5rem 0;
+  
+  /* Taille de police réduite */
+  font-size: 0.85rem;
+}
+
+/**
+ * CONTAINER INTERNE
+ * Limite la largeur et centre le contenu
+ */
+.top-navbar-container {
+  /* Largeur maximale */
+  max-width: 1400px;
+  
+  /* Centre horizontalement */
+  margin: 0 auto;
+  
+  /* Espacement intérieur */
+  padding: 0 2rem;
+  
+  /* Flexbox pour aligner les 3 sections */
+  display: flex;
+  
+  /* Espace entre les sections */
+  justify-content: space-between;
+  
+  /* Alignement vertical centré */
+  align-items: center;
+}
+
+/**
+ * SECTION GAUCHE
+ */
+.top-navbar-left {
+  /* Flexbox pour aligner les liens */
+  display: flex;
+  gap: 1rem;
+}
+
+/**
+ * SECTION CENTRE
+ * Peut contenir des infos promotionnelles
+ */
+.top-navbar-center {
+  flex: 1;
+  text-align: center;
+  color: #666;
+}
+
+/**
+ * SECTION DROITE
+ */
+.top-navbar-right {
+  /* Flexbox pour aligner les liens */
+  display: flex;
+  
+  /* Espace entre les liens */
+  gap: 1.5rem;
+}
+
+/**
+ * STYLE DES LIENS
+ */
+.top-link {
+  /* Couleur du texte */
+  color: #555;
+  
+  /* Pas de soulignement */
+  text-decoration: none;
+  
+  /* Transition douce pour le hover */
+  transition: color 0.3s ease;
+  
+  /* Police légèrement plus petite */
+  font-size: 0.85rem;
+  
+  /* Poids normal */
+  font-weight: 400;
+}
+
+/**
+ * EFFET AU SURVOL
+ */
+.top-link:hover {
+  /* Change la couleur au survol */
+  color: #2c3e50;
+  
+  /* Légèrement souligné */
+  text-decoration: underline;
+}
+
+/* =====================================
+   RESPONSIVE - MOBILE
+   ===================================== */
+
+/**
+ * Sur petit écran (mobile)
+ */
+@media (max-width: 768px) {
+  .top-navbar-container {
+    /* Colonne au lieu de ligne */
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .top-navbar-left,
+  .top-navbar-right {
+    /* Centre les liens */
+    justify-content: center;
+  }
+
+  .top-navbar-center {
+    /* Masque la section centre sur mobile */
+    display: none;
+  }
+}
