@@ -63,6 +63,7 @@ router.get("/products/:slug", productSupabaseController.getProductBySlug);
 // Gestion des catégories de produits (guitares, basses, etc.)
 // ===================================
 router.get("/categories", categoryController.getAllCategories); // Liste toutes les catégories
+router.get("/categories/slug/:slug", categoryController.getCategoryBySlug); // Récupère une catégorie par slug
 router.get("/categories/:id", categoryController.getCategoryById); // Récupère une catégorie spécifique
 router.post("/categories", checkJwt, categoryController.createCategory); // Création d'une catégorie (protégé)
 router.put("/categories/:id", checkJwt, categoryController.updateCategory); // Mise à jour (protégé)
@@ -98,15 +99,25 @@ router.get("/orders/:order_id", checkJwt, orderController.getOrderDetails); // R
 // ROUTES STRIPE PAIEMENT
 // Gestion des paiements via Stripe Checkout
 // ===================================
-router.post("/stripe/create-checkout-session", checkSupabaseAuth, stripeController.createCheckoutSession); // Créer session Stripe (protégé)
-router.get("/stripe/session-status/:sessionId", stripeController.getSessionStatus); // Vérifier statut session
+router.post(
+  "/stripe/create-checkout-session",
+  checkSupabaseAuth,
+  stripeController.createCheckoutSession,
+); // Créer session Stripe (protégé)
+router.get(
+  "/stripe/session-status/:sessionId",
+  stripeController.getSessionStatus,
+); // Vérifier statut session
 
 // ===================================
 // ROUTES STRIPE TEST (POUR DÉVELOPPEMENT) - ACTIVÉES POUR TESTS
 // Routes simples pour tester Stripe sans authentification
 // ===================================
 router.post("/stripe/test-simple", stripeController.createTestSessionSimple); // Test session 10€ (non protégé)
-router.post("/stripe/test-complete", stripeController.createTestSessionComplete); // Test session 99€ (non protégé)
+router.post(
+  "/stripe/test-complete",
+  stripeController.createTestSessionComplete,
+); // Test session 99€ (non protégé)
 
 // ===================================
 // WEBHOOK STRIPE (SANS AUTHENTIFICATION)

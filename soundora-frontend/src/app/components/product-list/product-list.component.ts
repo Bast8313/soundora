@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, ActivatedRoute } from '@angular/router';
 import { ProductService, Product, ProductsResponse } from '../../services/product.service';
 
 @Component({
@@ -20,22 +20,47 @@ export class ProductListComponent implements OnInit {
   limit: number = 12;
   totalPages: number = 0;
   
+  // Filtres
+  selectedCategory: string = '';
+  selectedBrand: string = '';
+  searchQuery: string = '';
+  
   // État du chargement
   isLoading: boolean = false;
   error: string = '';
 
-  constructor(private productService: ProductService) { }
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
-    this.loadProducts(); // Charge les produits au démarrage
+    // Écoute les changements de paramètres de l'URL
+    this.route.queryParams.subscribe(params => {
+      this.selectedCategory = params['category'] || '';
+      this.selectedBrand = params['brand'] || '';
+      this.searchQuery = params['search'] || '';
+      this.currentPage = parseInt(params['page']) || 1;
+      this.loadProducts();
+    });
   }
 
-  // Charge les produits depuis l'API
+  // Charge les produits depuis l'API avec filtres
   loadProducts(): void {
     this.isLoading = true;
     this.error = '';
 
-    this.productService.getProducts(this.currentPage, this.limit).subscribe({
+    // Construit l'objet de filtres
+    const filters: any = {
+      page: this.currentPage,
+      limit: this.limit
+    };
+
+    if (this.selectedCategory) filters.category = this.selectedCategory;
+    if (this.selectedBrand) filters.brand = this.selectedBrand;
+    if (this.searchQuery) filters.search = this.searchQuery;
+
+    this.productService.getProducts(filters.page, filters.limit, filters).subscribe({
       next: (response: ProductsResponse) => {
         this.products = response.products;
         this.total = response.total;

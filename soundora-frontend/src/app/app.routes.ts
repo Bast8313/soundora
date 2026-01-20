@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 
 /**
  * =====================================
@@ -42,6 +43,15 @@ export const routes: Routes = [
     path: 'products',
     component: ProductListComponent,
     data: { title: 'Catalogue des produits' }
+  },
+
+  // ========================================
+  // ROUTE CATÉGORIES
+  // ========================================
+  {
+    path: 'categories',
+    component: CategoriesComponent,
+    data: { title: 'Nos catégories' }
   },
 
   // ========================================

@@ -1,0 +1,55 @@
+<div class="categories-page">
+  <div class="container">
+    <h1 class="page-title">Nos Catégories</h1>
+    <p class="page-subtitle">Explorez notre catalogue organisé par catégories</p>
+
+    <!-- Loader -->
+    <div *ngIf="isLoading" class="loading">
+      <div class="spinner"></div>
+      <p>Chargement des catégories...</p>
+    </div>
+
+    <!-- Message d'erreur -->
+    <div *ngIf="error" class="error-message">
+      <p>{{ error }}</p>
+    </div>
+
+    <!-- Grille de catégories -->
+    <div *ngIf="!isLoading && !error" class="categories-grid">
+      <div *ngFor="let category of categories" class="category-card">
+        <div class="category-header">
+          <h2 class="category-name">{{ category.name }}</h2>
+          <p class="category-description" *ngIf="category.description">
+            {{ category.description }}
+          </p>
+        </div>
+
+        <!-- Sous-catégories -->
+        <div *ngIf="category.subcategories && category.subcategories.length > 0" 
+             class="subcategories-list">
+          <h3 class="subcategories-title">Sous-catégories</h3>
+          <div class="subcategory-links">
+            <a *ngFor="let subcategory of category.subcategories"
+               [routerLink]="['/products']"
+               [queryParams]="{category: subcategory.slug}"
+               class="subcategory-link">
+              {{ subcategory.name }}
+            </a>
+          </div>
+        </div>
+
+        <!-- Bouton voir tous les produits -->
+        <a [routerLink]="['/products']" 
+           [queryParams]="{category: category.slug}" 
+           class="btn-view-products">
+          Voir tous les produits
+        </a>
+      </div>
+    </div>
+
+    <!-- Message si aucune catégorie -->
+    <div *ngIf="!isLoading && !error && categories.length === 0" class="no-categories">
+      <p>Aucune catégorie disponible pour le moment.</p>
+    </div>
+  </div>
+</div>

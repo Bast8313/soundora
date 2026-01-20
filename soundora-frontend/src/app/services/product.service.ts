@@ -28,7 +28,7 @@ export interface ProductsResponse {
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'http://localhost:3010/api/products'; // URL de l'API backend
+  private apiUrl = 'http://localhost:3000/api/products'; // URL de l'API backend
 
   constructor(private http: HttpClient) { }
 
@@ -40,7 +40,9 @@ export class ProductService {
 
     // Ajoute les filtres optionnels (catégorie, marque, recherche, etc.)
     if (filters) {
+      if (filters.category) params = params.set('category', filters.category);
       if (filters.category_id) params = params.set('category_id', filters.category_id);
+      if (filters.brand) params = params.set('brand', filters.brand);
       if (filters.brand_id) params = params.set('brand_id', filters.brand_id);
       if (filters.search) params = params.set('search', filters.search);
       if (filters.min_price) params = params.set('min_price', filters.min_price);
