@@ -27,19 +27,21 @@ export class BannerImagesComponent {
   // Tableau des images à afficher
   bannerImages = [
     {
-      // Pour l'instant, on utilise des placeholders
-      // Tu pourras remplacer par tes vraies images plus tard
-      url: 'https://via.placeholder.com/600x250/3498db/ffffff?text=Guitares',
+      // Images gratuites haute qualité depuis Unsplash
+      // Guitares électriques
+      url: 'https://images.unsplash.com/photo-1510915361894-db8b60106cb1?w=600&h=250&fit=crop&q=80',
       alt: 'Collection Guitares',
       link: '/products?category=guitares'
     },
     {
-      url: 'https://via.placeholder.com/600x250/e74c3c/ffffff?text=Basses',
+      // Basses électriques
+      url: 'https://images.unsplash.com/photo-1556449895-a33c9dba33dd?w=600&h=250&fit=crop&q=80',
       alt: 'Collection Basses',
       link: '/products?category=basses'
     },
     {
-      url: 'https://via.placeholder.com/600x250/27ae60/ffffff?text=Effets+%26+Amplis',
+      // Effets et amplis
+      url: 'https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=600&h=250&fit=crop&q=80',
       alt: 'Effets et Amplis',
       link: '/products?category=effets'
     }
