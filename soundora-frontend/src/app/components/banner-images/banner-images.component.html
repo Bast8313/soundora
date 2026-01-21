@@ -1,0 +1,25 @@
+<!-- 
+  =====================================
+  BANNER IMAGES - HTML
+  =====================================
+  
+  3 images cliquables affichées horizontalement
+-->
+
+<div class="banner-container">
+  
+  <!-- Boucle sur les 3 images -->
+  <a *ngFor="let banner of bannerImages" 
+     [routerLink]="banner.link"
+     routerLinkActive="active"
+     class="banner-item">
+    
+    <!-- Image -->
+    <img [src]="banner.url" 
+         [alt]="banner.alt" 
+         class="banner-image"
+         loading="lazy">
+    
+  </a>
+
+</div>

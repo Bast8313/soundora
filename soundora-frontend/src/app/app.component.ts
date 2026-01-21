@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
+import { BannerImagesComponent } from './components/banner-images/banner-images.component';
 
 /**
  * =====================================
@@ -30,7 +31,8 @@ import { TopNavbarComponent } from './components/top-navbar/top-navbar.component
     CommonModule,         // Directives Angular de base (*ngIf, *ngFor, etc.)
     RouterModule,         // Pour la navigation (routerLink, router-outlet)
     NavbarComponent,      // Notre navbar principale
-    TopNavbarComponent    // Notre top navbar (NOUVEAU !)
+    TopNavbarComponent,   // Notre top navbar
+    BannerImagesComponent // Bannières images (NOUVEAU !)
   ],
   
   templateUrl: './app.component.html',

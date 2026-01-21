@@ -1,0 +1,143 @@
+/* =====================================
+   BANNER IMAGES - Styles
+   ===================================== */
+
+/**
+ * CONTENEUR PRINCIPAL
+ * Affiche les 3 images côte à côte avec espaces
+ */
+.banner-container {
+  /* Largeur maximale */
+  max-width: 1400px;
+  
+  /* Centre horizontalement */
+  margin: 2rem auto;
+  
+  /* Espacement intérieur */
+  padding: 0 2rem;
+  
+  /* Flexbox pour alignement horizontal */
+  display: flex;
+  
+  /* Espace entre les images */
+  gap: 1.5rem;
+  
+  /* Alignement */
+  justify-content: space-between;
+  align-items: center;
+}
+
+/**
+ * ITEM INDIVIDUEL (lien cliquable)
+ */
+.banner-item {
+  /* Prend 1/3 de l'espace disponible */
+  flex: 1;
+  
+  /* Pas de soulignement */
+  text-decoration: none;
+  
+  /* Enlève les marges */
+  display: block;
+  
+  /* Coins arrondis */
+  border-radius: 12px;
+  
+  /* Débordement caché */
+  overflow: hidden;
+  
+  /* Ombre portée */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  /* Transition pour effet hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/**
+ * EFFET AU SURVOL
+ */
+.banner-item:hover {
+  /* Légère élévation */
+  transform: translateY(-5px);
+  
+  /* Ombre plus prononcée */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+/**
+ * IMAGE
+ */
+.banner-image {
+  /* Prend toute la largeur */
+  width: 100%;
+  
+  /* Hauteur fixe */
+  height: 250px;
+  
+  /* Remplit sans déformation */
+  object-fit: cover;
+  
+  /* Affichage bloc */
+  display: block;
+  
+  /* Transition pour zoom au survol */
+  transition: transform 0.3s ease;
+}
+
+/**
+ * ZOOM DE L'IMAGE AU SURVOL
+ */
+.banner-item:hover .banner-image {
+  transform: scale(1.05);
+}
+
+/* =====================================
+   RESPONSIVE - TABLETTE
+   ===================================== */
+
+/**
+ * Tablette (< 1024px)
+ * Images un peu plus petites
+ */
+@media (max-width: 1024px) {
+  .banner-container {
+    gap: 1rem;
+    padding: 0 1.5rem;
+  }
+
+  .banner-image {
+    height: 200px;
+  }
+}
+
+/* =====================================
+   RESPONSIVE - MOBILE
+   ===================================== */
+
+/**
+ * Mobile (< 768px)
+ * Images empilées verticalement
+ */
+@media (max-width: 768px) {
+  .banner-container {
+    /* Colonne au lieu de ligne */
+    flex-direction: column;
+    
+    /* Espacement vertical */
+    gap: 1.5rem;
+    
+    /* Réduction des marges */
+    margin: 1.5rem auto;
+    padding: 0 1rem;
+  }
+
+  .banner-item {
+    /* Prend toute la largeur */
+    width: 100%;
+  }
+
+  .banner-image {
+    /* Hauteur ajustée pour mobile */
+    height: 180px;
+  }
+}
