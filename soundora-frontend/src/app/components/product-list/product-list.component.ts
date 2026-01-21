@@ -35,12 +35,20 @@ export class ProductListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    console.log(' ProductListComponent initialisé');
     // Écoute les changements de paramètres de l'URL
     this.route.queryParams.subscribe(params => {
+      console.log('📝 QueryParams reçus:', params);
       this.selectedCategory = params['category'] || '';
       this.selectedBrand = params['brand'] || '';
       this.searchQuery = params['search'] || '';
       this.currentPage = parseInt(params['page']) || 1;
+      console.log('🔍 Filtres appliqués:', {
+        category: this.selectedCategory,
+        brand: this.selectedBrand,
+        search: this.searchQuery,
+        page: this.currentPage
+      });
       this.loadProducts();
     });
   }
@@ -60,16 +68,20 @@ export class ProductListComponent implements OnInit {
     if (this.selectedBrand) filters.brand = this.selectedBrand;
     if (this.searchQuery) filters.search = this.searchQuery;
 
+    console.log('🛒 Chargement des produits avec filtres:', filters);
+
     this.productService.getProducts(filters.page, filters.limit, filters).subscribe({
       next: (response: ProductsResponse) => {
-        this.products = response.products;
-        this.total = response.total;
+        console.log('✅ Produits reçus:', response);
+        // Le backend retourne {success: true, data: [...], pagination: {...}}
+        this.products = response.data || response.products || [];
+        this.total = response.pagination?.total || response.total || 0;
         this.totalPages = Math.ceil(this.total / this.limit);
         this.isLoading = false;
       },
       error: (err) => {
         this.error = 'Erreur lors du chargement des produits';
-        console.error('Erreur:', err);
+        console.error('❌ Erreur:', err);
         this.isLoading = false;
       }
     });

@@ -36,7 +36,7 @@ export const getAllProducts = async (req, res) => {
       .select(
         `
         *,                                 
-        categories!inner(id, name, slug),  
+        categories(id, name, slug),  
         brands(id, name, slug)             
       `
       )

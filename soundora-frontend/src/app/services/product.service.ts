@@ -18,10 +18,18 @@ export interface Product {
 
 // Interface pour la réponse paginée
 export interface ProductsResponse {
-  products: Product[];
-  total: number;
-  page: number;
-  limit: number;
+  success: boolean;
+  data: Product[];  // Le backend retourne "data" et non "products"
+  pagination: {
+    total: number;
+    page: number;
+    limit: number;
+    totalPages: number;
+  };
+  products?: Product[];  // Pour compatibilité
+  total?: number;        // Pour compatibilité
+  page?: number;
+  limit?: number;
 }
 
 @Injectable({

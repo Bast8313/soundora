@@ -7,12 +7,8 @@
    ===================================
 */
 .navbar {
-  /* DÉGRADÉ DE FOND :
-     - linear-gradient(135deg, ...) : Dégradé en diagonal
-     - #2c3e50 : Bleu marine foncé (couleur de départ)
-     - #34495e : Bleu marine légèrement plus clair (couleur de fin)
-     Résultat : Effet de profondeur moderne au lieu d'une couleur unie */
-  background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+  /* FOND NOIR */
+  background: #000000;
   
   /* OMBRE PORTÉE :
      - 0 : décalage horizontal (0 = centré)

@@ -35,11 +35,14 @@ export class NavbarComponent implements OnInit {
 
   // Charge les catégories depuis l'API
   loadCategories(): void {
+    console.log('Chargement des catégories...');
     this.categoryService.getAllCategories().subscribe({
       next: (response) => {
+        console.log('Réponse catégories:', response);
         if (response.success) {
           // Organise les catégories en structure hiérarchique
           this.categories = this.categoryService.organizeCategoriesHierarchy(response.data);
+          console.log('Catégories organisées:', this.categories);
         }
       },
       error: (error) => {
