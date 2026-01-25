@@ -112,13 +112,41 @@ export class ProductListComponent implements OnInit {
   }
 
   /**
-   * Génère une URL d'image unique pour chaque produit
-   * Utilise des placeholders colorés avec texte pour différencier visuellement chaque produit
+   * Mapping des produits vers leurs images locales
+   * Clé : modèle du produit (simplifié)
+   * Valeur : nom du fichier image
+   */
+  private productImageMap: { [key: string]: string } = {
+    'minilogue xd': 'korg-minilogue-xd.jpg',
+    'export exx': 'pearl-export-exx.jpg',
+    'fp-30x': 'roland-fp-30x.jpg',
+    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg',
+    'imperialstar': 'tama-imperialstar.jpg',
+    'p-125': 'yamaha-p-125.jpg',
+    'trbx304': 'yamaha-trbx304.jpg',
+    'a custom set': 'zildjian-a-custom.jpg',
+    'player jazz bass': 'fender-jazz-bass.jpg',
+    'player precision bass': 'fender-precision-bass.jpg',
+    'sr500e': 'ibanez-sr500e.jpg'
+  };
+
+  /**
+   * Génère une URL d'image pour chaque produit
+   * Priorité : 1) Images locales, 2) Images BDD, 3) Placeholder coloré
    * @param product - Le produit pour lequel générer l'image
-   * @returns URL de l'image (placeholder ou vraie image)
+   * @returns URL de l'image
    */
   getProductImage(product: any): string {
-    // Si le produit a une image valide, essaie de l'utiliser
+    // 1. Vérifie d'abord si une image locale existe pour ce produit
+    if (product.model) {
+      const modelKey = product.model.toLowerCase();
+      const localImage = this.productImageMap[modelKey];
+      if (localImage) {
+        return `assets/images/products/${localImage}`;
+      }
+    }
+
+    // 2. Si le produit a une image valide en BDD, l'utilise
     if (product.images && product.images.length > 0 && product.images[0]) {
       return product.images[0];
     }
@@ -126,14 +154,13 @@ export class ProductListComponent implements OnInit {
       return product.image_url;
     }
 
-    // Palette de couleurs pour les différentes catégories
+    // 3. Sinon, génère un placeholder coloré
     const colors = [
       'FF6B6B', 'F06292', 'BA68C8', '9575CD', '7986CB', '64B5F6',
       '4FC3F7', '4DD0E1', '4DB6AC', '81C784', 'AED581', 'DCE775',
       'FFD54F', 'FFB74D', 'FF8A65', 'A1887F', '90A4AE'
     ];
     
-    // Génère un index basé sur l'ID du produit
     let colorIndex = 0;
     if (product.id) {
       const hash = product.id.split('').reduce((acc: number, char: string) => 
@@ -144,7 +171,6 @@ export class ProductListComponent implements OnInit {
     const bgColor = colors[colorIndex];
     const textColor = 'FFFFFF';
     
-    // Détermine l'icône selon la catégorie
     let emoji = '🎵';
     if (product.category?.name) {
       const category = product.category.name.toLowerCase();
@@ -158,12 +184,9 @@ export class ProductListComponent implements OnInit {
       else if (category.includes('ampli')) emoji = '🔊';
     }
     
-    // Texte à afficher (marque + modèle)
     const brand = product.brand?.name || 'Soundora';
-    const model = product.model || product.name.substring(0, 15);
     const text = `${emoji} ${brand}`;
     
-    // Génère une image placeholder via API placeholder.com
     return `https://via.placeholder.com/400x400/${bgColor}/${textColor}?text=${encodeURIComponent(text)}`;
   }
 
