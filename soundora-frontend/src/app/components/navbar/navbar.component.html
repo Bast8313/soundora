@@ -55,20 +55,13 @@
 
     </ul>
 
-    <!-- Barre de recherche -->
-    <div class="navbar-search">
-      <input 
-        type="text" 
-        class="search-input" 
-        placeholder="Rechercher un produit..."
-        [(ngModel)]="searchQuery"
-        (keyup.enter)="onSearch()">
-      <button class="search-button" (click)="onSearch()">
-        🔍
-      </button>
-    </div>
-
-    <!-- Actions utilisateur (panier, connexion) -->
+    <!-- 
+      ===================
+      ACTIONS UTILISATEUR
+      ===================
+      Panier et authentification
+      (La barre de recherche a été déplacée dans un composant séparé)
+    -->
     <div class="navbar-actions">
       <!-- Panier avec badge compteur -->
       <a routerLink="/cart" class="navbar-icon-link" title="Panier">

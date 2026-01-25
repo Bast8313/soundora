@@ -38,12 +38,12 @@ export class ProductListComponent implements OnInit {
     console.log(' ProductListComponent initialisé');
     // Écoute les changements de paramètres de l'URL
     this.route.queryParams.subscribe(params => {
-      console.log('📝 QueryParams reçus:', params);
+      console.log(' QueryParams reçus:', params);
       this.selectedCategory = params['category'] || '';
       this.selectedBrand = params['brand'] || '';
       this.searchQuery = params['search'] || '';
       this.currentPage = parseInt(params['page']) || 1;
-      console.log('🔍 Filtres appliqués:', {
+      console.log(' Filtres appliqués:', {
         category: this.selectedCategory,
         brand: this.selectedBrand,
         search: this.searchQuery,
@@ -68,11 +68,11 @@ export class ProductListComponent implements OnInit {
     if (this.selectedBrand) filters.brand = this.selectedBrand;
     if (this.searchQuery) filters.search = this.searchQuery;
 
-    console.log('🛒 Chargement des produits avec filtres:', filters);
+    console.log('Chargement des produits avec filtres:', filters);
 
     this.productService.getProducts(filters.page, filters.limit, filters).subscribe({
       next: (response: ProductsResponse) => {
-        console.log('✅ Produits reçus:', response);
+        console.log('Produits reçus:', response);
         // Le backend retourne {success: true, data: [...], pagination: {...}}
         this.products = response.data || response.products || [];
         this.total = response.pagination?.total || response.total || 0;
@@ -81,7 +81,7 @@ export class ProductListComponent implements OnInit {
       },
       error: (err) => {
         this.error = 'Erreur lors du chargement des produits';
-        console.error('❌ Erreur:', err);
+        console.error('Erreur:', err);
         this.isLoading = false;
       }
     });
@@ -109,5 +109,71 @@ export class ProductListComponent implements OnInit {
   // Génère un tableau pour les numéros de page
   getPageNumbers(): number[] {
     return Array.from({ length: this.totalPages }, (_, i) => i + 1);
+  }
+
+  /**
+   * Génère une URL d'image unique pour chaque produit
+   * Utilise des placeholders colorés avec texte pour différencier visuellement chaque produit
+   * @param product - Le produit pour lequel générer l'image
+   * @returns URL de l'image (placeholder ou vraie image)
+   */
+  getProductImage(product: any): string {
+    // Si le produit a une image valide, essaie de l'utiliser
+    if (product.images && product.images.length > 0 && product.images[0]) {
+      return product.images[0];
+    }
+    if (product.image_url) {
+      return product.image_url;
+    }
+
+    // Palette de couleurs pour les différentes catégories
+    const colors = [
+      'FF6B6B', 'F06292', 'BA68C8', '9575CD', '7986CB', '64B5F6',
+      '4FC3F7', '4DD0E1', '4DB6AC', '81C784', 'AED581', 'DCE775',
+      'FFD54F', 'FFB74D', 'FF8A65', 'A1887F', '90A4AE'
+    ];
+    
+    // Génère un index basé sur l'ID du produit
+    let colorIndex = 0;
+    if (product.id) {
+      const hash = product.id.split('').reduce((acc: number, char: string) => 
+        acc + char.charCodeAt(0), 0);
+      colorIndex = hash % colors.length;
+    }
+    
+    const bgColor = colors[colorIndex];
+    const textColor = 'FFFFFF';
+    
+    // Détermine l'icône selon la catégorie
+    let emoji = '🎵';
+    if (product.category?.name) {
+      const category = product.category.name.toLowerCase();
+      if (category.includes('guitare') && !category.includes('basse')) emoji = '🎸';
+      else if (category.includes('basse')) emoji = '🎸';
+      else if (category.includes('batterie')) emoji = '🥁';
+      else if (category.includes('clavier')) emoji = '🎹';
+      else if (category.includes('piano')) emoji = '🎹';
+      else if (category.includes('microphone')) emoji = '🎤';
+      else if (category.includes('pédale')) emoji = '🎛️';
+      else if (category.includes('ampli')) emoji = '🔊';
+    }
+    
+    // Texte à afficher (marque + modèle)
+    const brand = product.brand?.name || 'Soundora';
+    const model = product.model || product.name.substring(0, 15);
+    const text = `${emoji} ${brand}`;
+    
+    // Génère une image placeholder via API placeholder.com
+    return `https://via.placeholder.com/400x400/${bgColor}/${textColor}?text=${encodeURIComponent(text)}`;
+  }
+
+  /**
+   * Gère les erreurs de chargement d'image
+   * Remplace l'image cassée par une image par défaut depuis Unsplash
+   * @param event - Événement d'erreur de l'image
+   */
+  onImageError(event: any): void {
+    // Remplace l'image cassée par une image par défaut d'instruments de musique
+    event.target.src = 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop';
   }
 }

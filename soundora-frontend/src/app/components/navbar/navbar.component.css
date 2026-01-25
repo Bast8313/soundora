@@ -183,13 +183,18 @@
 
 /* ===================================
    BARRE DE RECHERCHE
-   =================================== */
-.navbar-search {
+   =================================== 
+   
+   NOTE : La barre de recherche a été déplacée dans un composant séparé (SearchBarComponent)
+   Ces styles sont conservés mais commentés pour référence
+*/
+
+/* .navbar-search {
   display: flex;
   align-items: center;
-  flex-shrink: 0;  /* Ne rétrécit pas */
-  min-width: 200px;  /* Largeur minimale */
-  max-width: 350px;  /* Largeur maximale réduite */
+  flex-shrink: 0;
+  min-width: 200px;
+  max-width: 350px;
 }
 
 .search-input {
@@ -199,7 +204,7 @@
   border-radius: 25px 0 0 25px;
   font-size: 0.95rem;
   outline: none;
-  min-width: 120px;  /* Largeur minimale de l'input */
+  min-width: 120px;
 }
 
 .search-button {
@@ -214,7 +219,7 @@
 
 .search-button:hover {
   background-color: #2980b9;
-}
+} */
 
 /* ===================================
    ACTIONS UTILISATEUR
@@ -422,26 +427,14 @@
 
 /* ===================================
    RESPONSIVE - TABLETTE ET MOBILE
-   =================================== */
+   =================================== 
+   
+   IMPORTANT : Le breakpoint a été augmenté à 1150px pour éviter
+   que les éléments de la navbar ne se chevauchent sur écrans moyens
+*/
 
-/* Tablette (< 1024px) */
-@media (max-width: 1024px) {
-  .navbar-search {
-    max-width: 250px;
-  }
-
-  .navbar-menu {
-    gap: 1rem;
-  }
-
-  .navbar-link {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
-  }
-}
-
-/* Mobile (< 768px) */
-@media (max-width: 768px) {
+/* Tablette et écrans moyens (< 1150px) - Menu burger activé */
+@media (max-width: 1150px) {
   .navbar-container {
     flex-wrap: wrap;
     height: auto;
@@ -513,13 +506,13 @@
     color: rgba(255, 255, 255, 0.8);
   }
 
-  /* Recherche en dessous */
+  /* Recherche en dessous - DÉSACTIVÉ (déplacé dans SearchBarComponent)
   .navbar-search {
     order: 4;
     width: 100%;
     max-width: 100%;
     margin-top: 1rem;
-  }
+  } */
 
   /* Actions (panier, auth) */
   .navbar-actions {

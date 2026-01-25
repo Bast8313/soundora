@@ -1,0 +1,30 @@
+<!-- 
+  =====================================
+  BARRE DE RECHERCHE DÉDIÉE
+  =====================================
+  
+  Composant indépendant pour la recherche de produits
+  Positionné entre la navbar noire et les images bannières
+  
+  UTILISATION :
+  - Tapez votre recherche et appuyez sur ENTRÉE
+-->
+
+<div class="search-bar-container">
+  <div class="search-bar-wrapper">
+    
+    <!-- 
+      Champ de recherche
+      - [(ngModel)] : Liaison bidirectionnelle avec la variable searchQuery
+      - (keyup.enter) : Déclenche la recherche quand on appuie sur Entrée
+      - placeholder : Indique à l'utilisateur comment utiliser la recherche
+    -->
+    <input 
+      type="text" 
+      class="search-input" 
+      placeholder="Rechercher un produit, une marque, une catégorie... (Appuyez sur Entrée)"
+      [(ngModel)]="searchQuery"
+      (keyup.enter)="onSearch()">
+    
+  </div>
+</div>

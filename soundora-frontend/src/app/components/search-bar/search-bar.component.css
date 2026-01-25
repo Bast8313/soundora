@@ -1,0 +1,81 @@
+/* 
+  =====================================
+  STYLES BARRE DE RECHERCHE
+  =====================================
+  
+  Barre de recherche positionnée entre la navbar et les bannières
+  Design simple et épuré
+*/
+
+/* Conteneur principal */
+.search-bar-container {
+  background-color: #f5f5f5; /* Fond gris clair */
+  padding: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Wrapper pour centrer le contenu */
+.search-bar-wrapper {
+  max-width: 1200px; /* Largeur maximale */
+  margin: 0 auto; /* Centrage horizontal */
+  padding: 0 20px;
+}
+
+/* Champ de recherche */
+.search-input {
+  width: 100%; /* Prend toute la largeur */
+  padding: 14px 24px; /* Padding plus généreux */
+  font-size: 16px;
+  border: 2px solid #ddd;
+  border-radius: 30px; /* Coins arrondis des deux côtés */
+  outline: none;
+  transition: all 0.3s ease; /* Animation fluide */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Ombre légère */
+}
+
+/* Focus sur le champ de recherche */
+.search-input:focus {
+  border-color: #999; /* Gris au focus */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* Ombre légère */
+}
+
+/* Placeholder plus visible */
+.search-input::placeholder {
+  color: #999; /* Gris moyen */
+  font-style: italic;
+}
+
+/* 
+  =====================================
+  RESPONSIVE - Mobile
+  =====================================
+*/
+@media (max-width: 768px) {
+  /* Réduction du padding sur mobile */
+  .search-bar-container {
+    padding: 10px 0;
+  }
+
+  .search-bar-wrapper {
+    padding: 0 15px;
+  }
+
+  /* Champ de recherche plus petit sur mobile */
+  .search-input {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+/* Très petits écrans (téléphones) */
+@media (max-width: 480px) {
+  .search-input {
+    padding: 10px 16px;
+    font-size: 13px;
+  }
+  
+  /* Placeholder plus court sur très petits écrans */
+  .search-input::placeholder {
+    font-size: 12px;
+  }
+}

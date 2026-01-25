@@ -1,13 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormsModule } from '@angular/forms';
 import { CategoryService, Category } from '../../services/category.service';
 
+/**
+ * =====================================
+ * COMPOSANT NAVBAR PRINCIPALE
+ * =====================================
+ * 
+ * Contient :
+ * - Logo Soundora
+ * - Menu de catégories
+ * - Actions utilisateur (panier, connexion)
+ * - Menu burger pour mobile
+ * 
+ * Note : La barre de recherche a été déplacée dans un composant séparé (SearchBarComponent)
+ */
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule], // FormsModule retiré (plus de recherche ici)
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -15,11 +27,8 @@ export class NavbarComponent implements OnInit {
   // État du menu burger (ouvert/fermé)
   isMenuOpen: boolean = false;
 
-  // État du dropdown catégories ( ouvert / fermé )
+  // État du dropdown catégories (ouvert/fermé)
   isCategoriesDropdownOpen: boolean = false;
-
-  // Terme de recherche
-  searchQuery: string = '';
 
   // Nombre d'articles dans le panier (à remplacer par la vraie valeur du service)
   cartItemCount: number = 0;
@@ -75,14 +84,5 @@ export class NavbarComponent implements OnInit {
   // Ferme le dropdown des catégories (menu)
   closeCategoriesDropdown(): void {
     this.isCategoriesDropdownOpen = false;
-  }
-
-  // Gère la recherche
-  onSearch(): void {
-    if (this.searchQuery.trim()) {
-      console.log('Recherche:', this.searchQuery);
-      // TODO: Implémenter la navigation vers /products?search=...
-      this.searchQuery = '';
-    }
   }
 }

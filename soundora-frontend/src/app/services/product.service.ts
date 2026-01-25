@@ -10,7 +10,8 @@ export interface Product {
   description?: string;
   price: number;
   stock: number;
-  image_url?: string;
+  images?: string[];     // Tableau d'URLs d'images (Supabase)
+  image_url?: string;    // URL unique (compatibilité)
   category_id?: number;
   brand_id?: number;
   featured?: boolean;

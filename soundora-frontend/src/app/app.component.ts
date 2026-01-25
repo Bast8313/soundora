@@ -4,6 +4,7 @@ import { RouterModule } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { BannerImagesComponent } from './components/banner-images/banner-images.component';
+import { SearchBarComponent } from './components/search-bar/search-bar.component'; // NOUVEAU : Barre de recherche
 
 /**
  * =====================================
@@ -15,9 +16,11 @@ import { BannerImagesComponent } from './components/banner-images/banner-images.
  * 
  * STRUCTURE :
  * 1. Top Navbar (petite barre en haut)
- * 2. Navbar principale (catégories, recherche, etc.)
- * 3. <router-outlet> (le contenu change selon la page)
- * 4. Footer (pied de page)
+ * 2. Navbar principale (catégories, panier, etc.)
+ * 3. Barre de recherche (NOUVEAU - entre navbar et bannières)
+ * 4. Bannières images
+ * 5. <router-outlet> (le contenu change selon la page)
+ * 6. Footer (pied de page)
  * 
  * CYCLE DE VIE :
  * ngOnInit() : Appelé une fois au démarrage
@@ -32,7 +35,8 @@ import { BannerImagesComponent } from './components/banner-images/banner-images.
     RouterModule,         // Pour la navigation (routerLink, router-outlet)
     NavbarComponent,      // Notre navbar principale
     TopNavbarComponent,   // Notre top navbar
-    BannerImagesComponent // Bannières images (NOUVEAU !)
+    SearchBarComponent,   // Barre de recherche (NOUVEAU !)
+    BannerImagesComponent // Bannières images
   ],
   
   templateUrl: './app.component.html',

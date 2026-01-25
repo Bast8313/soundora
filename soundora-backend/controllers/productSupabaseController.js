@@ -36,23 +36,95 @@ export const getAllProducts = async (req, res) => {
       .select(
         `
         *,                                 
-        categories(id, name, slug),  
-        brands(id, name, slug)             
-      `
+        category:categories!category_id(id, name, slug),  
+        brand:brands!brand_id(id, name, slug)             
+      `,
+        { count: "exact" } // Compte le nombre total de résultats pour la pagination
       )
       .eq("is_active", true); // Seulement les produits actifs
 
     // APPLICATION DES FILTRES
     // Chaque filtre s'ajoute à la requête seulement s'il est fourni
 
+    // FILTRE PAR CATÉGORIE (via slug)
+    // Gère à la fois les catégories parentes et les sous-catégories
     if (category) {
-      // Filtre par catégorie: WHERE categories.slug = 'guitares'
-      query = query.eq("categories.slug", category);
+      console.log("🔍 Filtrage par catégorie (slug):", category);
+
+      // Récupère la catégorie à partir de son slug
+      const { data: categoryData, error: categoryError } = await supabase
+        .from("categories")
+        .select("id, parent_id")
+        .eq("slug", category)
+        .single();
+
+      if (categoryError) {
+        console.error("❌ Erreur récupération catégorie:", categoryError);
+      } else if (categoryData) {
+        console.log("✅ Catégorie trouvée, ID:", categoryData.id);
+        
+        // Si c'est une catégorie parente (parent_id = null), on récupère toutes ses sous-catégories
+        if (categoryData.parent_id === null) {
+          console.log("📁 Catégorie parente détectée, recherche des sous-catégories...");
+          
+          // Récupère tous les IDs des sous-catégories
+          const { data: subCategories } = await supabase
+            .from("categories")
+            .select("id")
+            .eq("parent_id", categoryData.id);
+          
+          if (subCategories && subCategories.length > 0) {
+            const subCategoryIds = subCategories.map(sub => sub.id);
+            console.log(`✅ ${subCategoryIds.length} sous-catégories trouvées`);
+            
+            // Filtre par la catégorie parente OU ses sous-catégories
+            query = query.or(`category_id.eq.${categoryData.id},category_id.in.(${subCategoryIds.join(',')})`);
+          } else {
+            // Pas de sous-catégories, filtre juste par la catégorie elle-même
+            query = query.eq("category_id", categoryData.id);
+          }
+        } else {
+          // C'est une sous-catégorie, filtre directement
+          console.log("📄 Sous-catégorie, filtrage direct");
+          query = query.eq("category_id", categoryData.id);
+        }
+      } else {
+        // Si la catégorie n'existe pas, on retourne 0 résultat
+        console.log("⚠️ Catégorie non trouvée");
+        return res.json({
+          success: true,
+          data: [],
+          pagination: {
+            currentPage: parseInt(page),
+            totalPages: 0,
+            total: 0,
+            totalItems: 0,
+            itemsPerPage: parseInt(limit),
+            hasNextPage: false,
+            hasPrevPage: false,
+          },
+        });
+      }
     }
 
+    // FILTRE PAR MARQUE (via slug)
     if (brand) {
-      // Filtre par marque: WHERE brands.slug = 'fender'
-      query = query.eq("brands.slug", brand);
+      console.log("🔍 Filtrage par marque (slug):", brand);
+
+      // Récupère l'ID de la marque à partir de son slug
+      const { data: brandData, error: brandError } = await supabase
+        .from("brands")
+        .select("id")
+        .eq("slug", brand)
+        .single();
+
+      if (brandError) {
+        console.error("❌ Erreur récupération marque:", brandError);
+      } else if (brandData) {
+        console.log("✅ Marque trouvée, ID:", brandData.id);
+        // Filtre les produits par brand_id
+        query = query.eq("brand_id", brandData.id);
+      }
     }
 
     if (min_price) {
@@ -91,7 +163,7 @@ export const getAllProducts = async (req, res) => {
 
     // GESTION DES ERREURS
     if (error) {
-      console.error("Erreur Supabase:", error);
+      console.error("❌ Erreur Supabase:", error);
       return res.status(500).json({
         success: false,
         message: "Erreur lors de la récupération des produits",
@@ -99,17 +171,20 @@ export const getAllProducts = async (req, res) => {
       });
     }
 
+    console.log(`✅ ${count} produits trouvés (page ${page})`);
+
     // CALCUL DES MÉTADONNÉES DE PAGINATION
-    const totalPages = Math.ceil(count / limit);
+    const totalPages = Math.ceil((count || 0) / limit);
 
     // RÉPONSE AVEC DONNÉES ET PAGINATION
     res.json({
       success: true,
-      data: products,
+      data: products || [],
       pagination: {
         currentPage: parseInt(page), // Page actuelle
         totalPages, // Nombre total de pages
-        totalItems: count, // Nombre total d'éléments
+        total: count || 0, // AJOUT : total pour compatibilité frontend
+        totalItems: count || 0, // Nombre total d'éléments
         itemsPerPage: parseInt(limit), // Éléments par page
         hasNextPage: page < totalPages, // Y a-t-il une page suivante ?
         hasPrevPage: page > 1, // Y a-t-il une page précédente ?
@@ -146,7 +221,7 @@ export const getProductBySlug = async (req, res) => {
         *,
         categories!inner(id, name, slug, parent_id),
         brands(id, name, slug, description, logo_url)
-      `
+      `,
       )
       .eq("slug", slug) // WHERE slug = 'gibson-les-paul-standard'
       .eq("is_active", true) // AND is_active = true
@@ -213,7 +288,7 @@ export const getFeaturedProducts = async (req, res) => {
         is_featured,
         categories!inner(id, name, slug),
         brands(id, name, slug)
-      `
+      `,
       )
       .eq("is_active", true) // WHERE is_active = true
       .eq("is_featured", true) // AND is_featured = true
@@ -224,7 +299,7 @@ export const getFeaturedProducts = async (req, res) => {
     if (error) {
       console.error(
         "Erreur lors de la récupération des produits featured:",
-        error
+        error,
       );
       return res.status(500).json({
         success: false,
@@ -279,14 +354,14 @@ export const searchProducts = async (req, res) => {
         images,                       // Images du produit
         categories!inner(name, slug), // Infos catégorie (obligatoire)
         brands(name, slug)            // Infos marque (optionnel)
-      `
+      `,
       )
       .eq("is_active", true) // WHERE is_active = true
       .or(
         // AND (
         `name.ilike.%${query}%,` + //   name ILIKE '%guitare%'
           ` short_description.ilike.%${query}%,` + //   OR short_description ILIKE '%guitare%'
-          ` model.ilike.%${query}%` //   OR model ILIKE '%guitare%'
+          ` model.ilike.%${query}%`, //   OR model ILIKE '%guitare%'
       ) // )
       .limit(limit); // LIMIT X (défini par le paramètre)
 

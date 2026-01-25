@@ -21,8 +21,18 @@
     <div class="product-card" *ngFor="let product of products">
       <!-- Image du produit -->
       <div class="product-image">
-        <img [src]="product.image_url || 'assets/no-image.png'" 
-             [alt]="product.name">
+        <!-- 
+          Gestion intelligente des images :
+          1. Utilise getProductImage() pour générer automatiquement une image basée sur :
+             - La marque du produit (ex: Fender, Gibson)
+             - La catégorie (guitare, basse, batterie, etc.)
+          2. Si erreur de chargement, affiche l'image par défaut via (error)
+          3. Images libres de droit depuis Unsplash
+        -->
+        <img [src]="getProductImage(product)" 
+             [alt]="product.name"
+             loading="lazy"
+             (error)="onImageError($event)">
         <span class="badge featured" *ngIf="product.featured">⭐ Vedette</span>
       </div>
 
