@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Images Amplis</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .image-test { margin: 20px 0; padding: 10px; border: 1px solid #ddd; }
+        img { max-width: 200px; height: auto; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>🔊 Test des Images d'Amplis</h1>
+    
+    <div class="image-test">
+        <h3>Ampeg SVT-7 Pro</h3>
+        <img src="/assets/images/products/ampeg-svt-7-pro.jpg" 
+             alt="Ampeg"
+             onerror="this.parentElement.querySelector('.status').textContent='❌ Image non chargée'; this.parentElement.querySelector('.status').className='error status';"
+             onload="this.parentElement.querySelector('.status').textContent='✅ Image chargée'; this.parentElement.querySelector('.status').className='success status';">
+        <p class="status">⏳ Chargement...</p>
+    </div>
+
+    <div class="image-test">
+        <h3>Marshall DSL40CR</h3>
+        <img src="/assets/images/products/marshall-dsl40cr.jpg" 
+             alt="Marshall"
+             onerror="this.parentElement.querySelector('.status').textContent='❌ Image non chargée'; this.parentElement.querySelector('.status').className='error status';"
+             onload="this.parentElement.querySelector('.status').textContent='✅ Image chargée'; this.parentElement.querySelector('.status').className='success status';">
+        <p class="status">⏳ Chargement...</p>
+    </div>
+
+    <div class="image-test">
+        <h3>Fender Blues Junior IV</h3>
+        <img src="/assets/images/products/fender-blues-junior-iv.jpg" 
+             alt="Fender"
+             onerror="this.parentElement.querySelector('.status').textContent='❌ Image non chargée'; this.parentElement.querySelector('.status').className='error status';"
+             onload="this.parentElement.querySelector('.status').textContent='✅ Image chargée'; this.parentElement.querySelector('.status').className='success status';">
+        <p class="status">⏳ Chargement...</p>
+    </div>
+
+    <div class="image-test">
+        <h3>Vox AC30C2</h3>
+        <img src="/assets/images/products/vox-ac30c2.jpg" 
+             alt="Vox"
+             onerror="this.parentElement.querySelector('.status').textContent='❌ Image non chargée'; this.parentElement.querySelector('.status').className='error status';"
+             onload="this.parentElement.querySelector('.status').textContent='✅ Image chargée'; this.parentElement.querySelector('.status').className='success status';">
+        <p class="status">⏳ Chargement...</p>
+    </div>
+
+    <hr>
+    <h2>Instructions</h2>
+    <p>Si les images s'affichent ici, le problème vient du composant Angular.</p>
+    <p>Si les images ne s'affichent pas, vérifier que le serveur Angular sert bien le dossier assets/</p>
+</body>
+</html>

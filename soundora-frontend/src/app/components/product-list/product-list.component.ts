@@ -117,17 +117,49 @@ export class ProductListComponent implements OnInit {
    * Valeur : nom du fichier image
    */
   private productImageMap: { [key: string]: string } = {
+    // Claviers et synthés
     'minilogue xd': 'korg-minilogue-xd.jpg',
-    'export exx': 'pearl-export-exx.jpg',
     'fp-30x': 'roland-fp-30x.jpg',
-    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg',
-    'imperialstar': 'tama-imperialstar.jpg',
     'p-125': 'yamaha-p-125.jpg',
-    'trbx304': 'yamaha-trbx304.jpg',
+    
+    // Batteries
+    'export exx': 'pearl-export-exx.jpg',
+    'imperialstar': 'tama-imperialstar.jpg',
+    
+    // Cymbales
     'a custom set': 'zildjian-a-custom.jpg',
+    
+    // Amplis guitare
+    'svt-7 pro': 'ampeg-svt-7-pro.jpg',
+    'blues junior iv': 'fender-blues-junior-iv.jpg',
+    'rumble 500': 'fender-rumble-500.jpg',
+    'dsl40cr': 'marshall-dsl40cr.jpg',
+    'jcm800 2203': 'marshall-jcm800-2203.jpg',
+    'rockerverb 50 mkiii': 'orange-rockerverb-50-mkiii.jpg',
+    'rocker 30': 'orange-rocker-30.jpg', // Ajout si existe dans la BDD
+    'ac30c2': 'vox-ac30c2.jpg',
+    
+    // Pédales d'effets
+    'ds-1': 'boss-ds1-distortion.jpg',
+    'big muff pi': 'electro-harmonix-big-muff-pi.jpg',
+    'phase 90': 'mxr-phase-90.jpg',
+    'hall of fame 2': 'tc-electronic-hall-of-fame-2.jpg',
+    
+    // Basses
+    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg',
+    'trbx304': 'yamaha-trbx304.jpg',
     'player jazz bass': 'fender-jazz-bass.jpg',
     'player precision bass': 'fender-precision-bass.jpg',
-    'sr500e': 'ibanez-sr500e.jpg'
+    'sr500e': 'ibanez-sr500e.jpg',
+    
+    // Guitares
+    'player jazzmaster': 'fender-jazzmaster.jpg',
+    'explorer studio': 'gibson-explorer.jpg',
+    'se custom 24': 'prs-se-custom-24.jpg',
+    'classic vibe 70s stratocaster': 'squier-stratocaster-70s.jpg',
+    'rg550': 'ibanez-rg550.jpg',
+    'gibson-les paul standard 50s': 'gibson-les-paul-50s.jpg',
+    'epiphone-les paul standard 50s': 'epiphone-les-paul-50s.jpg'
   };
 
   /**
@@ -140,21 +172,33 @@ export class ProductListComponent implements OnInit {
     // 1. Vérifie d'abord si une image locale existe pour ce produit
     if (product.model) {
       const modelKey = product.model.toLowerCase();
+      
+      // Gère le cas spécial des Les Paul (Gibson vs Epiphone)
+      if (modelKey === 'les paul standard 50s' && product.brand?.name) {
+        const brandKey = `${product.brand.name.toLowerCase()}-${modelKey}`;
+        const localImage = this.productImageMap[brandKey];
+        if (localImage) {
+          console.log(`✅ Image locale trouvée pour ${product.name}: ${localImage}`);
+          return `assets/images/products/${localImage}`;
+        }
+      }
+      
+      // Recherche normale par modèle
       const localImage = this.productImageMap[modelKey];
       if (localImage) {
+        console.log(`✅ Image locale trouvée pour ${product.name}: ${localImage}`);
         return `assets/images/products/${localImage}`;
       }
     }
 
     // 2. Si le produit a une image valide en BDD, l'utilise
     if (product.images && product.images.length > 0 && product.images[0]) {
+      console.log(`⚠️ Utilisation image BDD pour ${product.name}: ${product.images[0]}`);
       return product.images[0];
-    }
-    if (product.image_url) {
-      return product.image_url;
     }
 
     // 3. Sinon, génère un placeholder coloré
+    console.log(`📦 Génération placeholder pour ${product.name}`);
     const colors = [
       'FF6B6B', 'F06292', 'BA68C8', '9575CD', '7986CB', '64B5F6',
       '4FC3F7', '4DD0E1', '4DB6AC', '81C784', 'AED581', 'DCE775',
