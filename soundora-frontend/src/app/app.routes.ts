@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { CategoriesComponent } from './components/categories/categories.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 /**
  * =====================================
@@ -52,6 +54,20 @@ export const routes: Routes = [
     path: 'categories',
     component: CategoriesComponent,
     data: { title: 'Nos catégories' }
+  },
+
+  // ========================================
+  // ROUTES AUTHENTIFICATION
+  // ========================================
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: { title: 'Connexion' }
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+    data: { title: 'Inscription' }
   },
 
   // ========================================

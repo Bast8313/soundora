@@ -1,0 +1,359 @@
+/* ================================= */
+/* CONTENEUR PRINCIPAL */
+/* ================================= */
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 40px 20px;
+}
+
+/* ================================= */
+/* CARTE D'INSCRIPTION */
+/* ================================= */
+.register-card {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 100%;
+  padding: 40px;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ================================= */
+/* EN-TÊTE */
+/* ================================= */
+.register-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.register-header h1 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0 0 8px 0;
+}
+
+.register-header p {
+  font-size: 14px;
+  color: #718096;
+  margin: 0;
+}
+
+/* ================================= */
+/* MESSAGE D'ERREUR */
+/* ================================= */
+.error-message {
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 8px;
+  padding: 12px 16px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #c53030;
+  animation: shake 0.5s ease-in-out;
+}
+
+.error-message svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-10px); }
+  75% { transform: translateX(10px); }
+}
+
+/* ================================= */
+/* FORMULAIRE */
+/* ================================= */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2d3748;
+}
+
+.form-group label .required {
+  color: #e53e3e;
+}
+
+.form-group input {
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.form-group input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group input:disabled {
+  background-color: #f7fafc;
+  cursor: not-allowed;
+}
+
+/* ================================= */
+/* LIGNE DE FORMULAIRE (2 CHAMPS) */
+/* ================================= */
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+/* ================================= */
+/* CHAMP MOT DE PASSE AVEC TOGGLE */
+/* ================================= */
+.password-input-wrapper {
+  position: relative;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  padding-right: 45px;
+}
+
+.toggle-password {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  color: #718096;
+  transition: color 0.2s ease;
+}
+
+.toggle-password:hover {
+  color: #4a5568;
+}
+
+.toggle-password svg {
+  width: 20px;
+  height: 20px;
+}
+
+.toggle-password:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ================================= */
+/* EXIGENCES DU MOT DE PASSE */
+/* ================================= */
+.password-requirements {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.requirement {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #a0aec0;
+  transition: color 0.2s ease;
+}
+
+.requirement svg {
+  width: 14px;
+  height: 14px;
+  opacity: 0.3;
+  transition: opacity 0.2s ease;
+}
+
+.requirement.valid {
+  color: #38a169;
+}
+
+.requirement.valid svg {
+  opacity: 1;
+}
+
+/* ================================= */
+/* MESSAGE DE NON-CORRESPONDANCE */
+/* ================================= */
+.password-mismatch {
+  font-size: 12px;
+  color: #e53e3e;
+  margin-top: 4px;
+}
+
+/* ================================= */
+/* NOTE CHAMPS REQUIS */
+/* ================================= */
+.required-note {
+  font-size: 12px;
+  color: #718096;
+  text-align: center;
+  margin: 0;
+}
+
+.required-note .required {
+  color: #e53e3e;
+}
+
+/* ================================= */
+/* BOUTON DE SOUMISSION */
+/* ================================= */
+.submit-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.submit-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+
+.submit-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.submit-btn .loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+  width: 20px;
+  height: 20px;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ================================= */
+/* SÉPARATEUR */
+/* ================================= */
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 30px 0 20px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.divider span {
+  padding: 0 15px;
+  color: #a0aec0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ================================= */
+/* LIEN VERS CONNEXION */
+/* ================================= */
+.login-link {
+  text-align: center;
+}
+
+.login-link p {
+  font-size: 14px;
+  color: #4a5568;
+  margin: 0 0 10px 0;
+}
+
+.login-btn {
+  background: white;
+  color: #667eea;
+  border: 2px solid #667eea;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+}
+
+.login-btn:hover {
+  background: #667eea;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+/* ================================= */
+/* RESPONSIVE */
+/* ================================= */
+@media (max-width: 600px) {
+  .register-card {
+    padding: 30px 20px;
+  }
+
+  .register-header h1 {
+    font-size: 24px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .password-requirements {
+    grid-template-columns: 1fr;
+  }
+}

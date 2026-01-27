@@ -1,0 +1,193 @@
+<!-- ================================= -->
+<!-- CONTENEUR PRINCIPAL REGISTER -->
+<!-- ================================= -->
+<div class="register-container">
+  <div class="register-card">
+    
+    <!-- EN-TÊTE -->
+    <div class="register-header">
+      <h1>Créer un compte</h1>
+      <p>Rejoignez Soundora et profitez de tous nos avantages</p>
+    </div>
+
+    <!-- MESSAGE D'ERREUR -->
+    <div *ngIf="errorMessage" class="error-message">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+      </svg>
+      <span>{{ errorMessage }}</span>
+    </div>
+
+    <!-- FORMULAIRE D'INSCRIPTION -->
+    <form (ngSubmit)="onSubmit()" class="register-form">
+      
+      <!-- CHAMP EMAIL -->
+      <div class="form-group">
+        <label for="email">Email <span class="required">*</span></label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email"
+          [(ngModel)]="email"
+          placeholder="votre@email.com"
+          required
+          [disabled]="loading"
+        />
+      </div>
+
+      <!-- CHAMPS PRÉNOM ET NOM -->
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">Prénom</label>
+          <input 
+            type="text" 
+            id="firstName" 
+            name="firstName"
+            [(ngModel)]="firstName"
+            placeholder="John"
+            [disabled]="loading"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="lastName">Nom</label>
+          <input 
+            type="text" 
+            id="lastName" 
+            name="lastName"
+            [(ngModel)]="lastName"
+            placeholder="Doe"
+            [disabled]="loading"
+          />
+        </div>
+      </div>
+
+      <!-- CHAMP MOT DE PASSE -->
+      <div class="form-group">
+        <label for="password">Mot de passe <span class="required">*</span></label>
+        <div class="password-input-wrapper">
+          <input 
+            [type]="showPassword ? 'text' : 'password'" 
+            id="password" 
+            name="password"
+            [(ngModel)]="password"
+            placeholder="••••••••"
+            required
+            [disabled]="loading"
+            (input)="validatePassword()"
+          />
+          <button 
+            type="button" 
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            [disabled]="loading"
+          >
+            <svg *ngIf="!showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <svg *ngIf="showPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+            </svg>
+          </button>
+        </div>
+        
+        <!-- INDICATEURS DE VALIDATION DU MOT DE PASSE -->
+        <div *ngIf="password.length > 0" class="password-requirements">
+          <div class="requirement" [class.valid]="hasMinLength()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            <span>Au moins 6 caractères</span>
+          </div>
+          <div class="requirement" [class.valid]="hasUpperCase()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            <span>Une majuscule</span>
+          </div>
+          <div class="requirement" [class.valid]="hasLowerCase()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            <span>Une minuscule</span>
+          </div>
+          <div class="requirement" [class.valid]="hasNumber()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+            </svg>
+            <span>Un chiffre</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAMP CONFIRMATION MOT DE PASSE -->
+      <div class="form-group">
+        <label for="confirmPassword">Confirmer le mot de passe <span class="required">*</span></label>
+        <div class="password-input-wrapper">
+          <input 
+            [type]="showConfirmPassword ? 'text' : 'password'" 
+            id="confirmPassword" 
+            name="confirmPassword"
+            [(ngModel)]="confirmPassword"
+            placeholder="••••••••"
+            required
+            [disabled]="loading"
+          />
+          <button 
+            type="button" 
+            class="toggle-password"
+            (click)="toggleConfirmPasswordVisibility()"
+            [disabled]="loading"
+          >
+            <svg *ngIf="!showConfirmPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            <svg *ngIf="showConfirmPassword" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.98 8.223A10.477 10.477 0 001.934 12C3.226 16.338 7.244 19.5 12 19.5c.993 0 1.953-.138 2.863-.395M6.228 6.228A10.45 10.45 0 0112 4.5c4.756 0 8.773 3.162 10.065 7.498a10.523 10.523 0 01-4.293 5.774M6.228 6.228L3 3m3.228 3.228l3.65 3.65m7.894 7.894L21 21m-3.228-3.228l-3.65-3.65m0 0a3 3 0 10-4.243-4.243m4.242 4.242L9.88 9.88" />
+            </svg>
+          </button>
+        </div>
+        <div *ngIf="confirmPassword.length > 0 && password !== confirmPassword" class="password-mismatch">
+          Les mots de passe ne correspondent pas
+        </div>
+      </div>
+
+      <!-- BOUTON DE SOUMISSION -->
+      <button 
+        type="submit" 
+        class="submit-btn"
+        [disabled]="!canSubmit()"
+      >
+        <span *ngIf="!loading">Créer mon compte</span>
+        <span *ngIf="loading" class="loader">
+          <svg class="spinner" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+          </svg>
+          Création en cours...
+        </span>
+      </button>
+
+      <!-- NOTE CHAMPS REQUIS -->
+      <p class="required-note">
+        <span class="required">*</span> Champs obligatoires
+      </p>
+    </form>
+
+    <!-- SÉPARATEUR -->
+    <div class="divider">
+      <span>ou</span>
+    </div>
+
+    <!-- LIEN VERS CONNEXION -->
+    <div class="login-link">
+      <p>Vous avez déjà un compte ?</p>
+      <button type="button" class="login-btn" (click)="goToLogin()">
+        Se connecter
+      </button>
+    </div>
+
+  </div>
+</div>
