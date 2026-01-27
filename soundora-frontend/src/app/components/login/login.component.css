@@ -8,6 +8,28 @@
   justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 20px;
+  position: relative;
+}
+
+/* ================================= */
+/* BOUTON RETOUR */
+/* ================================= */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* ================================= */
@@ -68,19 +90,12 @@
   align-items: center;
   gap: 10px;
   color: #c53030;
-  animation: shake 0.5s ease-in-out;
 }
 
 .error-message svg {
   width: 20px;
   height: 20px;
   flex-shrink: 0;
-}
-
-@keyframes shake {
-  0%, 100% { transform: translateX(0); }
-  25% { transform: translateX(-10px); }
-  75% { transform: translateX(10px); }
 }
 
 /* ================================= */
@@ -186,7 +201,7 @@
 /* BOUTON DE SOUMISSION */
 /* ================================= */
 .submit-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
   color: white;
   border: none;
   border-radius: 8px;

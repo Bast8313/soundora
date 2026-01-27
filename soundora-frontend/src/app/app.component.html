@@ -11,35 +11,38 @@
   4. Un footer
 -->
 
-<!-- 
-  TOP NAVBAR (nouvelle !)
-  Petite barre en haut avec liens utiles
-  [Service] [Nous contacter] [À propos] [FAQ]
--->
-<app-top-navbar></app-top-navbar>
+<!-- Layout complet (masqué sur login/register) -->
+<ng-container *ngIf="showLayout">
+  <!-- 
+    TOP NAVBAR (nouvelle !)
+    Petite barre en haut avec liens utiles
+    [Service] [Nous contacter] [À propos] [FAQ]
+  -->
+  <app-top-navbar></app-top-navbar>
 
-<!-- 
-  NAVBAR PRINCIPALE
-  Logo, catégories, panier, connexion
-  (La recherche a été déplacée en dessous)
--->
-<app-navbar></app-navbar>
+  <!-- 
+    NAVBAR PRINCIPALE
+    Logo, catégories, panier, connexion
+    (La recherche a été déplacée en dessous)
+  -->
+  <app-navbar></app-navbar>
 
-<!-- 
-  BARRE DE RECHERCHE DÉDIÉE (NOUVEAU !)
-  Positionnée entre la navbar noire et les images
-  Permet une meilleure visibilité en mode réduit
--->
-<app-search-bar></app-search-bar>
+  <!-- 
+    BARRE DE RECHERCHE DÉDIÉE (NOUVEAU !)
+    Positionnée entre la navbar noire et les images
+    Permet une meilleure visibilité en mode réduit
+  -->
+  <app-search-bar></app-search-bar>
 
-<!-- 
-  BANNIÈRES IMAGES
-  3 images horizontales cliquables
--->
-<app-banner-images></app-banner-images>
+  <!-- 
+    BANNIÈRES IMAGES
+    3 images horizontales cliquables
+  -->
+  <app-banner-images></app-banner-images>
+</ng-container>
 
 <!-- Contenu principal -->
-<main style="min-height: calc(100vh - 200px);">
+<main [style.min-height]="showLayout ? 'calc(100vh - 200px)' : '100vh'">
   <!--
     <router-outlet>
     Élément spécial Angular qui affiche le composant
@@ -55,8 +58,8 @@
   <router-outlet></router-outlet>
 </main>
 
-<!-- Pied de page simple -->
-<footer style="background: #000000; color: white; text-align: center; padding: 2rem; margin-top: 4rem; box-shadow: 0 -4px 12px rgba(0,0,0,0.1);">
+<!-- Footer (masqué sur login/register) -->
+<footer *ngIf="showLayout" style="background: #000000; color: white; text-align: center; padding: 2rem; margin-top: 4rem; box-shadow: 0 -4px 12px rgba(0,0,0,0.1);">
   <p style="font-weight: 500;">&copy; 2026 Soundora. Tous droits réservés.</p>
   <p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.9;">🎸 Votre plateforme de vente d'instruments de musique</p>
 </footer>

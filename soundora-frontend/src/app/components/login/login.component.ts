@@ -97,4 +97,11 @@ export class LoginComponent {
   goToRegister(): void {
     this.router.navigate(['/register']);
   }
+
+  /**
+   * Retour à la page précédente
+   */
+  goBack(): void {
+    this.router.navigate(['/']);
+  }
 }

@@ -8,6 +8,28 @@
   justify-content: center;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   padding: 40px 20px;
+  position: relative;
+}
+
+/* ================================= */
+/* BOUTON RETOUR */
+/* ================================= */
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* ================================= */
@@ -68,7 +90,6 @@
   align-items: center;
   gap: 10px;
   color: #c53030;
-  animation: shake 0.5s ease-in-out;
 }
 
 .error-message svg {
@@ -236,7 +257,7 @@
 /* BOUTON DE SOUMISSION */
 /* ================================= */
 .submit-btn {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
   color: white;
   border: none;
   border-radius: 8px;
@@ -250,7 +271,7 @@
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+  box-shadow: 0 10px 20px rgba(72, 187, 120, 0.3);
 }
 
 .submit-btn:active:not(:disabled) {
@@ -259,7 +280,7 @@
 
 .submit-btn:disabled {
   opacity: 0.6;
-  cursor: not-allowed;
+  cursor: default;
 }
 
 .submit-btn .loader {

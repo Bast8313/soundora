@@ -48,21 +48,21 @@ export class RegisterComponent {
   // Liées aux champs via [(ngModel)] = binding bidirectionnel
   // TS ↔ HTML : si l'utilisateur tape dans l'input, la propriété est mise à jour
   
-  email: string = '';                         // Email de l'utilisateur
-  password: string = '';                      // Mot de passe choisi
-  confirmPassword: string = '';               // Confirmation du mot de passe
-  firstName: string = '';                     // Prénom (optionnel)
-  lastName: string = '';                      // Nom (optionnel)
+  email = '';                                 // Email de l'utilisateur
+  password = '';                              // Mot de passe choisi
+  confirmPassword = '';                       // Confirmation du mot de passe
+  firstName = '';                             // Prénom (optionnel)
+  lastName = '';                              // Nom (optionnel)
   
   // =========================================
   // PROPRIÉTÉS : ÉTATS DU COMPOSANT
   // =========================================
   // Ces booléens contrôlent l'affichage d'éléments dans le template
   
-  loading: boolean = false;                   // true = requête en cours (affiche spinner)
-  errorMessage: string = '';                  // Message d'erreur à afficher
-  showPassword: boolean = false;              // true = affiche password en clair
-  showConfirmPassword: boolean = false;       // true = affiche confirmPassword en clair
+  loading = false;                            // true = requête en cours (affiche spinner)
+  errorMessage = '';                          // Message d'erreur à afficher
+  showPassword = false;                       // true = affiche password en clair
+  showConfirmPassword = false;                // true = affiche confirmPassword en clair
   
   // =========================================
   // PROPRIÉTÉ : ERREURS DE VALIDATION
@@ -343,5 +343,12 @@ export class RegisterComponent {
            this.email.length > 0 &&            // Email rempli
            this.password.length > 0 &&         // Mot de passe rempli
            this.confirmPassword.length > 0;    // Confirmation remplie
+  }
+
+  /**
+   * Retour à la page précédente
+   */
+  goBack(): void {
+    this.router.navigate(['/']);
   }
 }

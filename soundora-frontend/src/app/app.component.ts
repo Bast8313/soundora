@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { TopNavbarComponent } from './components/top-navbar/top-navbar.component';
 import { BannerImagesComponent } from './components/banner-images/banner-images.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component'; // NOUVEAU : Barre de recherche
+import { filter } from 'rxjs/operators';
 
 /**
  * =====================================
@@ -45,6 +46,18 @@ import { SearchBarComponent } from './components/search-bar/search-bar.component
 export class AppComponent implements OnInit {
   title = 'Soundora';
   isLoading = false;
+  showLayout = true; // Afficher ou masquer le layout (navbar, etc.)
+
+  constructor(private router: Router) {
+    // Écouter les changements de route
+    this.router.events.pipe(
+      filter(event => event instanceof NavigationEnd)
+    ).subscribe((event: any) => {
+      // Masquer le layout sur les pages de connexion/inscription
+      const authRoutes = ['/login', '/register'];
+      this.showLayout = !authRoutes.includes(event.urlAfterRedirects);
+    });
+  }
 
   /**
    * LIFECYCLE HOOK : ngOnInit()
