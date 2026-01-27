@@ -60,7 +60,10 @@
       ACTIONS UTILISATEUR
       ===================
       Panier et authentification
-      (La barre de recherche a été déplacée dans un composant séparé)
+      
+      NOUVEAUTÉ : Affichage conditionnel selon l'état de connexion
+      - *ngIf="!isLoggedIn()" : Affiche si NON connecté
+      - *ngIf="isLoggedIn()" : Affiche si CONNECTÉ
     -->
     <div class="navbar-actions">
       <!-- Panier avec badge compteur -->
@@ -69,10 +72,36 @@
         <span class="badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
       </a>
 
-      <!-- Boutons Connexion/Inscription -->
-      <div class="navbar-auth">
+      <!-- 
+        ============================================
+        SI UTILISATEUR NON CONNECTÉ
+        ============================================
+        Affiche les boutons Connexion et Inscription
+      -->
+      <div class="navbar-auth" *ngIf="!isLoggedIn()">
         <a routerLink="/login" class="btn-login">Connexion</a>
         <a routerLink="/register" class="btn-register">Inscription</a>
+      </div>
+      
+      <!-- 
+        ============================================
+        SI UTILISATEUR CONNECTÉ
+        ============================================
+        Affiche :
+        - Message de bienvenue avec prénom (ou email si pas de prénom)
+        - Bouton Déconnexion
+        
+        EXPLICATIONS :
+        - currentUser?.first_name : Le ? signifie "seulement si currentUser existe"
+        - || currentUser.email : Si pas de prénom, affiche l'email
+      -->
+      <div class="navbar-auth" *ngIf="isLoggedIn()">
+        <span class="welcome-message">
+          Bonjour {{ currentUser?.first_name || currentUser?.email }} 👋
+        </span>
+        <button (click)="logout()" class="btn-logout" title="Se déconnecter">
+          Déconnexion
+        </button>
       </div>
     </div>
 

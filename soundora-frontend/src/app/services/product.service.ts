@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 // Interface pour typer les produits
 export interface Product {
@@ -63,7 +64,9 @@ export class ProductService {
 
   // Récupère un produit par son slug
   getProductBySlug(slug: string): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${slug}`);
+    return this.http.get<any>(`${this.apiUrl}/${slug}`).pipe(
+      map((response) => response.data) // Extrait le produit du wrapper { success, data }
+    );
   }
 
   // Récupère les produits mis en avant

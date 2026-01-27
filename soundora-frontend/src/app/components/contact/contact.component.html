@@ -1,0 +1,135 @@
+<!-- ========================================= -->
+<!-- PAGE CONTACT - Nous Contacter -->
+<!-- ========================================= -->
+
+<div class="contact-container">
+  
+  <!-- En-tête -->
+  <div class="contact-header">
+    <h1>Nous Contacter</h1>
+    <p>Notre équipe est à votre écoute pour répondre à toutes vos questions</p>
+  </div>
+
+  <div class="contact-content">
+
+    <!-- Section gauche : Formulaire de contact -->
+    <div class="contact-form-section">
+      <h2>Envoyez-nous un message</h2>
+      
+      <!-- Message de succès -->
+      <div *ngIf="submitSuccess" class="success-message">
+        Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.
+      </div>
+
+      <form (ngSubmit)="submitForm()" class="contact-form">
+        
+        <!-- Nom -->
+        <div class="form-group">
+          <label for="name">Nom complet *</label>
+          <input 
+            type="text" 
+            id="name" 
+            name="name"
+            [(ngModel)]="contactForm.name"
+            required
+          />
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+          <label for="email">Email *</label>
+          <input 
+            type="email" 
+            id="email" 
+            name="email"
+            [(ngModel)]="contactForm.email"
+            required
+          />
+        </div>
+
+        <!-- Sujet -->
+        <div class="form-group">
+          <label for="subject">Sujet</label>
+          <input 
+            type="text" 
+            id="subject" 
+            name="subject"
+            [(ngModel)]="contactForm.subject"
+          />
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+          <label for="message">Message *</label>
+          <textarea 
+            id="message" 
+            name="message"
+            [(ngModel)]="contactForm.message"
+            rows="6"
+            required
+          ></textarea>
+        </div>
+
+        <!-- Bouton d'envoi -->
+        <button 
+          type="submit" 
+          class="btn-submit"
+          [disabled]="isSubmitting"
+        >
+          <span *ngIf="!isSubmitting"> Envoyer le message</span>
+          <span *ngIf="isSubmitting"> Envoi en cours...</span>
+        </button>
+
+      </form>
+    </div>
+
+    <!-- Section droite : Informations de contact -->
+    <div class="contact-info-section">
+      
+      <!-- Coordonnées -->
+      <div class="info-card">
+        <h2>Nos Coordonnées</h2>
+        <div class="contact-items">
+          <div *ngFor="let info of contactInfo" class="contact-item">
+            <div class="contact-details">
+              <h3>{{ info.title }}</h3>
+              <a 
+                *ngIf="info.link" 
+                [href]="info.link" 
+                class="contact-value"
+                [innerHTML]="info.value"
+              ></a>
+              <p *ngIf="!info.link" class="contact-value">{{ info.value }}</p>
+              <p class="contact-desc">{{ info.description }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Horaires -->
+      <div class="info-card">
+        <h2>Horaires du Support</h2>
+        <div class="hours-list">
+          <div *ngFor="let hour of hours" class="hour-item">
+            <span class="day">{{ hour.day }}</span>
+            <span class="time">{{ hour.time }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Réseaux sociaux -->
+      <div class="info-card social">
+        <h2>Suivez-nous</h2>
+        <div class="social-links">
+          <a href="#" class="social-link facebook">Facebook</a>
+          <a href="#" class="social-link instagram">Instagram</a>
+          <a href="#" class="social-link twitter">Twitter</a>
+          <a href="#" class="social-link youtube">YouTube</a>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

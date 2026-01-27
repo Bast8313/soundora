@@ -1,0 +1,187 @@
+/* ========================================= */
+/* CONTENEUR PRINCIPAL */
+/* ========================================= */
+.product-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* ========================================= */
+/* BOUTON RETOUR */
+/* ========================================= */
+.back-button {
+  background: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.back-button:hover {
+  background: #e0e0e0;
+}
+
+/* ========================================= */
+/* LOADER ET ERREUR */
+/* ========================================= */
+.loading, .error {
+  text-align: center;
+  padding: 40px;
+  font-size: 18px;
+}
+
+.error {
+  color: #e53e3e;
+}
+
+.error button {
+  margin-top: 20px;
+  background: #667eea;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ========================================= */
+/* CONTENU DU PRODUIT */
+/* ========================================= */
+.product-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+/* Image du produit */
+.product-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.product-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* ========================================= */
+/* INFORMATIONS DU PRODUIT */
+/* ========================================= */
+.product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Nom du produit */
+.product-info h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #1a202c;
+  margin: 0;
+}
+
+/* Marque */
+.brand {
+  font-size: 18px;
+  color: #718096;
+  margin: 0;
+}
+
+/* Prix */
+.price {
+  font-size: 28px;
+  font-weight: 700;
+  color: #48bb78;
+  margin: 0;
+}
+
+/* Description */
+.description {
+  margin-top: 10px;
+}
+
+.description h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+.description p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #4a5568;
+}
+
+/* Informations supplémentaires */
+.additional-info h2 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #2d3748;
+  margin-bottom: 10px;
+}
+
+.additional-info ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.additional-info li {
+  font-size: 16px;
+  color: #4a5568;
+  margin-bottom: 8px;
+}
+
+/* ========================================= */
+/* BOUTON AJOUTER AU PANIER */
+/* ========================================= */
+.add-to-cart-btn {
+  background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: transform 0.2s ease;
+}
+
+.add-to-cart-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+}
+
+.add-to-cart-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+/* ========================================= */
+/* RESPONSIVE : Écrans mobiles */
+/* ========================================= */
+@media (max-width: 768px) {
+  .product-content {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .product-info h1 {
+    font-size: 24px;
+  }
+  
+  .price {
+    font-size: 22px;
+  }
+}

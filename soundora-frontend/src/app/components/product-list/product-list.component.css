@@ -167,7 +167,7 @@
   display: block;
   width: 100%;
   padding: 0.8rem;
-  background-color: #3498db;
+  background-color: #667eea;
   color: white;
   text-align: center;
   text-decoration: none;
@@ -177,7 +177,7 @@
 }
 
 .btn-details:hover {
-  background-color: #2980b9;
+  background-color: #764ba2;
 }
 
 /* Message aucun produit */

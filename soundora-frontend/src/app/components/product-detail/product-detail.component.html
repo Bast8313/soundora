@@ -1,0 +1,77 @@
+<!-- ========================================= -->
+<!-- PAGE DE DÉTAILS DU PRODUIT -->
+<!-- ========================================= -->
+
+<div class="product-detail-container">
+  
+  <!-- BOUTON RETOUR -->
+  <button class="back-button" (click)="goBack()">
+    ← Retour aux produits
+  </button>
+
+  <!-- LOADER : Affichage pendant le chargement -->
+  <div *ngIf="loading" class="loading">
+    <p>Chargement du produit...</p>
+  </div>
+
+  <!-- MESSAGE D'ERREUR -->
+  <div *ngIf="error && !loading" class="error">
+    <p>{{ error }}</p>
+    <button (click)="goBack()">Retour aux produits</button>
+  </div>
+
+  <!-- CONTENU DU PRODUIT -->
+  <div *ngIf="product && !loading" class="product-content">
+    
+    <!-- SECTION GAUCHE : Image -->
+    <div class="product-image">
+      <img 
+        [src]="getProductImage()" 
+        [alt]="product.name"
+      />
+    </div>
+
+    <!-- SECTION DROITE : Informations -->
+    <div class="product-info">
+      
+      <!-- Nom du produit -->
+      <h1>{{ product.name }}</h1>
+      
+      <!-- Marque -->
+      <p class="brand">{{ product.brand_name }}</p>
+      
+      <!-- Prix -->
+      <p class="price">{{ product.price }} €</p>
+      
+      <!-- Description -->
+      <div class="description">
+        <h2>Description</h2>
+        <p>{{ product.description || 'Aucune description disponible' }}</p>
+      </div>
+      
+      <!-- Informations supplémentaires -->
+      <div class="additional-info">
+        <h2>Informations</h2>
+        <ul>
+          <li *ngIf="product.category_name">
+            <strong>Catégorie :</strong> {{ product.category_name }}
+          </li>
+          <li *ngIf="product.stock_quantity">
+            <strong>Stock :</strong> {{ product.stock_quantity }} disponible(s)
+          </li>
+        </ul>
+      </div>
+      
+      <!-- BOUTON AJOUTER AU PANIER -->
+      <button 
+        class="add-to-cart-btn" 
+        (click)="addToCart()"
+        [disabled]="addingToCart"
+      >
+        <span *ngIf="!addingToCart">🛒 Ajouter au panier</span>
+        <span *ngIf="addingToCart">Ajout en cours...</span>
+      </button>
+      
+    </div>
+  </div>
+</div>

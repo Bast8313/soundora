@@ -1,8 +1,12 @@
 import { Routes } from '@angular/router';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
+import { FaqComponent } from './components/faq/faq.component';
+import { AboutComponent } from './components/about/about.component';
+import { ContactComponent } from './components/contact/contact.component';
 
 /**
  * =====================================
@@ -48,6 +52,17 @@ export const routes: Routes = [
   },
 
   // ========================================
+  // ROUTE DÉTAILS D'UN PRODUIT
+  // ========================================
+  // Le :slug est un paramètre dynamique
+  // Exemple : /product/gibson-les-paul
+  {
+    path: 'product/:slug',
+    component: ProductDetailComponent,
+    data: { title: 'Détails du produit' }
+  },
+
+  // ========================================
   // ROUTE CATÉGORIES
   // ========================================
   {
@@ -68,6 +83,33 @@ export const routes: Routes = [
     path: 'register',
     component: RegisterComponent,
     data: { title: 'Inscription' }
+  },
+
+  // ========================================
+  // ROUTE FAQ (Questions Fréquentes)
+  // ========================================
+  {
+    path: 'faq',
+    component: FaqComponent,
+    data: { title: 'Questions Fréquentes' }
+  },
+
+  // ========================================
+  // ROUTE À PROPOS
+  // ========================================
+  {
+    path: 'about',
+    component: AboutComponent,
+    data: { title: 'À propos de Soundora' }
+  },
+
+  // ========================================
+  // ROUTE CONTACT
+  // ========================================
+  {
+    path: 'contact',
+    component: ContactComponent,
+    data: { title: 'Nous contacter' }
   },
 
   // ========================================

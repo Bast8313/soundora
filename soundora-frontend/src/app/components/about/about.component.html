@@ -1,0 +1,108 @@
+<!-- ========================================= -->
+<!-- PAGE À PROPOS - Histoire de Soundora -->
+<!-- ========================================= -->
+
+<div class="about-container">
+  
+  <!-- Section Hero -->
+  <section class="hero">
+    <h1>🎸 Bienvenue chez Soundora</h1>
+    <p class="tagline">Votre passion pour la musique, notre expertise depuis 2018</p>
+  </section>
+
+  <!-- Notre Histoire -->
+  <section class="story">
+    <h2>Notre Histoire</h2>
+    <div class="story-content">
+      <div class="story-text">
+        <p>
+          Tout a commencé en <strong>2018</strong>, dans un petit garage du 11ème arrondissement de Paris. 
+          <strong>Lucas</strong>, guitariste, <strong>Marie</strong>, batteuse, et <strong>Thomas</strong>, bassiste, 
+          partageaient la même frustration : trouver du matériel de musique de qualité à des prix justes était un véritable parcours du combattant.
+        </p>
+        <p>
+          Entre les boutiques physiques aux stocks limités et les sites en ligne impersonnels, 
+          il manquait une véritable alternative pour les musiciens. C'est ainsi que <strong>Soundora</strong> est née : 
+          une boutique en ligne créée par des musiciens, pour des musiciens.
+        </p>
+        <p>
+          Aujourd'hui, nous sommes fiers de compter plus de <strong>50 000 clients</strong> satisfaits, 
+          un catalogue de <strong>10 000 produits</strong>, et une équipe de <strong>25 passionnés</strong> 
+          prêts à vous conseiller pour trouver l'instrument de vos rêves.
+        </p>
+      </div>
+      <div class="story-image">
+        <img src="assets/images/products/gibson-explorer.jpg" alt="Équipe Soundora" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Timeline -->
+  <section class="timeline-section">
+    <h2>Les Étapes Clés</h2>
+    <div class="timeline">
+      <div *ngFor="let event of timeline" class="timeline-item">
+        <div class="timeline-year">{{ event.year }}</div>
+        <div class="timeline-content">
+          <h3>{{ event.title }}</h3>
+          <p>{{ event.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Nos Valeurs -->
+  <section class="values">
+    <h2>Nos Valeurs</h2>
+    <div class="values-grid">
+      <div *ngFor="let value of values" class="value-card">
+        <div class="value-icon">{{ value.icon }}</div>
+        <h3>{{ value.title }}</h3>
+        <p>{{ value.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Notre Engagement -->
+  <section class="commitment">
+    <h2>Notre Engagement</h2>
+    <div class="commitment-content">
+      <div class="commitment-item">
+        <span class="commitment-icon">✅</span>
+        <div>
+          <h3>Produits Authentiques</h3>
+          <p>100% de produits neufs et garantis, directement des distributeurs officiels.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <span class="commitment-icon">🎵</span>
+        <div>
+          <h3>Expertise Musicale</h3>
+          <p>Notre équipe est composée de musiciens professionnels et passionnés.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <span class="commitment-icon">🚚</span>
+        <div>
+          <h3>Livraison Rapide</h3>
+          <p>Livraison gratuite dès 50€ et expédition sous 24h pour les produits en stock.</p>
+        </div>
+      </div>
+      <div class="commitment-item">
+        <span class="commitment-icon">💚</span>
+        <div>
+          <h3>Service Client 5★</h3>
+          <p>Une question ? Notre équipe vous répond en moins de 2h du lundi au vendredi.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="cta">
+    <h2>Rejoignez la famille Soundora</h2>
+    <p>Découvrez notre catalogue et trouvez l'instrument parfait pour votre musique</p>
+    <a routerLink="/products" class="btn-cta">Découvrir nos produits</a>
+  </section>
+
+</div>

@@ -1,0 +1,60 @@
+<!-- ========================================= -->
+<!-- PAGE FAQ - Questions Fréquentes -->
+<!-- ========================================= -->
+
+<div class="faq-container">
+  
+  <!-- En-tête de la page -->
+  <div class="faq-header">
+    <h1>❓ Questions Fréquentes (FAQ)</h1>
+    <p>Trouvez rapidement les réponses à vos questions</p>
+  </div>
+
+  <!-- Boucle sur chaque catégorie -->
+  <div *ngFor="let category of faqCategories; let catIndex = index" class="faq-category">
+    
+    <!-- Titre de la catégorie -->
+    <h2 class="category-title">{{ category.title }}</h2>
+
+    <!-- Boucle sur les questions de cette catégorie -->
+    <div class="faq-items">
+      <div 
+        *ngFor="let faq of category.questions; let i = index" 
+        class="faq-item"
+        [class.open]="isOpen(catIndex * 100 + i)"
+      >
+        
+        <!-- Question (cliquable) -->
+        <button 
+          class="faq-question" 
+          (click)="toggleQuestion(catIndex * 100 + i)"
+        >
+          <span class="question-text">{{ faq.question }}</span>
+          <span class="toggle-icon">{{ isOpen(catIndex * 100 + i) ? '−' : '+' }}</span>
+        </button>
+
+        <!-- Réponse (visible si ouverte) -->
+        <div class="faq-answer" *ngIf="isOpen(catIndex * 100 + i)">
+          <p>{{ faq.answer }}</p>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section "Toujours une question ?" -->
+  <div class="faq-contact">
+    <h3>Vous ne trouvez pas la réponse à votre question ?</h3>
+    <p>Notre équipe est à votre disposition pour vous aider !</p>
+    <div class="contact-buttons">
+      <a href="mailto:contact@soundora.com" class="btn-contact email">
+        📧 contact&#64;soundora.com
+      </a>
+      <a href="tel:0123456789" class="btn-contact phone">
+        📞 01 23 45 67 89
+      </a>
+    </div>
+  </div>
+
+</div>

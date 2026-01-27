@@ -1,11 +1,11 @@
 // Script de diagnostic pour vérifier les amplis
 import supabase from "./config/supabase.js";
 
-console.log("🔍 DIAGNOSTIC DES AMPLIS\n");
+console.log("DIAGNOSTIC DES AMPLIS\n");
 console.log("=".repeat(80));
 
 // 1. Récupérer toutes les catégories d'amplis
-console.log("\n📋 Catégories d'amplification disponibles :");
+console.log("\n Catégories d'amplification disponibles :");
 const { data: ampliCategories } = await supabase
   .from("categories")
   .select("id, name, slug")
@@ -16,11 +16,11 @@ if (ampliCategories && ampliCategories.length > 0) {
     console.log(`  - ${cat.name} (slug: ${cat.slug})`);
   });
 } else {
-  console.log("  ❌ Aucune catégorie d'ampli trouvée!");
+  console.log("   Aucune catégorie d'ampli trouvée!");
 }
 
 // 2. Récupérer tous les amplis
-console.log("\n🔊 AMPLIS EN BASE DE DONNÉES :");
+console.log("\n AMPLIS EN BASE DE DONNÉES :");
 console.log("-".repeat(80));
 
 const ampliCategoryIds = ampliCategories?.map((c) => c.id) || [];
@@ -43,16 +43,16 @@ if (ampliCategoryIds.length > 0) {
     .order("name");
 
   if (error) {
-    console.log("❌ Erreur:", error);
+    console.log(" Erreur:", error);
   } else if (amplis && amplis.length > 0) {
     console.log(`\nTotal : ${amplis.length} amplis trouvés\n`);
 
     amplis.forEach((ampli, index) => {
       console.log(`${index + 1}. ${ampli.name}`);
-      console.log(`   📌 Modèle en BDD: "${ampli.model || "NULL"}"`);
-      console.log(`   🔗 Slug: ${ampli.slug}`);
-      console.log(`   🏷️  Marque: ${ampli.brand?.name || "NULL"}`);
-      console.log(`   📁 Catégorie: ${ampli.category?.name || "NULL"}`);
+      console.log(`    Modèle en BDD: "${ampli.model || "NULL"}"`);
+      console.log(`    Slug: ${ampli.slug}`);
+      console.log(`     Marque: ${ampli.brand?.name || "NULL"}`);
+      console.log(`    Catégorie: ${ampli.category?.name || "NULL"}`);
 
       // Vérifier les images
       let hasImage = false;
