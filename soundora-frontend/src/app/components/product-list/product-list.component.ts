@@ -112,78 +112,162 @@ export class ProductListComponent implements OnInit {
   }
 
   /**
-   * Mapping des produits vers leurs images locales
-   * Clé : modèle du produit (simplifié)
-   * Valeur : nom du fichier image
+   * ==========================================
+   * MAPPING DES IMAGES PRODUITS (productImageMap)
+   * ==========================================
+   * 
+   * POURQUOI CE MAPPING ?
+   * ---------------------
+   * Les images des produits dans la base de données Supabase sont souvent
+   * des URLs fictives (ex: "https://shure.com/sm57-1.jpg") qui ne fonctionnent pas.
+   * 
+   * Ce mapping permet d'associer le champ "model" d'un produit (ex: "SM57")
+   * à une image locale stockée dans "assets/images/products/".
+   * 
+   * COMMENT ÇA MARCHE ?
+   * -------------------
+   * - Clé (key) : Le nom du modèle EN MINUSCULES (ex: 'sm57')
+   * - Valeur (value) : Le nom du fichier image (ex: 'micro-shure-sm57-cable.jpg')
+   * 
+   * EXEMPLE :
+   * ---------
+   * Un produit avec model="SM57" sera converti en 'sm57' (toLowerCase)
+   * puis on cherche 'sm57' dans ce mapping → on trouve 'micro-shure-sm57-cable.jpg'
+   * → l'image affichée sera "assets/images/products/micro-shure-sm57-cable.jpg"
+   * 
+   * POUR AJOUTER UN NOUVEAU PRODUIT :
+   * ---------------------------------
+   * 1. Ajouter l'image dans "soundora-frontend/src/assets/images/products/"
+   * 2. Ajouter une entrée ici : 'nom-du-modele-en-minuscules': 'nom-du-fichier.jpg'
    */
   private productImageMap: { [key: string]: string } = {
-    // Claviers et synthés
-    'minilogue xd': 'korg-minilogue-xd.jpg',
-    'fp-30x': 'roland-fp-30x.jpg',
-    'p-125': 'yamaha-p-125.jpg',
+    // =====================
+    // CLAVIERS ET SYNTHÉS
+    // =====================
+    'minilogue xd': 'korg-minilogue-xd.jpg',      // Korg Minilogue XD
+    'fp-30x': 'roland-fp-30x.jpg',                // Roland FP-30X
+    'p-125': 'yamaha-p-125.jpg',                  // Yamaha P-125
     
-    // Batteries
-    'export exx': 'pearl-export-exx.jpg',
-    'imperialstar': 'tama-imperialstar.jpg',
+    // =====================
+    // BATTERIES
+    // =====================
+    'export exx': 'pearl-export-exx.jpg',         // Pearl Export EXX
+    'imperialstar': 'tama-imperialstar.jpg',      // Tama Imperialstar
     
-    // Cymbales
-    'a custom set': 'zildjian-a-custom.jpg',
+    // =====================
+    // CYMBALES
+    // =====================
+    'a custom set': 'zildjian-a-custom.jpg',      // Zildjian A Custom Set
     
-    // Amplis guitare
-    'svt-7 pro': 'ampeg-svt-7-pro.jpg',
-    'blues junior iv': 'fender-blues-junior-iv.jpg',
-    'rumble 500': 'fender-rumble-500.jpg',
-    'dsl40cr': 'marshall-dsl40cr.jpg',
-    'jcm800 2203': 'marshall-jcm800-2203.jpg',
-    'rockerverb 50 mkiii': 'orange-rockerverb-50-mkiii.jpg',
-    'rocker 30': 'orange-rocker-30.jpg', // Ajout si existe dans la BDD
-    'ac30c2': 'vox-ac30c2.jpg',
+    // =====================
+    // AMPLIS GUITARE/BASSE
+    // =====================
+    'svt-7 pro': 'ampeg-svt-7-pro.jpg',           // Ampeg SVT-7 Pro (basse)
+    'blues junior iv': 'fender-blues-junior-iv.jpg', // Fender Blues Junior IV
+    'rumble 500': 'fender-rumble-500.jpg',        // Fender Rumble 500 (basse)
+    'dsl40cr': 'marshall-dsl40cr.jpg',            // Marshall DSL40CR
+    'jcm800 2203': 'marshall-jcm800-2203.jpg',    // Marshall JCM800 2203
+    'rockerverb 50 mkiii': 'orange-rockerverb-50-mkiii.jpg', // Orange Rockerverb 50
+    'rocker 30': 'orange-rocker-30.jpg',          // Orange Rocker 30
+    'ac30c2': 'vox-ac30c2.jpg',                   // Vox AC30C2
     
-    // Pédales d'effets
-    'ds-1': 'boss-ds1-distortion.jpg',
-    'big muff pi': 'electro-harmonix-big-muff-pi.jpg',
-    'phase 90': 'mxr-phase-90.jpg',
-    'hall of fame 2': 'tc-electronic-hall-of-fame-2.jpg',
+    // =====================
+    // PÉDALES D'EFFETS
+    // =====================
+    'ds-1': 'boss-ds1-distortion.jpg',            // Boss DS-1 Distortion
+    'big muff pi': 'electro-harmonix-big-muff-pi.jpg', // Electro-Harmonix Big Muff
+    'phase 90': 'mxr-phase-90.jpg',               // MXR Phase 90
+    'hall of fame 2': 'tc-electronic-hall-of-fame-2.jpg', // TC Electronic Hall of Fame
     
-    // Basses
-    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg',
-    'trbx304': 'yamaha-trbx304.jpg',
-    'player jazz bass': 'fender-jazz-bass.jpg',
-    'player precision bass': 'fender-precision-bass.jpg',
-    'sr500e': 'ibanez-sr500e.jpg',
+    // =====================
+    // MICROPHONES
+    // =====================
+    // Ces entrées ont été ajoutées car les URLs en BDD (shure.com, etc.) sont fictives
+    'sm57': 'micro-shure-sm57-cable.jpg',         // Shure SM57 - Micro dynamique instrument
+    'sm58': 'micro-shure-sm58-cable.jpg',         // Shure SM58 - Micro dynamique vocal
+    'at2020': 'micro-audio-technica-at2020.jpg',  // Audio-Technica AT2020 - Micro condensateur
     
-    // Guitares
-    'player jazzmaster': 'fender-jazzmaster.jpg',
-    'explorer studio': 'gibson-explorer.jpg',
-    'se custom 24': 'prs-se-custom-24.jpg',
-    'classic vibe 70s stratocaster': 'squier-stratocaster-70s.jpg',
-    'rg550': 'ibanez-rg550.jpg',
-    'gibson-les paul standard 50s': 'gibson-les-paul-50s.jpg',
-    'epiphone-les paul standard 50s': 'epiphone-les-paul-50s.jpg'
+    // =====================
+    // INTERFACES AUDIO
+    // =====================
+    'scarlett 2i2 3rd gen': 'interface-focusrite-scarlett.jpg', // Focusrite Scarlett 2i2
+    
+    // =====================
+    // BASSES
+    // =====================
+    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg', // Squier Jazz Bass 60s
+    'trbx304': 'yamaha-trbx304.jpg',              // Yamaha TRBX304
+    'player jazz bass': 'fender-jazz-bass.jpg',   // Fender Player Jazz Bass
+    'player precision bass': 'fender-precision-bass.jpg', // Fender Player Precision Bass
+    'sr500e': 'ibanez-sr500e.jpg',                // Ibanez SR500E
+    
+    // =====================
+    // GUITARES
+    // =====================
+    'player jazzmaster': 'fender-jazzmaster.jpg', // Fender Player Jazzmaster
+    'explorer studio': 'gibson-explorer.jpg',     // Gibson Explorer Studio
+    'se custom 24': 'prs-se-custom-24.jpg',       // PRS SE Custom 24
+    'classic vibe 70s stratocaster': 'squier-stratocaster-70s.jpg', // Squier Strat 70s
+    'rg550': 'ibanez-rg550.jpg',                  // Ibanez RG550
+    // Cas spéciaux : même modèle mais marques différentes (voir getProductImage)
+    'gibson-les paul standard 50s': 'gibson-les-paul-50s.jpg',     // Gibson Les Paul
+    'epiphone-les paul standard 50s': 'epiphone-les-paul-50s.jpg'  // Epiphone Les Paul
   };
 
   /**
-   * Génère une URL d'image pour chaque produit
-   * Priorité : 1) Images locales, 2) Images BDD, 3) Placeholder coloré
-   * @param product - Le produit pour lequel générer l'image
-   * @returns URL de l'image
+   * ==========================================
+   * MÉTHODE getProductImage()
+   * ==========================================
+   * 
+   * RÔLE : Retourne l'URL de l'image à afficher pour un produit donné.
+   * 
+   * ORDRE DE PRIORITÉ :
+   * -------------------
+   * 1. IMAGE LOCALE (via productImageMap) → Priorité maximale
+   *    - On cherche le modèle du produit dans notre mapping
+   *    - Si trouvé, on utilise l'image locale (fiable, rapide)
+   * 
+   * 2. IMAGE EN BASE DE DONNÉES (Supabase)
+   *    - Si pas d'image locale, on utilise l'URL stockée en BDD
+   *    - ⚠️ Peut ne pas fonctionner si l'URL est invalide/fictive
+   * 
+   * 3. PLACEHOLDER COLORÉ (fallback)
+   *    - Si aucune image disponible, génère un placeholder
+   *    - Couleur basée sur l'ID du produit (cohérence visuelle)
+   *    - Emoji basé sur la catégorie (🎸 guitare, 🎹 clavier, etc.)
+   * 
+   * @param product - L'objet produit contenant name, model, images, category, etc.
+   * @returns string - L'URL de l'image à utiliser
    */
   getProductImage(product: any): string {
-    // 1. Vérifie d'abord si une image locale existe pour ce produit
+    
+    // =====================================================
+    // ÉTAPE 1 : Chercher une image locale dans le mapping
+    // =====================================================
+    // On vérifie si le produit a un champ "model" (ex: "SM57", "Scarlett 2i2 3rd Gen")
     if (product.model) {
+      // Convertir en minuscules pour la recherche (le mapping utilise des clés en minuscules)
       const modelKey = product.model.toLowerCase();
       
-      // Gère le cas spécial des Les Paul (Gibson vs Epiphone)
+      // -------------------------------------------------
+      // CAS SPÉCIAL : Les Paul (Gibson vs Epiphone)
+      // -------------------------------------------------
+      // Le modèle "Les Paul Standard 50s" existe chez Gibson ET Epiphone
+      // On doit donc différencier avec le nom de la marque
       if (modelKey === 'les paul standard 50s' && product.brand?.name) {
+        // Créer une clé unique : "gibson-les paul standard 50s" ou "epiphone-les paul standard 50s"
         const brandKey = `${product.brand.name.toLowerCase()}-${modelKey}`;
         const localImage = this.productImageMap[brandKey];
         if (localImage) {
+          // Image trouvée ! On log pour le debug et on retourne le chemin complet
           console.log(`✅ Image locale trouvée pour ${product.name}: ${localImage}`);
           return `assets/images/products/${localImage}`;
         }
       }
       
-      // Recherche normale par modèle
+      // -------------------------------------------------
+      // CAS NORMAL : Recherche par modèle uniquement
+      // -------------------------------------------------
       const localImage = this.productImageMap[modelKey];
       if (localImage) {
         console.log(`✅ Image locale trouvée pour ${product.name}: ${localImage}`);
@@ -191,31 +275,45 @@ export class ProductListComponent implements OnInit {
       }
     }
 
-    // 2. Si le produit a une image valide en BDD, l'utilise
+    // =====================================================
+    // ÉTAPE 2 : Utiliser l'image de la base de données
+    // =====================================================
+    // Si pas d'image locale, on essaie d'utiliser l'URL stockée en Supabase
+    // Le champ "images" est un tableau (peut contenir plusieurs images)
     if (product.images && product.images.length > 0 && product.images[0]) {
       console.log(`⚠️ Utilisation image BDD pour ${product.name}: ${product.images[0]}`);
       return product.images[0];
     }
 
-    // 3. Sinon, génère un placeholder coloré
+    // =====================================================
+    // ÉTAPE 3 : Générer un placeholder coloré (fallback)
+    // =====================================================
+    // Aucune image disponible → on crée un placeholder visuel
     console.log(`📦 Génération placeholder pour ${product.name}`);
+    
+    // Palette de couleurs variées pour les placeholders
     const colors = [
       'FF6B6B', 'F06292', 'BA68C8', '9575CD', '7986CB', '64B5F6',
       '4FC3F7', '4DD0E1', '4DB6AC', '81C784', 'AED581', 'DCE775',
       'FFD54F', 'FFB74D', 'FF8A65', 'A1887F', '90A4AE'
     ];
     
+    // Calculer un index de couleur basé sur l'ID du produit
+    // Ainsi, un même produit aura toujours la même couleur de placeholder
     let colorIndex = 0;
     if (product.id) {
+      // Convertir l'ID (UUID) en nombre en additionnant les codes ASCII de chaque caractère
       const hash = product.id.split('').reduce((acc: number, char: string) => 
         acc + char.charCodeAt(0), 0);
+      // Utiliser le modulo pour rester dans les limites du tableau de couleurs
       colorIndex = hash % colors.length;
     }
     
     const bgColor = colors[colorIndex];
     const textColor = 'FFFFFF';
     
-    let emoji = '🎵';
+    // Choisir un emoji selon la catégorie du produit
+    let emoji = '🎵'; // Emoji par défaut (musique)
     if (product.category?.name) {
       const category = product.category.name.toLowerCase();
       if (category.includes('guitare') && !category.includes('basse')) emoji = '🎸';

@@ -42,6 +42,69 @@ export class ProductDetailComponent implements OnInit {
   addingToCart: boolean = false;    // true = ajout au panier en cours
   
   /**
+   * ==========================================
+   * MAPPING DES IMAGES PRODUITS (productImageMap)
+   * ==========================================
+   * 
+   * POURQUOI CE MAPPING ?
+   * ---------------------
+   * Les images dans la BDD Supabase sont souvent des URLs fictives qui ne fonctionnent pas.
+   * Ce mapping associe le champ "model" d'un produit à une image locale.
+   * 
+   * FONCTIONNEMENT :
+   * - Clé : nom du modèle en MINUSCULES (ex: 'sm57')
+   * - Valeur : nom du fichier image dans "assets/images/products/"
+   * 
+   * NOTE : Ce mapping est dupliqué dans product-list.component.ts
+   *        Idéalement, il devrait être dans un service partagé.
+   */
+  private productImageMap: { [key: string]: string } = {
+    // Claviers et synthés
+    'minilogue xd': 'korg-minilogue-xd.jpg',
+    'fp-30x': 'roland-fp-30x.jpg',
+    'p-125': 'yamaha-p-125.jpg',
+    // Batteries
+    'export exx': 'pearl-export-exx.jpg',
+    'imperialstar': 'tama-imperialstar.jpg',
+    // Cymbales
+    'a custom set': 'zildjian-a-custom.jpg',
+    // Amplis guitare/basse
+    'svt-7 pro': 'ampeg-svt-7-pro.jpg',
+    'blues junior iv': 'fender-blues-junior-iv.jpg',
+    'rumble 500': 'fender-rumble-500.jpg',
+    'dsl40cr': 'marshall-dsl40cr.jpg',
+    'jcm800 2203': 'marshall-jcm800-2203.jpg',
+    'rockerverb 50 mkiii': 'orange-rockerverb-50-mkiii.jpg',
+    'rocker 30': 'orange-rocker-30.jpg',
+    'ac30c2': 'vox-ac30c2.jpg',
+    // Pédales d'effets
+    'ds-1': 'boss-ds1-distortion.jpg',
+    'big muff pi': 'electro-harmonix-big-muff-pi.jpg',
+    'phase 90': 'mxr-phase-90.jpg',
+    'hall of fame 2': 'tc-electronic-hall-of-fame-2.jpg',
+    // Microphones (URLs BDD fictives → images locales)
+    'sm57': 'micro-shure-sm57-cable.jpg',         // Shure SM57
+    'sm58': 'micro-shure-sm58-cable.jpg',         // Shure SM58
+    'at2020': 'micro-audio-technica-at2020.jpg',  // Audio-Technica AT2020
+    // Interfaces audio
+    'scarlett 2i2 3rd gen': 'interface-focusrite-scarlett.jpg', // Focusrite Scarlett 2i2
+    // Basses
+    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg',
+    'trbx304': 'yamaha-trbx304.jpg',
+    'player jazz bass': 'fender-jazz-bass.jpg',
+    'player precision bass': 'fender-precision-bass.jpg',
+    'sr500e': 'ibanez-sr500e.jpg',
+    // Guitares
+    'player jazzmaster': 'fender-jazzmaster.jpg',
+    'explorer studio': 'gibson-explorer.jpg',
+    'se custom 24': 'prs-se-custom-24.jpg',
+    'classic vibe 70s stratocaster': 'squier-stratocaster-70s.jpg',
+    'rg550': 'ibanez-rg550.jpg',
+    'gibson-les paul standard 50s': 'gibson-les-paul-50s.jpg',
+    'epiphone-les paul standard 50s': 'epiphone-les-paul-50s.jpg'
+  };
+  
+  /**
    * CONSTRUCTEUR : Injection de dépendances
    * 
    * @param route - Pour récupérer les paramètres de l'URL (le slug)
@@ -112,22 +175,78 @@ export class ProductDetailComponent implements OnInit {
    * MÉTHODE getProductImage()
    * ==========================================
    * 
-   * Retourne l'URL de l'image du produit.
+   * RÔLE : Retourne l'URL de l'image principale du produit.
    * 
-   * LOGIQUE :
-   * - Si le produit a un tableau 'images', on prend la première
-   * - Sinon on cherche 'image_url'
-   * - Sinon on affiche une image placeholder
+   * ORDRE DE PRIORITÉ :
+   * -------------------
+   * 1. IMAGE LOCALE (via productImageMap)
+   *    - Recherche le modèle du produit dans le mapping
+   *    - Retourne le chemin vers l'image locale si trouvée
+   * 
+   * 2. IMAGE EN BASE DE DONNÉES (Supabase)
+   *    - Utilise l'URL stockée dans le champ "images"
+   *    - FILTRE les URLs fictives connues (shure.com, focusrite.com, etc.)
+   * 
+   * 3. IMAGE_URL (compatibilité ancienne structure)
+   *    - Certains produits peuvent avoir un champ "image_url" au lieu de "images"
+   * 
+   * 4. PLACEHOLDER (fallback)
+   *    - Image par défaut si aucune autre option disponible
+   * 
+   * @returns string - L'URL de l'image à afficher
    */
   getProductImage(): string {
+    // Si le produit n'est pas encore chargé, afficher le placeholder
     if (!this.product) return 'assets/placeholder.jpg';
     
-    // Si 'images' existe et contient au moins une image
-    if (this.product.images && this.product.images.length > 0) {
-      return this.product.images[0];
+    // =====================================================
+    // ÉTAPE 1 : Chercher une image locale dans le mapping
+    // =====================================================
+    if (this.product.model) {
+      // Convertir le modèle en minuscules (les clés du mapping sont en minuscules)
+      const modelKey = this.product.model.toLowerCase();
+      
+      // -------------------------------------------------
+      // CAS SPÉCIAL : Les Paul (Gibson vs Epiphone)
+      // -------------------------------------------------
+      // Même modèle mais marques différentes → images différentes
+      if (modelKey === 'les paul standard 50s' && this.product.brand?.name) {
+        const brandKey = `${this.product.brand.name.toLowerCase()}-${modelKey}`;
+        const localImage = this.productImageMap[brandKey];
+        if (localImage) {
+          return `assets/images/products/${localImage}`;
+        }
+      }
+      
+      // -------------------------------------------------
+      // CAS NORMAL : Recherche par modèle
+      // -------------------------------------------------
+      const localImage = this.productImageMap[modelKey];
+      if (localImage) {
+        return `assets/images/products/${localImage}`;
+      }
     }
     
-    // Sinon, essayer 'image_url'
+    // =====================================================
+    // ÉTAPE 2 : Utiliser l'image de la base de données
+    // =====================================================
+    // Vérifier si le produit a des images en BDD
+    if (this.product.images && this.product.images.length > 0 && this.product.images[0]) {
+      const url = this.product.images[0];
+      
+      // IMPORTANT : Filtrer les URLs fictives qui ne fonctionnent pas
+      // Ces URLs ont été mises en BDD mais ne pointent vers aucune vraie image
+      const fakeUrlDomains = ['shure.com', 'focusrite.com', 'audio-technica.com'];
+      const isFakeUrl = fakeUrlDomains.some(domain => url.includes(domain));
+      
+      if (!isFakeUrl) {
+        return url;
+      }
+    }
+    
+    // =====================================================
+    // ÉTAPE 3 : Fallback sur image_url (ancienne structure)
+    // =====================================================
     if (this.product.image_url) {
       return this.product.image_url;
     }

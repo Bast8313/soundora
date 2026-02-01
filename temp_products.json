@@ -1,0 +1,1723 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "569e5a79-28a6-4cb3-b19d-b19ae1c481b6",
+      "name": "Shure SM57",
+      "slug": "shure-sm57-dynamic-mic",
+      "description": "Microphone dynamique légendaire, standard pour amplis et caisse claire",
+      "short_description": "Micro dynamique pour instruments",
+      "price": 119,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 5,
+      "sku": "SHR-SM57",
+      "category_id": "10ac16ef-6679-4b17-a8db-d93c532aca6f",
+      "brand_id": "f27edf2d-7586-46d7-894a-9d3288e401a3",
+      "model": "SM57",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://shure.com/sm57-1.jpg"
+      ],
+      "specifications": {
+        "type": "Dynamique",
+        "reponse": "40Hz-15kHz",
+        "directivite": "Cardioïde"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.40062+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "10ac16ef-6679-4b17-a8db-d93c532aca6f",
+        "name": "Microphones",
+        "slug": "microphones"
+      },
+      "brand": {
+        "id": "f27edf2d-7586-46d7-894a-9d3288e401a3",
+        "name": "Shure",
+        "slug": "shure"
+      }
+    },
+    {
+      "id": "945adc73-f77b-47f1-8e02-23d815828ca2",
+      "name": "Audio-Technica AT2020",
+      "slug": "audio-technica-at2020-condenser",
+      "description": "Microphone à condensateur cardioïde pour studio et home studio",
+      "short_description": "Micro à condensateur pour enregistrement",
+      "price": 99,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "AT-AT2020",
+      "category_id": "10ac16ef-6679-4b17-a8db-d93c532aca6f",
+      "brand_id": "6696ac01-2212-42f8-94b3-11499ba3ef27",
+      "model": "AT2020",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://audio-technica.com/at2020-1.jpg"
+      ],
+      "specifications": {
+        "type": "Condensateur",
+        "phantom": "48V",
+        "reponse": "20Hz-20kHz",
+        "directivite": "Cardioïde"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.40062+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "10ac16ef-6679-4b17-a8db-d93c532aca6f",
+        "name": "Microphones",
+        "slug": "microphones"
+      },
+      "brand": {
+        "id": "6696ac01-2212-42f8-94b3-11499ba3ef27",
+        "name": "Audio-Technica",
+        "slug": "audio-technica"
+      }
+    },
+    {
+      "id": "c90d9543-9a77-4cec-8bd8-c10df6cd3eb4",
+      "name": "Shure SM58",
+      "slug": "shure-sm58-vocal-mic",
+      "description": "Microphone vocal dynamique le plus utilisé au monde",
+      "short_description": "Micro dynamique vocal de référence",
+      "price": 119,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 4,
+      "sku": "SHR-SM58",
+      "category_id": "10ac16ef-6679-4b17-a8db-d93c532aca6f",
+      "brand_id": "f27edf2d-7586-46d7-894a-9d3288e401a3",
+      "model": "SM58",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://shure.com/sm58-1.jpg"
+      ],
+      "specifications": {
+        "type": "Dynamique",
+        "reponse": "50Hz-15kHz",
+        "directivite": "Cardioïde"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.40062+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "10ac16ef-6679-4b17-a8db-d93c532aca6f",
+        "name": "Microphones",
+        "slug": "microphones"
+      },
+      "brand": {
+        "id": "f27edf2d-7586-46d7-894a-9d3288e401a3",
+        "name": "Shure",
+        "slug": "shure"
+      }
+    },
+    {
+      "id": "9765d3dd-faac-4df6-9ae5-5b8d54d4c537",
+      "name": "Focusrite Scarlett 2i2 3rd Gen",
+      "slug": "focusrite-scarlett-2i2-3rd-gen",
+      "description": "Interface audio USB 2 entrées/2 sorties avec préamplis Scarlett",
+      "short_description": "Interface audio USB pour home studio",
+      "price": 169,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 4,
+      "sku": "FOC-SC2I2-3G",
+      "category_id": "93064919-d276-4f15-94c3-faeda5e87114",
+      "brand_id": "db67fbe2-8eb2-4186-bae2-958994c826ab",
+      "model": "Scarlett 2i2 3rd Gen",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Red",
+      "images": [
+        "https://focusrite.com/scarlett-2i2-1.jpg"
+      ],
+      "specifications": {
+        "entrees": "2x XLR-Jack combo",
+        "sorties": "2x Jack 6.35mm",
+        "resolution": "24-bit/192kHz"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.40062+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "93064919-d276-4f15-94c3-faeda5e87114",
+        "name": "Interfaces Audio",
+        "slug": "interfaces-audio"
+      },
+      "brand": {
+        "id": "db67fbe2-8eb2-4186-bae2-958994c826ab",
+        "name": "Focusrite",
+        "slug": "focusrite"
+      }
+    },
+    {
+      "id": "e1723cdc-6d61-4dd3-af04-6f45ddcc5475",
+      "name": "TC Electronic Hall of Fame 2",
+      "slug": "tc-electronic-hall-of-fame-2",
+      "description": "Pédale de reverb avec algorithmes TonePrint et réverbs légendaires",
+      "short_description": "Pédale de reverb avec TonePrint",
+      "price": 149,
+      "compare_price": 179,
+      "cost_price": null,
+      "stock": 4,
+      "sku": "TC-HOF2",
+      "category_id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+      "brand_id": "676265cf-14a7-4558-adeb-84008663ebd4",
+      "model": "Hall of Fame 2",
+      "year_released": null,
+      "country_origin": null,
+      "color": "White",
+      "images": [
+        "https://tcelectronic.com/hof2-1.jpg"
+      ],
+      "specifications": {
+        "mash": "Oui",
+        "type": "Reverb",
+        "toneprint": "Oui",
+        "algorithmes": "10 types"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:09.24984+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+        "name": "Pédales d'Effets",
+        "slug": "pedales-effets"
+      },
+      "brand": {
+        "id": "676265cf-14a7-4558-adeb-84008663ebd4",
+        "name": "TC Electronic",
+        "slug": "tc-electronic"
+      }
+    },
+    {
+      "id": "4de09678-0cb4-4808-8c3f-d420a1e4ffe5",
+      "name": "Electro-Harmonix Big Muff Pi",
+      "slug": "ehx-big-muff-pi-nyc",
+      "description": "Fuzz légendaire utilisé par Hendrix, Gilmour et bien d autres",
+      "short_description": "Pédale de fuzz vintage mythique",
+      "price": 89,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 4,
+      "sku": "EHX-BMUFF-NYC",
+      "category_id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+      "brand_id": "6a3bb11a-6d76-47fe-87ea-3bbc1334fd71",
+      "model": "Big Muff Pi",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Silver",
+      "images": [
+        "https://ehx.com/big-muff-1.jpg"
+      ],
+      "specifications": {
+        "type": "Fuzz",
+        "controles": "Volume, Tone, Sustain",
+        "vintage_reissue": "Oui"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:09.24984+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+        "name": "Pédales d'Effets",
+        "slug": "pedales-effets"
+      },
+      "brand": {
+        "id": "6a3bb11a-6d76-47fe-87ea-3bbc1334fd71",
+        "name": "Electro-Harmonix",
+        "slug": "electro-harmonix"
+      }
+    },
+    {
+      "id": "4d1e417b-ad3f-49e2-91dc-16eff1b77ef2",
+      "name": "MXR Phase 90",
+      "slug": "mxr-phase-90-orange",
+      "description": "Phaser classique utilisé par Van Halen, symbole du son années 70",
+      "short_description": "Pédale de phaser vintage iconique",
+      "price": 99,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "MXR-PH90-OR",
+      "category_id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+      "brand_id": "452c861b-4a80-4156-bcef-9f087cd49172",
+      "model": "Phase 90",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Orange",
+      "images": [
+        "https://mxr.com/phase-90-1.jpg"
+      ],
+      "specifications": {
+        "type": "Phaser",
+        "vintage": "Script Logo",
+        "controles": "Speed"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:09.24984+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+        "name": "Pédales d'Effets",
+        "slug": "pedales-effets"
+      },
+      "brand": {
+        "id": "452c861b-4a80-4156-bcef-9f087cd49172",
+        "name": "MXR",
+        "slug": "mxr"
+      }
+    },
+    {
+      "id": "2cde0fdb-6729-4009-902f-554d45fe87b0",
+      "name": "Boss DS-1 Distortion",
+      "slug": "boss-ds-1-distortion-orange",
+      "description": "Pédale de distorsion la plus vendue au monde, son rock classique",
+      "short_description": "Pédale de distorsion classique Boss",
+      "price": 59,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 6,
+      "sku": "BSS-DS1-OR",
+      "category_id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+      "brand_id": "2d90a956-2926-4aa5-a518-3aa49c2df3ae",
+      "model": "DS-1",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Orange",
+      "images": [
+        "https://boss.info/ds-1-1.jpg"
+      ],
+      "specifications": {
+        "type": "Distorsion",
+        "controles": "Level, Tone, Dist",
+        "alimentation": "9V"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.24984+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "3d9d5e5b-a315-42d5-b604-a5bb691721cf",
+        "name": "Pédales d'Effets",
+        "slug": "pedales-effets"
+      },
+      "brand": {
+        "id": "2d90a956-2926-4aa5-a518-3aa49c2df3ae",
+        "name": "Boss",
+        "slug": "boss"
+      }
+    },
+    {
+      "id": "0fb8857b-9a2b-4c7f-8fad-31055081a6e0",
+      "name": "Pearl Export EXX 5-Piece",
+      "slug": "pearl-export-exx-5-piece-jet-black",
+      "description": "Batterie Export légendaire avec fûts en peuplier",
+      "short_description": "Batterie 5 fûts avec hardware inclus",
+      "price": 799,
+      "compare_price": 899,
+      "cost_price": null,
+      "stock": 1,
+      "sku": "PRL-EXX5-JB",
+      "category_id": "62b82d4a-1ab5-43d4-a176-df203db9408d",
+      "brand_id": "af8a1069-3b40-4ec5-8373-e29553eb8ac9",
+      "model": "Export EXX",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Jet Black",
+      "images": [
+        "https://pearl.com/export-exx-1.jpg"
+      ],
+      "specifications": {
+        "toms": "10x7, 12x8",
+        "tom_basse": "16x16",
+        "caisse_claire": "14x5.5",
+        "grosse_caisse": "22x18"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.155765+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "62b82d4a-1ab5-43d4-a176-df203db9408d",
+        "name": "Batterie & Percussion",
+        "slug": "batterie-percussion"
+      },
+      "brand": {
+        "id": "af8a1069-3b40-4ec5-8373-e29553eb8ac9",
+        "name": "Pearl",
+        "slug": "pearl"
+      }
+    },
+    {
+      "id": "fedea12d-8a5c-4cd7-b665-45a50da6acba",
+      "name": "Tama Imperialstar 5-Piece",
+      "slug": "tama-imperialstar-5-piece-black",
+      "description": "Kit de batterie 5 pièces parfait pour débuter avec qualité Tama",
+      "short_description": "Batterie acoustique 5 fûts avec cymbales",
+      "price": 699,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "TAM-IMP5-HBK",
+      "category_id": "62b82d4a-1ab5-43d4-a176-df203db9408d",
+      "brand_id": "63f442b9-bf4f-4008-8a8f-f3d0613d278b",
+      "model": "Imperialstar",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Hairline Black",
+      "images": [
+        "https://tama.com/imperialstar-1.jpg"
+      ],
+      "specifications": {
+        "toms": "10x8, 12x9",
+        "tom_basse": "16x16",
+        "caisse_claire": "14x5.5",
+        "grosse_caisse": "22x16"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.155765+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "62b82d4a-1ab5-43d4-a176-df203db9408d",
+        "name": "Batterie & Percussion",
+        "slug": "batterie-percussion"
+      },
+      "brand": {
+        "id": "63f442b9-bf4f-4008-8a8f-f3d0613d278b",
+        "name": "Tama",
+        "slug": "tama"
+      }
+    },
+    {
+      "id": "21b23f67-c380-4985-85fe-b75681f59209",
+      "name": "Zildjian A Custom Cymbal Set",
+      "slug": "zildjian-a-custom-cymbal-set",
+      "description": "Set de cymbales A Custom avec Hi-Hat 14, Crash 16/18, Ride 20",
+      "short_description": "Set de cymbales brillantes polyvalentes",
+      "price": 899,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 1,
+      "sku": "ZIL-ACUST-SET",
+      "category_id": "62b82d4a-1ab5-43d4-a176-df203db9408d",
+      "brand_id": "e41ad343-08fc-4c58-a790-bd2fa061ad8a",
+      "model": "A Custom Set",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Brilliant",
+      "images": [
+        "https://zildjian.com/a-custom-set-1.jpg"
+      ],
+      "specifications": {
+        "ride": "20 A Custom",
+        "hi_hat": "14 A Custom",
+        "crash_1": "16 A Custom",
+        "crash_2": "18 A Custom"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:09.155765+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "62b82d4a-1ab5-43d4-a176-df203db9408d",
+        "name": "Batterie & Percussion",
+        "slug": "batterie-percussion"
+      },
+      "brand": {
+        "id": "e41ad343-08fc-4c58-a790-bd2fa061ad8a",
+        "name": "Zildjian",
+        "slug": "zildjian"
+      }
+    },
+    {
+      "id": "ff22dc8f-de30-4055-b088-843d7944f149",
+      "name": "Roland FP-30X",
+      "slug": "roland-fp-30x-black",
+      "description": "Piano numérique avec mécanisme PHA-4 et sons SuperNATURAL",
+      "short_description": "Piano numérique avec toucher authentique",
+      "price": 899,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "ROL-FP30X-BK",
+      "category_id": "fec91025-f73d-480f-8a59-8821a32296e6",
+      "brand_id": "a6345691-19ae-4686-8005-d732a044d390",
+      "model": "FP-30X",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://roland.com/fp-30x-1.jpg"
+      ],
+      "specifications": {
+        "sons": "SuperNATURAL",
+        "touches": "88 PHA-4 Standard",
+        "polyphonie": "256 notes"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.036709+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "fec91025-f73d-480f-8a59-8821a32296e6",
+        "name": "Claviers & Pianos",
+        "slug": "claviers-pianos"
+      },
+      "brand": {
+        "id": "a6345691-19ae-4686-8005-d732a044d390",
+        "name": "Roland",
+        "slug": "roland"
+      }
+    },
+    {
+      "id": "300e0509-6218-4cf5-9da4-edc500084c43",
+      "name": "Yamaha P-125",
+      "slug": "yamaha-p125-black",
+      "description": "Piano numérique portable 88 touches avec mécanisme GHS",
+      "short_description": "Piano numérique 88 touches portable",
+      "price": 699,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "YAM-P125-BK",
+      "category_id": "fec91025-f73d-480f-8a59-8821a32296e6",
+      "brand_id": "43e38f90-a4af-4061-a7ee-7296e3052eba",
+      "model": "P-125",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://yamaha.com/p125-1.jpg"
+      ],
+      "specifications": {
+        "sons": "24 voix",
+        "touches": "88 pondérées GHS",
+        "polyphonie": "192 notes"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.036709+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "fec91025-f73d-480f-8a59-8821a32296e6",
+        "name": "Claviers & Pianos",
+        "slug": "claviers-pianos"
+      },
+      "brand": {
+        "id": "43e38f90-a4af-4061-a7ee-7296e3052eba",
+        "name": "Yamaha",
+        "slug": "yamaha"
+      }
+    },
+    {
+      "id": "01a31229-04a0-4fe0-b55e-d3d25b70c987",
+      "name": "Korg Minilogue XD",
+      "slug": "korg-minilogue-xd",
+      "description": "Synthétiseur analogique polyphonique avec oscillateur numérique",
+      "short_description": "Synthé analogique 4 voix avec effets",
+      "price": 699,
+      "compare_price": 799,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "KRG-MNLGXD",
+      "category_id": "fec91025-f73d-480f-8a59-8821a32296e6",
+      "brand_id": "e217b9c7-f7e6-4b61-9f96-f85fbb0c7a1e",
+      "model": "Minilogue XD",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Dark Gray",
+      "images": [
+        "https://korg.com/minilogue-xd-1.jpg"
+      ],
+      "specifications": {
+        "voix": "4",
+        "effets": "Modulation, Reverb",
+        "filtre": "2-pole",
+        "oscillateurs": "2 VCO + 1 Multi"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.036709+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "fec91025-f73d-480f-8a59-8821a32296e6",
+        "name": "Claviers & Pianos",
+        "slug": "claviers-pianos"
+      },
+      "brand": {
+        "id": "e217b9c7-f7e6-4b61-9f96-f85fbb0c7a1e",
+        "name": "Korg",
+        "slug": "korg"
+      }
+    },
+    {
+      "id": "1888282a-0827-4561-b160-7c8aa224cffc",
+      "name": "Ampeg SVT-7 Pro Head",
+      "slug": "ampeg-svt-7-pro-head",
+      "description": "Tête de basse 1000W avec son SVT légendaire compact",
+      "short_description": "Tête de basse 1000W avec préamp lampe",
+      "price": 899,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "AMP-SVT7PRO-HEAD",
+      "category_id": "c8d239eb-7fc3-4e71-8772-191e76535e14",
+      "brand_id": "c47dd0da-6584-4658-9a98-d3f9340b62bf",
+      "model": "SVT-7 Pro",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://ampeg.com/svt-7-pro-1.jpg"
+      ],
+      "specifications": {
+        "eq": "9 bandes",
+        "preamp": "Lampe 12AX7",
+        "puissance": "1000W",
+        "compresseur": "Intégré"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:09.014444+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "c8d239eb-7fc3-4e71-8772-191e76535e14",
+        "name": "Amplis Basse",
+        "slug": "amplis-basse"
+      },
+      "brand": {
+        "id": "c47dd0da-6584-4658-9a98-d3f9340b62bf",
+        "name": "Ampeg",
+        "slug": "ampeg"
+      }
+    },
+    {
+      "id": "fe09ed8f-c825-4ab6-be16-7258667607aa",
+      "name": "Fender Rumble 500 Head",
+      "slug": "fender-rumble-500-head",
+      "description": "Tête de basse 500W légère avec son Fender classique",
+      "short_description": "Tête de basse 500W légère",
+      "price": 549,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "FEND-RMB500-HEAD",
+      "category_id": "c8d239eb-7fc3-4e71-8772-191e76535e14",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "Rumble 500",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://fender.com/rumble-500-1.jpg"
+      ],
+      "specifications": {
+        "eq": "4 bandes",
+        "poids": "2.9 kg",
+        "overdrive": "Intégré",
+        "puissance": "500W"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:09.014444+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "c8d239eb-7fc3-4e71-8772-191e76535e14",
+        "name": "Amplis Basse",
+        "slug": "amplis-basse"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "5e7959d5-4c32-406a-9434-0ca268be25f7",
+      "name": "Marshall JCM800 2203 Head",
+      "slug": "marshall-jcm800-2203-head",
+      "description": "Tête d ampli légendaire 100W, référence du rock britannique",
+      "short_description": "Tête d ampli à lampes 100W mythique",
+      "price": 1899,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 1,
+      "sku": "MARS-JCM800-HEAD",
+      "category_id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+      "brand_id": "37e3ca99-5802-4e26-a606-d4216fe5acf0",
+      "model": "JCM800 2203",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://marshall.com/jcm800-head-1.jpg"
+      ],
+      "specifications": {
+        "canaux": "1",
+        "lampes": "ECC83, EL34",
+        "controles": "Presence, Bass, Middle, Treble",
+        "puissance": "100W"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.894506+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+        "name": "Amplis Guitare",
+        "slug": "amplis-guitare"
+      },
+      "brand": {
+        "id": "37e3ca99-5802-4e26-a606-d4216fe5acf0",
+        "name": "Marshall",
+        "slug": "marshall"
+      }
+    },
+    {
+      "id": "f48397fe-37b8-4964-9d31-6abb363f9403",
+      "name": "Vox AC30C2",
+      "slug": "vox-ac30c2-combo",
+      "description": "Combo légendaire 30W avec son britannique années 60",
+      "short_description": "Ampli combo 30W à lampes iconique",
+      "price": 1199,
+      "compare_price": 1399,
+      "cost_price": null,
+      "stock": 1,
+      "sku": "VOX-AC30C2",
+      "category_id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+      "brand_id": "0355d92e-aa3a-4699-a0c5-a676d1af962f",
+      "model": "AC30C2",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://voxamps.com/ac30c2-1.jpg"
+      ],
+      "specifications": {
+        "canaux": "2",
+        "lampes": "ECC83, EL84",
+        "puissance": "30W",
+        "haut_parleur": "2x Celestion G12M"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.894506+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+        "name": "Amplis Guitare",
+        "slug": "amplis-guitare"
+      },
+      "brand": {
+        "id": "0355d92e-aa3a-4699-a0c5-a676d1af962f",
+        "name": "Vox",
+        "slug": "vox"
+      }
+    },
+    {
+      "id": "34413729-5e0e-41db-bc28-5386bba5f863",
+      "name": "Orange Rockerverb 50 MKIII Head",
+      "slug": "orange-rockerverb-50-mk3-head",
+      "description": "Tête d ampli Orange 50W avec son britannique distinctif",
+      "short_description": "Tête d ampli 50W avec caractère Orange",
+      "price": 1299,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 1,
+      "sku": "ORG-RV50MK3-HEAD",
+      "category_id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+      "brand_id": "aea97116-48f7-4d54-9f2a-17a998d66d54",
+      "model": "Rockerverb 50 MKIII",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Orange",
+      "images": [
+        "https://orangeamps.com/rockerverb-50-1.jpg"
+      ],
+      "specifications": {
+        "canaux": "2",
+        "lampes": "ECC83, EL34",
+        "reverb": "Accutronics",
+        "puissance": "50W"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.894506+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+        "name": "Amplis Guitare",
+        "slug": "amplis-guitare"
+      },
+      "brand": {
+        "id": "aea97116-48f7-4d54-9f2a-17a998d66d54",
+        "name": "Orange",
+        "slug": "orange"
+      }
+    },
+    {
+      "id": "36512187-922d-4485-beb6-85d629f90262",
+      "name": "Fender Blues Junior IV",
+      "slug": "fender-blues-junior-iv-black",
+      "description": "Combo à lampes 15W parfait pour studio et petites scènes",
+      "short_description": "Ampli combo 15W à lampes avec réverb",
+      "price": 599,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "FEND-BJ4-BK",
+      "category_id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "Blues Junior IV",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://fender.com/blues-junior-1.jpg"
+      ],
+      "specifications": {
+        "effets": "Réverb",
+        "lampes": "EL84, 12AX7",
+        "puissance": "15W",
+        "haut_parleur": "Celestion A-Type 12"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.894506+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+        "name": "Amplis Guitare",
+        "slug": "amplis-guitare"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "9ae9a00d-900f-438e-a6cd-be091926219d",
+      "name": "Ibanez SR500E",
+      "slug": "ibanez-sr500e-brown-mahogany",
+      "description": "Basse SR avec manche fin et électronique Bartolini",
+      "short_description": "Basse électrique moderne SR",
+      "price": 699,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "IBZ-SR500E-BM",
+      "category_id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+      "brand_id": "4a3f46df-1bef-47d8-a6e3-3cf78c9a1c5b",
+      "model": "SR500E",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Brown Mahogany",
+      "images": [
+        "https://ibanez.com/sr500e-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "manche": "5-pièces Jatoba/Bubinga",
+        "micros": "Bartolini BH2"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.871001+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+        "name": "Basses",
+        "slug": "basses"
+      },
+      "brand": {
+        "id": "4a3f46df-1bef-47d8-a6e3-3cf78c9a1c5b",
+        "name": "Ibanez",
+        "slug": "ibanez"
+      }
+    },
+    {
+      "id": "79c2b7e0-c272-4eb5-9501-6e1110b0fc3f",
+      "name": "Yamaha TRBX304",
+      "slug": "yamaha-trbx304-red-metallic",
+      "description": "Basse 4 cordes moderne avec électronique active",
+      "short_description": "Basse électrique active polyvalente",
+      "price": 399,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 4,
+      "sku": "YAM-TRBX304-RM",
+      "category_id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+      "brand_id": "43e38f90-a4af-4061-a7ee-7296e3052eba",
+      "model": "TRBX304",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Red Metallic",
+      "images": [
+        "https://yamaha.com/trbx304-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "manche": "Érable",
+        "touche": "Palissandre",
+        "électronique": "Active"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.871001+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+        "name": "Basses",
+        "slug": "basses"
+      },
+      "brand": {
+        "id": "43e38f90-a4af-4061-a7ee-7296e3052eba",
+        "name": "Yamaha",
+        "slug": "yamaha"
+      }
+    },
+    {
+      "id": "face84bc-dfec-4307-8186-d840b821ab27",
+      "name": "Fender Player Precision Bass",
+      "slug": "fender-player-precision-bass-3ts",
+      "description": "Precision Bass iconique avec son profond qui a défini le standard",
+      "short_description": "Basse électrique 4 cordes Precision",
+      "price": 899,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "FEND-PLY-PB-3TS",
+      "category_id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "Player Precision Bass",
+      "year_released": null,
+      "country_origin": null,
+      "color": "3-Color Sunburst",
+      "images": [
+        "https://fender.com/player-pbass-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Aulne",
+        "manche": "Érable",
+        "micros": "Split Single-Coil",
+        "touche": "Palissandre"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.871001+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+        "name": "Basses",
+        "slug": "basses"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "1b0116ae-6fa0-4ee5-a4ea-2c7ae32eab15",
+      "name": "Fender Player Jazz Bass",
+      "slug": "fender-player-jazz-bass-black",
+      "description": "Jazz Bass polyvalente avec deux micros pour palette sonore étendue",
+      "short_description": "Basse électrique 4 cordes Jazz Bass",
+      "price": 949,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "FEND-PLY-JB-BK",
+      "category_id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "Player Jazz Bass",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://fender.com/player-jbass-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Aulne",
+        "manche": "Érable",
+        "micros": "2x Single-Coil",
+        "touche": "Palissandre"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.871001+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+        "name": "Basses",
+        "slug": "basses"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "f3de102b-f651-474e-94ed-8191f125c79d",
+      "name": "Squier Classic Vibe 60s Jazz Bass",
+      "slug": "squier-cv-60s-jazz-bass-white",
+      "description": "Jazz Bass vintage inspirée des modèles années 60",
+      "short_description": "Basse 4 cordes abordable vintage",
+      "price": 449,
+      "compare_price": 499,
+      "cost_price": null,
+      "stock": 4,
+      "sku": "SQR-CV60-JB-OW",
+      "category_id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+      "brand_id": "a62a4cea-274e-479e-9482-6b82c23fa901",
+      "model": "Classic Vibe 60s Jazz Bass",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Olympic White",
+      "images": [
+        "https://squier.com/cv-60s-jbass-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Peuplier",
+        "manche": "Érable",
+        "micros": "Fender Designed",
+        "touche": "Laurier"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.871001+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "c7bbe1a0-ba3f-48c4-851f-d56f498a2d28",
+        "name": "Basses",
+        "slug": "basses"
+      },
+      "brand": {
+        "id": "a62a4cea-274e-479e-9482-6b82c23fa901",
+        "name": "Squier",
+        "slug": "squier"
+      }
+    },
+    {
+      "id": "dec62d1c-c0dc-4b4a-b991-aa5b06cb22b4",
+      "name": "ESP LTD EC-1000",
+      "slug": "esp-ltd-ec-1000-black",
+      "description": "Single cut avec micros EMG et finition professionnelle",
+      "short_description": "Guitare électrique ESP pour metal",
+      "price": 1299,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 1,
+      "sku": "ESP-LTD-EC1000-BK",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "956b8a61-1ce5-43cc-a89b-89c31bde5290",
+      "model": "LTD EC-1000",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://espguitars.com/ltd-ec-1000-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "table": "Érable flammé",
+        "manche": "3-pièces Acajou",
+        "micros": "EMG 81/60"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "956b8a61-1ce5-43cc-a89b-89c31bde5290",
+        "name": "ESP",
+        "slug": "esp"
+      }
+    },
+    {
+      "id": "9df6728a-7a70-4e87-9b00-d4cfa8334cf4",
+      "name": "Epiphone Les Paul Standard 50s",
+      "slug": "epiphone-lp-standard-50s-gold-top",
+      "description": "Les Paul Standard abordable avec look et son vintage Gibson",
+      "short_description": "Les Paul Standard avec micros ProBucker",
+      "price": 599,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "EPI-LP-STD50-GT",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "7211a7c5-0dcb-4650-b9ba-0ac0c6ce4b1f",
+      "model": "Les Paul Standard 50s",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Gold Top",
+      "images": [
+        "https://epiphone.com/lp-standard-50s-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "table": "Érable",
+        "manche": "Acajou",
+        "micros": "ProBucker-2/3"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "7211a7c5-0dcb-4650-b9ba-0ac0c6ce4b1f",
+        "name": "Epiphone",
+        "slug": "epiphone"
+      }
+    },
+    {
+      "id": "3fb65cb2-fb79-4533-981e-12115691be36",
+      "name": "Fender American Professional II Stratocaster",
+      "slug": "fender-american-pro-2-strat-white",
+      "description": "Stratocaster haut de gamme avec micros V-Mod II et innovations modernes",
+      "short_description": "Stratocaster américaine professionnelle",
+      "price": 1699,
+      "compare_price": 1899,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "FEND-AMPRO2-STRAT-WH",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "American Professional II Stratocaster",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Olympic White",
+      "images": [
+        "https://fender.com/american-pro-2-strat-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Aulne",
+        "manche": "Érable",
+        "micros": "V-Mod II Single-Coil",
+        "touche": "Palissandre"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "a4ea3292-0b55-431c-aa96-beabaeafaf49",
+      "name": "Gibson SG Standard 61",
+      "slug": "gibson-sg-standard-61-cherry",
+      "description": "SG légendaire avec profil de manche 61 et micros 490R/498T",
+      "short_description": "Guitare électrique SG avec sustain mythique",
+      "price": 1999,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "GIBS-SG-STD61-CH",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "212ff653-a6dc-4f96-a3ff-44c0d3bed5e1",
+      "model": "SG Standard 61",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Cherry",
+      "images": [
+        "https://gibson.com/sg-standard-61-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "manche": "Acajou",
+        "micros": "490R/498T",
+        "touche": "Palissandre"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "212ff653-a6dc-4f96-a3ff-44c0d3bed5e1",
+        "name": "Gibson",
+        "slug": "gibson"
+      }
+    },
+    {
+      "id": "2a2765a6-bea6-415f-ab97-b8ff13fabb74",
+      "name": "PRS SE Custom 24",
+      "slug": "prs-se-custom-24-whale-blue",
+      "description": "Custom 24 série SE abordable avec qualité PRS authentique",
+      "short_description": "Guitare électrique PRS avec micros 85/15",
+      "price": 999,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "PRS-SE-C24-WB",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "a2184c09-b293-432b-ad7d-aaf28feb0baa",
+      "model": "SE Custom 24",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Whale Blue",
+      "images": [
+        "https://prsguitars.com/se-custom-24-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "table": "Érable flammé",
+        "manche": "Acajou",
+        "micros": "85/15 S"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "a2184c09-b293-432b-ad7d-aaf28feb0baa",
+        "name": "PRS",
+        "slug": "prs"
+      }
+    },
+    {
+      "id": "d338a970-8af1-43ea-8c7d-d9b1757597e9",
+      "name": "Ibanez RG550",
+      "slug": "ibanez-rg550-purple-neon",
+      "description": "RG légendaire avec manche Wizard et vibrato Edge",
+      "short_description": "Guitare électrique pour shred et metal",
+      "price": 899,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "IBZ-RG550-PN",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "4a3f46df-1bef-47d8-a6e3-3cf78c9a1c5b",
+      "model": "RG550",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Purple Neon",
+      "images": [
+        "https://ibanez.com/rg550-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Tilleul",
+        "manche": "Érable/Bubinga",
+        "micros": "V7/S1/V8",
+        "touche": "Érable"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": true,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.558588+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "4a3f46df-1bef-47d8-a6e3-3cf78c9a1c5b",
+        "name": "Ibanez",
+        "slug": "ibanez"
+      }
+    },
+    {
+      "id": "6731336f-5d95-437f-a13b-87331e84002e",
+      "name": "Fender Player Jazzmaster",
+      "slug": "fender-player-jazzmaster-surf-green",
+      "description": "Jazzmaster moderne avec caractère vintage et améliorations Player Series",
+      "short_description": "Guitare électrique Jazzmaster alternative",
+      "price": 999,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "FEND-PLY-JAZZ-SG",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "Player Jazzmaster",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Surf Green",
+      "images": [
+        "https://fender.com/player-jazzmaster-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Aulne",
+        "manche": "Érable",
+        "micros": "Player Series Alnico 5",
+        "touche": "Palissandre"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "a75d5b2b-c83f-4029-82dd-f550e1ba2c22",
+      "name": "Gibson Explorer Studio",
+      "slug": "gibson-explorer-studio-ebony",
+      "description": "Explorer iconique dans version Studio sans fioritures",
+      "short_description": "Guitare électrique Explorer pour le rock",
+      "price": 1599,
+      "compare_price": 1799,
+      "cost_price": null,
+      "stock": 1,
+      "sku": "GIBS-EXP-STUD-EB",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "212ff653-a6dc-4f96-a3ff-44c0d3bed5e1",
+      "model": "Explorer Studio",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Ebony",
+      "images": [
+        "https://gibson.com/explorer-studio-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "manche": "Acajou",
+        "micros": "490R/498T",
+        "touche": "Palissandre"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "212ff653-a6dc-4f96-a3ff-44c0d3bed5e1",
+        "name": "Gibson",
+        "slug": "gibson"
+      }
+    },
+    {
+      "id": "85ffb56a-77d0-440f-9fca-08581b1a0c8f",
+      "name": "Squier Classic Vibe 70s Stratocaster",
+      "slug": "squier-cv-70s-strat-black",
+      "description": "Stratocaster vintage inspirée des modèles années 70",
+      "short_description": "Stratocaster abordable vintage",
+      "price": 399,
+      "compare_price": 449,
+      "cost_price": null,
+      "stock": 5,
+      "sku": "SQR-CV70-STRAT-BK",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "a62a4cea-274e-479e-9482-6b82c23fa901",
+      "model": "Classic Vibe 70s Stratocaster",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Black",
+      "images": [
+        "https://squier.com/cv-70s-strat-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Peuplier",
+        "manche": "Érable",
+        "micros": "Fender Designed Alnico",
+        "touche": "Érable"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T13:53:08.764549+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "a62a4cea-274e-479e-9482-6b82c23fa901",
+        "name": "Squier",
+        "slug": "squier"
+      }
+    },
+    {
+      "id": "24a722d4-ac39-49cb-a051-ef7d9e477f69",
+      "name": "Fender Player Stratocaster",
+      "slug": "fender-player-stratocaster-sunburst",
+      "description": "La légendaire Stratocaster dans sa version Player Series, offrant le son authentique Fender avec des améliorations modernes.",
+      "short_description": "Guitare électrique Stratocaster avec micros Player Series",
+      "price": 899,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 5,
+      "sku": "FEND-STRAT-PLY-SB",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "Player Stratocaster",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Sunburst",
+      "images": [
+        "https://example.com/images/fender-strat-1.jpg",
+        "https://example.com/images/fender-strat-2.jpg"
+      ],
+      "specifications": {
+        "corps": "Aulne",
+        "manche": "Érable",
+        "micros": "Player Series Alnico 5",
+        "touche": "Palissandre",
+        "vibrato": "Vintage-Style Synchronized"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T11:18:39.765691+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "df12b6ae-b77f-44f8-b68b-d63f6ae563f9",
+      "name": "Fender Player Telecaster",
+      "slug": "fender-player-telecaster-butterscotch",
+      "description": "La Telecaster iconique avec le son cristallin et la polyvalence légendaire de Fender.",
+      "short_description": "Guitare électrique Telecaster avec micros Player Series",
+      "price": 849,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 3,
+      "sku": "FEND-TELE-PLY-BS",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+      "model": "Player Telecaster",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Butterscotch Blonde",
+      "images": [
+        "https://example.com/images/fender-tele-1.jpg"
+      ],
+      "specifications": {
+        "corps": "Aulne",
+        "manche": "Érable",
+        "micros": "Player Series Alnico 5",
+        "touche": "Palissandre",
+        "chevalet": "6-Saddle Vintage-Style"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T11:18:39.765691+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "0d1f9fe7-2f7f-4c7a-9f16-323528cbf83e",
+        "name": "Fender",
+        "slug": "fender"
+      }
+    },
+    {
+      "id": "96aa6753-51b6-4f26-b915-feda88247c26",
+      "name": "Gibson Les Paul Standard 50s",
+      "slug": "gibson-les-paul-standard-50s-tobacco",
+      "description": "La Les Paul Standard dans sa configuration des années 50, avec des micros P.A.F. et un son vintage authentique.",
+      "short_description": "Guitare électrique Les Paul avec micros Burstbucker",
+      "price": 2499,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 2,
+      "sku": "GIBS-LP-STD50-TB",
+      "category_id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+      "brand_id": "212ff653-a6dc-4f96-a3ff-44c0d3bed5e1",
+      "model": "Les Paul Standard 50s",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Tobacco Burst",
+      "images": [
+        "https://example.com/images/gibson-lp-1.jpg",
+        "https://example.com/images/gibson-lp-2.jpg"
+      ],
+      "specifications": {
+        "corps": "Acajou",
+        "table": "Érable",
+        "manche": "Acajou",
+        "micros": "Burstbucker Pro",
+        "touche": "Palissandre",
+        "chevalet": "Tune-o-matic"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T11:18:39.765691+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "bc5bec3e-a030-45ea-8432-f98ada472052",
+        "name": "Guitares",
+        "slug": "guitares"
+      },
+      "brand": {
+        "id": "212ff653-a6dc-4f96-a3ff-44c0d3bed5e1",
+        "name": "Gibson",
+        "slug": "gibson"
+      }
+    },
+    {
+      "id": "8315a80b-2ae2-40d9-bff8-174614cf3753",
+      "name": "Marshall DSL40CR",
+      "slug": "marshall-dsl40cr-combo",
+      "description": "Amplificateur combo 40W avec deux canaux et réverb numérique, parfait pour le studio et la scène.",
+      "short_description": "Ampli combo 40W avec lampes et réverb",
+      "price": 749,
+      "compare_price": null,
+      "cost_price": null,
+      "stock": 4,
+      "sku": "MARS-DSL40CR",
+      "category_id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+      "brand_id": "37e3ca99-5802-4e26-a606-d4216fe5acf0",
+      "model": "DSL40CR",
+      "year_released": null,
+      "country_origin": null,
+      "color": "Noir",
+      "images": [
+        "https://example.com/images/marshall-dsl40-1.jpg"
+      ],
+      "specifications": {
+        "canaux": "2",
+        "effets": "Réverb",
+        "lampes": "ECC83, EL34",
+        "reverb": "Numérique",
+        "puissance": "40W",
+        "haut_parleur": "Celestion V-Type 12"
+      },
+      "weight": null,
+      "dimensions": null,
+      "meta_title": null,
+      "meta_description": null,
+      "is_active": true,
+      "is_featured": false,
+      "created_at": "2025-07-28T11:18:39.765691+02:00",
+      "updated_at": "2025-07-28T13:53:09.423181+02:00",
+      "category": {
+        "id": "2481d53e-f2f0-4a1a-97e3-e6a9392b8039",
+        "name": "Amplis Guitare",
+        "slug": "amplis-guitare"
+      },
+      "brand": {
+        "id": "37e3ca99-5802-4e26-a606-d4216fe5acf0",
+        "name": "Marshall",
+        "slug": "marshall"
+      }
+    }
+  ],
+  "pagination": {
+    "currentPage": 1,
+    "totalPages": 1,
+    "total": 38,
+    "totalItems": 38,
+    "itemsPerPage": 100,
+    "hasNextPage": false,
+    "hasPrevPage": false
+  }
+}

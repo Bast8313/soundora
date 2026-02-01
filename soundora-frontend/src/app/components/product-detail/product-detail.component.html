@@ -26,8 +26,9 @@
     <!-- SECTION GAUCHE : Image -->
     <div class="product-image">
       <img 
-        [src]="getProductImage()" 
+        [src]="'assets/images/products/' + product.image"
         [alt]="product.name"
+        class="product-image"
       />
     </div>
 
