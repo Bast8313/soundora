@@ -79,7 +79,7 @@ export class ProductDetailComponent implements OnInit {
     'ac30c2': 'vox-ac30c2.jpg',
     // Pédales d'effets
     'ds-1': 'boss-ds1-distortion.jpg',
-    'big muff pi': 'electro-harmonix-big-muff-pi.jpg',
+    'big muff pi': 'electro-harmonix-bigmuff-pi.jpg',
     'phase 90': 'mxr-phase-90.jpg',
     'hall of fame 2': 'tc-electronic-hall-of-fame-2.jpg',
     // Microphones (URLs BDD fictives → images locales)
@@ -89,19 +89,22 @@ export class ProductDetailComponent implements OnInit {
     // Interfaces audio
     'scarlett 2i2 3rd gen': 'interface-focusrite-scarlett.jpg', // Focusrite Scarlett 2i2
     // Basses
-    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg',
+    'classic vibe 60s jazz bass': 'squier-classic-vibe-60s-jazz-bass.jpg',
     'trbx304': 'yamaha-trbx304.jpg',
     'player jazz bass': 'fender-jazz-bass.jpg',
     'player precision bass': 'fender-precision-bass.jpg',
     'sr500e': 'ibanez-sr500e.jpg',
     // Guitares
-    'player jazzmaster': 'fender-jazzmaster.jpg',
+    'player jazzmaster': 'fender-player-jazz-master.jpg',
     'explorer studio': 'gibson-explorer.jpg',
     'se custom 24': 'prs-se-custom-24.jpg',
     'classic vibe 70s stratocaster': 'squier-stratocaster-70s.jpg',
-    'rg550': 'ibanez-rg550.jpg',
+    'rg550': 'ibanez-rg-550.jpg',
     'gibson-les paul standard 50s': 'gibson-les-paul-50s.jpg',
-    'epiphone-les paul standard 50s': 'epiphone-les-paul-50s.jpg'
+    'epiphone-les paul standard 50s': 'epiphone-les-paul-50s.jpg',
+    'ltd ec-1000': 'esp-ltd-ec-1000.jpg',
+    'american professional ii stratocaster': 'fender-american-professional-2-stratocaster.jpg',
+    'sg standard 61': 'gibson-sg-standard-61.jpg'
   };
   
   /**
@@ -202,9 +205,25 @@ export class ProductDetailComponent implements OnInit {
     // =====================================================
     // ÉTAPE 1 : Chercher une image locale dans le mapping
     // =====================================================
+    // 
+    // EXPLICATION POUR UN ÉTUDIANT :
+    // ------------------------------
+    // On a créé un "dictionnaire" (productImageMap) qui associe 
+    // le nom d'un modèle à son fichier image.
+    // 
+    // Exemple : 'classic vibe 60s jazz bass' → 'squier-classic-vibe-60s-jazz-bass.jpg'
+    // 
+    // Cette approche est plus fiable que les URLs en base de données
+    // car les images sont stockées LOCALEMENT dans notre projet.
+    // =====================================================
+    
     if (this.product.model) {
-      // Convertir le modèle en minuscules (les clés du mapping sont en minuscules)
+      // Convertir le modèle en minuscules pour uniformiser la recherche
+      // "Classic Vibe 60s Jazz Bass" devient "classic vibe 60s jazz bass"
       const modelKey = this.product.model.toLowerCase();
+      
+      // LOG DE DEBUG : Affiche ce qu'on cherche dans la console du navigateur (F12)
+      console.log(`🔍 Recherche image pour modèle: "${modelKey}"`);
       
       // -------------------------------------------------
       // CAS SPÉCIAL : Les Paul (Gibson vs Epiphone)
@@ -214,16 +233,23 @@ export class ProductDetailComponent implements OnInit {
         const brandKey = `${this.product.brand.name.toLowerCase()}-${modelKey}`;
         const localImage = this.productImageMap[brandKey];
         if (localImage) {
+          console.log(`✅ Image locale trouvée (Les Paul): ${localImage}`);
           return `assets/images/products/${localImage}`;
         }
       }
       
       // -------------------------------------------------
-      // CAS NORMAL : Recherche par modèle
+      // CAS NORMAL : Recherche par modèle uniquement
       // -------------------------------------------------
       const localImage = this.productImageMap[modelKey];
       if (localImage) {
+        // Image trouvée dans notre mapping local !
+        console.log(`✅ Image locale trouvée: ${localImage}`);
         return `assets/images/products/${localImage}`;
+      } else {
+        // Pas trouvée : on affiche les clés disponibles pour debug
+        console.log(`❌ Modèle "${modelKey}" non trouvé dans le mapping`);
+        console.log(`📋 Clés disponibles:`, Object.keys(this.productImageMap));
       }
     }
     
@@ -234,14 +260,67 @@ export class ProductDetailComponent implements OnInit {
     if (this.product.images && this.product.images.length > 0 && this.product.images[0]) {
       const url = this.product.images[0];
       
+      // =========================================================
       // IMPORTANT : Filtrer les URLs fictives qui ne fonctionnent pas
-      // Ces URLs ont été mises en BDD mais ne pointent vers aucune vraie image
-      const fakeUrlDomains = ['shure.com', 'focusrite.com', 'audio-technica.com'];
+      // =========================================================
+      // 
+      // EXPLICATION POUR UN ÉTUDIANT :
+      // ------------------------------
+      // En base de données (Supabase), chaque produit a un champ "images"
+      // qui contient des URLs vers des photos. 
+      // 
+      // PROBLÈME : Lors de la création des données de test, on a mis des 
+      // URLs "fictives" qui ressemblent à de vraies URLs mais qui n'existent pas.
+      // Exemple : "https://squier.com/cv-60s-jbass-1.jpg" → cette page n'existe pas !
+      // 
+      // SOLUTION : On crée une liste de tous les domaines fictifs connus,
+      // et si l'URL contient un de ces domaines, on l'ignore pour utiliser
+      // plutôt notre image locale (stockée dans assets/images/products/).
+      // 
+      // C'est comme avoir une "liste noire" de sources non fiables !
+      // =========================================================
+      const fakeUrlDomains = [
+        // Marques de micros et interfaces
+        'shure.com', 
+        'focusrite.com', 
+        'audio-technica.com',
+        // Marques de guitares et basses
+        'squier.com',
+        'fender.com',
+        'gibson.com',
+        'epiphone.com',
+        'prs.com',
+        'ibanez.com',
+        'espguitars.com',
+        // Marques d'amplis
+        'marshall.com',
+        'vox.com',
+        'orange.com',
+        'ampeg.com',
+        // Marques de pédales
+        'tcelectronic.com',
+        'ehx.com',
+        'mxr.com',
+        'boss.com',
+        // Marques de batteries et cymbales
+        'pearldrums.com',
+        'tama.com',
+        'zildjian.com',
+        // Marques de claviers
+        'roland.com',
+        'yamaha.com',
+        'korg.com'
+      ];
+      
+      // La méthode .some() vérifie si AU MOINS UN élément du tableau
+      // satisfait la condition. Ici : est-ce que l'URL contient un domaine fictif ?
       const isFakeUrl = fakeUrlDomains.some(domain => url.includes(domain));
       
+      // Si l'URL n'est PAS fictive, on peut l'utiliser en toute confiance
       if (!isFakeUrl) {
         return url;
       }
+      // Sinon, on continue vers le fallback (placeholder)
     }
     
     // =====================================================

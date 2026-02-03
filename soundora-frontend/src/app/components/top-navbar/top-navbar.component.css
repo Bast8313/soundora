@@ -13,8 +13,8 @@
   /* Bordure en bas pour séparer de la navbar principale */
   border-bottom: 1px solid #e0e0e0;
   
-  /* Padding vertical petit pour une barre compacte */
-  padding: 0.5rem 0;
+  /* Padding vertical - agrandi pour plus de confort */
+  padding: 0.75rem 0;
   
   /* Taille de police réduite */
   font-size: 0.85rem;
@@ -78,8 +78,8 @@
  * STYLE DES LIENS
  */
 .top-link {
-  /* Couleur du texte */
-  color: #555;
+  /* Couleur du texte - plus foncée pour meilleure lisibilité */
+  color: #444;
   
   /* Pas de soulignement */
   text-decoration: none;
@@ -87,11 +87,14 @@
   /* Transition douce pour le hover */
   transition: color 0.3s ease;
   
-  /* Police légèrement plus petite */
-  font-size: 0.85rem;
+  /* Police plus grande et lisible */
+  font-size: 0.95rem;
   
-  /* Poids normal */
-  font-weight: 400;
+  /* Poids semi-bold pour meilleure lisibilité */
+  font-weight: 500;
+  
+  /* Police moderne */
+  font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /**
@@ -99,7 +102,7 @@
  */
 .top-link:hover {
   /* Change la couleur au survol */
-  color: #2c3e50;
+  color: #667eea;
   
   /* Légèrement souligné */
   text-decoration: underline;

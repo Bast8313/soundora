@@ -23,12 +23,24 @@
   <!-- CONTENU DU PRODUIT -->
   <div *ngIf="product && !loading" class="product-content">
     
-    <!-- SECTION GAUCHE : Image -->
+    <!-- ================================================= -->
+    <!-- SECTION GAUCHE : Image du produit -->
+    <!-- ================================================= -->
+    <!-- 
+      EXPLICATION POUR UN ÉTUDIANT :
+      On utilise la méthode getProductImage() définie dans le fichier .ts
+      Cette méthode est intelligente : elle cherche d'abord une image locale
+      dans notre dossier assets/, et si elle n'en trouve pas, elle utilise
+      l'URL de la base de données (ou un placeholder par défaut).
+      
+      [src] = "binding" Angular : la valeur entre guillemets est du TypeScript
+      getProductImage() retourne un chemin comme "assets/images/products/tama-imperialstar.jpg"
+    -->
     <div class="product-image">
       <img 
-        [src]="'assets/images/products/' + product.image"
+        [src]="getProductImage()"
         [alt]="product.name"
-        class="product-image"
+        class="main-image"
       />
     </div>
 

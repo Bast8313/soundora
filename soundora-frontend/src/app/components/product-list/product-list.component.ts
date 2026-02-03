@@ -175,7 +175,7 @@ export class ProductListComponent implements OnInit {
     // PÉDALES D'EFFETS
     // =====================
     'ds-1': 'boss-ds1-distortion.jpg',            // Boss DS-1 Distortion
-    'big muff pi': 'electro-harmonix-big-muff-pi.jpg', // Electro-Harmonix Big Muff
+    'big muff pi': 'electro-harmonix-bigmuff-pi.jpg', // Electro-Harmonix Big Muff
     'phase 90': 'mxr-phase-90.jpg',               // MXR Phase 90
     'hall of fame 2': 'tc-electronic-hall-of-fame-2.jpg', // TC Electronic Hall of Fame
     
@@ -195,7 +195,7 @@ export class ProductListComponent implements OnInit {
     // =====================
     // BASSES
     // =====================
-    'classic vibe 60s jazz bass': 'squier-jazz-bass-60s.jpg', // Squier Jazz Bass 60s
+    'classic vibe 60s jazz bass': 'squier-classic-vibe-60s-jazz-bass.jpg', // Squier Jazz Bass 60s
     'trbx304': 'yamaha-trbx304.jpg',              // Yamaha TRBX304
     'player jazz bass': 'fender-jazz-bass.jpg',   // Fender Player Jazz Bass
     'player precision bass': 'fender-precision-bass.jpg', // Fender Player Precision Bass
@@ -204,11 +204,14 @@ export class ProductListComponent implements OnInit {
     // =====================
     // GUITARES
     // =====================
-    'player jazzmaster': 'fender-jazzmaster.jpg', // Fender Player Jazzmaster
+    'player jazzmaster': 'fender-player-jazz-master.jpg', // Fender Player Jazzmaster
     'explorer studio': 'gibson-explorer.jpg',     // Gibson Explorer Studio
     'se custom 24': 'prs-se-custom-24.jpg',       // PRS SE Custom 24
     'classic vibe 70s stratocaster': 'squier-stratocaster-70s.jpg', // Squier Strat 70s
-    'rg550': 'ibanez-rg550.jpg',                  // Ibanez RG550
+    'rg550': 'ibanez-rg-550.jpg',                 // Ibanez RG550
+    'ltd ec-1000': 'esp-ltd-ec-1000.jpg',         // ESP LTD EC-1000
+    'american professional ii stratocaster': 'fender-american-professional-2-stratocaster.jpg', // Fender Am Pro II Strat
+    'sg standard 61': 'gibson-sg-standard-61.jpg', // Gibson SG Standard 61
     // Cas spéciaux : même modèle mais marques différentes (voir getProductImage)
     'gibson-les paul standard 50s': 'gibson-les-paul-50s.jpg',     // Gibson Les Paul
     'epiphone-les paul standard 50s': 'epiphone-les-paul-50s.jpg'  // Epiphone Les Paul

@@ -24,7 +24,7 @@ export class FaqComponent {
   // Questions fréquentes organisées par catégories
   faqCategories = [
     {
-      title: '🛒 Commandes & Livraison',
+      title: 'Commandes & Livraison',
       questions: [
         {
           question: 'Quels sont les délais de livraison ?',
