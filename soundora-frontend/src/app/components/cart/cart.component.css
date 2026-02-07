@@ -1,0 +1,438 @@
+/* ==========================================
+   STYLES DU PANIER - cart.component.css
+   ==========================================
+   
+   ORGANISATION :
+   1. Container principal
+   2. En-tête
+   3. Notifications
+   4. Panier vide
+   5. Liste des produits
+   6. Récapitulatif
+   7. Responsive (mobile)
+   
+   POUR LES ÉTUDIANTS :
+   - On utilise Flexbox pour l'alignement
+   - Les couleurs suivent la charte Soundora
+   - Le design est "mobile-first" (styles mobiles par défaut)
+*/
+
+/* ==========================================
+   1. CONTAINER PRINCIPAL
+   ========================================== */
+.cart-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  min-height: 60vh;
+}
+
+/* ==========================================
+   2. EN-TÊTE
+   ========================================== */
+.cart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid #eee;
+}
+
+.cart-header h1 {
+  font-size: 2rem;
+  color: #1a1a2e;
+  margin: 0;
+}
+
+.btn-clear {
+  background: transparent;
+  border: 2px solid #dc3545;
+  color: #dc3545;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-clear:hover {
+  background: #dc3545;
+  color: white;
+}
+
+/* ==========================================
+   3. NOTIFICATIONS
+   ========================================== */
+.notification {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================
+   4. PANIER VIDE
+   ========================================== */
+.empty-cart {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-cart-icon {
+  font-size: 5rem;
+  opacity: 0.3;
+  margin-bottom: 1rem;
+}
+
+.empty-cart h2 {
+  color: #1a1a2e;
+  margin-bottom: 0.5rem;
+}
+
+.empty-cart p {
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.btn-primary {
+  display: inline-block;
+  background: #e94560;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: #d63850;
+}
+
+/* ==========================================
+   5. LISTE DES PRODUITS
+   ========================================== */
+.cart-content {
+  display: grid;
+  grid-template-columns: 1fr 350px;
+  gap: 2rem;
+}
+
+.cart-items {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+/* En-tête du tableau */
+.cart-table-header {
+  display: none; /* Masqué sur mobile */
+  background: #f8f9fa;
+  padding: 1rem;
+  font-weight: 600;
+  color: #666;
+}
+
+/* Article du panier */
+.cart-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #eee;
+  gap: 1rem;
+}
+
+.cart-item:last-child {
+  border-bottom: none;
+}
+
+/* Produit (image + nom) */
+.item-product {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+  min-width: 200px;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #f5f5f5;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.item-name {
+  font-size: 1rem;
+  color: #1a1a2e;
+  margin: 0 0 0.25rem 0;
+}
+
+.item-link {
+  font-size: 0.875rem;
+  color: #e94560;
+  text-decoration: none;
+}
+
+.item-link:hover {
+  text-decoration: underline;
+}
+
+/* Prix */
+.item-price {
+  color: #666;
+  min-width: 80px;
+  text-align: center;
+}
+
+/* Contrôles de quantité */
+.item-quantity {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.qty-btn {
+  width: 36px;
+  height: 36px;
+  background: #f5f5f5;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.qty-btn:hover:not(:disabled) {
+  background: #e94560;
+  color: white;
+}
+
+.qty-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.qty-value {
+  width: 40px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Sous-total */
+.item-subtotal {
+  font-weight: 600;
+  color: #1a1a2e;
+  min-width: 100px;
+  text-align: center;
+}
+
+/* Bouton supprimer */
+.item-action {
+  min-width: 50px;
+  text-align: center;
+}
+
+.btn-remove {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.btn-remove:hover {
+  opacity: 1;
+}
+
+/* Labels mobiles (masqués sur desktop) */
+.mobile-label {
+  display: inline;
+  font-weight: 500;
+  color: #666;
+  margin-right: 0.5rem;
+}
+
+/* ==========================================
+   6. RÉCAPITULATIF
+   ========================================== */
+.cart-summary {
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  height: fit-content;
+  position: sticky;
+  top: 2rem;
+}
+
+.cart-summary h2 {
+  font-size: 1.25rem;
+  color: #1a1a2e;
+  margin: 0 0 1.5rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #eee;
+}
+
+.summary-line {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  color: #666;
+}
+
+.free-shipping {
+  color: #28a745;
+  font-weight: 500;
+}
+
+.cart-summary hr {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 1rem 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 1.5rem;
+}
+
+.total-price {
+  color: #e94560;
+}
+
+.btn-checkout {
+  width: 100%;
+  background: #e94560;
+  color: white;
+  border: none;
+  padding: 1rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btn-checkout:hover {
+  background: #d63850;
+}
+
+.continue-shopping {
+  display: block;
+  text-align: center;
+  margin-top: 1rem;
+  color: #666;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.continue-shopping:hover {
+  color: #e94560;
+}
+
+/* ==========================================
+   7. RESPONSIVE (MOBILE)
+   ========================================== */
+@media (max-width: 992px) {
+  /* Sur tablette/mobile, on empile le contenu */
+  .cart-content {
+    grid-template-columns: 1fr;
+  }
+  
+  .cart-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .cart-container {
+    padding: 1rem;
+  }
+
+  .cart-header h1 {
+    font-size: 1.5rem;
+  }
+
+  /* On affiche les articles en colonne */
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .item-product {
+    width: 100%;
+  }
+
+  .item-price,
+  .item-quantity,
+  .item-subtotal {
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 0;
+  }
+
+  .item-action {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+  }
+
+  .cart-item {
+    position: relative;
+  }
+
+  /* On affiche les labels sur mobile */
+  .mobile-label {
+    display: inline;
+  }
+}
+
+@media (min-width: 992px) {
+  /* Sur desktop, on affiche l'en-tête du tableau */
+  .cart-table-header {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+    gap: 1rem;
+  }
+
+  .cart-item {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr 0.5fr;
+    gap: 1rem;
+  }
+
+  /* On masque les labels sur desktop */
+  .mobile-label {
+    display: none;
+  }
+}

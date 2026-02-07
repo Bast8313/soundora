@@ -1,0 +1,273 @@
+/* =============================================
+   STYLES PAGE SERVICES - services.component.css
+   =============================================
+   
+   CE QU'EST CE FICHIER :
+   Les styles CSS qui définissent l'apparence de la page Services.
+   Ces styles sont "scopés" au composant (n'affectent pas les autres pages).
+   
+   ORGANISATION :
+   1. Conteneur principal
+   2. En-tête
+   3. Sections
+   4. Grille de cartes
+   5. Cartes individuelles
+   6. Section contact
+   ============================================= */
+
+/* =============================================
+   CONTENEUR PRINCIPAL
+   ============================================= */
+.services-container {
+  /* Largeur maximale pour une bonne lisibilité */
+  max-width: 1200px;
+  
+  /* Centre le conteneur horizontalement */
+  /* margin: haut droite bas gauche */
+  /* "auto" sur les côtés = centrage automatique */
+  margin: 0 auto;
+  
+  /* Espacement intérieur (padding) */
+  padding: 2rem;
+}
+
+/* =============================================
+   EN-TÊTE DE LA PAGE
+   ============================================= */
+.services-header {
+  /* Centre le texte */
+  text-align: center;
+  
+  /* Espace en bas avant les sections */
+  margin-bottom: 3rem;
+}
+
+.services-header h1 {
+  /* Taille du titre principal */
+  font-size: 2.5rem;
+  
+  /* Couleur du texte */
+  color: #333;
+  
+  /* Espace sous le titre */
+  margin-bottom: 1rem;
+}
+
+.subtitle {
+  /* Taille du sous-titre */
+  font-size: 1.1rem;
+  
+  /* Couleur grise pour le sous-titre */
+  color: #666;
+  
+  /* Largeur maximale pour éviter les lignes trop longues */
+  max-width: 600px;
+  
+  /* Centre le paragraphe */
+  margin: 0 auto;
+  
+  /* Hauteur de ligne pour une meilleure lisibilité */
+  line-height: 1.6;
+}
+
+/* =============================================
+   SECTIONS
+   ============================================= */
+.services-section {
+  /* Espace entre les sections */
+  margin-bottom: 3rem;
+}
+
+.services-section h2 {
+  /* Taille des titres de section */
+  font-size: 1.8rem;
+  
+  /* Couleur du texte */
+  color: #333;
+  
+  /* Espace sous le titre */
+  margin-bottom: 1.5rem;
+  
+  /* Bordure décorative sous le titre */
+  /* padding-bottom = espace entre texte et bordure */
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #667eea;
+  
+  /* La bordure ne fait que la largeur du texte */
+  display: inline-block;
+}
+
+/* =============================================
+   GRILLE DE CARTES
+   ============================================= 
+   
+   CSS GRID expliqué :
+   - display: grid → Active le mode grille
+   - grid-template-columns → Définit les colonnes
+   - repeat(auto-fit, minmax(280px, 1fr)) signifie :
+     "Crée autant de colonnes que possible,
+      chacune faisant entre 280px et 1fr (fraction égale)"
+   - gap → Espace entre les éléments
+   
+   Cela crée une grille RESPONSIVE automatiquement !
+*/
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+/* =============================================
+   CARTES DE SERVICE
+   ============================================= */
+.service-card {
+  /* Fond blanc */
+  background: white;
+  
+  /* Espacement intérieur */
+  padding: 1.5rem;
+  
+  /* Coins arrondis */
+  border-radius: 8px;
+  
+  /* Ombre légère pour l'effet "carte flottante" */
+  /* box-shadow: décalageX décalageY flou couleur */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  /* Bordure subtile à gauche (accent coloré) */
+  border-left: 4px solid #667eea;
+  
+  /* Transition pour l'animation au survol */
+  /* transition: propriété durée type-animation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* EFFET AU SURVOL de la carte */
+.service-card:hover {
+  /* Légère élévation vers le haut */
+  /* translateY(-5px) = monte de 5 pixels */
+  transform: translateY(-5px);
+  
+  /* Ombre plus prononcée au survol */
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.service-card h3 {
+  /* Taille du titre de la carte */
+  font-size: 1.2rem;
+  
+  /* Couleur du texte */
+  color: #333;
+  
+  /* Espace sous le titre */
+  margin-bottom: 0.5rem;
+}
+
+.service-card p {
+  /* Couleur grise pour la description */
+  color: #666;
+  
+  /* Hauteur de ligne pour lisibilité */
+  line-height: 1.5;
+  
+  /* Pas de marge en bas */
+  margin: 0;
+}
+
+/* =============================================
+   SECTION CONTACT (en bas de page)
+   ============================================= */
+.contact-section {
+  /* Fond coloré (dégradé) */
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  
+  /* Texte blanc sur fond coloré */
+  color: white;
+  
+  /* Centre le contenu */
+  text-align: center;
+  
+  /* Espacement intérieur généreux */
+  padding: 3rem 2rem;
+  
+  /* Coins arrondis */
+  border-radius: 12px;
+  
+  /* Espace au-dessus */
+  margin-top: 2rem;
+}
+
+.contact-section h2 {
+  /* Taille du titre */
+  font-size: 1.8rem;
+  
+  /* Espace sous le titre */
+  margin-bottom: 0.5rem;
+}
+
+.contact-section p {
+  /* Espace sous le paragraphe */
+  margin-bottom: 1.5rem;
+  
+  /* Légère transparence */
+  opacity: 0.9;
+}
+
+/* BOUTON DE CONTACT */
+.contact-button {
+  /* Affichage en ligne-bloc pour appliquer padding */
+  display: inline-block;
+  
+  /* Fond blanc */
+  background: white;
+  
+  /* Texte de la couleur du dégradé */
+  color: #667eea;
+  
+  /* Espacement intérieur */
+  padding: 0.8rem 2rem;
+  
+  /* Coins arrondis */
+  border-radius: 6px;
+  
+  /* Pas de soulignement (c'est un lien) */
+  text-decoration: none;
+  
+  /* Texte en gras */
+  font-weight: 600;
+  
+  /* Transition pour l'animation */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* EFFET AU SURVOL du bouton */
+.contact-button:hover {
+  /* Légère élévation */
+  transform: translateY(-2px);
+  
+  /* Ombre pour effet de profondeur */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* =============================================
+   RESPONSIVE - ADAPTATION MOBILE
+   ============================================= 
+   
+   @media = règle conditionnelle
+   (max-width: 768px) = "si l'écran fait 768px ou moins"
+   
+   On ajuste les tailles et espacements pour mobile.
+*/
+@media (max-width: 768px) {
+  .services-header h1 {
+    font-size: 2rem;
+  }
+  
+  .services-section h2 {
+    font-size: 1.5rem;
+  }
+  
+  .contact-section {
+    padding: 2rem 1rem;
+  }
+}

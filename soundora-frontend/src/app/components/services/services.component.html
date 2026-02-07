@@ -1,0 +1,97 @@
+<!-- =============================================
+     PAGE SERVICES - services.component.html
+     =============================================
+     
+     CE QU'EST CE FICHIER :
+     C'est le template HTML qui définit la structure visuelle de la page.
+     Il affiche les données définies dans le fichier .ts
+     
+     SYNTAXE ANGULAR UTILISÉE :
+     - *ngFor="let item of items"  → Boucle pour répéter des éléments
+     - {{ variable }}              → Affiche la valeur d'une variable
+     - routerLink="/chemin"        → Lien de navigation Angular
+     
+     ============================================= -->
+
+<div class="services-container">
+  
+  <!-- =============================================
+       EN-TÊTE DE LA PAGE
+       ============================================= -->
+  <header class="services-header">
+    <h1>Nos Services</h1>
+    <p class="subtitle">
+      Chez Soundora, nous mettons tout en œuvre pour vous offrir 
+      la meilleure expérience d'achat possible.
+    </p>
+  </header>
+
+  <!-- =============================================
+       SECTION 1 : LIVRAISON ET COMMANDE
+       ============================================= 
+       
+       *ngFor expliqué :
+       - "let service of deliveryServices" signifie :
+         "Pour chaque élément du tableau deliveryServices, 
+          crée une variable 'service' et répète ce bloc HTML"
+       
+       {{ service.title }} affiche la propriété "title" de l'objet
+  -->
+  <section class="services-section">
+    <h2>Livraison et Commande</h2>
+    
+    <div class="services-grid">
+      <!-- Boucle sur chaque service de livraison -->
+      <div *ngFor="let service of deliveryServices" class="service-card">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECTION 2 : PAIEMENT
+       ============================================= -->
+  <section class="services-section">
+    <h2>Paiement</h2>
+    
+    <div class="services-grid">
+      <!-- Boucle sur chaque service de paiement -->
+      <div *ngFor="let service of paymentServices" class="service-card">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECTION 3 : APRÈS-VENTE ET SUPPORT
+       ============================================= -->
+  <section class="services-section">
+    <h2>Après-vente et Support</h2>
+    
+    <div class="services-grid">
+      <!-- Boucle sur chaque service de support -->
+      <div *ngFor="let service of supportServices" class="service-card">
+        <h3>{{ service.title }}</h3>
+        <p>{{ service.description }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============================================
+       SECTION CONTACT
+       ============================================= 
+       
+       routerLink="/contact" :
+       C'est la façon Angular de créer un lien.
+       Au lieu de <a href="/contact">, on utilise routerLink
+       car ça permet une navigation SANS recharger la page.
+  -->
+  <section class="contact-section">
+    <h2>Une question ?</h2>
+    <p>Notre équipe est à votre disposition pour vous aider.</p>
+    <a routerLink="/contact" class="contact-button">Nous contacter</a>
+  </section>
+
+</div>

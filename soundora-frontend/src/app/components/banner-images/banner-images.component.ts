@@ -24,25 +24,25 @@ import { RouterModule } from '@angular/router';
   styleUrl: './banner-images.component.css'
 })
 export class BannerImagesComponent {
-  // Tableau des images à afficher - Produits réels du catalogue
+  // Tableau des 3 images bannières sous la barre de recherche
   bannerImages = [
     {
-      // Ibanez SR500E - Basse électrique
-      url: 'assets/images/products/ibanez-sr500e.jpg',
-      alt: 'Ibanez SR500E - Collection Basses',
+      // Image 1 : Concert / Foule
+      url: 'assets/images/banner-guitares.jpg',
+      alt: 'Concert - Ambiance musicale',
+      link: '/products?category=guitares'
+    },
+    {
+      // Image 2 : Guitariste / Musicien
+      url: 'assets/images/banner-basses.jpg',
+      alt: 'Musicien - Guitare électrique',
       link: '/products?category=basses'
     },
     {
-      // Tama Imperialstar - Batterie acoustique
-      url: 'assets/images/products/tama-imperialstar.jpg',
-      alt: 'Tama Imperialstar - Collection Batterie',
-      link: '/products?category=batterie'
-    },
-    {
-      // Orange Rockerverb 50 MKIII - Ampli guitare
-      url: 'assets/images/products/orange-rockerverb-50-mkiii.jpg',
-      alt: 'Orange Rockerverb 50 - Amplis Guitare',
-      link: '/products?category=amplis'
+      // Image 3 : Studio d'enregistrement
+      url: 'assets/images/banner-effets.jpg',
+      alt: 'Studio - Équipement professionnel',
+      link: '/products?category=studio'
     }
   ];
 }

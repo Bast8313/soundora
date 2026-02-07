@@ -1,0 +1,192 @@
+<!-- 
+  ==========================================
+  PAGE PANIER - cart.component.html
+  ==========================================
+  
+  STRUCTURE :
+  1. En-tête avec titre et bouton "Vider"
+  2. Message de notification (si action effectuée)
+  3. Liste des produits OU message "panier vide"
+  4. Récapitulatif et bouton de commande
+  
+  POUR LES ÉTUDIANTS :
+  - *ngIf : affiche ou masque un élément selon une condition
+  - *ngFor : répète un élément pour chaque item d'un tableau
+  - (click) : écoute l'événement clic et appelle une méthode
+  - [src] : lie dynamiquement la source d'une image
+  - {{ }} : affiche une valeur du composant (interpolation)
+-->
+
+<div class="cart-container">
+  
+  <!-- ========================================
+       EN-TÊTE DE LA PAGE
+       ======================================== -->
+  <div class="cart-header">
+    <h1>🛒 Mon Panier</h1>
+    
+    <!-- Bouton pour vider le panier (affiché seulement si le panier n'est pas vide) -->
+    <button 
+      *ngIf="cartItems.length > 0" 
+      class="btn-clear" 
+      (click)="clearCart()">
+      Vider le panier
+    </button>
+  </div>
+
+  <!-- ========================================
+       MESSAGE DE NOTIFICATION
+       ======================================== -->
+  <!-- 
+    Ce message apparaît temporairement après une action
+    (ajout, suppression, etc.)
+  -->
+  <div *ngIf="message" class="notification">
+    {{ message }}
+  </div>
+
+  <!-- ========================================
+       PANIER VIDE
+       ======================================== -->
+  <!-- 
+    *ngIf="cartItems.length === 0" : s'affiche seulement si le panier est vide
+  -->
+  <div *ngIf="cartItems.length === 0" class="empty-cart">
+    <div class="empty-cart-icon">🛒</div>
+    <h2>Votre panier est vide</h2>
+    <p>Découvrez notre catalogue et ajoutez des produits !</p>
+    <a routerLink="/products" class="btn-primary">
+      Voir les produits
+    </a>
+  </div>
+
+  <!-- ========================================
+       LISTE DES PRODUITS
+       ======================================== -->
+  <!-- 
+    *ngIf="cartItems.length > 0" : s'affiche seulement si le panier contient des produits
+    *ngFor="let item of cartItems" : crée un élément pour chaque produit
+  -->
+  <div *ngIf="cartItems.length > 0" class="cart-content">
+    
+    <!-- Tableau des produits -->
+    <div class="cart-items">
+      
+      <!-- En-tête du tableau (visible sur desktop) -->
+      <div class="cart-table-header">
+        <span class="col-product">Produit</span>
+        <span class="col-price">Prix</span>
+        <span class="col-quantity">Quantité</span>
+        <span class="col-subtotal">Sous-total</span>
+        <span class="col-action">Action</span>
+      </div>
+
+      <!-- Boucle sur chaque article du panier -->
+      <div class="cart-item" *ngFor="let item of cartItems">
+        
+        <!-- Image et nom du produit -->
+        <div class="item-product">
+          <img 
+            [src]="getImagePath(item.image)" 
+            [alt]="item.name"
+            class="item-image"
+            (error)="onImageError($event)">
+          <div class="item-info">
+            <h3 class="item-name">{{ item.name }}</h3>
+            <a [routerLink]="['/products', item.slug]" class="item-link">
+              Voir le produit
+            </a>
+          </div>
+        </div>
+
+        <!-- Prix unitaire -->
+        <div class="item-price">
+          <span class="mobile-label">Prix :</span>
+          {{ item.price | number:'1.2-2' }} €
+        </div>
+
+        <!-- Contrôle de quantité -->
+        <div class="item-quantity">
+          <span class="mobile-label">Quantité :</span>
+          <div class="quantity-controls">
+            <!-- Bouton - (diminuer) -->
+            <button 
+              class="qty-btn" 
+              (click)="decreaseQuantity(item)"
+              [disabled]="item.quantity <= 1">
+              −
+            </button>
+            
+            <!-- Affichage de la quantité -->
+            <span class="qty-value">{{ item.quantity }}</span>
+            
+            <!-- Bouton + (augmenter) -->
+            <button 
+              class="qty-btn" 
+              (click)="increaseQuantity(item)">
+              +
+            </button>
+          </div>
+        </div>
+
+        <!-- Sous-total (prix × quantité) -->
+        <div class="item-subtotal">
+          <span class="mobile-label">Sous-total :</span>
+          <strong>{{ item.price * item.quantity | number:'1.2-2' }} €</strong>
+        </div>
+
+        <!-- Bouton supprimer -->
+        <div class="item-action">
+          <button 
+            class="btn-remove" 
+            (click)="removeItem(item)"
+            title="Retirer du panier">
+            🗑️
+          </button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ========================================
+         RÉCAPITULATIF ET COMMANDE
+         ======================================== -->
+    <div class="cart-summary">
+      <h2>Récapitulatif</h2>
+      
+      <div class="summary-line">
+        <span>Nombre d'articles :</span>
+        <span>{{ cartItems.length }}</span>
+      </div>
+      
+      <div class="summary-line">
+        <span>Sous-total :</span>
+        <span>{{ cartTotal | number:'1.2-2' }} €</span>
+      </div>
+      
+      <div class="summary-line">
+        <span>Livraison :</span>
+        <span class="free-shipping">Gratuite</span>
+      </div>
+      
+      <hr>
+      
+      <div class="summary-total">
+        <span>Total :</span>
+        <span class="total-price">{{ cartTotal | number:'1.2-2' }} €</span>
+      </div>
+
+      <!-- Bouton de commande -->
+      <button class="btn-checkout" (click)="checkout()">
+        Commander
+      </button>
+
+      <!-- Lien pour continuer les achats -->
+      <a routerLink="/products" class="continue-shopping">
+        ← Continuer mes achats
+      </a>
+    </div>
+
+  </div>
+
+</div>

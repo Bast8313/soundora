@@ -4,6 +4,7 @@ import { RouterModule, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CategoryService, Category } from '../../services/category.service';
 import { AuthService, User } from '../../services/auth.service';
+import { CartService } from '../../services/cart.service';
 
 /**
  * =====================================
@@ -16,9 +17,9 @@ import { AuthService, User } from '../../services/auth.service';
  * - Actions utilisateur (panier, connexion/déconnexion)
  * - Menu burger pour mobile
  * 
- * NOUVEAUTÉ : Gestion de l'authentification
- * - Affiche "Connexion/Inscription" si utilisateur NON connecté
- * - Affiche "Bonjour [prénom] | Déconnexion" si utilisateur CONNECTÉ
+ * NOUVEAUTÉ : Gestion du panier en temps réel
+ * - Le compteur du panier se met à jour automatiquement
+ * - Utilise un BehaviorSubject pour les notifications
  * 
  * CONCEPTS CLÉS :
  * 
@@ -43,31 +44,34 @@ export class NavbarComponent implements OnInit, OnDestroy {
   // État du dropdown catégories (ouvert/fermé)
   isCategoriesDropdownOpen: boolean = false;
 
-  // Nombre d'articles dans le panier (à remplacer par la vraie valeur du service)
+  // Nombre d'articles dans le panier (mis à jour automatiquement)
   cartItemCount: number = 0;
 
   // Liste des catégories avec leurs sous-catégories
   categories: Category[] = [];
 
-  // === NOUVEAUTÉ : GESTION DE L'UTILISATEUR ===
+  // === GESTION DE L'UTILISATEUR ===
   
   // L'utilisateur actuellement connecté (ou null si déconnecté)
   currentUser: User | null = null;
   
   // Subscription pour écouter les changements d'utilisateur
-  // On doit stocker la subscription pour pouvoir se désabonner plus tard
   private userSubscription!: Subscription;
+  
+  // Subscription pour écouter les changements du panier
+  private cartSubscription!: Subscription;
 
   constructor(
     private categoryService: CategoryService,
-    private authService: AuthService,  // Injection du service d'authentification
-    private router: Router              // Pour naviguer après déconnexion
+    private authService: AuthService,  // Service d'authentification
+    private cartService: CartService,  // Service du panier
+    private router: Router              // Pour naviguer
   ) {}
 
   ngOnInit(): void {
     this.loadCategories();
     
-    // === NOUVEAUTÉ : S'ABONNER AUX CHANGEMENTS D'UTILISATEUR ===
+    // === S'ABONNER AUX CHANGEMENTS D'UTILISATEUR ===
     // Quand l'utilisateur se connecte ou se déconnecte,
     // le AuthService émet une nouvelle valeur via son BehaviorSubject
     // La navbar reçoit automatiquement la notification et se met à jour !
@@ -77,10 +81,22 @@ export class NavbarComponent implements OnInit, OnDestroy {
       console.log('👤 Navbar : Nouvel état utilisateur:', user);
       this.currentUser = user;
     });
+    
+    // === S'ABONNER AUX CHANGEMENTS DU PANIER ===
+    // Quand on ajoute ou retire un produit du panier,
+    // le CartService émet une nouvelle valeur
+    // La navbar met à jour le compteur automatiquement !
+    console.log('🛒 Navbar : Abonnement aux changements du panier');
+    
+    this.cartSubscription = this.cartService.cartItems$.subscribe(items => {
+      // Calcule le nombre total d'articles (somme des quantités)
+      this.cartItemCount = items.reduce((total, item) => total + item.quantity, 0);
+      console.log('🛒 Navbar : Nombre d\'articles:', this.cartItemCount);
+    });
   }
   
   /**
-   * === NOUVEAUTÉ : NETTOYAGE À LA DESTRUCTION ===
+   * === NETTOYAGE À LA DESTRUCTION ===
    * ngOnDestroy() est appelé automatiquement par Angular
    * quand le composant est détruit (changement de page, etc.)
    * 
@@ -89,10 +105,16 @@ export class NavbarComponent implements OnInit, OnDestroy {
    * la destruction du composant.
    */
   ngOnDestroy(): void {
-    // Se désabonner si la subscription existe
+    // Se désabonner de l'utilisateur
     if (this.userSubscription) {
       console.log('🔕 Navbar : Désabonnement des changements utilisateur');
       this.userSubscription.unsubscribe();
+    }
+    
+    // Se désabonner du panier
+    if (this.cartSubscription) {
+      console.log('🔕 Navbar : Désabonnement des changements du panier');
+      this.cartSubscription.unsubscribe();
     }
   }
 

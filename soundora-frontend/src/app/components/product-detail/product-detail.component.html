@@ -84,6 +84,16 @@
         <span *ngIf="!addingToCart">🛒 Ajouter au panier</span>
         <span *ngIf="addingToCart">Ajout en cours...</span>
       </button>
+
+      <!-- MESSAGE DE CONFIRMATION -->
+      <!-- 
+        *ngIf="cartMessage" : s'affiche seulement si cartMessage n'est pas vide
+        Le message disparaît automatiquement après 3 secondes (voir le .ts)
+      -->
+      <div *ngIf="cartMessage" class="cart-message">
+        {{ cartMessage }}
+        <a routerLink="/cart" class="view-cart-link">Voir le panier →</a>
+      </div>
       
     </div>
   </div>

@@ -7,6 +7,8 @@ import { RegisterComponent } from './components/register/register.component';
 import { FaqComponent } from './components/faq/faq.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
+import { ServicesComponent } from './components/services/services.component';
+import { CartComponent } from './components/cart/cart.component'; // PANIER
 
 /**
  * =====================================
@@ -63,6 +65,15 @@ export const routes: Routes = [
   },
 
   // ========================================
+  // ROUTE PANIER
+  // ========================================
+  {
+    path: 'cart',
+    component: CartComponent,
+    data: { title: 'Mon Panier' }
+  },
+
+  // ========================================
   // ROUTE CATÉGORIES
   // ========================================
   {
@@ -92,6 +103,15 @@ export const routes: Routes = [
     path: 'faq',
     component: FaqComponent,
     data: { title: 'Questions Fréquentes' }
+  },
+
+  // ========================================
+  // ROUTE SERVICES (Nouveau)
+  // ========================================
+  {
+    path: 'service',
+    component: ServicesComponent,
+    data: { title: 'Nos Services' }
   },
 
   // ========================================

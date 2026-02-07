@@ -3,9 +3,9 @@
 // ==========================================
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 import { ProductService } from '../../services/product.service';
-// import { CartService } from '../../services/cart.service'; // Temporairement désactivé
+import { CartService } from '../../services/cart.service';
 
 /**
  * ==========================================
@@ -26,7 +26,7 @@ import { ProductService } from '../../services/product.service';
 @Component({
   selector: 'app-product-detail',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.css']
 })
@@ -40,6 +40,7 @@ export class ProductDetailComponent implements OnInit {
   loading: boolean = true;          // true = on charge les données
   error: string = '';               // Message d'erreur si problème
   addingToCart: boolean = false;    // true = ajout au panier en cours
+  cartMessage: string = '';         // Message après ajout au panier
   
   /**
    * ==========================================
@@ -113,12 +114,13 @@ export class ProductDetailComponent implements OnInit {
    * @param route - Pour récupérer les paramètres de l'URL (le slug)
    * @param router - Pour naviguer vers d'autres pages
    * @param productService - Pour récupérer les données du produit
+   * @param cartService - Pour ajouter le produit au panier
    */
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private productService: ProductService
-    // private cartService: CartService // Temporairement désactivé
+    private productService: ProductService,
+    private cartService: CartService
   ) {}
 
   /**
@@ -342,36 +344,69 @@ export class ProductDetailComponent implements OnInit {
    * Ajoute le produit au panier.
    * 
    * FONCTIONNEMENT :
-   * 1. Active le loader (addingToCart = true)
-   * 2. Appelle le service pour ajouter au panier
-   * 3. Affiche un message de succès ou d'erreur
+   * 1. Vérifie que le produit existe
+   * 2. Prépare l'objet produit avec l'image locale
+   * 3. Appelle le CartService pour ajouter au panier
+   * 4. Affiche un message de confirmation
+   * 
+   * POUR LES ÉTUDIANTS :
+   * Cette méthode est appelée quand on clique sur "Ajouter au panier"
+   * dans le template HTML via (click)="addToCart()"
    */
   addToCart(): void {
+    // Vérification : le produit doit être chargé
     if (!this.product) return;
     
+    // Active le loader pour le bouton
     this.addingToCart = true;
     
-    // TODO: Réactiver quand CartService sera disponible
-    alert('Produit ajouté au panier ! (fonctionnalité en cours de développement)');
+    // Prépare l'objet produit pour le panier
+    // On inclut l'image locale pour l'afficher dans le panier
+    const productForCart = {
+      id: this.product.id,
+      name: this.product.name,
+      price: this.product.price,
+      slug: this.product.slug,
+      image: this.getLocalImageName() // Nom du fichier image local
+    };
+    
+    // Ajoute au panier via le service
+    this.cartService.addToCart(productForCart, 1);
+    
+    // Affiche le message de confirmation
+    this.cartMessage = `✅ ${this.product.name} ajouté au panier !`;
+    
+    // Désactive le loader
     this.addingToCart = false;
     
-    /* Temporairement désactivé - problème de cache TypeScript
-    // Appel au service panier
-    this.cartService.addToCart(this.product.id, 1).subscribe({
-      // Si l'ajout réussit
-      next: (response: any) => {
-        console.log('Produit ajouté au panier:', response);
-        this.addingToCart = false;
-        alert('Produit ajouté au panier !');
-      },
-      // Si l'ajout échoue
-      error: (err: any) => {
-        console.error('Erreur ajout panier:', err);
-        this.addingToCart = false;
-        alert('Erreur lors de l\'ajout au panier');
-      }
-    });
-    */
+    // Le message disparaît après 3 secondes
+    setTimeout(() => {
+      this.cartMessage = '';
+    }, 3000);
+  }
+
+  /**
+   * ==========================================
+   * MÉTHODE getLocalImageName()
+   * ==========================================
+   * 
+   * Retourne le nom du fichier image local pour le panier.
+   * Utilisé pour stocker l'image correcte dans le panier.
+   * 
+   * @returns string - Nom du fichier image
+   */
+  private getLocalImageName(): string {
+    if (!this.product?.model) return 'default-product.jpg';
+    
+    const modelKey = this.product.model.toLowerCase();
+    
+    // Cas spécial Les Paul
+    if (modelKey === 'les paul standard 50s' && this.product.brand?.name) {
+      const brandKey = `${this.product.brand.name.toLowerCase()}-${modelKey}`;
+      return this.productImageMap[brandKey] || 'default-product.jpg';
+    }
+    
+    return this.productImageMap[modelKey] || 'default-product.jpg';
   }
 
   /**
