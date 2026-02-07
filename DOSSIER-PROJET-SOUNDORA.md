@@ -14,11 +14,12 @@ as # 📁 Dossier Projet - SOUNDORA
 6. [Architecture de l'application](#6-architecture-de-lapplication)
 7. [Modèle de données (MCD/MLD)](#7-modèle-de-données-mcdmld)
 8. [Wireframes et maquettes](#8-wireframes-et-maquettes)
-9. [Les 8 compétences professionnelles](#9-les-8-compétences-professionnelles)
-10. [Extraits de code commentés](#10-extraits-de-code-commentés)
-11. [Difficultés rencontrées et solutions](#11-difficultés-rencontrées-et-solutions)
-12. [Veille technologique](#12-veille-technologique)
-13. [Bilan et perspectives](#13-bilan-et-perspectives)
+9. [**Avancement détaillé du projet**](#9-avancement-détaillé-du-projet)
+10. [Les 8 compétences professionnelles](#10-les-8-compétences-professionnelles)
+11. [Extraits de code commentés](#11-extraits-de-code-commentés)
+12. [Difficultés rencontrées et solutions](#12-difficultés-rencontrées-et-solutions)
+13. [Veille technologique](#13-veille-technologique)
+14. [Bilan et perspectives](#14-bilan-et-perspectives)
 
 ---
 
@@ -573,7 +574,214 @@ soundora-backend/
 
 ---
 
-# 9. Les 8 compétences professionnelles
+# 9. Avancement détaillé du projet
+
+## 9.1. Vue d'ensemble de l'avancement
+
+> **Dernière mise à jour : 7 février 2026**
+
+| Module                  | Progression | Statut          |
+| ----------------------- | ----------- | --------------- |
+| Frontend Angular        | 95%         | ✅ Opérationnel |
+| Backend Node.js/Express | 90%         | ✅ Opérationnel |
+| Base de données         | 100%        | ✅ Terminé      |
+| Authentification        | 100%        | ✅ Terminé      |
+| Paiement Stripe         | 100%        | ✅ Terminé      |
+| Tests & Déploiement     | 30%         | 🔄 En cours     |
+
+---
+
+## 9.2. Fonctionnalités Frontend (Angular)
+
+### ✅ Composants terminés
+
+| Composant           | Fichiers                               | Fonctionnalités                                                     |
+| ------------------- | -------------------------------------- | ------------------------------------------------------------------- |
+| **Navbar**          | `navbar.component.ts/html/css`         | Navigation principale, menu déroulant catégories, panier, connexion |
+| **Top Navbar**      | `top-navbar.component.ts/html/css`     | Liens secondaires (Services, Contact, FAQ, À propos)                |
+| **Product List**    | `product-list.component.ts/html/css`   | Affichage grille, pagination, filtres par catégorie/marque          |
+| **Product Detail**  | `product-detail.component.ts/html/css` | Détails produit, images, ajout au panier                            |
+| **Cart**            | `cart.component.ts/html/css`           | Gestion panier, modification quantités, total, paiement Stripe      |
+| **Login**           | `login.component.ts/html/css`          | Formulaire connexion, validation, gestion erreurs                   |
+| **Register**        | `register.component.ts/html/css`       | Formulaire inscription, validation email/mot de passe               |
+| **Payment Success** | `payment-success.component.ts`         | Page confirmation après paiement Stripe réussi                      |
+| **Payment Cancel**  | `payment-cancel.component.ts`          | Page retour après annulation paiement                               |
+| **FAQ**             | `faq.component.ts/html/css`            | Questions/Réponses accordéon                                        |
+| **Contact**         | `contact.component.ts/html/css`        | Formulaire de contact                                               |
+| **About**           | `about.component.ts/html/css`          | Présentation de l'entreprise                                        |
+| **Services**        | `services.component.ts/html/css`       | Liste des services proposés                                         |
+| **Categories**      | `categories.component.ts/html/css`     | Affichage des catégories                                            |
+| **Search Bar**      | `search-bar.component.ts/html/css`     | Recherche de produits                                               |
+| **Banner Images**   | `banner-images.component.ts/html/css`  | Carrousel d'images accueil                                          |
+
+### ✅ Services Angular terminés
+
+| Service             | Fichier               | Rôle                                                    |
+| ------------------- | --------------------- | ------------------------------------------------------- |
+| **AuthService**     | `auth.service.ts`     | Connexion, inscription, déconnexion, gestion JWT        |
+| **ProductService**  | `product.service.ts`  | Récupération produits, filtres, pagination, recherche   |
+| **CartService**     | `cart.service.ts`     | Gestion panier localStorage, ajout/suppression/quantité |
+| **CategoryService** | `category.service.ts` | Récupération des catégories et sous-catégories          |
+| **StripeService**   | `stripe.service.ts`   | Création session paiement, redirection Stripe           |
+
+### 📋 Routes configurées (`app.routes.ts`)
+
+| Route              | Composant               | Description                  |
+| ------------------ | ----------------------- | ---------------------------- |
+| `/`                | Redirect → `/products`  | Page d'accueil               |
+| `/products`        | ProductListComponent    | Catalogue produits           |
+| `/product/:slug`   | ProductDetailComponent  | Détail d'un produit          |
+| `/cart`            | CartComponent           | Panier d'achat               |
+| `/login`           | LoginComponent          | Connexion utilisateur        |
+| `/register`        | RegisterComponent       | Inscription utilisateur      |
+| `/payment/success` | PaymentSuccessComponent | Confirmation paiement réussi |
+| `/payment/cancel`  | PaymentCancelComponent  | Paiement annulé              |
+| `/faq`             | FaqComponent            | Questions fréquentes         |
+| `/about`           | AboutComponent          | À propos                     |
+| `/contact`         | ContactComponent        | Formulaire de contact        |
+| `/service`         | ServicesComponent       | Nos services                 |
+| `/categories`      | CategoriesComponent     | Liste des catégories         |
+
+---
+
+## 9.3. Fonctionnalités Backend (Node.js/Express)
+
+### ✅ Contrôleurs terminés
+
+| Contrôleur              | Fichier                        | Routes associées                          |
+| ----------------------- | ------------------------------ | ----------------------------------------- |
+| **Auth Controller**     | `authController.js`            | `/api/auth/login`, `/register`, `/logout` |
+| **Product Controller**  | `productSupabaseController.js` | `/api/products`, `/products/:slug`        |
+| **Category Controller** | `categoryController.js`        | `/api/categories`, `/categories/:id`      |
+| **Brand Controller**    | `brandController.js`           | `/api/brands`, `/brands/:id`              |
+| **Cart Controller**     | `cartController.js`            | `/api/cart`, `/cart/items`                |
+| **Order Controller**    | `orderController.js`           | `/api/orders`, `/orders/:id`              |
+| **Stripe Controller**   | `stripeController.js`          | `/api/stripe/*` (checkout, webhook)       |
+| **Test Controller**     | `testController.js`            | `/api/test/*` (connexion, tables)         |
+
+### ✅ API REST complète
+
+| Endpoint                             | Méthode | Auth | Description                    |
+| ------------------------------------ | ------- | ---- | ------------------------------ |
+| `GET /api/products`                  | GET     | Non  | Liste produits avec pagination |
+| `GET /api/products/featured`         | GET     | Non  | Produits mis en avant          |
+| `GET /api/products/search`           | GET     | Non  | Recherche textuelle            |
+| `GET /api/products/:slug`            | GET     | Non  | Détail produit par slug        |
+| `GET /api/categories`                | GET     | Non  | Liste des catégories           |
+| `GET /api/brands`                    | GET     | Non  | Liste des marques              |
+| `POST /api/auth/register`            | POST    | Non  | Inscription utilisateur        |
+| `POST /api/auth/login`               | POST    | Non  | Connexion utilisateur          |
+| `POST /api/auth/logout`              | POST    | Non  | Déconnexion                    |
+| `GET /api/auth/me`                   | GET     | Oui  | Profil utilisateur connecté    |
+| `GET /api/cart`                      | GET     | Oui  | Contenu du panier              |
+| `POST /api/cart/items`               | POST    | Oui  | Ajouter au panier              |
+| `PUT /api/cart/items/:id`            | PUT     | Oui  | Modifier quantité              |
+| `DELETE /api/cart/items/:id`         | DELETE  | Oui  | Supprimer du panier            |
+| `POST /api/stripe/create-checkout`   | POST    | Oui  | Créer session Stripe           |
+| `GET /api/stripe/session-status/:id` | GET     | Non  | Vérifier statut paiement       |
+| `POST /api/stripe/webhook`           | POST    | Non  | Webhook Stripe (confirmation)  |
+| `POST /api/orders`                   | POST    | Oui  | Créer une commande             |
+| `GET /api/orders`                    | GET     | Oui  | Historique commandes           |
+
+### ✅ Middlewares implémentés
+
+| Middleware            | Fichier                | Rôle                            |
+| --------------------- | ---------------------- | ------------------------------- |
+| **checkSupabaseAuth** | `checkSupabaseAuth.js` | Vérification token JWT Supabase |
+| **checkJwt**          | `checkJwt.js`          | Vérification JWT classique      |
+
+---
+
+## 9.4. Paiement Stripe - Implémentation complète
+
+### Flux de paiement implémenté
+
+```
+┌─────────────────┐     ┌─────────────────┐     ┌─────────────────┐
+│    FRONTEND     │     │    BACKEND      │     │     STRIPE      │
+│    (Angular)    │     │  (Node/Express) │     │                 │
+└────────┬────────┘     └────────┬────────┘     └────────┬────────┘
+         │                       │                       │
+         │  1. Click "Payer"     │                       │
+         │──────────────────────►│                       │
+         │                       │  2. Créer session     │
+         │                       │──────────────────────►│
+         │                       │                       │
+         │                       │  3. URL de paiement   │
+         │                       │◄──────────────────────│
+         │  4. Redirection       │                       │
+         │◄──────────────────────│                       │
+         │                       │                       │
+         │  5. Page Stripe       │                       │
+         │───────────────────────────────────────────────►│
+         │                       │                       │
+         │                       │  6. Webhook           │
+         │                       │◄──────────────────────│
+         │                       │  (paiement confirmé)  │
+         │  7. Retour success    │                       │
+         │◄──────────────────────────────────────────────│
+         │                       │                       │
+```
+
+### Fichiers Stripe créés
+
+| Côté     | Fichier                           | Description                             |
+| -------- | --------------------------------- | --------------------------------------- |
+| Frontend | `services/stripe.service.ts`      | Service Angular pour appeler le backend |
+| Frontend | `components/payment-success/`     | Page de confirmation                    |
+| Frontend | `components/payment-cancel/`      | Page d'annulation                       |
+| Backend  | `controllers/stripeController.js` | Logique complète (991 lignes)           |
+
+### Fonctionnalités Stripe
+
+- ✅ Création de session Checkout avec les articles du panier
+- ✅ Conversion automatique euros → centimes
+- ✅ Email client pré-rempli
+- ✅ Interface en français
+- ✅ Collecte adresse facturation/livraison
+- ✅ Webhook pour confirmation de paiement
+- ✅ Création automatique de commande en BDD après paiement
+- ✅ Gestion des erreurs (cartes refusées, etc.)
+
+---
+
+## 9.5. Base de données Supabase
+
+### Tables créées
+
+| Table           | Colonnes principales                                                                |
+| --------------- | ----------------------------------------------------------------------------------- |
+| **products**    | id, name, slug, description, price, stock, category_id, brand_id, images, is_active |
+| **categories**  | id, name, slug, parent_id, is_active                                                |
+| **brands**      | id, name, slug, description, is_active                                              |
+| **orders**      | id, user_id, status, total, stripe_session_id, created_at                           |
+| **order_items** | id, order_id, product_id, quantity, price                                           |
+
+### Données insérées
+
+| Table      | Nombre d'entrées |
+| ---------- | ---------------- |
+| Products   | 50+ produits     |
+| Categories | 12 catégories    |
+| Brands     | 15+ marques      |
+
+---
+
+## 9.6. Ce qui reste à faire
+
+| Tâche                           | Priorité | Statut                |
+| ------------------------------- | -------- | --------------------- |
+| Tests unitaires (Jasmine/Jest)  | Haute    | ❌ À faire            |
+| Dashboard admin                 | Haute    | ❌ À faire            |
+| Déploiement production          | Haute    | 🔄 En préparation     |
+| Emails de confirmation          | Moyenne  | 🔄 Partiellement fait |
+| Historique commandes (frontend) | Moyenne  | ❌ À faire            |
+| Système d'avis produits         | Basse    | ❌ À faire            |
+| Wishlist (favoris)              | Basse    | ❌ À faire            |
+
+---
+
+# 10. Les 8 compétences professionnelles
 
 ## CP1 - Maquetter une application ✅
 
@@ -583,7 +791,7 @@ soundora-backend/
 - Définition de la charte graphique (couleurs, typographie)
 - Parcours utilisateur défini
 
-**Preuves :** Wireframes ci-dessus (Section 7)
+**Preuves :** Wireframes ci-dessus (Section 8)
 
 ---
 
@@ -803,7 +1011,7 @@ const session = await stripe.checkout.sessions.create({
 
 ---
 
-# 10. Extraits de code commentés
+# 11. Extraits de code commentés
 
 ## 9.1. Composant Angular - Liste des produits
 
@@ -930,7 +1138,7 @@ export const getAllProducts = async (req, res) => {
 
 ---
 
-# 11. Difficultés rencontrées et solutions
+# 12. Difficultés rencontrées et solutions
 
 | Difficulté                               | Contexte                                                         | Solution mise en œuvre                                                                           |
 | ---------------------------------------- | ---------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ |
@@ -942,7 +1150,7 @@ export const getAllProducts = async (req, res) => {
 
 ---
 
-# 12. Veille technologique
+# 13. Veille technologique
 
 ## Sources utilisées
 
@@ -964,7 +1172,7 @@ export const getAllProducts = async (req, res) => {
 
 ---
 
-# 13. Bilan et perspectives
+# 14. Bilan et perspectives
 
 ## Ce que j'ai appris
 
@@ -1001,7 +1209,7 @@ Le projet Soundora m'a permis de mettre en pratique l'ensemble des compétences 
 
 # 📎 Annexes
 
-- **Lien GitHub** : [URL du repository]
+- **Lien GitHub** : [https://github.com/Bast8313/soundora.git]
 - **Site en ligne** : [URL de démo si disponible]
 - **Captures d'écran** : Voir dossier `/documentation/screenshots/`
 
