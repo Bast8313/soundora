@@ -3,9 +3,11 @@
 // ==========================================
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CartService, CartItem } from '../../services/cart.service';
+import { StripeService } from '../../services/stripe.service';
+import { AuthService } from '../../services/auth.service';
 
 /**
  * ==========================================
@@ -66,18 +68,29 @@ export class CartComponent implements OnInit, OnDestroy {
    */
   message: string = '';
 
+  /**
+   * Indique si un paiement est en cours
+   * Permet de désactiver le bouton pendant le traitement
+   */
+  isProcessing: boolean = false;
+
   // ==========================================
   // CONSTRUCTEUR - Injection des dépendances
   // ==========================================
 
   /**
-   * On injecte le CartService pour accéder au panier
-   * 
-   * INJECTION DE DÉPENDANCES :
-   * Angular crée automatiquement une instance du service
-   * et la "injecte" dans notre composant via le constructeur.
+   * On injecte les services nécessaires :
+   * - CartService : accès au panier
+   * - StripeService : gestion des paiements
+   * - AuthService : vérification connexion utilisateur
+   * - Router : navigation entre les pages
    */
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private stripeService: StripeService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   // ==========================================
   // CYCLE DE VIE - ngOnInit
@@ -174,27 +187,59 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   /**
-   * Passe la commande (simulation)
+   * Lance le processus de paiement Stripe
    * 
-   * POUR ALLER PLUS LOIN :
-   * Ici, on pourrait :
-   * - Vérifier que l'utilisateur est connecté
-   * - Rediriger vers une page de paiement (Stripe)
-   * - Créer une commande dans la base de données
+   * PROCESSUS COMPLET :
+   * 1. Vérifie que l'utilisateur est connecté
+   * 2. Vérifie que le panier n'est pas vide
+   * 3. Appelle le backend pour créer une session Stripe
+   * 4. Redirige vers la page de paiement Stripe
+   * 5. Après paiement, Stripe redirige vers success/cancel
    */
   checkout(): void {
+    // Vérification panier vide
     if (this.cartItems.length === 0) {
       this.showMessage('Votre panier est vide !');
       return;
     }
 
-    // Simulation de commande
-    const orderNumber = 'CMD-' + Date.now();
-    
-    alert(`🎉 Commande ${orderNumber} validée !\n\nTotal : ${this.cartTotal.toFixed(2)} €\n\nMerci pour votre achat !`);
-    
-    // Vide le panier après la commande
-    this.cartService.clearCart();
+    // Vérification utilisateur connecté
+    if (!this.authService.isLoggedIn()) {
+      this.showMessage('Veuillez vous connecter pour passer commande');
+      // Redirection vers la page de connexion après 2 secondes
+      setTimeout(() => {
+        this.router.navigate(['/login']);
+      }, 2000);
+      return;
+    }
+
+    // Évite les doubles clics
+    if (this.isProcessing) {
+      return;
+    }
+
+    // Lance le paiement
+    this.isProcessing = true;
+    this.showMessage('Préparation du paiement...');
+
+    // Appel au service Stripe
+    this.stripeService.createCheckoutSession(this.cartItems).subscribe({
+      next: (response) => {
+        if (response.success && response.url) {
+          // Redirection vers Stripe Checkout
+          this.showMessage('Redirection vers le paiement sécurisé...');
+          this.stripeService.redirectToCheckout(response.url);
+        } else {
+          this.isProcessing = false;
+          this.showMessage(response.error || 'Erreur lors de la création du paiement');
+        }
+      },
+      error: (error) => {
+        this.isProcessing = false;
+        console.error('Erreur Stripe:', error);
+        this.showMessage(error.message || 'Erreur lors du paiement');
+      }
+    });
   }
 
   /**

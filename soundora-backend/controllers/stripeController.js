@@ -274,11 +274,11 @@ export const createCheckoutSession = async (req, res) => {
       // PAGE DE SUCCÈS APRÈS PAIEMENT CONFIRMÉ
       // {CHECKOUT_SESSION_ID} = placeholder remplacé automatiquement par Stripe
       // Permet à Angular de récupérer les détails de la commande
-      success_url: `${process.env.FRONTEND_URL}/order/success?session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${process.env.FRONTEND_URL}/payment/success?session_id={CHECKOUT_SESSION_ID}`,
 
       // PAGE DE RETOUR EN CAS D'ANNULATION
-      // Ramène l'utilisateur à son panier pour qu'il puisse réessayer
-      cancel_url: `${process.env.FRONTEND_URL}/cart`,
+      // Ramène l'utilisateur à la page d'annulation pour qu'il puisse réessayer
+      cancel_url: `${process.env.FRONTEND_URL}/payment/cancel`,
 
       // ===== MÉTADONNÉES POUR LE WEBHOOK ET LE SUIVI =====
 
@@ -335,7 +335,7 @@ export const createCheckoutSession = async (req, res) => {
     res.json({
       success: true, // Flag de succès pour la gestion d'erreurs côté client
       sessionId: session.id, // ID de session pour le suivi et la vérification ultérieure
-      checkoutUrl: session.url, // URL de paiement Stripe où rediriger l'utilisateur
+      url: session.url, // URL de paiement Stripe où rediriger l'utilisateur
       message: "Session de paiement créée avec succès", // Message de confirmation
     });
   } catch (error) {

@@ -176,10 +176,20 @@
         <span class="total-price">{{ cartTotal | number:'1.2-2' }} €</span>
       </div>
 
-      <!-- Bouton de commande -->
-      <button class="btn-checkout" (click)="checkout()">
-        Commander
+      <!-- Bouton de commande avec état de chargement -->
+      <button 
+        class="btn-checkout" 
+        (click)="checkout()"
+        [disabled]="isProcessing || cartItems.length === 0"
+        [class.processing]="isProcessing">
+        <span *ngIf="!isProcessing">Payer {{ cartTotal | number:'1.2-2' }} €</span>
+        <span *ngIf="isProcessing">Traitement en cours...</span>
       </button>
+      
+      <!-- Indication paiement sécurisé -->
+      <p class="secure-payment">
+        Paiement sécurisé par Stripe
+      </p>
 
       <!-- Lien pour continuer les achats -->
       <a routerLink="/products" class="continue-shopping">

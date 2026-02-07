@@ -97,7 +97,7 @@
       -->
       <div class="navbar-auth" *ngIf="isLoggedIn()">
         <span class="welcome-message">
-          Bonjour {{ currentUser?.first_name || currentUser?.email }} 👋
+          Bonjour {{ currentUser?.first_name || currentUser?.email }}
         </span>
         <button (click)="logout()" class="btn-logout" title="Se déconnecter">
           Déconnexion

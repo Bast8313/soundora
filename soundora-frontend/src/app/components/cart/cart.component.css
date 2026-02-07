@@ -340,11 +340,37 @@
   font-weight: 600;
   border-radius: 8px;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.btn-checkout:hover {
+.btn-checkout:hover:not(:disabled) {
   background: #d63850;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+.btn-checkout:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-checkout.processing {
+  background: #6c757d;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+.secure-payment {
+  text-align: center;
+  color: #28a745;
+  font-size: 0.85rem;
+  margin-top: 0.75rem;
+  margin-bottom: 0;
 }
 
 .continue-shopping {

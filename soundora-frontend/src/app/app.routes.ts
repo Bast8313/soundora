@@ -8,7 +8,9 @@ import { FaqComponent } from './components/faq/faq.component';
 import { AboutComponent } from './components/about/about.component';
 import { ContactComponent } from './components/contact/contact.component';
 import { ServicesComponent } from './components/services/services.component';
-import { CartComponent } from './components/cart/cart.component'; // PANIER
+import { CartComponent } from './components/cart/cart.component';
+import { PaymentSuccessComponent } from './components/payment-success/payment-success.component';
+import { PaymentCancelComponent } from './components/payment-cancel/payment-cancel.component';
 
 /**
  * =====================================
@@ -130,6 +132,20 @@ export const routes: Routes = [
     path: 'contact',
     component: ContactComponent,
     data: { title: 'Nous contacter' }
+  },
+
+  // ========================================
+  // ROUTES PAIEMENT STRIPE
+  // ========================================
+  {
+    path: 'payment/success',
+    component: PaymentSuccessComponent,
+    data: { title: 'Paiement réussi' }
+  },
+  {
+    path: 'payment/cancel',
+    component: PaymentCancelComponent,
+    data: { title: 'Paiement annulé' }
   },
 
   // ========================================
